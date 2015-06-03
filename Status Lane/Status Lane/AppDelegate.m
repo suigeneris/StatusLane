@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "CreateAccountPresenter.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) CreateAccountPresenter *createAccount;
 
 @end
 
@@ -17,6 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    _createAccount = [[CreateAccountPresenter alloc]init];
+//    [self.window setRootViewController:self.createAccount];
+//    [self.window makeKeyAndVisible];
     return YES;
 }
 
