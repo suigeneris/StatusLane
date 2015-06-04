@@ -10,12 +10,12 @@
 #import "HomePagePresenter.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
+#import "RSKImageCropViewController.h"
 
 
+@interface HomePageInteractor () 
 
-@interface HomePageInteractor ()
-
-
+@property (nonatomic, assign) int flagForAlertViewButton;
 @end
 
 
@@ -29,9 +29,18 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     
-    [picker dismissViewControllerAnimated:YES completion:^{
+    [picker dismissViewControllerAnimated:self.flagForAlertViewButton ? NO : YES completion:^{
         
-        [self.presenter setBackGroundImage:[self grayishImage:chosenImage]];
+        if (self.flagForAlertViewButton == 0) {
+            [self.presenter setBackGroundImage:[self grayishImage:chosenImage]];
+            [self.presenter setProfileImage:chosenImage];
+        }
+        
+        else {
+            
+            [self.presenter showImageCropper:chosenImage];
+            
+        }
         
         
     }];
@@ -48,7 +57,7 @@
 
 #pragma mark - Delegate Methods
 
--(BOOL)checkImagePickerSourceTypeAvailability:(Class )imagePickerClass{
+-(BOOL)checkImagePickerSourceTypeAvailability:(Class)imagePickerClass{
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -75,6 +84,12 @@
     [[UIApplication sharedApplication] openURL:appSettings];
 }
 
+-(int)setFlagForAlertViewButtonPressed:(int)interger{
+
+    self.flagForAlertViewButton = interger;
+    return self.flagForAlertViewButton;
+}
+
 #pragma mark - Internal Methods
 
 - (UIImage*) grayishImage: (UIImage*) inputImage {
@@ -95,7 +110,7 @@
     
 }
 
--(NSString *)getMediaAutorizationForMediaType:(UIImagePickerControllerSourceType) sourceType {
+-(NSString *)getMediaAutorizationForMediaType:(UIImagePickerControllerSourceType)sourceType {
     
     NSString * authorization;
     if (sourceType == UIImagePickerControllerSourceTypeCamera) {
@@ -165,4 +180,17 @@
 
 }
 
+#pragma mark - RSKImageCropViewControllerDelegate
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
+{
+    [self.presenter dissmissImageCropper];
+
+}
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect
+{
+    [self.presenter setProfileImage:croppedImage];
+    [self.presenter dissmissImageCropper];
+}
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AE957B32B8AC0E3E5455448 /* libPods-Status Lane.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFB4850C787E7864FBDC0D6 /* libPods-Status Lane.a */; };
 		2A0C568F1B054203004198D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C568E1B054203004198D5 /* main.m */; };
 		2A0C56921B054203004198D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56911B054203004198D5 /* AppDelegate.m */; };
 		2A0C56951B054203004198D5 /* Status_Lane.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56931B054203004198D5 /* Status_Lane.xcdatamodeld */; };
@@ -76,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FFB4850C787E7864FBDC0D6 /* libPods-Status Lane.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Status Lane.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0C56891B054203004198D5 /* Status Lane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Status Lane.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0C568D1B054203004198D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A0C568E1B054203004198D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -185,6 +187,8 @@
 		2AF8AD211B0E074000864270 /* UserProfilePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfilePresenter.m; sourceTree = "<group>"; };
 		2AF8AD271B0E54B100864270 /* PurchaseRequestsPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseRequestsPresenter.h; sourceTree = "<group>"; };
 		2AF8AD281B0E54B100864270 /* PurchaseRequestsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseRequestsPresenter.m; sourceTree = "<group>"; };
+		4602F9F818E2C03E31641169 /* Pods-Status Lane.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status Lane.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane.debug.xcconfig"; sourceTree = "<group>"; };
+		69C04E1D27BAC18D563ECC0B /* Pods-Status Lane.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status Lane.release.xcconfig"; path = "Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,7 @@
 				2A871C381B1F8D6200A2779B /* Photos.framework in Frameworks */,
 				2A9E5DD41B1E1FF3008033AB /* AVFoundation.framework in Frameworks */,
 				2AD6AB031B1CCE9A00457102 /* AddressBook.framework in Frameworks */,
+				0AE957B32B8AC0E3E5455448 /* libPods-Status Lane.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +220,7 @@
 				2AD6AB011B1CCE6900457102 /* Frameworks */,
 				2A0C56A81B054203004198D5 /* Status LaneTests */,
 				2A0C568A1B054203004198D5 /* Products */,
+				EFB5824ED336999559435CAD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -838,6 +844,7 @@
 				2A871C371B1F8D6200A2779B /* Photos.framework */,
 				2A9E5DD31B1E1FF3008033AB /* AVFoundation.framework */,
 				2AD6AB021B1CCE9A00457102 /* AddressBook.framework */,
+				1FFB4850C787E7864FBDC0D6 /* libPods-Status Lane.a */,
 			);
 			name = Frameworks;
 			path = "Status Lane";
@@ -956,6 +963,15 @@
 			name = Router;
 			sourceTree = "<group>";
 		};
+		EFB5824ED336999559435CAD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4602F9F818E2C03E31641169 /* Pods-Status Lane.debug.xcconfig */,
+				69C04E1D27BAC18D563ECC0B /* Pods-Status Lane.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -963,9 +979,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A0C56AF1B054203004198D5 /* Build configuration list for PBXNativeTarget "Status Lane" */;
 			buildPhases = (
+				986A1D19563C0433DB6D1932 /* Check Pods Manifest.lock */,
 				2A0C56851B054203004198D5 /* Sources */,
 				2A0C56861B054203004198D5 /* Frameworks */,
 				2A0C56871B054203004198D5 /* Resources */,
+				68E3B04807BE90B10586BC14 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1057,6 +1075,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68E3B04807BE90B10586BC14 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		986A1D19563C0433DB6D1932 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2A0C56851B054203004198D5 /* Sources */ = {
@@ -1228,6 +1279,7 @@
 		};
 		2A0C56B01B054203004198D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4602F9F818E2C03E31641169 /* Pods-Status Lane.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1239,6 +1291,7 @@
 		};
 		2A0C56B11B054203004198D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69C04E1D27BAC18D563ECC0B /* Pods-Status Lane.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -280,16 +280,10 @@
                             <constraint firstItem="iZW-AL-Sxi" firstAttribute="top" secondItem="7T7-iq-U5C" secondAttribute="bottom" constant="21" id="YfA-Kv-ndv"/>
                             <constraint firstItem="1xZ-mO-Anz" firstAttribute="top" secondItem="yvk-Oy-9Hf" secondAttribute="top" constant="20" symbolic="YES" id="ZBY-Ld-q4m"/>
                             <constraint firstItem="f4u-TN-vYs" firstAttribute="centerY" secondItem="1xZ-mO-Anz" secondAttribute="centerY" constant="0.5" id="aEV-2g-0yo"/>
-                            <constraint firstItem="f4u-TN-vYs" firstAttribute="top" secondItem="ITr-oM-7pp" secondAttribute="bottom" constant="11" id="cSx-sa-SDE"/>
                             <constraint firstAttribute="trailing" secondItem="yjB-w0-25J" secondAttribute="trailing" id="pUI-ge-nQH"/>
                             <constraint firstItem="yjB-w0-25J" firstAttribute="top" secondItem="yvk-Oy-9Hf" secondAttribute="top" id="r1R-DC-4eq"/>
                             <constraint firstItem="Tde-13-n9S" firstAttribute="top" secondItem="yjB-w0-25J" secondAttribute="bottom" id="t7a-n5-Ug7"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="cSx-sa-SDE"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -1015,7 +1009,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baB-3O-AJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3844" y="1430"/>
+            <point key="canvasLocation" x="3844" y="1447"/>
         </scene>
         <!--Search Users Presenter-->
         <scene sceneID="JWc-5r-Fgm">
@@ -1124,7 +1118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgi-Vo-df2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3844" y="2157"/>
+            <point key="canvasLocation" x="3844" y="2169"/>
         </scene>
         <!--Purchase Requests Presenter-->
         <scene sceneID="DYS-Z3-xwu">
@@ -2097,8 +2091,8 @@
                                     <constraint firstAttribute="height" constant="65" id="xN6-DA-w9t"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&quot;Where there is love the is life&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68r-QS-adD">
-                                <rect key="frame" x="61" y="92" width="198" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Where there is love the is life&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68r-QS-adD">
+                                <rect key="frame" x="61" y="51" width="198" height="17"/>
                                 <fontDescription key="fontDescription" name="Lobster1.3" family="Lobster 1.3" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2109,7 +2103,7 @@
                             <constraint firstAttribute="trailing" secondItem="GhS-vz-aqs" secondAttribute="trailing" id="EzV-W9-Sco"/>
                             <constraint firstItem="1qK-zo-ba5" firstAttribute="top" secondItem="c3Q-r4-YIM" secondAttribute="top" id="I1m-dd-hND"/>
                             <constraint firstItem="Yeb-vL-eMh" firstAttribute="leading" secondItem="c3Q-r4-YIM" secondAttribute="leading" id="J7d-jV-oJG"/>
-                            <constraint firstItem="68r-QS-adD" firstAttribute="top" secondItem="Edv-kO-1Hh" secondAttribute="bottom" multiplier="4.6" constant="92" id="JEH-TR-zN5"/>
+                            <constraint firstItem="68r-QS-adD" firstAttribute="top" secondItem="Edv-kO-1Hh" secondAttribute="bottom" multiplier="2.5" constant="1" id="JEH-TR-zN5"/>
                             <constraint firstItem="CLH-3P-coc" firstAttribute="top" secondItem="1qK-zo-ba5" secondAttribute="bottom" id="JQW-1e-OFb"/>
                             <constraint firstAttribute="trailing" secondItem="1qK-zo-ba5" secondAttribute="trailing" id="MCy-Sk-lCQ"/>
                             <constraint firstAttribute="trailing" secondItem="gqL-pd-gTM" secondAttribute="trailing" id="NI7-ou-RNv"/>
@@ -2136,7 +2130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqL-TB-lla" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4266" y="2157"/>
+            <point key="canvasLocation" x="4286" y="2169"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IJO-Jq-RHm">
@@ -2180,6 +2174,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="NA9-kS-8cI"/>
         <segue reference="A1T-yW-fbn"/>
-        <segue reference="sxa-A7-M9C"/>
+        <segue reference="Qtg-Qj-Kr7"/>
     </inferredMetricsTieBreakers>
 </document>

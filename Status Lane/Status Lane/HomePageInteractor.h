@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "HomePageContracts.h"
+#import "RSKImageCropViewController.h"
 
 
 
-@interface HomePageInteractor : NSObject <HomePageInteractorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HomePageInteractor : NSObject <HomePageInteractorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate>
 
 @property (nonatomic, weak) id<HomePagePresenterDelegate> presenter;
 
