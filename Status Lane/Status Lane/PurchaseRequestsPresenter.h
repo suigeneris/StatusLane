@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PurchaseRequestsContracts.h"
 
-@interface PurchaseRequestsPresenter : UIViewController
+@interface PurchaseRequestsPresenter : UIViewController <PurchaseRequestsPresenterDelegate>
+
+@property (nonatomic, strong) id interactor;
+
 
 @end

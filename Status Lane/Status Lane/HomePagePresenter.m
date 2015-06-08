@@ -10,6 +10,7 @@
 #import "HomePageInteractor.h"
 #import "UIFont+StatusLaneFonts.h"
 #import "UIColor+StatusLane.h"
+#import "SWRevealViewController.h"
 
 @interface HomePagePresenter ()
 
@@ -19,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 @end
 
@@ -29,7 +32,7 @@
     // Do any additional setup after loading the view.
     
     [self additionalUIViewSetup];
-    
+    [self revealControllerSetUp];
     
     
 }
@@ -75,8 +78,22 @@
                                                                                      constant:0
                                                         ];
     [self.view addConstraint:buttomUIViewHeightConstraint];
+    [self.profileImage.layer setCornerRadius:_profileImage.frame.size.width/2];
+    [self.profileImage.layer setMasksToBounds:YES];
+
     
+}
+
+-(void)revealControllerSetUp{
     
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if ( revealViewController )
+    {
+        [self.burgerMenu addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+        [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
+        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 /*
@@ -206,8 +223,10 @@
 
 }
 
--(void)setProfileImage:(UIImage *)profileImage{
+-(void)chooseProfileImage:(UIImage *)profileImage{
     
+    self.profileImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.profileImage.layer.borderWidth = 3;
     [self.profileImage setImage:profileImage];
 }
 

@@ -21,19 +21,15 @@
 
 @implementation HomePageInteractor
 
-
-
 #pragma mark - ImagePicker Delegate Methods
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-    
     [picker dismissViewControllerAnimated:self.flagForAlertViewButton ? NO : YES completion:^{
         
         if (self.flagForAlertViewButton == 0) {
             [self.presenter setBackGroundImage:[self grayishImage:chosenImage]];
-            [self.presenter setProfileImage:chosenImage];
         }
         
         else {
@@ -41,8 +37,6 @@
             [self.presenter showImageCropper:chosenImage];
             
         }
-        
-        
     }];
 }
 
@@ -51,8 +45,6 @@
     [self.presenter dissmiss];
     
 }
-
-
 
 
 #pragma mark - Delegate Methods
@@ -190,7 +182,7 @@
 
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect
 {
-    [self.presenter setProfileImage:croppedImage];
+    [self.presenter chooseProfileImage:croppedImage];
     [self.presenter dissmissImageCropper];
 }
 @end

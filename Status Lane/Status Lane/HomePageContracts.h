@@ -26,7 +26,7 @@ typedef void (^AlertControllerBlock)(void);
 -(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error actionTitle:(NSString *)actionTitle withStyle:(UIAlertControllerStyle)style withBlock:(AlertControllerBlock)alertViewBlock;
 -(void)dissmiss;
 -(void)setBackGroundImage:(UIImage *)image;
--(void)setProfileImage:(UIImage *)image;
+-(void)chooseProfileImage:(UIImage *)image;
 -(void)showImageCropper:(UIImage *)image;
 -(void)dissmissImageCropper;
 
