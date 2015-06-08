@@ -11,3 +11,15 @@
 @protocol PurchaseRequestsPresenterDelegate <NSObject>
 
 @end
+
+@protocol PurchaseRequestInteractorDataSource <NSObject>
+
+-(id<UITableViewDataSource>)dataSource;
+
+@end
+
+@protocol PurchaseRequestsInteractorDelegate <NSObject>
+
+
+
+@end

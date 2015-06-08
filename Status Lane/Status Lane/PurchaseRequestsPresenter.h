@@ -11,7 +11,7 @@
 
 @interface PurchaseRequestsPresenter : UIViewController <PurchaseRequestsPresenterDelegate>
 
-@property (nonatomic, strong) id interactor;
+@property (nonatomic, strong) id <PurchaseRequestsInteractorDelegate, PurchaseRequestInteractorDataSource, UITableViewDelegate> interactor;
 
 
 @end

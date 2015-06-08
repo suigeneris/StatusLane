@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "PurchaseRequestsContracts.h"
 
-@interface PurchaseRequestsInteractor : NSObject
+@interface PurchaseRequestsInteractor : NSObject <UITableViewDelegate, PurchaseRequestsInteractorDelegate, PurchaseRequestInteractorDataSource>
 
 @property (nonatomic, weak) id<PurchaseRequestsPresenterDelegate> presenter;
 

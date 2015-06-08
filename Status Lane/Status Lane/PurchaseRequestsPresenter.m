@@ -15,10 +15,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundVIew;
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -37,6 +37,9 @@
     // Do any additional setup after loading the view.
     [self setUpUIElements];
     [self revealControllerSetUp];
+    self.tableView.delegate = self.interactor;
+    self.tableView.dataSource = [self.interactor dataSource];
+    self.tableView.tableFooterView = [UIView new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +53,6 @@
                                                           green:0
                                                            blue:0
                                                           alpha:0.3];
-    self.containerView.backgroundColor  = [UIColor colorWithWhite:0 alpha:0.3];
 }
 
 -(void)revealControllerSetUp{

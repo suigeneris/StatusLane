@@ -1,49 +1,38 @@
 //
-//  PurchaseRequestsTablePresenter.m
+//  PurchaseRequestsDataSource.m
 //  Status Lane
 //
-//  Created by Jonathan Aguele on 29/05/2015.
+//  Created by Jonathan Aguele on 08/06/2015.
 //  Copyright (c) 2015 Sui Generis Innovations. All rights reserved.
 //
 
-#import "PurchaseRequestsTablePresenter.h"
-#import "PurchaseRequestsInteractor.h"
+#import "PurchaseRequestsDataSource.h"
 #import "PurchseRequestPresenterCell.h"
 
+@implementation PurchaseRequestsDataSource
 
-@implementation PurchaseRequestsTablePresenter
 
 
--(void)viewDidLoad{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    [super viewDidLoad];
-    NSLog(@"Row selected");
-
-
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    return  4;
     
-    [self.tableView setSeparatorColor:[UIColor colorWithRed:1
-                                                      green:1
-                                                       blue:1
-                                                      alpha:0.13
-                                       ]];
-    
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
+    return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     
     PurchseRequestPresenterCell *cell = (PurchseRequestPresenterCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell 1"];
     
     if (indexPath.row == 0) {
         
         [cell.seletedButton setImage:[UIImage imageNamed:@"Purchase Unchecked"] forState:UIControlStateNormal];
+
         cell.numberOfRequestsLabel.text = @"1 Status Request";
         cell.priceLabel.text = @"£0.99";
     }
@@ -72,15 +61,5 @@
         
     }
     return cell;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return  4;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
 }
 @end

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *seletedButton;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRequestsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (nonatomic, assign) BOOL currentlySelected;
 
 @end
