@@ -16,6 +16,7 @@
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) PurchaseRequestsDataSource *purchaseRequestsDataSource;
 
+
 @end
 
 @implementation PurchaseRequestsInteractor
@@ -44,6 +45,7 @@
     
     return _purchaseRequestsDataSource;
 }
+
 
 #pragma mark PurchaseRequests Delegate
 

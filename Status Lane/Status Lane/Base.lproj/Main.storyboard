@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EWL-gH-dL8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -8,6 +8,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Asap-Bold.otf">
+            <string>Asap-Bold</string>
             <string>Asap-Bold</string>
             <string>Asap-Bold</string>
             <string>Asap-Bold</string>
@@ -1202,7 +1203,79 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baB-3O-AJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3844" y="1447"/>
+            <point key="canvasLocation" x="3884" y="1445"/>
+        </scene>
+        <!--Status List Presenter-->
+        <scene sceneID="TJC-hV-mXe">
+            <objects>
+                <viewController id="EWL-gH-dL8" customClass="StatusListPresenter" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HXi-11-4wl"/>
+                        <viewControllerLayoutGuide type="bottom" id="r8c-wg-wCm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4cs-1j-ULA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dim Image " translatesAutoresizingMaskIntoConstraints="NO" id="fcQ-zO-3R1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Xr6-q6-RSC">
+                                <rect key="frame" x="20" y="106" width="280" height="400"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell 1" rowHeight="94" id="sUp-da-Dfw" customClass="StatusListPresenterCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sUp-da-Dfw" id="j52-RM-nB5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKZ-ss-0dR">
+                                                    <rect key="frame" x="119" y="36" width="42" height="22"/>
+                                                    <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="17"/>
+                                                    <color key="textColor" red="0.33333333333333331" green="0.75686274509803919" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W6K-o9-6fy">
+                                                    <rect key="frame" x="15" y="35" width="20" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="6Id-EB-Y91"/>
+                                                        <constraint firstAttribute="height" constant="24" id="bK7-zG-EbM"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="zKZ-ss-0dR" secondAttribute="centerY" id="Quk-cw-TRJ"/>
+                                                <constraint firstAttribute="centerX" secondItem="zKZ-ss-0dR" secondAttribute="centerX" id="lVu-oD-7Sa"/>
+                                                <constraint firstAttribute="centerY" secondItem="W6K-o9-6fy" secondAttribute="centerY" id="obO-yZ-jAe"/>
+                                                <constraint firstItem="W6K-o9-6fy" firstAttribute="leading" secondItem="j52-RM-nB5" secondAttribute="leading" constant="15" id="scv-xR-opM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="statusTypeLabel" destination="zKZ-ss-0dR" id="5NB-ah-taE"/>
+                                            <outlet property="tickImgeView" destination="j52-RM-nB5" id="bZe-Vi-f00"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fcQ-zO-3R1" firstAttribute="leading" secondItem="4cs-1j-ULA" secondAttribute="leading" id="9im-Yf-Xy2"/>
+                            <constraint firstItem="Xr6-q6-RSC" firstAttribute="top" secondItem="HXi-11-4wl" secondAttribute="bottom" constant="86" id="UnT-SW-wcs"/>
+                            <constraint firstItem="Xr6-q6-RSC" firstAttribute="leading" secondItem="4cs-1j-ULA" secondAttribute="leading" constant="20" id="cbJ-pb-irb"/>
+                            <constraint firstItem="r8c-wg-wCm" firstAttribute="top" secondItem="Xr6-q6-RSC" secondAttribute="bottom" constant="62.5" id="d3f-dj-8B1"/>
+                            <constraint firstAttribute="trailing" secondItem="fcQ-zO-3R1" secondAttribute="trailing" id="ib3-xy-U22"/>
+                            <constraint firstItem="fcQ-zO-3R1" firstAttribute="top" secondItem="4cs-1j-ULA" secondAttribute="top" id="jXs-eX-zr1"/>
+                            <constraint firstItem="r8c-wg-wCm" firstAttribute="top" secondItem="fcQ-zO-3R1" secondAttribute="bottom" id="uLB-K8-BCW"/>
+                            <constraint firstAttribute="trailing" secondItem="Xr6-q6-RSC" secondAttribute="trailing" constant="20" id="zpS-dD-7eo"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Pa-gU-VoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4309" y="3205"/>
         </scene>
         <!--Search Users Presenter-->
         <scene sceneID="JWc-5r-Fgm">
@@ -1272,7 +1345,7 @@
                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="59" id="O24-hn-B2Q" customClass="ChoosePartnerCellPresenter">
+                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell 1" rowHeight="59" id="O24-hn-B2Q" customClass="ChoosePartnerCellPresenter">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O24-hn-B2Q" id="mc9-vP-J9m">
@@ -2304,6 +2377,7 @@
         <image name="Burger Menu" width="11" height="11"/>
         <image name="Burger Menu Selected" width="11" height="11"/>
         <image name="Deny Button Request" width="39" height="39"/>
+        <image name="Dim Image " width="320" height="568"/>
         <image name="Email Button" width="81" height="81"/>
         <image name="Facebook Button" width="81" height="80"/>
         <image name="Magnifine Glass" width="16" height="14"/>
