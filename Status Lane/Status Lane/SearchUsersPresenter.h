@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchUsersContracts.h"
 
-@interface SearchUsersPresenter : UIViewController
+@interface SearchUsersPresenter : UIViewController <SearchUsersPresenterDelegate>
+
+@property (nonatomic, strong) id <SearchUsersInteractorDelegate, UISearchBarDelegate> interactor;
 
 @end

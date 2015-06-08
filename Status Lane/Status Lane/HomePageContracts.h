@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 typedef void (^AlertControllerBlock)(void);
 
 
@@ -16,6 +17,7 @@ typedef void (^AlertControllerBlock)(void);
 -(BOOL)checkImagePickerSourceTypeAvailability:(Class )imagePickerClass;
 -(NSString *)checkAuthorizationForSourceType:(UIImagePickerControllerSourceType)sourceType;
 -(void)openSettings;
+-(int)setFlagForAlertViewButtonPressed:(int)interger;
 
 @end
 
@@ -24,5 +26,8 @@ typedef void (^AlertControllerBlock)(void);
 -(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error actionTitle:(NSString *)actionTitle withStyle:(UIAlertControllerStyle)style withBlock:(AlertControllerBlock)alertViewBlock;
 -(void)dissmiss;
 -(void)setBackGroundImage:(UIImage *)image;
+-(void)chooseProfileImage:(UIImage *)image;
+-(void)showImageCropper:(UIImage *)image;
+-(void)dissmissImageCropper;
 
 @end

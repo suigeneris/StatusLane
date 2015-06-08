@@ -7,11 +7,13 @@
 //
 
 #import "SettingsPresenterContainer.h"
-
+#import "SWRevealViewController.h"
 @interface SettingsPresenterContainer()
 
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
+@property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 @end
 
@@ -22,6 +24,7 @@
     // Do any additional setup after loading the view.
     
     [self setUpUIElements];
+    [self revealControllerSetUp];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +43,18 @@
                                            ];
     
     
+}
+
+-(void)revealControllerSetUp{
+    
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if ( revealViewController )
+    {
+        [self.burgerMenuButton addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+        [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
+        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 /*
  #pragma mark - Navigation

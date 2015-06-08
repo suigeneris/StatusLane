@@ -8,6 +8,9 @@
 
 #import "SearchUsersPresenter.h"
 #import "UIColor+StatusLane.h"
+#import "SearchUsersInteractor.h"
+#import "SWRevealViewController.h"
+
 
 @interface SearchUsersPresenter ()
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
@@ -15,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-
+@property (strong, nonatomic) SWRevealViewController *revealController;
 @end
 
 @implementation SearchUsersPresenter
@@ -25,6 +28,8 @@
     // Do any additional setup after loading the view.
     
     [self setUpUIElements];
+    [self interactor];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,8 +37,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(id<SearchUsersInteractorDelegate>)interactor{
+    
+    if (!_interactor) {
+        
+        SearchUsersInteractor *interactor = [SearchUsersInteractor new];
+        interactor.presenter = self;
+        _interactor = interactor;
+        self.searchBar.delegate = _interactor;
+    }
+    
+    return _interactor;
+}
 
-#pragma mark - Additional UI Setup 
+//-(SWRevealViewController *)revealViewController{
+//    
+//    if (!_revealController) {
+//        
+//        _revealController = self.revealViewController;
+//    }
+//    
+//    return _revealController;
+//}
+#pragma mark - Additional UI Setup
 
 - (void)setUpUIElements {
     
@@ -45,6 +71,8 @@
                                                            blue:0
                                                           alpha:0.3
                                            ];
+    
+
 
 }
 
@@ -74,6 +102,11 @@
     
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    [self.searchBar resignFirstResponder];
+}
+
 
 /*
 #pragma mark - Navigation
@@ -86,7 +119,20 @@
 */
 - (IBAction)backButtonPressed:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.searchBar resignFirstResponder];
+    [_revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
 
+
+#pragma mark - Search Users Presenter Delegate Methods
+-(void)setFrontViewController{
+    
+    _revealController = self.revealViewController;
+    [_revealController setFrontViewPosition:FrontViewPositionLeftSideMost animated:YES];
+}
+
+-(void)resetFrontViewController{
+    
+    [_revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+}
 @end

@@ -19,6 +19,7 @@
 -(void)viewDidLoad{
     
     [super viewDidLoad];
+
     self.tableView.delegate = self.interactor;
     self.tableView.dataSource = [self.interactor dataSource];
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -37,7 +38,6 @@
     SettingsInteractor *interactor = [SettingsInteractor new];
     self.interactor = interactor;
 }
-
 
 
 @end

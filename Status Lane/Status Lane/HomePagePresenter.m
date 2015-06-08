@@ -10,6 +10,7 @@
 #import "HomePageInteractor.h"
 #import "UIFont+StatusLaneFonts.h"
 #import "UIColor+StatusLane.h"
+#import "SWRevealViewController.h"
 
 @interface HomePagePresenter ()
 
@@ -19,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 @end
 
@@ -29,7 +32,7 @@
     // Do any additional setup after loading the view.
     
     [self additionalUIViewSetup];
-    
+    [self revealControllerSetUp];
     
     
 }
@@ -75,8 +78,22 @@
                                                                                      constant:0
                                                         ];
     [self.view addConstraint:buttomUIViewHeightConstraint];
+    [self.profileImage.layer setCornerRadius:_profileImage.frame.size.width/2];
+    [self.profileImage.layer setMasksToBounds:YES];
+
     
+}
+
+-(void)revealControllerSetUp{
     
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if ( revealViewController )
+    {
+        [self.burgerMenu addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+        [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
+        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 /*
@@ -93,7 +110,7 @@
 
 - (IBAction)pressedChangeBackgroundImageButton:(id)sender {
     
-    [self showChooseImageActionSheet];
+    [self showChooseImageActionSheet:0];
 }
 
 
@@ -103,14 +120,13 @@
 
 - (IBAction)addProfileImagePressed:(UITapGestureRecognizer *)sender {
     
-    [self showChooseImageActionSheet];
+    [self showChooseImageActionSheet:1];
 }
-
 
 
 #pragma mark - Internal Methods
 
--(void)showChooseImageActionSheet {
+-(void)showChooseImageActionSheet:(int) sender {
     
     UIAlertController *chooseImageActionSheet = [UIAlertController alertControllerWithTitle:nil
                                                                                        message:nil
@@ -126,7 +142,7 @@
                                                                 
                                                                 if ([self.interactor checkImagePickerSourceTypeAvailability:[self class]]) {
                                                                     
-                                                                    [self showImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+                                                                    [self showImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera from:sender];
                                                                 }
                                                                 
                                                                 else{
@@ -145,7 +161,7 @@
                                                                style:UIAlertActionStyleDefault
                                                              handler:^(UIAlertAction *action) {
                                                                  
-                                                                 [self showImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                                                                 [self showImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary from:sender];
                                                                  
                                                              }]];
     
@@ -177,6 +193,7 @@
                                               handler:^(UIAlertAction *action) {
                                                   
                                                   if (alertViewBlock) {
+                                                      
                                                       alertViewBlock();
                                                   }
                                                   
@@ -195,61 +212,80 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)dissmissImageCropper{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)setBackGroundImage:(UIImage *)image{
     
     self.backgroundImageView.image = image;
+
 }
+
+-(void)chooseProfileImage:(UIImage *)profileImage{
+    
+    self.profileImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.profileImage.layer.borderWidth = 3;
+    [self.profileImage setImage:profileImage];
+}
+
+
+-(void)showImageCropper:(UIImage *)image{
+    
+    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image cropMode:RSKImageCropModeCircle];
+    imageCropVC.delegate = self.interactor;
+    [self.navigationController pushViewController:imageCropVC animated:YES];
+}
+
 
 #pragma mark - Internal Methods
 
--(void)showImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType{
+-(void)showImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType from:(int)alertViewFrom{
     
     self.imagePicker.sourceType = sourceType;
+    NSString *accessGranted = [self.interactor checkAuthorizationForSourceType:sourceType];
+
+    [self.interactor setFlagForAlertViewButtonPressed:alertViewFrom];
+
     [self presentViewController:_imagePicker animated:YES completion:^{
         
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([accessGranted isEqualToString:@"Authorised"]) {
             
-            NSString *accessGranted = [self.interactor checkAuthorizationForSourceType:sourceType];
-
-            if ([accessGranted isEqualToString:@"Authorised"]) {
-
-                
-            }
+        }
+        
+        else if ([accessGranted isEqualToString:@"Denied"] || [accessGranted isEqualToString:@"Restricted"]) {
             
-            else  if ([accessGranted isEqualToString:@"Denied"] || [accessGranted isEqualToString:@"Restricted"]) {
-
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                               message:sourceType ? @"We need Access to camera" : @"We need access to photos"
-                                                                        preferredStyle:UIAlertControllerStyleAlert
-                                            
-                                            ];
-                
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction *action) {
-                                                            
-                                                            [self.interactor openSettings];
-                                                            
-                                                        }]];
-                
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    
-                    [_imagePicker presentViewController:alert animated:YES completion:nil];
-
-                });
-                
-            }
+            [_imagePicker presentViewController:[self alertViewForImagePickerFromSourceType:sourceType] animated:YES completion:nil];
             
-            else if ([accessGranted isEqualToString:@"Not Determined"]){
-                
-            }
+        }
+        
+        else if ([accessGranted isEqualToString:@"Not Determined"]){
             
-
-
-            
-        });
+        }
         
     }];
+    
+}
+
+-(UIAlertController *)alertViewForImagePickerFromSourceType:(UIImagePickerControllerSourceType)sourceType {
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:sourceType ? @"We need Access to camera" : @"We need access to photos"
+                                                            preferredStyle:UIAlertControllerStyleAlert
+                                
+                                ];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action) {
+                                                
+                                                [self.interactor openSettings];
+                                                
+                                            }]];
+    
+    return alert;
     
     
 }
