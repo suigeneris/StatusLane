@@ -9,6 +9,8 @@
 #import "StatusListInteractor.h"
 #import "StatusListPresenterCell.h"
 #import "StatusListDataSource.h"
+#import "UIFont+StatusLaneFonts.h"
+#import "UIColor+StatusLane.h"
 
 @interface StatusListInteractor()
 
@@ -43,7 +45,9 @@
     
     [tableView reloadData];
     StatusListPresenterCell *cell = (StatusListPresenterCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
+    [cell.statusTypeLabel setFont:[UIFont statusLaneAsapBold:15]];
+    cell.statusTypeLabel.textColor = [UIColor statusLaneGreen];
+    cell.tickImageView.image = [UIImage imageNamed:@"Tick"];
     
 }
 @end

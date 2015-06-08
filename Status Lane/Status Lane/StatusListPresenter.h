@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StatusListInteractor.h"
 
-@interface StatusListPresenter : UIViewController
+@interface StatusListPresenter : UIViewController <StatusListPresenterDelegate>
+
+@property (nonatomic, strong) id <StatusListInteractorDelegate, StatusListInteractorDataSource, UITableViewDelegate> interactor;
 
 @end

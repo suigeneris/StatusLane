@@ -8,6 +8,8 @@
 
 #import "StatusListDataSource.h"
 #import "StatusListPresenterCell.h"
+#import <UIKit/UIKit.h>
+#import "UIFont+StatusLaneFonts.h"
 
 
 @interface StatusListDataSource()
@@ -46,7 +48,9 @@
     StatusListPresenterCell *cell = (StatusListPresenterCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell 1"];
     
     cell.statusTypeLabel.text = [self.arrayofStatusTypes objectAtIndex:indexPath.row];
-    
+    cell.statusTypeLabel.textColor = [UIColor blackColor];
+    [cell.statusTypeLabel setFont:[UIFont statusLaneAsapRegular:15]];
+    cell.tickImageView.image = [UIImage new];
     return cell;
 }
 

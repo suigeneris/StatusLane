@@ -13,4 +13,7 @@
 
 @interface StatusListInteractor : NSObject <UITableViewDelegate, StatusListInteractorDataSource, StatusListInteractorDelegate>
 
+@property (nonatomic, weak) id<StatusListPresenterDelegate> presenter;
+
+
 @end

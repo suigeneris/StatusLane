@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface StatusListPresenterCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIView *tickImgeView;
 @property (weak, nonatomic) IBOutlet UILabel *statusTypeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *tickImageView;
 
 @end

@@ -11,6 +11,7 @@
 #import "UIFont+StatusLaneFonts.h"
 #import "UIColor+StatusLane.h"
 #import "SWRevealViewController.h"
+#import "StatusListPresenter.h"
 
 @interface HomePagePresenter ()
 
@@ -34,8 +35,8 @@
     [self additionalUIViewSetup];
     [self revealControllerSetUp];
     
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -80,7 +81,6 @@
     [self.view addConstraint:buttomUIViewHeightConstraint];
     [self.profileImage.layer setCornerRadius:_profileImage.frame.size.width/2];
     [self.profileImage.layer setMasksToBounds:YES];
-
     
 }
 
@@ -96,15 +96,24 @@
     }
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"popOver"]) {
+        
+        UINavigationController *destNav = segue.destinationViewController;
+        StatusListPresenter *vc = destNav.viewControllers.firstObject;
+        
+        // This is the important part
+        UIPopoverPresentationController *popPC = vc.popoverPresentationController;
+        popPC.delegate = self;
+    
+    }
 }
-*/
 
 #pragma mark - IBOutlets
 
@@ -289,5 +298,27 @@
     
     
 }
+
+#pragma mark - UIPopOverPresentationControllerDelegate
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return UIModalPresentationNone;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
