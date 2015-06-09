@@ -21,4 +21,6 @@
 
 @protocol StatusListPresenterDelegate <NSObject>
 
+-(void)dismissView;
+
 @end

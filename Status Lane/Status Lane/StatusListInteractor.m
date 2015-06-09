@@ -49,5 +49,6 @@
     cell.statusTypeLabel.textColor = [UIColor statusLaneGreen];
     cell.tickImageView.image = [UIImage imageNamed:@"Tick"];
     
+    
 }
 @end

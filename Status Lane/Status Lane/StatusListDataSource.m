@@ -24,7 +24,7 @@
     
     if (!_arrayofStatusTypes) {
         
-        _arrayofStatusTypes = @[@"SINGLE", @"MARRIED", @"DATING", @"RELATIIONSHIP", @"SEEING", @"COMPLICATED", @"ENGAGED"];
+        _arrayofStatusTypes = @[@"SINGLE", @"MARRIED", @"DATING", @"RELATIONSHIP", @"SEEING", @"COMPLICATED", @"ENGAGED"];
     }
     
     return _arrayofStatusTypes;

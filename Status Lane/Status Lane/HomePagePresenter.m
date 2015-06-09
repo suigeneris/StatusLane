@@ -11,6 +11,7 @@
 #import "UIFont+StatusLaneFonts.h"
 #import "UIColor+StatusLane.h"
 #import "SWRevealViewController.h"
+#import "SLTransitionAnimator.h"
 #import "StatusListPresenter.h"
 
 @interface HomePagePresenter ()
@@ -23,6 +24,9 @@
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong, nonatomic) UINavigationController *statusListPresenter;
+@property (nonatomic) UIStoryboard *mainStoryboard;
+
 
 @end
 
@@ -66,6 +70,30 @@
     return _interactor;
 }
 
+-(UIStoryboard *)mainStoryboard{
+    
+        if (!_mainStoryboard) {
+            _mainStoryboard = 	[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        }
+        return _mainStoryboard;
+}
+
+-(UINavigationController *)statusListPresenter{
+    
+    if (!_statusListPresenter) {
+        
+        UIViewController *vc = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"StatusListViewController"];
+        _statusListPresenter = [[UINavigationController alloc]initWithRootViewController:vc];
+        _statusListPresenter.transitioningDelegate = self;
+        _statusListPresenter.modalPresentationStyle = UIModalPresentationCustom;
+        _statusListPresenter.navigationBarHidden = YES;
+        
+    }
+    
+    return _statusListPresenter;
+    
+}
+
 -(void)additionalUIViewSetup{
     
     [self.bottomUIView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
@@ -99,21 +127,16 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"popOver"]) {
-        
-        UINavigationController *destNav = segue.destinationViewController;
-        StatusListPresenter *vc = destNav.viewControllers.firstObject;
-        
-        // This is the important part
-        UIPopoverPresentationController *popPC = vc.popoverPresentationController;
-        popPC.delegate = self;
-    
-    }
-}
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//    if ([segue.identifier isEqualToString:@"popOver"]) {
+//        
+//        
+//    
+//    }
+//}
 
 #pragma mark - IBOutlets
 
@@ -125,6 +148,7 @@
 
 - (IBAction)relationshipStatusPressed:(id)sender {
     
+    [self presentViewController:self.statusListPresenter animated:YES completion:nil];
 }
 
 - (IBAction)addProfileImagePressed:(UITapGestureRecognizer *)sender {
@@ -299,12 +323,21 @@
     
 }
 
-#pragma mark - UIPopOverPresentationControllerDelegate
+#pragma mark - UIViewControllerTransitioningDelegate
 
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
-    return UIModalPresentationNone;
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    
+    SLTransitionAnimator *transitionAnimation = [[SLTransitionAnimator alloc] initWithParentViewController:presenting presentedViewController:presented];
+    transitionAnimation.isPresenting = YES;
+    return transitionAnimation;
 }
 
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    
+    return [[SLTransitionAnimator alloc] initWithParentViewController:self.parentViewController presentedViewController:dismissed];
+}
 
 
 

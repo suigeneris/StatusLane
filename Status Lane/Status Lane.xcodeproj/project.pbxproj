@@ -23,8 +23,7 @@
 		2A0C56BC1B05491A004198D5 /* CreateAccountRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56BB1B05491A004198D5 /* CreateAccountRouter.m */; };
 		2A0C56C01B054985004198D5 /* CreateAccountPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56BF1B054985004198D5 /* CreateAccountPresenter.m */; };
 		2A0C56CD1B054AD9004198D5 /* CreateAccountInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56CC1B054AD9004198D5 /* CreateAccountInteractor.m */; };
-		2A12AD971B261C660047D657 /* StatusListPresention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A12AD961B261C660047D657 /* StatusListPresention.m */; };
-		2A12AD9A1B2644A00047D657 /* StatusListAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A12AD991B2644A00047D657 /* StatusListAnimationController.m */; };
+		2A12AD9A1B2644A00047D657 /* SLTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A12AD991B2644A00047D657 /* SLTransitionAnimator.m */; };
 		2A18A34F1B0C9D7B005FA738 /* ForgotPasswordPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A18A34E1B0C9D7B005FA738 /* ForgotPasswordPresenter.m */; };
 		2A18A3561B0CB943005FA738 /* HomePagePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A18A3551B0CB943005FA738 /* HomePagePresenter.m */; };
 		2A18A3581B0CD638005FA738 /* ufonts.com_din-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A18A3571B0CD627005FA738 /* ufonts.com_din-medium.ttf */; };
@@ -122,10 +121,8 @@
 		2A0C56BF1B054985004198D5 /* CreateAccountPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountPresenter.m; sourceTree = "<group>"; };
 		2A0C56CB1B054AD9004198D5 /* CreateAccountInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountInteractor.h; sourceTree = "<group>"; };
 		2A0C56CC1B054AD9004198D5 /* CreateAccountInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountInteractor.m; sourceTree = "<group>"; };
-		2A12AD951B261C660047D657 /* StatusListPresention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusListPresention.h; sourceTree = "<group>"; };
-		2A12AD961B261C660047D657 /* StatusListPresention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusListPresention.m; sourceTree = "<group>"; };
-		2A12AD981B2644A00047D657 /* StatusListAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusListAnimationController.h; sourceTree = "<group>"; };
-		2A12AD991B2644A00047D657 /* StatusListAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusListAnimationController.m; sourceTree = "<group>"; };
+		2A12AD981B2644A00047D657 /* SLTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTransitionAnimator.h; sourceTree = "<group>"; };
+		2A12AD991B2644A00047D657 /* SLTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTransitionAnimator.m; sourceTree = "<group>"; };
 		2A18A34D1B0C9D7B005FA738 /* ForgotPasswordPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordPresenter.h; sourceTree = "<group>"; };
 		2A18A34E1B0C9D7B005FA738 /* ForgotPasswordPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordPresenter.m; sourceTree = "<group>"; };
 		2A18A3541B0CB943005FA738 /* HomePagePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePagePresenter.h; sourceTree = "<group>"; };
@@ -350,6 +347,7 @@
 				2A0C56B61B05426E004198D5 /* Model */,
 				2A0C56B81B0548AA004198D5 /* Features */,
 				2AB99DA01B1648FC000535DA /* Categories */,
+				AB281DBC1B26F35C0097B792 /* Transition Animator */,
 				2A0C568C1B054203004198D5 /* Supporting Files */,
 			);
 			path = "Status Lane";
@@ -1092,6 +1090,15 @@
 			name = Presenter;
 			sourceTree = "<group>";
 		};
+		AB281DBC1B26F35C0097B792 /* Transition Animator */ = {
+			isa = PBXGroup;
+			children = (
+				2A12AD981B2644A00047D657 /* SLTransitionAnimator.h */,
+				2A12AD991B2644A00047D657 /* SLTransitionAnimator.m */,
+			);
+			name = "Transition Animator";
+			sourceTree = "<group>";
+		};
 		AB967F2B1B25A43500A5AA9B /* Data Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -1119,10 +1126,6 @@
 				AB967F351B25B7B800A5AA9B /* StatusListPresenter.m */,
 				AB967F391B25EF7B00A5AA9B /* StatusListPresenterCell.h */,
 				AB967F3A1B25EF7B00A5AA9B /* StatusListPresenterCell.m */,
-				2A12AD951B261C660047D657 /* StatusListPresention.h */,
-				2A12AD961B261C660047D657 /* StatusListPresention.m */,
-				2A12AD981B2644A00047D657 /* StatusListAnimationController.h */,
-				2A12AD991B2644A00047D657 /* StatusListAnimationController.m */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -1334,7 +1337,7 @@
 				2ACF523B1B17855200DDC1EE /* CountryCode.m in Sources */,
 				AB967F2E1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m in Sources */,
 				2A63CA2E1B244B75000F191E /* PurchaseRequestsInteractor.m in Sources */,
-				2A12AD9A1B2644A00047D657 /* StatusListAnimationController.m in Sources */,
+				2A12AD9A1B2644A00047D657 /* SLTransitionAnimator.m in Sources */,
 				2A020B681B233FAB000811FC /* BurgerMenuInteractor.m in Sources */,
 				2A458E371B14FE91008C21FA /* CountryListDataSource.m in Sources */,
 				2A1C7A241B1811FE003ADCF5 /* SettingsPresenterContainer.m in Sources */,
@@ -1352,7 +1355,6 @@
 				2A1C7A411B18C5BB003ADCF5 /* ReferAFriendPresenter.m in Sources */,
 				2A0C56BC1B05491A004198D5 /* CreateAccountRouter.m in Sources */,
 				2A458E421B1516B4008C21FA /* CountryListInteractor.m in Sources */,
-				2A12AD971B261C660047D657 /* StatusListPresention.m in Sources */,
 				2A0C568F1B054203004198D5 /* main.m in Sources */,
 				2A1BA5361B1B465B006703D5 /* ChoosePartnerCellPresenter.m in Sources */,
 				2A1C7A2A1B18144D003ADCF5 /* SettingsDataSource.m in Sources */,

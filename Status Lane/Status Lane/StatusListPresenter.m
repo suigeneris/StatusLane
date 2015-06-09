@@ -31,7 +31,7 @@
     [super awakeFromNib];
 }
 
--(id<StatusListInteractorDelegate,StatusListInteractorDataSource,UITableViewDelegate>)interactor{
+-(id<StatusListInteractorDelegate, StatusListInteractorDataSource, UITableViewDelegate>)interactor{
     
     if (!_interactor) {
         
@@ -43,8 +43,12 @@
     return _interactor;
 }
 
+#pragma mark Status List Presenter
 
-
+-(void)dismissView{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 
