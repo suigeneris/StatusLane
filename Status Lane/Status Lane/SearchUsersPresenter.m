@@ -29,6 +29,8 @@
     
     [self setUpUIElements];
     [self interactor];
+    self.tableView.delegate = self.interactor;
+    self.tableView.dataSource = [self.interactor dataSource];
 
 }
 
@@ -50,15 +52,6 @@
     return _interactor;
 }
 
-//-(SWRevealViewController *)revealViewController{
-//    
-//    if (!_revealController) {
-//        
-//        _revealController = self.revealViewController;
-//    }
-//    
-//    return _revealController;
-//}
 #pragma mark - Additional UI Setup
 
 - (void)setUpUIElements {

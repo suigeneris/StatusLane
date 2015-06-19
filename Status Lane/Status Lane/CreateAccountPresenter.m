@@ -8,12 +8,16 @@
 
 #import "CreateAccountPresenter.h"
 #import "CreateAccountInteractor.h"
+#import "UIColor+StatusLane.h"
+//#import "NBPhoneNumberUtil"
 
-@interface CreateAccountPresenter ()
+@interface CreateAccountPresenter () <UITextFieldDelegate>
     
 @property (weak, nonatomic) IBOutlet UILabel *statusLaneLabel;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *countryCodeButton;
+@property (weak, nonatomic) IBOutlet UIButton *createAccountButton;
 
 @end
 
@@ -80,13 +84,24 @@
     self.phoneNumberTextfield.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"mobile number" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     self.countryCodeButton.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.09];
-
+    
+    self.passwordTextField.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.09];
+        self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+    self.passwordTextField.delegate = self;
+    self.phoneNumberTextfield.delegate = self;
 }
 
 - (IBAction)continueButtonPressed:(id)sender {
+    
+    [self.interactor phoneNumberChanged:self.phoneNumberTextfield.text];
+    [self.interactor passwordChanged:self.passwordTextField.text];
+    [self.interactor countryCodeChanged:self.countryCodeButton.titleLabel.text];
+    [self.interactor attemptRegisterUser];
 }
 
 - (IBAction)alreadyAuser:(id)sender {
+    
 }
 
 #pragma mark - Internal Methods
@@ -94,7 +109,36 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
     [self.phoneNumberTextfield resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
 }
+
+-(void)changeCreateAccountButtonColour{
+    
+    [self.createAccountButton setBackgroundColor:[UIColor statusLaneGreen]];
+}
+
+#pragma mark - Textfield Delegate
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if (textField == self.phoneNumberTextfield) {
+        
+    }
+    
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

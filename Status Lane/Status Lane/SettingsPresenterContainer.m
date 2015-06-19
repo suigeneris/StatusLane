@@ -66,6 +66,9 @@
  }
  */
 
+#pragma mark - internal methods
+
+
 
 #pragma mark - Settings Presenter Delegate
 

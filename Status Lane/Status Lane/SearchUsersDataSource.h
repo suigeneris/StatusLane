@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface SearchUsersDataSource : NSObject
+@interface SearchUsersDataSource : NSObject <UITableViewDataSource>
 
 @end

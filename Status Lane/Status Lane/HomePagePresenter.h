@@ -11,7 +11,8 @@
 #import "RSKImageCropViewController.h"
 
 
-@interface HomePagePresenter : UIViewController <HomePagePresenterDelegate, UIViewControllerTransitioningDelegate>
+@interface HomePagePresenter : UIViewController <HomePagePresenterDelegate>
 
-@property (nonatomic, strong) id <HomePageInteractorDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate> interactor;
+@property (nonatomic, strong) id <HomePageInteractorDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UITableViewDelegate, HomePageDataSource> interactor;
+
 @end

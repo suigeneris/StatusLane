@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "ChoosePartnerContracts.h"
+#import "Defaults.h"
 #import <UIKit/UIKit.h>
 
 @interface ChoosePartnerInteractor : NSObject <ChoosePartnerInteractorDelegate, UITableViewDelegate, ChoosePartnerInteractorDataSource>
 
 
 @property (nonatomic, weak) id<ChoosePartnerPresenterDelegate> presenter;
+
 @end

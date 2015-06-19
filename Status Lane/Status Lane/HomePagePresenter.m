@@ -11,21 +11,40 @@
 #import "UIFont+StatusLaneFonts.h"
 #import "UIColor+StatusLane.h"
 #import "SWRevealViewController.h"
-#import "SLTransitionAnimator.h"
-#import "StatusListPresenter.h"
+#import "StatusListPresenterCell.h"
+#import "ChoosePartnerPresenter.h"
 
-@interface HomePagePresenter ()
+
+@interface HomePagePresenter () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIView *bottomUIView;
 @property (weak, nonatomic) IBOutlet UILabel *relationshipStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UIImageView *partnerProfileImage;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
-@property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
-@property (strong, nonatomic) UINavigationController *statusListPresenter;
-@property (nonatomic) UIStoryboard *mainStoryboard;
+@property (weak, nonatomic) IBOutlet UILabel *quoteOfTheDay;
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) UITableView *tableview;
+@property (nonatomic, assign) bool isTableViewHidden;
+@property (nonatomic, strong) UITapGestureRecognizer *tapToHideTableView;
+
+@property (nonatomic, strong) NSIndexPath *indexPathForSelectedCell;
+
+
+//NSLayout Constraints
+@property (nonatomic, strong) NSLayoutConstraint *tableViewLeading;
+@property (nonatomic, strong) NSLayoutConstraint *tableViewTrailing;
+@property (nonatomic, strong) NSLayoutConstraint *tableViewTop;
+@property (nonatomic, strong) NSLayoutConstraint *tableViewBottom;
+
+@property (nonatomic, strong) NSLayoutConstraint *animateTableViewLeading;
+@property (nonatomic, strong) NSLayoutConstraint *animateTableViewBottom;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageViewCenterX;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *partnerProfileImageViewCenterX;
 
 
 @end
@@ -38,7 +57,19 @@
     
     [self additionalUIViewSetup];
     [self revealControllerSetUp];
+    [self constraintsForTableView];
+
+
+}
+
+-(void)viewDidAppear:(BOOL)animated{
     
+    [super viewDidAppear:animated];
+    self.relationshipStatusLabel.text = [self.interactor returnUserStatusFromDefaults];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(hideTableView)
+                                                name:@"HideTableView"
+                                              object:nil];
 }
 
 
@@ -54,13 +85,13 @@
         _imagePicker = [[UIImagePickerController alloc]init];
         _imagePicker.delegate = self.interactor;
         _imagePicker.allowsEditing = NO;
-        
+
     }
     
     return _imagePicker;
 }
 
--(id<HomePageInteractorDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>)interactor{
+-(id<HomePageInteractorDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate, HomePageDataSource, UITableViewDelegate>)interactor{
     
     if (!_interactor) {
         HomePageInteractor *interactor = [HomePageInteractor new];
@@ -70,29 +101,28 @@
     return _interactor;
 }
 
--(UIStoryboard *)mainStoryboard{
+-(UITapGestureRecognizer *)tapToHideTableView{
     
-        if (!_mainStoryboard) {
-            _mainStoryboard = 	[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        }
-        return _mainStoryboard;
-}
-
--(UINavigationController *)statusListPresenter{
-    
-    if (!_statusListPresenter) {
+    if (!_tapToHideTableView) {
         
-        UIViewController *vc = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"StatusListViewController"];
-        _statusListPresenter = [[UINavigationController alloc]initWithRootViewController:vc];
-        _statusListPresenter.transitioningDelegate = self;
-        _statusListPresenter.modalPresentationStyle = UIModalPresentationCustom;
-        _statusListPresenter.navigationBarHidden = YES;
-        
+        _tapToHideTableView = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideTableView)];
+        _tapToHideTableView.delegate = self;
     }
     
-    return _statusListPresenter;
-    
+    return _tapToHideTableView;
 }
+
+-(UIImageView *)backgroundImageView{
+    
+    if (!_backgroundImageView) {
+        
+        _backgroundImageView.image = [self.interactor returnBackgroundImageFromFile];
+    }
+    
+    return _backgroundImageView;
+}
+
+
 
 -(void)additionalUIViewSetup{
     
@@ -106,9 +136,14 @@
                                                                                    multiplier:0.30
                                                                                      constant:0
                                                         ];
+    
     [self.view addConstraint:buttomUIViewHeightConstraint];
-    [self.profileImage.layer setCornerRadius:_profileImage.frame.size.width/2];
-    [self.profileImage.layer setMasksToBounds:YES];
+
+    [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self chooseProfileImage];
+    [self setBackGroundImage];
+    _partnerProfileImage.hidden = YES;
+
     
 }
 
@@ -118,25 +153,27 @@
     if ( revealViewController )
     {
         [self.burgerMenu addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
         [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
-        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
 
 #pragma mark - Navigation
 
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//    if ([segue.identifier isEqualToString:@"popOver"]) {
-//        
-//        
-//    
-//    }
-//}
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showChoosePartner"]) {
+        
+        StatusListPresenterCell *cell = (StatusListPresenterCell *)[self.tableview cellForRowAtIndexPath:self.indexPathForSelectedCell];
+        ChoosePartnerPresenter *vc = segue.destinationViewController;
+        vc.usersChosenStatus = cell.statusTypeLabel.text;
+    }
+
+}
 
 #pragma mark - IBOutlets
 
@@ -148,7 +185,7 @@
 
 - (IBAction)relationshipStatusPressed:(id)sender {
     
-    [self presentViewController:self.statusListPresenter animated:YES completion:nil];
+    [self showTableView];
 }
 
 - (IBAction)addProfileImagePressed:(UITapGestureRecognizer *)sender {
@@ -162,12 +199,10 @@
 -(void)showChooseImageActionSheet:(int) sender {
     
     UIAlertController *chooseImageActionSheet = [UIAlertController alertControllerWithTitle:nil
-                                                                                       message:nil
-                                                                                preferredStyle:UIAlertControllerStyleActionSheet
-                                                        
-                                                    ];
-    
-
+                                                                                    message:nil
+                                                                             preferredStyle:UIAlertControllerStyleActionSheet
+                                                 
+                                                 ];
     
     [chooseImageActionSheet addAction:[UIAlertAction actionWithTitle:@"Take A Picture"
                                                               style:UIAlertActionStyleDefault
@@ -211,76 +246,24 @@
 }
 
 
-
-#pragma mark - Presenter Delegate Methods
-
--(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error actionTitle:(NSString *)actionTitle withStyle:(UIAlertControllerStyle)style withBlock:(AlertControllerBlock)alertViewBlock{
-    
-    UIAlertController *noCamera = [UIAlertController alertControllerWithTitle:title
-                                                                      message:error
-                                                               preferredStyle:style
-                                   ];
-    
-    [noCamera addAction:[UIAlertAction actionWithTitle:actionTitle
-                                                style:UIAlertActionStyleDefault
-                                              handler:^(UIAlertAction *action) {
-                                                  
-                                                  if (alertViewBlock) {
-                                                      
-                                                      alertViewBlock();
-                                                  }
-                                                  
-                                                  else{
-                                                  }
-                                                  
-                                              }]];
-    
-    [self presentViewController:noCamera animated:YES completion:nil];
-    
-    
-}
-
--(void)dissmiss{
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)dissmissImageCropper{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)setBackGroundImage:(UIImage *)image{
-    
-    self.backgroundImageView.image = image;
-
-}
-
--(void)chooseProfileImage:(UIImage *)profileImage{
-    
-    self.profileImage.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.profileImage.layer.borderWidth = 3;
-    [self.profileImage setImage:profileImage];
-}
-
-
--(void)showImageCropper:(UIImage *)image{
-    
-    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image cropMode:RSKImageCropModeCircle];
-    imageCropVC.delegate = self.interactor;
-    [self.navigationController pushViewController:imageCropVC animated:YES];
-}
-
-
-#pragma mark - Internal Methods
-
 -(void)showImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType from:(int)alertViewFrom{
     
     self.imagePicker.sourceType = sourceType;
+    
+    if (sourceType == UIImagePickerControllerSourceTypeCamera) {
+        
+        CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, 40.0);
+        _imagePicker.cameraViewTransform = translate;
+        CGAffineTransform scale = CGAffineTransformScale(translate, 1.333333, 1.333333);
+        _imagePicker.cameraViewTransform = scale;
+        //_imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+        
+    }
+    
     NSString *accessGranted = [self.interactor checkAuthorizationForSourceType:sourceType];
-
+    
     [self.interactor setFlagForAlertViewButtonPressed:alertViewFrom];
-
+    
     [self presentViewController:_imagePicker animated:YES completion:^{
         
         if ([accessGranted isEqualToString:@"Authorised"]) {
@@ -323,32 +306,232 @@
     
 }
 
-#pragma mark - UIViewControllerTransitioningDelegate
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                  presentingController:(UIViewController *)presenting
-                                                                      sourceController:(UIViewController *)source {
+
+#pragma mark - Presenter Delegate Methods
+
+-(void)setBackGroundImage{
     
-    SLTransitionAnimator *transitionAnimation = [[SLTransitionAnimator alloc] initWithParentViewController:presenting presentedViewController:presented];
-    transitionAnimation.isPresenting = YES;
-    return transitionAnimation;
+    self.backgroundImageView.image = [self.interactor returnBackgroundImageFromFile];
+    
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+-(void)chooseProfileImage{
     
-    return [[SLTransitionAnimator alloc] initWithParentViewController:self.parentViewController presentedViewController:dismissed];
+    self.profileImage.image = [self.interactor returnProfileImageFromFile];
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2;
+    self.profileImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.profileImage.layer.borderWidth = 2;
+    self.profileImage.clipsToBounds = YES;
+}
+
+-(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error actionTitle:(NSString *)actionTitle withStyle:(UIAlertControllerStyle)style withBlock:(AlertControllerBlock)alertViewBlock{
+    
+    UIAlertController *noCamera = [UIAlertController alertControllerWithTitle:title
+                                                                      message:error
+                                                               preferredStyle:style
+                                   ];
+    
+    [noCamera addAction:[UIAlertAction actionWithTitle:actionTitle
+                                                style:UIAlertActionStyleDefault
+                                              handler:^(UIAlertAction *action) {
+                                                  
+                                                  if (alertViewBlock) {
+                                                      
+                                                      alertViewBlock();
+                                                  }
+                                                  
+                                                  else{
+                                                  }
+                                                  
+                                              }]];
+    
+    [self presentViewController:noCamera animated:YES completion:nil];
+    
+    
+}
+
+-(void)dismiss{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)dissmissImageCropper{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)showImageCropper:(UIImage *)image{
+    
+    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image cropMode:RSKImageCropModeCircle];
+    imageCropVC.delegate = self.interactor;
+    [self.navigationController pushViewController:imageCropVC animated:YES];
+}
+
+-(void)showChoosePartner{
+    
+    [self performSegueWithIdentifier:@"showChoosePartner" sender:self];
+}
+
+-(void)indexPathForSelectedRow:(NSIndexPath *)indexPath{
+    
+    self.indexPathForSelectedCell = indexPath;
+}
+
+-(void)changeUserStatusToSingle{
+    
+    self.relationshipStatusLabel.text = @"SINGLE";
 }
 
 
+-(void)animateViews{
+    
+    self.partnerProfileImage.hidden = NO;
+    self.profileImageViewCenterX.constant = 100;
+    self.partnerProfileImageViewCenterX.constant = 100;
+    
+    [UIView animateWithDuration:0.36
+                     animations:^{
+                         
+                         
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
+-(void)resetImageViewsPostition{
+    
+    self.profileImageViewCenterX.constant = 0;
+    self.partnerProfileImageViewCenterX.constant = 0;
+    
+    [UIView animateWithDuration:0.36
+                     animations:^{
+                         
+                         
+                         [self.view layoutIfNeeded];
+                     }];
+    
+}
+
+#pragma mark - UIGestureReognizer Delegate Methods
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    CGPoint touchPoint = [touch locationInView:self.view];
+    return !CGRectContainsPoint(self.tableview.frame, touchPoint);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Table view setup
+#pragma mark - UIGestureReognizer Table view setup
 
 
+-(void)constraintsForTableView{
+    
+    self.tableview = [[UITableView alloc]init];
+    self.tableview.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableview.dataSource = [self.interactor dataSource];
+    self.tableview.delegate = self.interactor;
+    self.tableview.rowHeight = 80;
+    self.tableview.layer.cornerRadius = 4;
+    [self.view addSubview:self.tableview];
+    
+    
+    self.tableViewLeading = [NSLayoutConstraint constraintWithItem:self.tableview
+                                                         attribute:NSLayoutAttributeLeading
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.view
+                                                         attribute:NSLayoutAttributeLeading
+                                                        multiplier:1
+                                                          constant:20
+                             ];
+    
+    self.tableViewTrailing = [NSLayoutConstraint constraintWithItem:self.tableview
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1
+                                                           constant:-20
+                              ];
+    
+    self.tableViewTop = [NSLayoutConstraint constraintWithItem:self.tableview
+                                                     attribute:NSLayoutAttributeTop
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self.view
+                                                     attribute:NSLayoutAttributeTop
+                                                    multiplier:1
+                                                      constant:[UIScreen mainScreen].bounds.size.height
+                         ];
+    
+    self.tableViewBottom = [NSLayoutConstraint constraintWithItem:self.tableview
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1
+                                                         constant:[UIScreen mainScreen].bounds.size.height - 148
+                            ];
+    
+    [self.view addConstraint:self.tableViewLeading];
+    [self.view addConstraint:self.tableViewTrailing];
+    [self.view addConstraint:self.tableViewTop];
+    [self.view addConstraint:self.tableViewBottom];
+
+    
+}
+
+-(void)showTableView{
+    
+    _isTableViewHidden = NO;
+    self.burgerMenu.userInteractionEnabled = NO;
+    self.searchButton.userInteractionEnabled = NO;
+    
+    [self.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    [self.view removeGestureRecognizer:self.revealViewController.tapGestureRecognizer];
+    [self.view addGestureRecognizer:self.tapToHideTableView];
+
+    self.burgerMenu.alpha = 0.3;
+    self.searchButton.alpha = 0.3;
+    
+    _tableViewTop.constant = 86;
+    _tableViewBottom.constant = -62;
+    
+    [UIView animateWithDuration:0.30
+                     animations:^{
+                         
+                         [self.view layoutIfNeeded];
+                         
+                     }];
+}
 
 
+-(void)hideTableView{
+    
+    _isTableViewHidden = YES;
+    self.burgerMenu.userInteractionEnabled = YES;
+    self.searchButton.userInteractionEnabled = YES;
+
+    
+    [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+    [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
+    [self.view removeGestureRecognizer:self.tapToHideTableView];
+
+    self.burgerMenu.alpha = 1;
+    self.searchButton.alpha = 1;
+    _tableViewTop.constant = [UIScreen mainScreen].bounds.size.height;
+    _tableViewBottom.constant = [UIScreen mainScreen].bounds.size.height - 148;
+    
+    [UIView animateWithDuration:0.30
+                     animations:^{
+                         
+                         [self.view layoutIfNeeded];
+                         
+                     }];
+    
+
+}
 
 
-
-
-
+#pragma mark - View Animations
 
 
 

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BurgerMenuContracts.h"
 
-@interface BurgerMenuPresenter : UIViewController
+@interface BurgerMenuPresenter : UIViewController <BurgerMenuPresenter>
+
+@property (nonatomic, strong) id <BurgerMenuInteractor> interactor;
 
 @end
