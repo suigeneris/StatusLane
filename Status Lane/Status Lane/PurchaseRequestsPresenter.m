@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *dimView;
 
 @end
 
@@ -53,6 +54,12 @@
                                                           green:0
                                                            blue:0
                                                           alpha:0.3];
+    
+    self.dimView.backgroundColor = [UIColor colorWithRed:0
+                                               green:0
+                                                blue:0
+                                               alpha:0.3
+                                ];
 }
 
 -(void)revealControllerSetUp{

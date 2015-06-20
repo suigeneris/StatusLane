@@ -21,4 +21,16 @@
     return statusLaneGreen;
 }
 
++(UIColor *)statusLaneGreenPressed{
+    
+    UIColor *statusLaneGreenPressed = [UIColor colorWithRed:62.0f/255.0f
+                                               green:143.0/255.0f
+                                                blue:136.0/255.0f
+                                               alpha:1
+                                ];
+    
+    return statusLaneGreenPressed;
+}
+
+
 @end

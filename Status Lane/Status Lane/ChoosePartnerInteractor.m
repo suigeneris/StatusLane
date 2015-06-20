@@ -10,6 +10,7 @@
 #import "CountryCode.h"
 #import "ChoosePartnerDataSource.h"
 #import "ChoosePartnerPresenter.h"
+#import "ChoosePartnerCellPresenter.h"
 #import <AddressBook/AddressBook.h>
 
 
@@ -37,7 +38,6 @@
 
 -(void)askUserForPermissionToViewContacts{
     
-
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
         ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
         
@@ -80,6 +80,24 @@
     [[UIApplication sharedApplication] openURL:appSettings];
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ChoosePartnerCellPresenter *cell = (ChoosePartnerCellPresenter *)[tableView cellForRowAtIndexPath:indexPath];
+    [self.presenter dismissTabelViewWithPartnerName:cell.firstNameLabel.text
+                                          andNumber:nil
+     ];
+    
+}
+
+-(void)saveStatusToDefaults:(NSString *)status{
+    
+    [Defaults setStatus:status];
+    
+}
+
+
+
 #pragma mark ChoosePartnerInteractor DataSource
 
 -(id<UITableViewDataSource>)dataSource{
@@ -103,5 +121,6 @@
     
     return _choosePartnerDataSource;
 }
+
 
 @end

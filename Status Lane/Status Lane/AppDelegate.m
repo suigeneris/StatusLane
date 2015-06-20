@@ -7,11 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "CreateAccountPresenter.h"
 
 @interface AppDelegate ()
-
-@property (nonatomic, strong) CreateAccountPresenter *createAccount;
 
 @end
 
@@ -24,6 +21,14 @@
 //    _createAccount = [[CreateAccountPresenter alloc]init];
 //    [self.window setRootViewController:self.createAccount];
 //    [self.window makeKeyAndVisible];
+    [Parse enableLocalDatastore];
+    
+    [Parse setApplicationId:@"nilSvL4G2SkPGxCgBuZkhjHLOraM4dtp8YFNQadT"
+                  clientKey:@"4hSgGJ482V7Abf5sgzdEpDZZt9ZASG7lqCzVWMJt"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+
     return YES;
 }
 

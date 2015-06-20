@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *contactListTableView;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *partnerNameTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *countryCodeButton;
@@ -41,12 +42,20 @@
     [self setUPUIElements];
     self.contactListTableView.delegate = self.interactor;
     self.contactListTableView.dataSource = [self.interactor dataSource];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [self countryCodeButton];
+
+}
+
+-(void)viewDidAppear:(BOOL)animated{
     
+    //[self viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTableView" object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,8 +116,14 @@
     self.phoneNumberTextfield.backgroundColor = [UIColor colorWithWhite:1 alpha:0.09];
     self.phoneNumberTextfield.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"phone number" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
+    self.partnerNameTextField.backgroundColor = [UIColor colorWithWhite:1 alpha:0.09];
+    self.partnerNameTextField.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
     self.countryCodeButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.09];
     self.phoneNumberButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
+    
+
+    
 
 }
 
@@ -122,6 +137,12 @@
 }
 */
 
+#pragma mark - Internal Methods
+
+-(void)saveStatusToDefaults{
+    
+    [self.interactor saveStatusToDefaults:self.usersChosenStatus];
+}
 #pragma mark - IBOutlets
 
 - (IBAction)backButtonPressed:(id)sender {
@@ -147,6 +168,9 @@
 }
 
 - (IBAction)sendButtonPressed:(id)sender {
+    
+    [self saveStatusToDefaults];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -160,6 +184,7 @@
         
         self.countryCodeButton.hidden = NO;
         self.phoneNumberTextfield.hidden = NO;
+        self.partnerNameTextField.hidden = NO;
         self.sendButton.hidden = NO;
         self.contactListTableView.hidden = YES;
 }
@@ -168,6 +193,7 @@
         
         self.countryCodeButton.hidden = YES;
         self.phoneNumberTextfield.hidden = YES;
+        self.partnerNameTextField.hidden = YES;
         self.sendButton.hidden = YES;
         self.contactListTableView.hidden = NO;
         
@@ -195,6 +221,8 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
     [self.phoneNumberTextfield resignFirstResponder];
+    [self.partnerNameTextField resignFirstResponder];
+
 }
 
 
@@ -204,7 +232,6 @@
 
 -(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error andActionTitle:(NSString *)actionTitle{
     
-    NSLog(@"IS this method called");
     UIAlertController *cantAddContactAlert = [UIAlertController alertControllerWithTitle:title
                                                                                  message:error
                                                                           preferredStyle:UIAlertControllerStyleAlert
@@ -230,6 +257,12 @@
     [self.contactListTableView reloadData];
 }
 
+-(void)dismissTabelViewWithPartnerName:(NSString *)name andNumber:(NSString *)number{
+    
+    [self contactListButtonPressed:self.phoneNumberButton];
+    self.partnerNameTextField.text = name;
+
+}
 
 
 

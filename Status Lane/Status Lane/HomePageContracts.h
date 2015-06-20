@@ -11,23 +11,37 @@
 
 typedef void (^AlertControllerBlock)(void);
 
+@protocol HomePageDataSource <NSObject>
 
+-(id<UITableViewDataSource>) dataSource;
+
+@end
 @protocol HomePageInteractorDelegate <NSObject>
 
 -(BOOL)checkImagePickerSourceTypeAvailability:(Class )imagePickerClass;
 -(NSString *)checkAuthorizationForSourceType:(UIImagePickerControllerSourceType)sourceType;
 -(void)openSettings;
 -(int)setFlagForAlertViewButtonPressed:(int)interger;
+-(UIImage *)returnBackgroundImageFromFile;
+-(UIImage *)returnProfileImageFromFile;
+-(NSString *)returnUserStatusFromDefaults;
+
 
 @end
 
 @protocol HomePagePresenterDelegate <NSObject>
 
 -(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error actionTitle:(NSString *)actionTitle withStyle:(UIAlertControllerStyle)style withBlock:(AlertControllerBlock)alertViewBlock;
--(void)dissmiss;
--(void)setBackGroundImage:(UIImage *)image;
--(void)chooseProfileImage:(UIImage *)image;
+-(void)dismiss;
+-(void)showChoosePartner;
+-(void)setBackGroundImage;
+-(void)chooseProfileImage;
 -(void)showImageCropper:(UIImage *)image;
 -(void)dissmissImageCropper;
+-(void)hideTableView;
+-(void)indexPathForSelectedRow:(NSIndexPath*)indexPath;
+-(void)changeUserStatusToSingle;
+-(void)animateViews;
+-(void)resetImageViewsPostition;
 
 @end

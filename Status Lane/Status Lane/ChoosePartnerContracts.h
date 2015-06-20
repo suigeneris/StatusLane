@@ -14,6 +14,7 @@
 -(NSString *)requestCountryCode;
 -(void)askUserForPermissionToViewContacts;
 -(void)openSettings;
+-(void)saveStatusToDefaults:(NSString *)string;
 
 @end
 
@@ -27,5 +28,5 @@
 
 -(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error andActionTitle:(NSString *)actionTitle;
 -(void)reloadData;
-
+-(void)dismissTabelViewWithPartnerName:(NSString *)name andNumber:(NSString *)number;
 @end

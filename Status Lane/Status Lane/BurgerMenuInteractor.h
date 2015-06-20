@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BurgerMenuContracts.h"
 
-@interface BurgerMenuInteractor : NSObject
+@interface BurgerMenuInteractor : NSObject <BurgerMenuInteractor>
+
+@property (nonatomic, weak) id<BurgerMenuPresenter> presenter;
 
 @end

@@ -11,6 +11,6 @@
 
 @interface SearchUsersPresenter : UIViewController <SearchUsersPresenterDelegate>
 
-@property (nonatomic, strong) id <SearchUsersInteractorDelegate, UISearchBarDelegate> interactor;
+@property (nonatomic, strong) id <SearchUsersInteractorDelegate, UISearchBarDelegate, SearchUsersInteractorDataSource, UITableViewDelegate> interactor;
 
 @end

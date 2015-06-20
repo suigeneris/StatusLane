@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@protocol BurgerMenuContracts <NSObject>
+@protocol BurgerMenuPresenter <NSObject>
+
+@end
+
+@protocol BurgerMenuInteractor <NSObject>
+
+-(UIImage *)retrieveProfileImageFromFile;
+
 
 @end

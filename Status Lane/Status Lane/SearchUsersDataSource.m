@@ -7,7 +7,29 @@
 //
 
 #import "SearchUsersDataSource.h"
+#import "SearchUsersCell.h"
+
 
 @implementation SearchUsersDataSource
 
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    SearchUsersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    return cell;
+    
+}
+
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 4;
+}
 @end

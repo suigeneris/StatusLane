@@ -26,7 +26,6 @@
         
         _arrayOfContacts = [self retrieveContactsFromAddressBook];
     }
-    
     return _arrayOfContacts;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -50,44 +49,45 @@
 
 -(NSArray *)retrieveContactsFromAddressBook{
     
-    CFErrorRef error = NULL;
-    NSArray *array = [[NSMutableArray alloc]init];
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-    NSMutableArray *array2 = [[NSMutableArray alloc]init];
-    if (addressBook != nil) {
-        
-        array = (__bridge NSArray *)(ABAddressBookCopyArrayOfAllPeople(addressBook));
-
-        for (int i = 0; i < [array count]; i++) {
+    
+        CFErrorRef error = NULL;    
+        NSArray *array = [[NSMutableArray alloc]init];
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+        NSMutableArray *array2 = [[NSMutableArray alloc]init];
+        if (addressBook != nil) {
             
-            ABRecordRef contact = (__bridge ABRecordRef)[array objectAtIndex:i];
-            NSString *string = (__bridge NSString *)(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
-            
-            if (string) {
+            array = (__bridge NSArray *)(ABAddressBookCopyArrayOfAllPeople(addressBook));
+            for (int i = 0; i < [array count]; i++) {
                 
-                [array2 addObject:string];
-
+                ABRecordRef contact = (__bridge ABRecordRef)[array objectAtIndex:i];
+                NSString *string = (__bridge NSString *)(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
+                
+                if (string) {
+                    
+                    [array2 addObject:string];
+                    
+                }
+                
+                else{
+                    
+                }
+                
             }
             
-            else{
-                
-            }
-
+            CFRelease(addressBook);
+            
         }
         
-        CFRelease(addressBook);
-
-    }
-    
-    
-    else{
         
-    }
+        else{
+            
+        }
+        
+        NSArray *finalArray = [array2 sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
-    NSArray *finalArray = [array2 sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
     return finalArray;
 }
+
 
 
 

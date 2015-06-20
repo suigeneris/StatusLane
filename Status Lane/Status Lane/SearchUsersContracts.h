@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @protocol SearchUsersInteractorDelegate <NSObject>
 
 @end
 
 
 @protocol SearchUsersInteractorDataSource <NSObject>
+
+-(id<UITableViewDataSource>)dataSource;
 
 
 @end

@@ -15,5 +15,10 @@
 @protocol CreateAccountInteractor <NSObject>
 
 -(NSString*)requestCountryCode;
+-(void)phoneNumberChanged:(NSString *)phoneNumber;
+-(void)passwordChanged:(NSString *)password;
+-(void)countryCodeChanged:(NSString *)cc;
+
+-(void)attemptRegisterUser;
 
 @end

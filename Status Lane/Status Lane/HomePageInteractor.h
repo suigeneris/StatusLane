@@ -12,7 +12,7 @@
 
 
 
-@interface HomePageInteractor : NSObject <HomePageInteractorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate>
+@interface HomePageInteractor : NSObject <HomePageInteractorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, UITableViewDelegate, HomePageDataSource>
 
 @property (nonatomic, weak) id<HomePagePresenterDelegate> presenter;
 
