@@ -144,6 +144,12 @@ static void *countryCodeContext = &countryCodeContext;
     [errorView show];
 }
 
+-(void)dismissView{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
 
 
 

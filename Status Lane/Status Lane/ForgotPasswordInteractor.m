@@ -42,7 +42,6 @@
             if (objects.count != 0) {
                 
                 //user found
-                NSLog(@"IS this called");
                 PFUser *user = [objects objectAtIndex:0];
                 NSLog(@"%@", user);
                 [self sendPasswordForPhoneNumber:user.username];
@@ -88,7 +87,7 @@
                                     if (!error) {
                                         
                                         NSLog(@"%@", object);
-                                        //[self.presenter showVerifyAccount];
+                                        [self.presenter dismissView];
                                     }
                                     
                                     else{

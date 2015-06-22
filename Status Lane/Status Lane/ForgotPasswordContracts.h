@@ -19,5 +19,7 @@
 @protocol ForgotPasswordPresenter <NSObject>
 
 -(void)showErrorViewWithMessage:(NSString *)message;
+-(void)dismissView;
+
 
 @end
