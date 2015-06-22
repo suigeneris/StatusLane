@@ -110,7 +110,7 @@ static void *countryCodeContext = &countryCodeContext;
                                         forKeyPath:@"text"
                                            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                                            context:countryCodeContext];
-    
+
 }
 
 #pragma mark - IB Outlets
@@ -210,7 +210,6 @@ static void *countryCodeContext = &countryCodeContext;
     return isNumberValid;
     
 }
-
 
 #pragma mark - Key Value Observer
 

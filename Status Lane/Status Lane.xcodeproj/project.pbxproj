@@ -88,7 +88,6 @@
 		2AC27B661B348723009997AF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC27B651B348723009997AF /* libsqlite3.dylib */; };
 		2AC27B691B348814009997AF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC27B681B348814009997AF /* Accounts.framework */; };
 		2AC27B6B1B34881B009997AF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC27B6A1B34881B009997AF /* Social.framework */; };
-		2AC27B6E1B349A92009997AF /* UIButton+StatusLaneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC27B6D1B349A92009997AF /* UIButton+StatusLaneButton.m */; };
 		2AC702601B0A737D00FA1950 /* Asap-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7025F1B0A729900FA1950 /* Asap-Bold.otf */; };
 		2ACF523B1B17855200DDC1EE /* CountryCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF523A1B17855200DDC1EE /* CountryCode.m */; };
 		2AD6AB031B1CCE9A00457102 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD6AB021B1CCE9A00457102 /* AddressBook.framework */; };
@@ -263,8 +262,6 @@
 		2AC27B651B348723009997AF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		2AC27B681B348814009997AF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		2AC27B6A1B34881B009997AF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		2AC27B6C1B349A92009997AF /* UIButton+StatusLaneButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+StatusLaneButton.h"; sourceTree = "<group>"; };
-		2AC27B6D1B349A92009997AF /* UIButton+StatusLaneButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+StatusLaneButton.m"; sourceTree = "<group>"; };
 		2AC7025F1B0A729900FA1950 /* Asap-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Bold.otf"; sourceTree = "<group>"; };
 		2ACF52391B17855200DDC1EE /* CountryCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryCode.h; sourceTree = "<group>"; };
 		2ACF523A1B17855200DDC1EE /* CountryCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryCode.m; sourceTree = "<group>"; };
@@ -1090,8 +1087,6 @@
 				2AA9F4AA1B2D9DCD00B5C1A2 /* NSString+StatusLane.m */,
 				2AA9F4AC1B2D9FB600B5C1A2 /* UIImage+StatusLane.h */,
 				2AA9F4AD1B2D9FB600B5C1A2 /* UIImage+StatusLane.m */,
-				2AC27B6C1B349A92009997AF /* UIButton+StatusLaneButton.h */,
-				2AC27B6D1B349A92009997AF /* UIButton+StatusLaneButton.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1476,7 +1471,6 @@
 				2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */,
 				2A1C7A271B181308003ADCF5 /* SettingsPresenter.m in Sources */,
 				2AA9F4A81B2D7D0500B5C1A2 /* Defaults.m in Sources */,
-				2AC27B6E1B349A92009997AF /* UIButton+StatusLaneButton.m in Sources */,
 				2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */,
 				2A7679BD1B2251A100B616DE /* SWRevealViewController.m in Sources */,
 				2A1C7A5C1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m in Sources */,
