@@ -723,6 +723,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKd-pG-lhp">
                                 <rect key="frame" x="78" y="362" width="165" height="29"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Forgot your password again?">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2622,6 +2623,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="A1T-yW-fbn"/>
         <segue reference="jpR-89-pEy"/>
-        <segue reference="1xB-qQ-SFp"/>
+        <segue reference="sxa-A7-M9C"/>
     </inferredMetricsTieBreakers>
 </document>
