@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ForgotPasswordContracts.h"
 
-@interface ForgotPasswordPresenter : UIViewController
+@interface ForgotPasswordPresenter : UIViewController <ForgotPasswordPresenter>
 
 @property (nonatomic) id<ForgotPasswordInteractor> interactor;
 

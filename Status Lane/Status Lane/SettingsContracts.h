@@ -17,6 +17,6 @@
 
 @protocol SettingsPresenterDelegate <NSObject>
 
--(void)logOut:(UIViewController *)viewController;
+-(void)logOut;
 
 @end

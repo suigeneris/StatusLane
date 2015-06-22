@@ -12,9 +12,7 @@
 
 @interface CreateAccountInteractor()
 
-@property (nonatomic) NSString *phoneNumber;
-@property (nonatomic) NSString *password;
-@property (nonatomic) NSString *countryCode;
+
 
 @end
 @implementation CreateAccountInteractor
@@ -23,58 +21,45 @@
     
     CountryCode *code = [CountryCode sharedInstance];
     NSString *string = code.countryCode;
-    _countryCode = string;
     return string;
 }
 
 
 #pragma mark - Create Account Interactor Delegate
 
--(void)passwordChanged:(NSString *)password{
-    _password = password;
+-(NSString *)generateVerificationCode{
     
-    
-}
--(void)phoneNumberChanged:(NSString *)phoneNumber{
-    
-    _phoneNumber = phoneNumber;
+    uint64_t verificationCode = arc4random_uniform(100000);
+    NSNumber* n = [NSNumber numberWithUnsignedLongLong:verificationCode];
+
+    return [n stringValue];
 
 }
 
--(void)countryCodeChanged:(NSString *)cc{
+-(void)sendSMSWithVerificationCode:(NSString *)number withCode:(NSString *)code{
     
-    _countryCode = cc;
+        [PFCloud callFunctionInBackground:@"verifyNumber"
+                           withParameters:@{ @"number" : number,
+                                             @"verificationCode" : code}
+                                    block:^(id object, NSError *error) {
+    
+    
+                                        if (!error) {
+    
+                                            NSLog(@"%@", object);
 
+                                            [self.presenter showVerifyAccount];
+                                        }
+    
+                                        else{
+    
+                                            NSLog(@"%@", error.localizedDescription);
+                                            [self.presenter showErrorView:error.localizedDescription];
+                                        }
+                                    }];
+    
 }
 
-
--(void)attemptRegisterUser{
-    
-    NSString *countryCode = self.countryCode;
-    NSString *phoneNumberAsUserName = [countryCode stringByAppendingString:self.phoneNumber];
-    
-    PFUser *user = [PFUser user];
-    user.username = phoneNumberAsUserName;
-    user.password = _password;
-    user[@"status"] = @"single";
-    
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
-    
-    
-        if (!error) {
-            
-            NSLog(@"User sign up successful");
-        }
-        else{
-            
-            NSString *errorString = [error userInfo][@"error"];
-            NSLog(@"%@", errorString);
-            NSLog(@"This is the user info: %@", [error userInfo]);
-
-        }
-    
-    }];
-}
 
 
 

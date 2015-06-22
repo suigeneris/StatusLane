@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingsContracts.h"
-@interface SettingsPresenter : UITableViewController
+@interface SettingsPresenter : UITableViewController <SettingsPresenterDelegate>
 
 @property (nonatomic) id <UITableViewDelegate, SettingsInteractor> interactor;
 
