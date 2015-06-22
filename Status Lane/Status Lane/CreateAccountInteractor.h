@@ -11,6 +11,6 @@
 
 @interface CreateAccountInteractor : NSObject <CreateAccountInteractor>
 
-@property (nonatomic) id <CreateAccountPresenter> presenter;
+@property (nonatomic, weak) id <CreateAccountPresenter> presenter;
 
 @end

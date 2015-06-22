@@ -11,5 +11,5 @@
 @interface NSString (StatusLane)
 
 +(NSString *)documentsPathForFileName:(NSString *)name;
-
++(bool)isPhoneNumberValid:(NSString*)phoneNumber;
 @end

@@ -7,9 +7,8 @@
 //
 
 #import "Defaults.h"
-#import "KeychainItemWrapper.h"
 #import "NSString+StatusLane.h"
-
+#import "KeyChainWrapper.h"
 
 #define kFullNameKey @"fullName"
 #define kPhoneNumberCountryCodeKey @"phoneNumberCountryCode"

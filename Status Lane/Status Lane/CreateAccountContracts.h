@@ -10,15 +10,16 @@
 
 @protocol CreateAccountPresenter <NSObject>
 
+-(void)showErrorView:(NSString *)errorMessage;
+-(void)showVerifyAccount;
+
 @end
 
 @protocol CreateAccountInteractor <NSObject>
 
 -(NSString*)requestCountryCode;
--(void)phoneNumberChanged:(NSString *)phoneNumber;
--(void)passwordChanged:(NSString *)password;
--(void)countryCodeChanged:(NSString *)cc;
+-(NSString *)generateVerificationCode;
+-(void)sendSMSWithVerificationCode:(NSString *)number withCode:(NSString *)code;
 
--(void)attemptRegisterUser;
 
 @end

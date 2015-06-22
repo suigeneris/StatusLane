@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CreateAccountContracts.h"
-@interface CreateAccountPresenter : UIViewController
+
+@interface CreateAccountPresenter : UIViewController <CreateAccountPresenter>
 
 @property (nonatomic) id<CreateAccountInteractor> interactor;
 

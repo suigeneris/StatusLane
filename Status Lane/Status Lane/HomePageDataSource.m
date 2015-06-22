@@ -60,6 +60,7 @@
     [cell.statusTypeLabel setFont:[UIFont statusLaneAsapRegular:15]];
     cell.tickImageView.image = [UIImage new];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
     
     return cell;
 }

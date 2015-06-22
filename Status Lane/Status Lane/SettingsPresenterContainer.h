@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SettingsContracts.h"
 
-@interface SettingsPresenterContainer : UIViewController <SettingsPresenterDelegate>
+@interface SettingsPresenterContainer : UIViewController 
 
 
 @end

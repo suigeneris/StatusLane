@@ -33,4 +33,26 @@
 }
 
 
++(UIColor *)statusLaneRed{
+    
+    UIColor *statusLaneRed = [UIColor colorWithRed:236.0f/255.0f
+                                             green:110.0f/255.0f
+                                              blue:110.0f/255.0f
+                                             alpha:1
+                              ];
+    
+    return statusLaneRed;
+}
+
++(UIColor *)statusLaneRedPressed{
+    
+    UIColor *statusLaneRedPressed = [UIColor colorWithRed:172.0f/255.0f
+                                                    green:80.0f/255.0f
+                                                     blue:80.0f/255.0f
+                                                    alpha:1
+                                     ];
+    
+    return statusLaneRedPressed;
+}
+
 @end

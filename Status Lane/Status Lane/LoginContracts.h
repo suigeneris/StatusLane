@@ -11,5 +11,15 @@
 @protocol LoginInteractor <NSObject>
 
 -(NSString *)requestCountryCode;
+-(void)attemptLoginWithUsername:(NSString *)username andPassword:(NSString *)password;
+-(void)loginCachedUser;
+
+@end
+
+
+@protocol LoginPresenter <NSObject>
+
+-(void)showErrorViewWithErrorMessage:(NSString *)errorMessage;
+-(void)login;
 
 @end

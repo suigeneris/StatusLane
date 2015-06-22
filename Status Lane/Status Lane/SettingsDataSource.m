@@ -107,7 +107,7 @@
                                                                                                                 NSFontAttributeName: [UIFont statusLaneAsapRegular:14]}];
         
         _accoutActionsArray = @[logout,
-                                  deleteAccout];
+                                deleteAccout];
     }
     
     return _accoutActionsArray;

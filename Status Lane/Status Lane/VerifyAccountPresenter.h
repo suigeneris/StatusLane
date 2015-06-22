@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VerifyAccountContracts.h"
 
-@interface VerifyAccountPresenter : UIViewController
+@interface VerifyAccountPresenter : UIViewController <VerifyAccountPresenter>
+
+@property (nonatomic, strong) id <VerifyAccountInteractor> interactor;
+
+@property (nonatomic, strong) NSString *phonenumber;
+@property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *verificationCode;
+
+
 
 @end

@@ -70,10 +70,6 @@
 
 
 
-#pragma mark - Settings Presenter Delegate
 
--(void)logOut:(UIViewController *)viewController{
-    
-    [self.navigationController popToViewController:viewController animated:YES];
-}
+
 @end

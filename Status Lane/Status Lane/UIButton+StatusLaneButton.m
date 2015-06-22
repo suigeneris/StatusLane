@@ -7,20 +7,22 @@
 //
 
 #import "UIButton+StatusLaneButton.h"
+#import "UIColor+StatusLane.h"
 
 @implementation UIButton (StatusLaneButton)
 
 -(void)setHighlighted:(BOOL)highlighted{
     
-    [super setHighlighted:highlighted];
-    
-    if (highlighted) {
-        
-    }
-    
-    else{
-        
-        
-    }
+//    [super setHighlighted:highlighted];
+//    
+//    if (highlighted) {
+//        
+//        self.backgroundColor = [UIColor statusLaneGreenPressed];
+//    }
+//    
+//    else{
+//        
+//        self.backgroundColor = [UIColor statusLaneGreen];
+//    }
 }
 @end

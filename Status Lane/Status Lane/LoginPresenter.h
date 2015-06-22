@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LoginInteractor.h"
 
-@interface LoginPresenter : UIViewController
+@interface LoginPresenter : UIViewController <LoginPresenter>
 
 @property (nonatomic) id<LoginInteractor> interactor;
 

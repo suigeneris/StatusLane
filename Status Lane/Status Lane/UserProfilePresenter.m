@@ -7,6 +7,7 @@
 //
 
 #import "UserProfilePresenter.h"
+#import "UIColor+StatusLane.h"
 
 @interface UserProfilePresenter ()
 
@@ -20,7 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIView *popUpView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *enlargedProfileImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *partnerProfileImageView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *partnerProfileCenterXAlignment;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageCenterXAlignment;
 @end
 
 @implementation UserProfilePresenter
@@ -52,7 +56,9 @@
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
 
-
+    self.partnerProfileImageView.layer.borderWidth = 2;
+    self.partnerProfileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
+    self.partnerProfileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
 
     [self.bottomUIView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     
@@ -92,8 +98,10 @@
                      animations:^{
                          
                          self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.85];
-;
+
                      }];
+    
+    
 }
 - (IBAction)cancelButtonPressed:(id)sender {
     
@@ -114,9 +122,75 @@
                          
                          self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
                          self.popUpView.hidden = YES;
-                         [self.viewStatusButton setTitle:@"MARRIED" forState:UIControlStateNormal];
+                         //[self.viewStatusButton setTitle:@"View History" forState:UIControlStateNormal];
+                         [self animateViews];
+                         //[self activityIndicator];
 
                      }];
+
+
+}
+
+-(void)animateViews{
+    
+    [[self.view viewWithTag:111] removeFromSuperview];
+    self.profileImageCenterXAlignment.constant = 100;
+    self.partnerProfileCenterXAlignment.constant = -100;
+    
+    [UIView animateWithDuration:0.36
+                     animations:^{
+                         
+                         [self.view layoutIfNeeded];
+                         
+                         
+                     }];
+    
+    [UIView animateWithDuration:0.36
+                     animations:^{
+                         
+                         [self.view layoutIfNeeded];
+
+                         
+                     } completion:^(BOOL finished) {
+                         
+                         [self resetImageViewsPostition];
+                         
+                     }];
+}
+
+-(void)resetImageViewsPostition{
+    
+    self.profileImageCenterXAlignment.constant = 0;
+    self.partnerProfileCenterXAlignment.constant = 0;
+
+    
+    [UIView animateWithDuration:0.36
+                          delay:3
+                        options:0
+                     animations:^{
+                         
+                         [self.view layoutIfNeeded];
+
+                     } completion:^(BOOL finished) {
+                         
+                         
+                     }];
+    
+    
+}
+
+-(void)activityIndicator{
+    
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center = self.view.center;
+    activityView.color = [UIColor statusLaneGreenPressed];
+    activityView.hidesWhenStopped = YES;
+    activityView.tag=1111;
+    [self.view addSubview:activityView];
+    [activityView startAnimating];
+    [activityView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:3.0];
+
 
 }
 

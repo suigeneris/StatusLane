@@ -36,7 +36,17 @@
     
     [super awakeFromNib];
     SettingsInteractor *interactor = [SettingsInteractor new];
+    interactor.presenter = self;
     self.interactor = interactor;
+}
+
+#pragma mark Presenter Delegate Methods
+
+-(void)logOut{
+    
+    [self performSegueWithIdentifier:@"Logout"sender:self];
+    
+    
 }
 
 

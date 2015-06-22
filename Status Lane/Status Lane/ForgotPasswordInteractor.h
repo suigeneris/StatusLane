@@ -10,4 +10,6 @@
 #import "ForgotPasswordContracts.h"
 @interface ForgotPasswordInteractor : NSObject <ForgotPasswordInteractor>
 
+@property (nonatomic, weak) id <ForgotPasswordPresenter> presenter;
+
 @end

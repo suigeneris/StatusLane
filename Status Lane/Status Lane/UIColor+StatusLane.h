@@ -14,4 +14,9 @@
 
 +(UIColor *)statusLaneGreenPressed;
 
++(UIColor *)statusLaneRed;
+
++(UIColor *)statusLaneRedPressed;
+
+
 @end

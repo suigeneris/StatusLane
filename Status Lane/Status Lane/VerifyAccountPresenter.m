@@ -7,10 +7,17 @@
 //
 
 #import "VerifyAccountPresenter.h"
+#import "VerifyAccountInteractor.h"
+#import "StatusLaneErrorView.h"
+#import "StatusLaneButtonGreen.h"
+#import "UIColor+StatusLane.h"
 
-@interface VerifyAccountPresenter ()
+
+
+@interface VerifyAccountPresenter () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *verificationCodeTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet StatusLaneButtonGreen *registerButton;
 
 @end
 
@@ -19,7 +26,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self setAttributesForUILabel];
+    NSLog(@"%@", self.phonenumber);
+    NSLog(@"%@", self.password);
+    NSLog(@"verification code passed on throug segue: %@", self.verificationCode);
 
     // Do any additional setup after loading the view.
 }
@@ -29,6 +40,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(id<VerifyAccountInteractor>)interactor{
+    
+    if (!_interactor) {
+        
+        VerifyAccountInteractor *interactor = [VerifyAccountInteractor new];
+        interactor.presenter = self;
+        _interactor = interactor;
+    }
+    
+    return _interactor;
+}
 /*
 #pragma mark - Navigation
 
@@ -39,18 +61,34 @@
 }
 */
 
+#pragma mark - IB Outlets
+
 - (IBAction)backArrowPressed:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)registerButtonnPressed:(id)sender {
+    
+    [self validateDataInTextFields];
+}
+
+- (IBAction)resentButtonPressed:(id)sender {
+    
+   self.verificationCode = [self.interactor resendVerificationCodeToNumber:self.phonenumber];
+    NSLog(@"new verification code : %@", self.verificationCode);
+}
+
+#pragma mark - Additional UI Setup
 
 - (void)setAttributesForUILabel {
     
     self.passwordTextField.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.09];
-    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"re-type password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     self.verificationCodeTextfield.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.09];
     self.verificationCodeTextfield.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"verification code" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.passwordTextField.delegate = self;
+    self.verificationCodeTextfield.delegate = self;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -58,4 +96,70 @@
     [self.verificationCodeTextfield resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 }
+
+-(void)validateDataInTextFields{
+    
+    [self touchesBegan:nil withEvent:nil];
+    if ([self.verificationCode isEqualToString:self.verificationCodeTextfield.text]) {
+        
+        if ([self.password isEqualToString:self.passwordTextField.text]) {
+            
+            [self.interactor attemptRegisterUserWithUsername:self.phonenumber andPassword:self.password];
+
+        }
+        else{
+            
+            [self showErrorViewWithMessage:@"Passwords Dont Match"];
+        }
+        
+    }
+    
+    else{
+        
+        [self showErrorViewWithMessage:@"Verification Codes Dont Match"];
+
+    }
+}
+
+#pragma mark - Presenter Delegate Methods
+
+-(void)showErrorViewWithMessage:(NSString *)message {
+    
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message];
+    [errorView show];
+
+}
+
+-(void)createAccountSuccessfull{
+    
+    [self performSegueWithIdentifier:@"AccountCreated" sender:self];
+
+    
+}
+
+#pragma mark - UITextField Delegate Methods
+
+-(void)textFieldDidBeginEditing:(UITextField *)textFieldf{
+    
+    [self.registerButton setBackgroundColor:[UIColor statusLaneGreen]];
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
+
