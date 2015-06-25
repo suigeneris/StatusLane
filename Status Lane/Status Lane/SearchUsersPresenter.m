@@ -10,7 +10,7 @@
 #import "UIColor+StatusLane.h"
 #import "SearchUsersInteractor.h"
 #import "SWRevealViewController.h"
-
+#import "UserProfilePresenter.h"
 
 @interface SearchUsersPresenter ()
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) PFUser *user;
+
+
 @property (strong, nonatomic) SWRevealViewController *revealController;
 @end
 
@@ -101,15 +104,19 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    
+    if ([segue.identifier isEqualToString:@"showUserProfile"]) {
+        
+        UserProfilePresenter *userProfilePresenter = segue.destinationViewController;
+        userProfilePresenter.user = self.user;
+    }
 }
-*/
+
 - (IBAction)backButtonPressed:(id)sender {
     
     [self.searchBar resignFirstResponder];
@@ -127,5 +134,19 @@
 -(void)resetFrontViewController{
     
     [_revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+}
+
+
+#pragma mark - Presenter Delegate Methods
+
+-(void)reloadData{
+    
+    [self.tableView reloadData];
+}
+
+-(void)showUserProfileForUser:(PFUser *)user{
+    
+    self.user = user;
+    [self performSegueWithIdentifier:@"showUserProfile" sender:self];
 }
 @end

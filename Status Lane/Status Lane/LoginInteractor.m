@@ -30,16 +30,35 @@
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
                                             
+                                            [self.presenter hideActivityView];
                                             [Defaults setPassword:password];
                                             [self.presenter login];
-                                            NSLog(@"%@", user);
                                         
                                         } else {
+                                            
+                                            [self.presenter hideActivityView];
+                                            if (error.code == kPFErrorObjectNotFound) {
+                                                
+                                                [self.presenter showErrorViewWithErrorMessage:@"Sorry we cant seem to match your details with any accounts"];
+                                                NSLog(@"%@", [error userInfo]);
+                                            }
+                                            
+                                            else if(error.code == kPFErrorTimeout || error.code == kPFErrorConnectionFailed){
+                                                
+                                                [self.presenter showErrorViewWithErrorMessage:@"Cannot Connect To Servers, Please check your Internet Connection"];
 
-                                            [self.presenter showErrorViewWithErrorMessage:@"Please Check Your Phone Number and Password and Try again"];
-                                            NSLog(@"%@", [error userInfo]);
+                                            }
+                                            else{
+                                                
+                                                [self.presenter showErrorViewWithErrorMessage:@"Please Check Your Phone Number and Password and Try again"];
+                                                NSLog(@"%@", [error userInfo]);
+                                            }
+
+
                                         }
                                     }];
+    
+    [self.presenter showActivityView];
      
 }
 
@@ -54,6 +73,10 @@
         
     }
 }
+
+#pragma mark - Interanl Methods
+
+
 
 
 @end

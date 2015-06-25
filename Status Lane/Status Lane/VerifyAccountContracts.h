@@ -21,6 +21,8 @@
 
 -(void)showErrorViewWithMessage:(NSString *)message;
 -(void)createAccountSuccessfull;
+-(void)showActivityView;
+-(void)hideActivityView;
 
 
 @end

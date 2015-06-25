@@ -9,6 +9,7 @@
 #import "Defaults.h"
 #import "NSString+StatusLane.h"
 #import "KeyChainWrapper.h"
+#import "Parse/Parse.h"
 
 #define kFullNameKey @"fullName"
 #define kPhoneNumberCountryCodeKey @"phoneNumberCountryCode"
@@ -101,6 +102,7 @@
 +(void)setStatus:(NSString *)status{
     
     [self putValue:status forkey:kStatus];
+    [self updatePFUserColoum:@"status" withInfo:status];
 }
 
 
@@ -117,6 +119,7 @@
     NSData *pngData = UIImagePNGRepresentation(profileImage);
     NSString *filePath = [NSString documentsPathForFileName:@"profileImage.png"];
     [pngData writeToFile:filePath atomically:YES];
+    [self updatePFUserProfileImage:profileImage];
 }
 
 +(UIImage *)backgroundImage{
@@ -133,6 +136,7 @@
     NSData *pngData = UIImagePNGRepresentation(backgroundImage);
     NSString *filePath = [NSString documentsPathForFileName:@"backgroundImage.png"];
     [pngData writeToFile:filePath atomically:YES];
+    [self updatePFUserBackgroundImage:backgroundImage];
 
 }
 
@@ -205,10 +209,110 @@
 
 
 
++(void)updatePFUserColoum:(NSString *)column withInfo:(NSString *)info{
+    
+    NSLog(@"Attepmt update user");
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[column] = info;
+    [currentUser saveInBackground];
+    
+}
+
++(void)updatePFUserProfileImage:(UIImage *)profileImage{
 
 
+    NSData *profileImageData = UIImagePNGRepresentation(profileImage);
+    PFFile *profileImageFile = [PFFile fileWithData:profileImageData];
+    
+    UIBackgroundTaskIdentifier backgoundTask;
+    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+    }];
+    
+    [profileImageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+        if (succeeded) {
+            
+            PFUser *user = [PFUser currentUser];
+            [user setObject:profileImageFile forKey:@"userProfilePicture"];
+            [user saveInBackgroundWithBlock:^(BOOL suceeded, NSError *error){
+                
+                if (succeeded) {
+                    NSLog(@"Image uploaded");
+                    [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
 
+                }
+                
+                else{
+                    
+                    NSLog(@"%@", [error userInfo]);
+                }
 
+            
+            }];
+            
+        }
+        
+        else{
+            
+            NSLog(@"Error from saving file: %@", [error userInfo]);
+            [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+
+        }
+    
+    }];
+    
+    
+}
+
++(void)updatePFUserBackgroundImage:(UIImage *)profileImage{
+    
+    
+    NSData *profileImageData = UIImagePNGRepresentation(profileImage);
+    PFFile *profileImageFile = [PFFile fileWithData:profileImageData];
+    
+    UIBackgroundTaskIdentifier backgoundTask;
+    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+    }];
+    
+    [profileImageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded) {
+            
+            PFUser *user = [PFUser currentUser];
+            [user setObject:profileImageFile forKey:@"userBackgroundPicture"];
+            [user saveInBackgroundWithBlock:^(BOOL suceeded, NSError *error){
+                
+                if (succeeded) {
+                    NSLog(@"Image uploaded");
+                    [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+                    
+                }
+                
+                else{
+                    
+                    NSLog(@"%@", [error userInfo]);
+                }
+                
+                
+            }];
+            
+        }
+        
+        else{
+            
+            NSLog(@"Error from saving file: %@", [error userInfo]);
+            [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+            
+        }
+        
+    }];
+    
+    
+}
 
 
 

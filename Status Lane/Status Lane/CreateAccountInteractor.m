@@ -45,18 +45,58 @@
     
     
                                         if (!error) {
-    
+                                            
+                                            [self.presenter hideActivityView];
                                             NSLog(@"%@", object);
 
                                             [self.presenter showVerifyAccount];
                                         }
     
                                         else{
-    
+                                            
+                                            [self.presenter hideActivityView];
                                             NSLog(@"%@", error.localizedDescription);
                                             [self.presenter showErrorView:error.localizedDescription];
                                         }
                                     }];
+    
+    [self.presenter showActivityView];
+
+    
+}
+
+-(void)queryParseForUsernmae:(NSString *)username andCode:(NSString *)code{
+    
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:username];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
+        
+        if (error) {
+            
+            [self.presenter hideActivityView];
+            [self.presenter showErrorView:error.localizedDescription];
+            
+        }
+        
+        else{
+            
+            [self.presenter hideActivityView];
+
+            if (array.count == 0) {
+                
+                [self sendSMSWithVerificationCode:username withCode:code];
+            }
+            
+            else{
+                
+                [self.presenter showErrorView:@"A User With that Number Already Exists"];
+            }
+        }
+    
+    }];
+    [self.presenter showActivityView];
+
     
 }
 
@@ -65,4 +105,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
+
+
+
+
+

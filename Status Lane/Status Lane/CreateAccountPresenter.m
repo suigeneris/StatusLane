@@ -185,6 +185,25 @@ static void *countryCodeContext = &countryCodeContext;
     return isNumberValid;
     
 }
+
+-(void)activityIndicator{
+    
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center = self.view.center;
+    activityView.color = [UIColor statusLaneGreenPressed];
+    activityView.hidesWhenStopped = YES;
+    activityView.tag=1111;
+    [self.view addSubview:activityView];
+    [activityView startAnimating];
+    
+    
+}
+
+-(void)hide{
+    
+    [[self.view viewWithTag:1111] removeFromSuperview];
+}
 #pragma mark - IB Outlets Methods
 
 - (IBAction)continueButtonPressed:(id)sender {
@@ -192,7 +211,7 @@ static void *countryCodeContext = &countryCodeContext;
     [self touchesBegan:nil withEvent:nil];
     NSString  *string = [self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text];
     self.verificationCode = [self.interactor generateVerificationCode];
-    [self.interactor sendSMSWithVerificationCode:string withCode:self.verificationCode];
+    [self.interactor queryParseForUsernmae:string andCode:self.verificationCode];
 }
 
 - (IBAction)alreadyAuser:(id)sender {
@@ -230,6 +249,17 @@ static void *countryCodeContext = &countryCodeContext;
     
 }
 
+
+-(void)showActivityView{
+    
+    [self activityIndicator];
+    
+}
+
+-(void)hideActivityView{
+    
+    [self hide];
+}
 
 #pragma mark - TextField Delegate
 

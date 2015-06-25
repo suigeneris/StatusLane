@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface UserProfilePresenter : UIViewController
 
+@property (nonatomic, strong) PFUser *user;
 @end

@@ -85,7 +85,6 @@
         [self.presenter showChoosePartner];
     }
     
-    
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(StatusListPresenterCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

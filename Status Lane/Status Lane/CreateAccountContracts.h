@@ -12,6 +12,8 @@
 
 -(void)showErrorView:(NSString *)errorMessage;
 -(void)showVerifyAccount;
+-(void)showActivityView;
+-(void)hideActivityView;
 
 @end
 
@@ -19,7 +21,7 @@
 
 -(NSString*)requestCountryCode;
 -(NSString *)generateVerificationCode;
--(void)sendSMSWithVerificationCode:(NSString *)number withCode:(NSString *)code;
+-(void)queryParseForUsernmae:(NSString *)username andCode:(NSString *)code;
 
 
 @end

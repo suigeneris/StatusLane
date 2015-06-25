@@ -138,6 +138,16 @@ static void *countryCodeContext = &countryCodeContext;
     [self performSegueWithIdentifier:@"Login" sender:self];
 }
 
+-(void)showActivityView{
+    
+    [self activityIndicator];
+    
+}
+
+-(void)hideActivityView{
+    
+    [self hide];
+}
 #pragma mark - TextField Delegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -209,6 +219,25 @@ static void *countryCodeContext = &countryCodeContext;
     BOOL isNumberValid = [NSString isPhoneNumberValid:fullNumber];
     return isNumberValid;
     
+}
+
+-(void)activityIndicator{
+    
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center = self.view.center;
+    activityView.color = [UIColor statusLaneGreenPressed];
+    activityView.hidesWhenStopped = YES;
+    activityView.tag=1111;
+    [self.view addSubview:activityView];
+    [activityView startAnimating];
+    
+    
+}
+
+-(void)hide{
+    
+    [[self.view viewWithTag:1111] removeFromSuperview];
 }
 
 #pragma mark - Key Value Observer

@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SearchUsersContracts.h"
 
 @interface SearchUsersDataSource : NSObject <UITableViewDataSource>
+
+@property (nonatomic, weak) id<SearchUsersInteractorDelegate> interactor;
 
 @end

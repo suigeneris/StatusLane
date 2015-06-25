@@ -91,6 +91,8 @@
     self.verificationCodeTextfield.delegate = self;
 }
 
+#pragma mark - Internal Methods
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
     [self.verificationCodeTextfield resignFirstResponder];
@@ -121,6 +123,24 @@
     }
 }
 
+-(void)activityIndicator{
+    
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center = self.view.center;
+    activityView.color = [UIColor statusLaneGreenPressed];
+    activityView.hidesWhenStopped = YES;
+    activityView.tag=1111;
+    [self.view addSubview:activityView];
+    [activityView startAnimating];
+    
+    
+}
+
+-(void)hide{
+    
+    [[self.view viewWithTag:1111] removeFromSuperview];
+}
 #pragma mark - Presenter Delegate Methods
 
 -(void)showErrorViewWithMessage:(NSString *)message {
@@ -135,6 +155,17 @@
     [self performSegueWithIdentifier:@"AccountCreated" sender:self];
 
     
+}
+
+-(void)showActivityView{
+    
+    [self activityIndicator];
+    
+}
+
+-(void)hideActivityView{
+    
+    [self hide];
 }
 
 #pragma mark - UITextField Delegate Methods

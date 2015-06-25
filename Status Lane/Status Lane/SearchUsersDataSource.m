@@ -8,7 +8,13 @@
 
 #import "SearchUsersDataSource.h"
 #import "SearchUsersCell.h"
+#import <Parse/Parse.h>
 
+@interface SearchUsersDataSource()
+
+@property (nonatomic, strong) NSArray *searchResults;
+
+@end
 
 @implementation SearchUsersDataSource
 
@@ -17,6 +23,14 @@
     
     
     SearchUsersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    PFUser *user = [self.searchResults objectAtIndex:indexPath.row];
+    
+    cell.phoneNumberLabel.text = user.username;
+    cell.nameLabel.text = user[@"fullName"];
+    cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
+    cell.profileImageView.clipsToBounds = YES;
+    cell.profileImageView.file = user[@"userProfilePicture"];
+    [cell.profileImageView loadInBackground];
     return cell;
     
 }
@@ -30,6 +44,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    self.searchResults = [self.interactor returnArrayOfSearchResults];
+    return self.searchResults.count;
 }
 @end

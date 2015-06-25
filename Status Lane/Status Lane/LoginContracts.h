@@ -21,5 +21,7 @@
 
 -(void)showErrorViewWithErrorMessage:(NSString *)errorMessage;
 -(void)login;
+-(void)showActivityView;
+-(void)hideActivityView;
 
 @end

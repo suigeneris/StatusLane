@@ -8,10 +8,11 @@
 
 #import "UserProfilePresenter.h"
 #import "UIColor+StatusLane.h"
+#import <ParseUI/ParseUI.h>
 
 @interface UserProfilePresenter ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIView *bottomUIView;
 @property (weak, nonatomic) IBOutlet UIButton *viewStatusButton;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
@@ -19,9 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancellButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UIView *popUpView;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *enlargedProfileImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *partnerProfileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *enlargedProfileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *partnerProfileImageView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *partnerProfileCenterXAlignment;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageCenterXAlignment;
@@ -33,6 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self additionalUIViewSetup];
+    NSLog(@"%@", self.user);
 
 }
 
@@ -44,6 +46,9 @@
 
 -(void)additionalUIViewSetup{
     
+    self.backgroundImageView.file = self.user[@"userBackgroundPicture"];
+    [self.backgroundImageView loadInBackground];
+    
     self.viewStatusButton.layer.cornerRadius = 1.6;
     self.sendButton.layer.cornerRadius = 1.6;
     self.cancellButton.layer.cornerRadius = 1.6;
@@ -51,15 +56,29 @@
     self.enlargedProfileImageView.layer.borderWidth = 2;
     self.enlargedProfileImageView.layer.cornerRadius = self.enlargedProfileImageView.frame.size.width/2;
     self.enlargedProfileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.enlargedProfileImageView.clipsToBounds = YES;
+
+    self.enlargedProfileImageView.file = self.user[@"userProfilePicture"];
+    [self.enlargedProfileImageView loadInBackground];
+    
     
     self.profileImageView.layer.borderWidth = 2;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.profileImageView.clipsToBounds = YES;
+
+    self.profileImageView.file = self.user[@"userProfilePicture"];
+    [self.profileImageView loadInBackground];
+
 
     self.partnerProfileImageView.layer.borderWidth = 2;
     self.partnerProfileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.partnerProfileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.partnerProfileImageView.file = self.user[@"userProfilePicture"];
+    self.partnerProfileImageView.clipsToBounds = YES;
 
+    [self.partnerProfileImageView loadInBackground];
+    
     [self.bottomUIView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     
     NSLayoutConstraint *buttomUIViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.bottomUIView

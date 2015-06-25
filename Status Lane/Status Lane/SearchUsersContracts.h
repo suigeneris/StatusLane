@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+
+
 @protocol SearchUsersInteractorDelegate <NSObject>
+
+
+-(NSArray *)returnArrayOfSearchResults;
 
 @end
 
@@ -24,5 +30,7 @@
 
 -(void)setFrontViewController;
 -(void)resetFrontViewController;
+-(void)reloadData;
+-(void)showUserProfileForUser:(PFUser *)user;
 
 @end
