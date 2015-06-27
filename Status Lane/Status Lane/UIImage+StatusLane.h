@@ -12,5 +12,8 @@
 
 +(UIImage*)grayishImage:(UIImage*)inputImage;
 +(UIImage*)flipPicture:(UIImage*)picture;
++(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
++(UIImage *)shrinkImage:(UIImage *)image;
++(BOOL)isImageToLarge:(UIImage *)image;
 
 @end

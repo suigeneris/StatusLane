@@ -17,8 +17,6 @@
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) SearchUsersDataSource *searchUsersDatasource;
 @property (nonatomic, strong) NSArray *searchResults;
-//@property (nonatomic, strong) PFUser *searchedUser;
-
 
 
 @end
@@ -133,6 +131,15 @@
     
     PFUser *selectedUser = [self.searchResults objectAtIndex:indexPath.row];
     [self.presenter showUserProfileForUser:selectedUser];
+}
+
+#pragma mark - UIScrollView Delegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    
+    [self.presenter dismissSearchBar];
+    
 }
 
 

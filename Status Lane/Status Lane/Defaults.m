@@ -9,6 +9,7 @@
 #import "Defaults.h"
 #import "NSString+StatusLane.h"
 #import "KeyChainWrapper.h"
+#import "UIImage+StatusLane.h"
 #import "Parse/Parse.h"
 
 #define kFullNameKey @"fullName"
@@ -119,7 +120,21 @@
     NSData *pngData = UIImagePNGRepresentation(profileImage);
     NSString *filePath = [NSString documentsPathForFileName:@"profileImage.png"];
     [pngData writeToFile:filePath atomically:YES];
-    [self updatePFUserProfileImage:profileImage];
+    
+    UIBackgroundTaskIdentifier backgoundTask;
+    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+    }];
+    
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        [self updatePFUserProfileImage:profileImage];
+        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+
+
+    });
 }
 
 +(UIImage *)backgroundImage{
@@ -136,7 +151,21 @@
     NSData *pngData = UIImagePNGRepresentation(backgroundImage);
     NSString *filePath = [NSString documentsPathForFileName:@"backgroundImage.png"];
     [pngData writeToFile:filePath atomically:YES];
-    [self updatePFUserBackgroundImage:backgroundImage];
+    
+    UIBackgroundTaskIdentifier backgoundTask;
+    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+    }];
+    
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self updatePFUserBackgroundImage:backgroundImage];
+        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+        
+        
+    });
 
 }
 
@@ -219,17 +248,15 @@
 }
 
 +(void)updatePFUserProfileImage:(UIImage *)profileImage{
-
-
+    
+    if ([UIImage isImageToLarge:profileImage]) {
+        
+        profileImage = [UIImage shrinkImage:profileImage];
+        
+    }
+    
     NSData *profileImageData = UIImagePNGRepresentation(profileImage);
     PFFile *profileImageFile = [PFFile fileWithData:profileImageData];
-    
-    UIBackgroundTaskIdentifier backgoundTask;
-    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        
-        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
-    }];
-    
     [profileImageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     
         if (succeeded) {
@@ -240,7 +267,6 @@
                 
                 if (succeeded) {
                     NSLog(@"Image uploaded");
-                    [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
 
                 }
                 
@@ -257,7 +283,6 @@
         else{
             
             NSLog(@"Error from saving file: %@", [error userInfo]);
-            [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
 
         }
     
@@ -266,29 +291,28 @@
     
 }
 
-+(void)updatePFUserBackgroundImage:(UIImage *)profileImage{
++(void)updatePFUserBackgroundImage:(UIImage *)backgroundImage{
     
-    
-    NSData *profileImageData = UIImagePNGRepresentation(profileImage);
-    PFFile *profileImageFile = [PFFile fileWithData:profileImageData];
-    
-    UIBackgroundTaskIdentifier backgoundTask;
-    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    if ([UIImage isImageToLarge:backgroundImage]) {
         
-        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
-    }];
+        backgroundImage = [UIImage shrinkImage:backgroundImage];
+        
+    }
+
+
+    NSData *backgroundImageData = UIImagePNGRepresentation(backgroundImage);
+    PFFile *backgroundImageFile = [PFFile fileWithData:backgroundImageData];
     
-    [profileImageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [backgroundImageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         if (succeeded) {
             
             PFUser *user = [PFUser currentUser];
-            [user setObject:profileImageFile forKey:@"userBackgroundPicture"];
+            [user setObject:backgroundImageFile forKey:@"userBackgroundPicture"];
             [user saveInBackgroundWithBlock:^(BOOL suceeded, NSError *error){
                 
                 if (succeeded) {
                     NSLog(@"Image uploaded");
-                    [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
                     
                 }
                 
@@ -305,7 +329,6 @@
         else{
             
             NSLog(@"Error from saving file: %@", [error userInfo]);
-            [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
             
         }
         

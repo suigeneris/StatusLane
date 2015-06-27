@@ -22,7 +22,6 @@
     
     uint64_t verificationCode = arc4random_uniform(100000);
     NSNumber* n = [NSNumber numberWithUnsignedLongLong:verificationCode];
-    
     return [n stringValue];
     
 }
@@ -36,6 +35,7 @@
                 [PFCloud callFunctionInBackground:@"verifyNumber"
                                    withParameters:@{ @"number" : number,
                                                      @"verificationCode" : newCode}
+                 
                                             block:^(id object, NSError *error) {
     
     
@@ -71,9 +71,7 @@
     user[@"fullName"] = @"Full Name";
     user[@"gender"] = @"Gender not set";
 
-
-    
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
     
     
             if (!error) {
@@ -90,7 +88,8 @@
     
             }
         
-        }];
+    }];
+    
     [self.presenter showActivityView];
 
     

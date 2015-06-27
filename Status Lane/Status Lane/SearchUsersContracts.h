@@ -32,5 +32,6 @@
 -(void)resetFrontViewController;
 -(void)reloadData;
 -(void)showUserProfileForUser:(PFUser *)user;
+-(void)dismissSearchBar;
 
 @end

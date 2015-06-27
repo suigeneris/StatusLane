@@ -31,7 +31,7 @@
                                         if (user) {
                                             
                                             [self.presenter hideActivityView];
-                                            [Defaults setPassword:password];
+                                            //[Defaults setPassword:password];
                                             [self.presenter login];
                                         
                                         } else {

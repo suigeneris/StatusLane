@@ -38,6 +38,11 @@
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -47,6 +52,8 @@
 -(void)additionalUIViewSetup{
     
     self.backgroundImageView.file = self.user[@"userBackgroundPicture"];
+    [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+
     [self.backgroundImageView loadInBackground];
     
     self.viewStatusButton.layer.cornerRadius = 1.6;
@@ -107,6 +114,7 @@
 */
 - (IBAction)backkButtonPressed:(id)sender {
     
+    self.backgroundImageView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 

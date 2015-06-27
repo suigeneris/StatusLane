@@ -10,7 +10,6 @@
 #import <ParseUI/ParseUI.h>
 
 @interface SearchUsersCell : UITableViewCell
-//@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;

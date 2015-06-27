@@ -10,7 +10,7 @@
 #import "SearchUsersContracts.h"
 #import <UIKit/UIKit.h>
 
-@interface SearchUsersInteractor : NSObject <SearchUsersInteractorDelegate, UITableViewDelegate, UISearchBarDelegate, SearchUsersInteractorDataSource>
+@interface SearchUsersInteractor : NSObject <SearchUsersInteractorDelegate, UITableViewDelegate, UISearchBarDelegate, SearchUsersInteractorDataSource, UIScrollViewDelegate>
 
 @property (nonatomic, weak) id <SearchUsersPresenterDelegate> presenter;
 

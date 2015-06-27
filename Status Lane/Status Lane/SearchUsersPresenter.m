@@ -149,4 +149,10 @@
     self.user = user;
     [self performSegueWithIdentifier:@"showUserProfile" sender:self];
 }
+
+-(void)dismissSearchBar{
+    
+    [self.searchBar resignFirstResponder];
+}
+
 @end
