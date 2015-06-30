@@ -102,8 +102,16 @@
 
 +(void)setStatus:(NSString *)status{
     
-    [self putValue:status forkey:kStatus];
-    [self updatePFUserColoum:@"status" withInfo:status];
+    if ([status isEqualToString:[self status]]) {
+        
+        [self putValue:status forkey:kStatus];
+    }
+    
+    else {
+        [self putValue:status forkey:kStatus];
+        [self updatePFUserColoum:@"status" withInfo:status];
+
+    }
 }
 
 
@@ -263,7 +271,7 @@
             
             PFUser *user = [PFUser currentUser];
             [user setObject:profileImageFile forKey:@"userProfilePicture"];
-            [user saveInBackgroundWithBlock:^(BOOL suceeded, NSError *error){
+            [user saveEventually:^(BOOL suceeded, NSError *error){
                 
                 if (succeeded) {
                     NSLog(@"Image uploaded");
@@ -288,7 +296,6 @@
     
     }];
     
-    
 }
 
 +(void)updatePFUserBackgroundImage:(UIImage *)backgroundImage{
@@ -309,7 +316,7 @@
             
             PFUser *user = [PFUser currentUser];
             [user setObject:backgroundImageFile forKey:@"userBackgroundPicture"];
-            [user saveInBackgroundWithBlock:^(BOOL suceeded, NSError *error){
+            [user saveEventually:^(BOOL suceeded, NSError *error){
                 
                 if (succeeded) {
                     NSLog(@"Image uploaded");

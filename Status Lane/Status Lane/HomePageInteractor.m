@@ -111,6 +111,7 @@
                 chosenImage = [UIImage flipPicture:chosenImage];
 
             }
+            
             [Defaults setBackgroundImage:[UIImage grayishImage:chosenImage]];
             [self.presenter setBackGroundImage];
             
@@ -204,7 +205,7 @@
 -(NSString *)returnUserStatusFromDefaults{
     
     if ([[Defaults status] isEqualToString:@"SINGLE"]) {
-        
+        NSLog(@"The status is single");
         return [Defaults status];
     }
     
@@ -298,6 +299,7 @@
 
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect
 {
+    croppedImage = [UIImage imageWithImage:croppedImage scaledToSize:CGSizeMake(100, 100)];
     [Defaults setProfileImage:croppedImage];
     [self.presenter chooseProfileImage];
     [self.presenter dissmissImageCropper];

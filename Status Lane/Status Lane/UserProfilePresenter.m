@@ -8,6 +8,7 @@
 
 #import "UserProfilePresenter.h"
 #import "UIColor+StatusLane.h"
+#import "UIImage+StatusLane.h"
 #import <ParseUI/ParseUI.h>
 
 @interface UserProfilePresenter ()
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet PFImageView *enlargedProfileImageView;
 @property (weak, nonatomic) IBOutlet PFImageView *partnerProfileImageView;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *partnerProfileCenterXAlignment;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageCenterXAlignment;
@@ -34,13 +36,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self additionalUIViewSetup];
-    NSLog(@"%@", self.user);
 
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+-(void)viewDidAppear:(BOOL)animated{
     
+    [super viewDidAppear:animated];
+    //[self crossDissolveBackgroundImage];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,13 +51,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(UIActivityIndicatorView *)activityIndicator{
+    
+    if (!_activityIndicator) {
+        
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityIndicator.center = self.view.center;
+        _activityIndicator.color = [UIColor statusLaneGreenPressed];
+        _activityIndicator.hidesWhenStopped = YES;
+        _activityIndicator.tag = 1111;
+    }
+    return _activityIndicator;
+}
 
 -(void)additionalUIViewSetup{
     
-    self.backgroundImageView.file = self.user[@"userBackgroundPicture"];
     [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
-
-    [self.backgroundImageView loadInBackground];
+    [self crossDissolveBackgroundImage];
     
     self.viewStatusButton.layer.cornerRadius = 1.6;
     self.sendButton.layer.cornerRadius = 1.6;
@@ -103,19 +116,12 @@
     
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)backkButtonPressed:(id)sender {
     
-    self.backgroundImageView = nil;
     [self.navigationController popViewControllerAnimated:YES];
+    self.backgroundImageView.image = [UIImage imageNamed:@"Background"];
+
 }
 
 - (IBAction)viewStatusButtonPressed:(id)sender {
@@ -149,9 +155,7 @@
                          
                          self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
                          self.popUpView.hidden = YES;
-                         //[self.viewStatusButton setTitle:@"View History" forState:UIControlStateNormal];
                          [self animateViews];
-                         //[self activityIndicator];
 
                      }];
 
@@ -206,22 +210,51 @@
     
 }
 
--(void)activityIndicator{
+-(void)crossDissolveBackgroundImage{
     
+    PFFile  *file = self.user[@"userBackgroundPicture"];
+    if (file) {
+        
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+            
+            [_activityIndicator stopAnimating];
+            if (error) {
+                
+                NSLog(@"Error fetching data");
+                
+            }
+            
+            else{
+                
+                if (data) {
+                    
+                
+                    UIImage *image = [UIImage imageWithData:data];
+                    self.backgroundImageView.alpha = 1;
+                    self.backgroundImageView.image = image;
+                                         
+                }
+                
+                else{
+                    
+                }
+                
+            }
+            
+            
+        }];
+        
+        [self.view addSubview:self.activityIndicator];
+        [_activityIndicator startAnimating];
+    }
     
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityView.center = self.view.center;
-    activityView.color = [UIColor statusLaneGreenPressed];
-    activityView.hidesWhenStopped = YES;
-    activityView.tag=1111;
-    [self.view addSubview:activityView];
-    [activityView startAnimating];
-    [activityView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:3.0];
-
+    else{
+        
+        
+    }
+    
 
 }
-
-
 @end
 
 

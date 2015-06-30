@@ -31,7 +31,7 @@
                                         if (user) {
                                             
                                             [self.presenter hideActivityView];
-                                            //[Defaults setPassword:password];
+                                            [Defaults setStatus:user[@"status"]];
                                             [self.presenter login];
                                         
                                         } else {
@@ -67,6 +67,7 @@
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         
+        [Defaults setStatus:currentUser[@"status"]];
         [self.presenter login];
 
     } else {
