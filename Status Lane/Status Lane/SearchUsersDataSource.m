@@ -24,7 +24,6 @@
     
     SearchUsersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     PFUser *user = [self.searchResults objectAtIndex:indexPath.row];
-    
     cell.phoneNumberLabel.text = user.username;
     cell.nameLabel.text = user[@"fullName"];
     cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
@@ -47,4 +46,6 @@
     self.searchResults = [self.interactor returnArrayOfSearchResults];
     return self.searchResults.count;
 }
+
+
 @end

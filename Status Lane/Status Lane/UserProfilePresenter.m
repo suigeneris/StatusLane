@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButtonPressed;
 @property (weak, nonatomic) IBOutlet UIButton *cancellButton;
+@property (weak, nonatomic) IBOutlet UILabel *searchUserStatusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UIView *popUpView;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
@@ -112,6 +113,7 @@
     [self.view addConstraint:buttomUIViewHeightConstraint];
     
     self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    self.searchUserStatusLabel.text = self.user[@"status"];
 
     
     
@@ -164,29 +166,49 @@
 
 -(void)animateViews{
     
-    [[self.view viewWithTag:111] removeFromSuperview];
-    self.profileImageCenterXAlignment.constant = 100;
-    self.partnerProfileCenterXAlignment.constant = -100;
-    
-    [UIView animateWithDuration:0.36
-                     animations:^{
-                         
-                         [self.view layoutIfNeeded];
-                         
-                         
-                     }];
-    
-    [UIView animateWithDuration:0.36
-                     animations:^{
-                         
-                         [self.view layoutIfNeeded];
+    if ([self.searchUserStatusLabel.text isEqualToString:@"SINGLE"]) {
+                
+        [UIView animateWithDuration:3
+                         animations:^{
+                             
+                             [self.view layoutIfNeeded];
+                             self.searchUserStatusLabel.hidden = NO;
 
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         [self resetImageViewsPostition];
-                         
-                     }];
+                             
+                         } completion:nil];
+        
+        self.viewStatusButton.userInteractionEnabled = NO;
+        [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreenPressed]];
+    }
+    
+    else {
+        
+        self.profileImageCenterXAlignment.constant = 100;
+        self.partnerProfileCenterXAlignment.constant = -100;
+        
+        [UIView animateWithDuration:0.36
+                         animations:^{
+                             
+                             [self.view layoutIfNeeded];
+                             
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             self.searchUserStatusLabel.hidden = NO;
+                             [self resetImageViewsPostition];
+                             
+                             
+                         }];
+        
+        self.viewStatusButton.userInteractionEnabled = NO;
+        [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreenPressed]];
+        
+    }
+
+    
+    
+
+
 }
 
 -(void)resetImageViewsPostition{
@@ -204,7 +226,9 @@
 
                      } completion:^(BOOL finished) {
                          
-                         
+                         self.viewStatusButton.userInteractionEnabled = YES;
+                         [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreen]];
+                         self.searchUserStatusLabel.hidden = YES;
                      }];
     
     
@@ -218,6 +242,7 @@
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
             
             [_activityIndicator stopAnimating];
+            [self.activityIndicator removeFromSuperview];
             if (error) {
                 
                 NSLog(@"Error fetching data");
@@ -233,10 +258,6 @@
                     self.backgroundImageView.alpha = 1;
                     self.backgroundImageView.image = image;
                                          
-                }
-                
-                else{
-                    
                 }
                 
             }

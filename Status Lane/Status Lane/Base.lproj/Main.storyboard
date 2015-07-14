@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -28,6 +28,8 @@
             <string>Asap-Bold</string>
         </mutableArray>
         <mutableArray key="Asap-Regular.otf">
+            <string>Asap-Regular</string>
+            <string>Asap-Regular</string>
             <string>Asap-Regular</string>
             <string>Asap-Regular</string>
             <string>Asap-Regular</string>
@@ -1136,6 +1138,11 @@
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="TbE-mn-b6L">
                                 <rect key="frame" x="0.0" y="109" width="320" height="459"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="eaP-sO-5Ma">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell 1" rowHeight="57" id="bbK-Ks-u4C" customClass="ChoosePartnerCellPresenter">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1144,23 +1151,30 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AhR-vu-m18">
-                                                    <rect key="frame" x="38" y="17" width="245" height="21"/>
+                                                    <rect key="frame" x="38" y="17" width="190" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSW-ee-eQy">
+                                                    <rect key="frame" x="239" y="17" width="73" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="firstNameLabel" destination="AhR-vu-m18" id="qCC-od-8kU"/>
+                                            <outlet property="contactNumber" destination="AhR-vu-m18" id="Wtl-M5-Hht"/>
+                                            <outlet property="firstNameLabel" destination="mSW-ee-eQy" id="9cD-du-fC3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t08-D3-qt6" customClass="StatusLaneButtonGreen">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t08-D3-qt6" customClass="StatusLaneButtonGreen">
                                 <rect key="frame" x="50" y="300" width="220" height="44"/>
-                                <color key="backgroundColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.20784313730000001" green="0.4941176471" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="l3j-c6-KjR"/>
                                     <constraint firstAttribute="height" constant="44" id="wGe-0T-jIh"/>
@@ -1179,7 +1193,7 @@
                                     <action selector="sendButtonPressed:" destination="v2d-g8-i4g" eventType="touchUpInside" id="ewS-OH-pQp"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m82-gr-3KZ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m82-gr-3KZ" userLabel="Name textfield">
                                 <rect key="frame" x="50" y="170" width="220" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="gLS-LY-AYg"/>
@@ -1245,6 +1259,12 @@
                                     <action selector="contactListButtonPressed:" destination="v2d-g8-i4g" eventType="touchUpInside" id="KQu-LO-EER"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="invalid number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSw-w2-I04">
+                                <rect key="frame" x="117" y="350" width="87" height="17"/>
+                                <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="13"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.4941176471" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1262,6 +1282,7 @@
                             <constraint firstAttribute="trailing" secondItem="t08-D3-qt6" secondAttribute="trailing" constant="50" id="X2f-KF-wEG"/>
                             <constraint firstItem="c0a-p6-xW2" firstAttribute="trailing" secondItem="t08-D3-qt6" secondAttribute="trailing" id="Y2g-JE-LKT"/>
                             <constraint firstItem="sTp-p0-Bqs" firstAttribute="top" secondItem="TbE-mn-b6L" secondAttribute="bottom" id="YCj-H6-Ueo"/>
+                            <constraint firstItem="lSw-w2-I04" firstAttribute="top" secondItem="t08-D3-qt6" secondAttribute="bottom" constant="6" id="cOr-dg-RKj"/>
                             <constraint firstItem="z4T-b0-rGV" firstAttribute="leading" secondItem="Kv0-ue-ngV" secondAttribute="trailing" id="f6u-kr-1EC"/>
                             <constraint firstItem="Kv0-ue-ngV" firstAttribute="top" secondItem="aaE-Hb-uXf" secondAttribute="bottom" id="jhf-qW-7sx"/>
                             <constraint firstItem="aaE-Hb-uXf" firstAttribute="top" secondItem="5fN-Ky-Vny" secondAttribute="top" id="lL6-wR-Fxq"/>
@@ -1270,6 +1291,7 @@
                             <constraint firstItem="AIi-BJ-fiV" firstAttribute="top" secondItem="5fN-Ky-Vny" secondAttribute="top" id="oKA-m2-R2X"/>
                             <constraint firstAttribute="trailing" secondItem="TbE-mn-b6L" secondAttribute="trailing" id="piB-ex-di9"/>
                             <constraint firstItem="Kv0-ue-ngV" firstAttribute="width" secondItem="z4T-b0-rGV" secondAttribute="width" id="q5d-gB-8Lh"/>
+                            <constraint firstAttribute="centerX" secondItem="lSw-w2-I04" secondAttribute="centerX" id="qY7-ld-fL1"/>
                             <constraint firstItem="aaE-Hb-uXf" firstAttribute="leading" secondItem="5fN-Ky-Vny" secondAttribute="leading" id="sCY-HX-DeF"/>
                             <constraint firstItem="z4T-b0-rGV" firstAttribute="top" secondItem="aaE-Hb-uXf" secondAttribute="bottom" id="tJg-Ph-PTx"/>
                             <constraint firstItem="Kv0-ue-ngV" firstAttribute="leading" secondItem="5fN-Ky-Vny" secondAttribute="leading" id="uMI-3q-Of7"/>
@@ -1286,9 +1308,11 @@
                         <outlet property="contactListTableView" destination="TbE-mn-b6L" id="ldP-xs-sn9"/>
                         <outlet property="countryCodeButton" destination="u91-E0-tGd" id="gSh-Jd-X7l"/>
                         <outlet property="navigationBarView" destination="aaE-Hb-uXf" id="jz3-mw-505"/>
+                        <outlet property="numberValidityLabel" destination="lSw-w2-I04" id="eOt-w7-wYZ"/>
                         <outlet property="partnerNameTextField" destination="m82-gr-3KZ" id="CHs-gt-IsO"/>
                         <outlet property="phoneNumberButton" destination="Kv0-ue-ngV" id="w9e-cD-bWi"/>
                         <outlet property="phoneNumberTextfield" destination="c0a-p6-xW2" id="q3F-Sy-Sp0"/>
+                        <outlet property="searchBar" destination="eaP-sO-5Ma" id="W0v-2w-ygK"/>
                         <outlet property="sendButton" destination="t08-D3-qt6" id="6CW-30-pCb"/>
                     </connections>
                 </viewController>
@@ -2366,6 +2390,12 @@
                                     <constraint firstAttribute="centerX" secondItem="2Ht-zK-TlM" secondAttribute="centerX" id="tYi-r4-hCH"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hD-BO-A9o" userLabel="Searched User Status Label">
+                                <rect key="frame" x="139" y="329" width="42" height="22"/>
+                                <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
+                                <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StatusLane Logo for Home Page confirmed" translatesAutoresizingMaskIntoConstraints="NO" id="FqH-JZ-icI" userLabel="StatusLane Logo for User Profile confirmed">
                                 <rect key="frame" x="135" y="367" width="49" height="49"/>
                                 <constraints>
@@ -2490,6 +2520,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RPb-jM-JSH" secondAttribute="trailing" id="1wW-jF-IJf"/>
+                            <constraint firstItem="FqH-JZ-icI" firstAttribute="top" secondItem="6hD-BO-A9o" secondAttribute="bottom" constant="16" id="3Mh-LK-ztr"/>
                             <constraint firstItem="y8n-TF-UUa" firstAttribute="centerY" secondItem="17B-p9-hOa" secondAttribute="centerY" id="4ic-gO-GfB"/>
                             <constraint firstItem="RPb-jM-JSH" firstAttribute="top" secondItem="c3Q-r4-YIM" secondAttribute="top" id="7wJ-XF-8No"/>
                             <constraint firstItem="FqH-JZ-icI" firstAttribute="centerY" secondItem="y8n-TF-UUa" secondAttribute="centerY" id="Ds2-qg-o1f"/>
@@ -2507,6 +2538,7 @@
                             <constraint firstItem="RPb-jM-JSH" firstAttribute="leading" secondItem="c3Q-r4-YIM" secondAttribute="leading" id="eAv-7a-MMC"/>
                             <constraint firstItem="gqL-pd-gTM" firstAttribute="leading" secondItem="c3Q-r4-YIM" secondAttribute="leading" id="eNg-eh-nvK"/>
                             <constraint firstAttribute="centerX" secondItem="y8n-TF-UUa" secondAttribute="centerX" id="eQe-KK-a5w"/>
+                            <constraint firstAttribute="centerX" secondItem="6hD-BO-A9o" secondAttribute="centerX" id="eyL-ho-Lbh"/>
                             <constraint firstItem="CLH-3P-coc" firstAttribute="top" secondItem="RPb-jM-JSH" secondAttribute="bottom" id="lXl-yN-1ny"/>
                             <constraint firstAttribute="centerX" secondItem="68r-QS-adD" secondAttribute="centerX" id="mZe-DW-h5N"/>
                             <constraint firstItem="CLH-3P-coc" firstAttribute="top" secondItem="gqL-pd-gTM" secondAttribute="bottom" id="mjI-e4-4I0"/>
@@ -2530,6 +2562,7 @@
                         <outlet property="profileImageCenterXAlignment" destination="eQe-KK-a5w" id="oua-Wo-fxK"/>
                         <outlet property="profileImageView" destination="y8n-TF-UUa" id="3bE-yw-9Ov"/>
                         <outlet property="searchButtonPressed" destination="GhS-vz-aqs" id="W89-R5-Wp4"/>
+                        <outlet property="searchUserStatusLabel" destination="6hD-BO-A9o" id="mIa-a2-JWL"/>
                         <outlet property="sendButton" destination="Ej1-Xc-hCR" id="x2n-0f-3fl"/>
                         <outlet property="viewStatusButton" destination="EUJ-xO-5M3" id="2Wu-py-CYG"/>
                     </connections>
@@ -2621,8 +2654,8 @@
         <image name="sample profile image" width="41" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="A1T-yW-fbn"/>
+        <segue reference="Qtg-Qj-Kr7"/>
         <segue reference="jpR-89-pEy"/>
-        <segue reference="sxa-A7-M9C"/>
+        <segue reference="A1T-yW-fbn"/>
     </inferredMetricsTieBreakers>
 </document>

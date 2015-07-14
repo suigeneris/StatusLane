@@ -37,6 +37,11 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -119,7 +124,9 @@
 
 - (IBAction)backButtonPressed:(id)sender {
     
+    self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
+    [self.interactor emptyDataSourceArray];
     [_revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
 

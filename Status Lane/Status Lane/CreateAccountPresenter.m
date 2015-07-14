@@ -223,7 +223,6 @@ static void *countryCodeContext = &countryCodeContext;
     
     [self.phoneNumberTextfield resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-    //self.isValidLabel.hidden = YES;
 }
 
 -(void)changeCreateAccountButtonColour{

@@ -11,7 +11,7 @@
 #import "Defaults.h"
 #import <UIKit/UIKit.h>
 
-@interface ChoosePartnerInteractor : NSObject <ChoosePartnerInteractorDelegate, UITableViewDelegate, ChoosePartnerInteractorDataSource>
+@interface ChoosePartnerInteractor : NSObject <ChoosePartnerInteractorDelegate, UITableViewDelegate, ChoosePartnerInteractorDataSource, UISearchBarDelegate, UIScrollViewDelegate>
 
 
 @property (nonatomic, weak) id<ChoosePartnerPresenterDelegate> presenter;

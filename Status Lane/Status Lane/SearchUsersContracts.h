@@ -13,8 +13,9 @@
 
 @protocol SearchUsersInteractorDelegate <NSObject>
 
-
 -(NSArray *)returnArrayOfSearchResults;
+-(void)emptyDataSourceArray;
+
 
 @end
 

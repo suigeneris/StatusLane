@@ -148,6 +148,7 @@ static void *countryCodeContext = &countryCodeContext;
     
     [self hide];
 }
+
 #pragma mark - TextField Delegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{

@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ChoosePartnerContracts.h"
 #import <UIKit/UIKit.h>
 
 @interface ChoosePartnerDataSource : NSObject <UITableViewDataSource>
+
+@property (nonatomic, weak) id <ChoosePartnerInteractorDelegate> interactor;
 
 @end

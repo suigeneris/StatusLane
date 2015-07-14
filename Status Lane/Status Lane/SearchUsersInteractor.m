@@ -53,7 +53,7 @@
     
     PFQuery *query = [PFUser query];
     query.limit = 20;
-    [query whereKey:@"username" containsString:details];
+    [query whereKey:@"username" matchesRegex:details];
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
         
         if (error) {
@@ -109,7 +109,6 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
     [searchBar resignFirstResponder];
-    //[self.presenter hideKeyboard];
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
@@ -150,5 +149,12 @@
     return self.searchResults;
 }
 
+-(void)emptyDataSourceArray{
+    
+    NSArray *emptyArray = [NSArray new];
+    self.searchResults = emptyArray;
+    [self.presenter reloadData];
+    
+}
 
 @end

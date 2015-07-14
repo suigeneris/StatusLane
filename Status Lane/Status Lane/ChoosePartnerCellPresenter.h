@@ -10,5 +10,6 @@
 
 @interface ChoosePartnerCellPresenter : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contactNumber;
 
 @end

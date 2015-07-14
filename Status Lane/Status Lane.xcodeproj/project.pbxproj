@@ -62,6 +62,7 @@
 		2A3883581B2BC342002E5EDB /* StatusListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A3883571B2BC342002E5EDB /* StatusListCell.xib */; };
 		2A38835B1B2BD868002E5EDB /* StatusListPresenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A38835A1B2BD868002E5EDB /* StatusListPresenterCell.m */; };
 		2A3883611B2C8897002E5EDB /* StatusLaneUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3883601B2C8897002E5EDB /* StatusLaneUser.m */; };
+		2A3DDE1E1B4C480E0037DFC8 /* AddressBookContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3DDE1D1B4C480E0037DFC8 /* AddressBookContact.m */; };
 		2A458E331B14FAC0008C21FA /* CountryListPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A458E321B14FAC0008C21FA /* CountryListPresenter.m */; };
 		2A458E371B14FE91008C21FA /* CountryListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A458E361B14FE91008C21FA /* CountryListDataSource.m */; };
 		2A458E3F1B150BCA008C21FA /* countrylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A458E3E1B150BCA008C21FA /* countrylist.json */; };
@@ -226,6 +227,8 @@
 		2A38835A1B2BD868002E5EDB /* StatusListPresenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusListPresenterCell.m; sourceTree = "<group>"; };
 		2A38835F1B2C8897002E5EDB /* StatusLaneUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusLaneUser.h; sourceTree = "<group>"; };
 		2A3883601B2C8897002E5EDB /* StatusLaneUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusLaneUser.m; sourceTree = "<group>"; };
+		2A3DDE1C1B4C480E0037DFC8 /* AddressBookContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookContact.h; sourceTree = "<group>"; };
+		2A3DDE1D1B4C480E0037DFC8 /* AddressBookContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookContact.m; sourceTree = "<group>"; };
 		2A458E311B14FAC0008C21FA /* CountryListPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListPresenter.h; sourceTree = "<group>"; };
 		2A458E321B14FAC0008C21FA /* CountryListPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListPresenter.m; sourceTree = "<group>"; };
 		2A458E351B14FE91008C21FA /* CountryListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListDataSource.h; sourceTree = "<group>"; };
@@ -412,7 +415,7 @@
 		2A0C568B1B054203004198D5 /* Status Lane */ = {
 			isa = PBXGroup;
 			children = (
-				2AC27B671B348746009997AF /* Media Resources */,
+				2AC27B671B348746009997AF /* Resources */,
 				2A0C56B71B054281004198D5 /* App Delegate */,
 				2A0C56B61B05426E004198D5 /* Model */,
 				2A0C56B81B0548AA004198D5 /* Features */,
@@ -462,6 +465,7 @@
 		2A0C56B61B05426E004198D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2A3DDE1B1B4C477C0037DFC8 /* Address Book Contact */,
 				2A18F32F1B39F4960005F061 /* Searched User Model */,
 				2A38835E1B2C8878002E5EDB /* User Model */,
 				2ACF52381B17852D00DDC1EE /* Country Code Model */,
@@ -949,6 +953,15 @@
 			name = "User Model";
 			sourceTree = "<group>";
 		};
+		2A3DDE1B1B4C477C0037DFC8 /* Address Book Contact */ = {
+			isa = PBXGroup;
+			children = (
+				2A3DDE1C1B4C480E0037DFC8 /* AddressBookContact.h */,
+				2A3DDE1D1B4C480E0037DFC8 /* AddressBookContact.m */,
+			);
+			name = "Address Book Contact";
+			sourceTree = "<group>";
+		};
 		2A458E271B14F171008C21FA /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1107,7 +1120,7 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		2AC27B671B348746009997AF /* Media Resources */ = {
+		2AC27B671B348746009997AF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2A0C56991B054203004198D5 /* Main.storyboard */,
@@ -1115,7 +1128,7 @@
 				2A0C569C1B054203004198D5 /* Images.xcassets */,
 				2AED54861B08C92600B392C7 /* Launch Image.png */,
 			);
-			name = "Media Resources";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		2ACF52371B1783F700DDC1EE /* Core Data */ = {
@@ -1477,6 +1490,7 @@
 				2A0C568F1B054203004198D5 /* main.m in Sources */,
 				2A232CEE1B35987800590B66 /* StatusLaneButtonGreen.m in Sources */,
 				2A1BA5361B1B465B006703D5 /* ChoosePartnerCellPresenter.m in Sources */,
+				2A3DDE1E1B4C480E0037DFC8 /* AddressBookContact.m in Sources */,
 				2A1C7A2A1B18144D003ADCF5 /* SettingsDataSource.m in Sources */,
 				2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */,
 				2A1C7A271B181308003ADCF5 /* SettingsPresenter.m in Sources */,
