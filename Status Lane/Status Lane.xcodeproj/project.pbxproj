@@ -537,7 +537,6 @@
 			isa = PBXGroup;
 			children = (
 				2A1C7A181B180635003ADCF5 /* Contracts */,
-				2A25C0441B0C7DF10063472B /* Router */,
 				2A0C56C41B0549C1004198D5 /* Interactor */,
 				2A25C0431B0C7DE40063472B /* Presenter */,
 			);
@@ -918,13 +917,6 @@
 				2A25C0461B0C7E3E0063472B /* LoginPresenter.m */,
 			);
 			name = Presenter;
-			sourceTree = "<group>";
-		};
-		2A25C0441B0C7DF10063472B /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Router;
 			sourceTree = "<group>";
 		};
 		2A3883521B2BADE9002E5EDB /* Home Page Data Source */ = {

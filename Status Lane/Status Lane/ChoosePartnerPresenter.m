@@ -259,6 +259,8 @@ static void *countryCodeContext = &countryCodeContext;
 }
 
 
+
+
 #pragma mark - IBOutlets
 
 - (IBAction)backButtonPressed:(id)sender {
@@ -290,6 +292,7 @@ static void *countryCodeContext = &countryCodeContext;
 - (IBAction)sendButtonPressed:(id)sender {
     
     [self saveStatusToDefaults];
+    [self.interactor updateUserPartnerWithFullName:self.partnerNameTextField.text andNumber:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

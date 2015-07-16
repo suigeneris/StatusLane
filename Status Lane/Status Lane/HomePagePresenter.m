@@ -143,6 +143,11 @@
     [self chooseProfileImage];
     [self setBackGroundImage];
     _partnerProfileImage.hidden = YES;
+    _partnerProfileImage.layer.borderWidth = 2;
+    _partnerProfileImage.layer.cornerRadius = _partnerProfileImage.frame.size.width/2;
+    _partnerProfileImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    _partnerProfileImage.clipsToBounds = YES;
+    
 
     
 }

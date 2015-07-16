@@ -197,7 +197,7 @@
     
     else{
         
-        UIImage *image = [UIImage imageNamed:@"Add Profile Image"];
+        UIImage *image = [UIImage imageNamed:@"Default_Profile_Image"];
         return image;
     }
 }

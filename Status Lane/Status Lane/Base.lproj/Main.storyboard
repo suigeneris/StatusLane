@@ -501,7 +501,7 @@
                                     <segue destination="D8a-lD-h2r" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="2Ia-dS-d0E"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add Profile Image" translatesAutoresizingMaskIntoConstraints="NO" id="Sey-10-fc7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sey-10-fc7">
                                 <rect key="frame" x="62" y="61" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="3oi-dJ-KAb"/>
@@ -1010,7 +1010,7 @@
                                     <constraint firstAttribute="width" constant="49" id="kxQ-d8-lvn"/>
                                 </constraints>
                             </imageView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add Profile Image" translatesAutoresizingMaskIntoConstraints="NO" id="4oc-RS-3vN" userLabel="Partner Profile Image 2">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_Profile_Image" translatesAutoresizingMaskIntoConstraints="NO" id="4oc-RS-3vN" userLabel="Partner Profile Image 2">
                                 <rect key="frame" x="125" y="361" width="70" height="70"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -1018,7 +1018,7 @@
                                     <constraint firstAttribute="height" constant="70" id="SWn-ra-M8C"/>
                                 </constraints>
                             </imageView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add Profile Image" translatesAutoresizingMaskIntoConstraints="NO" id="par-yy-A9o">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_Profile_Image" translatesAutoresizingMaskIntoConstraints="NO" id="par-yy-A9o">
                                 <rect key="frame" x="125" y="361" width="70" height="70"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -1074,7 +1074,7 @@
                         <outlet property="fullNameLabel" destination="lvE-WT-dgC" id="dBd-NA-I9Q"/>
                         <outlet property="partnerProfileImage" destination="4oc-RS-3vN" id="29B-o3-nDh"/>
                         <outlet property="partnerProfileImageViewCenterX" destination="Io7-fy-kqt" id="fNT-ad-akc"/>
-                        <outlet property="profileImage" destination="par-yy-A9o" id="yBT-0r-Wd5"/>
+                        <outlet property="profileImage" destination="par-yy-A9o" id="Hux-tF-XUF"/>
                         <outlet property="profileImageViewCenterX" destination="vyY-Jy-UdB" id="eD9-72-fqq"/>
                         <outlet property="quoteOfTheDay" destination="aDt-b7-7N8" id="kin-Iw-SqR"/>
                         <outlet property="relationshipStatusLabel" destination="wbh-eX-Mny" id="DZe-mD-7oo"/>
@@ -2634,13 +2634,13 @@
     </scenes>
     <resources>
         <image name="Accpet Request Button" width="38" height="39"/>
-        <image name="Add Profile Image" width="141" height="142"/>
         <image name="Arrow" width="40" height="40"/>
         <image name="Background" width="640" height="1136"/>
         <image name="Background 2" width="320" height="568"/>
         <image name="Background Image Bright" width="320" height="568"/>
         <image name="Burger Menu" width="11" height="11"/>
         <image name="Burger Menu Selected" width="11" height="11"/>
+        <image name="Default_Profile_Image" width="141" height="141"/>
         <image name="Deny Button Request" width="39" height="39"/>
         <image name="Email Button" width="81" height="81"/>
         <image name="Facebook Button" width="81" height="80"/>
@@ -2654,8 +2654,8 @@
         <image name="sample profile image" width="41" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2Ia-dS-d0E"/>
         <segue reference="Qtg-Qj-Kr7"/>
-        <segue reference="jpR-89-pEy"/>
         <segue reference="A1T-yW-fbn"/>
     </inferredMetricsTieBreakers>
 </document>

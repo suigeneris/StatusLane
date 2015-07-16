@@ -14,6 +14,7 @@
 #import "AddressBookContact.h"
 #import <AddressBook/AddressBook.h>
 #import "UIColor+StatusLane.h"
+#import <Parse/Parse.h>
 
 
 @interface ChoosePartnerInteractor(){
@@ -103,6 +104,11 @@
     [[UIApplication sharedApplication] openURL:appSettings];
 }
 
+-(void)updateUserPartnerWithFullName:(NSString *)fullName andNumber:(NSString *)number{
+    
+    
+    
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -162,6 +168,8 @@
     return _choosePartnerDataSource;
 }
 
+
+
 #pragma mark - UIScrollView Delegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -195,7 +203,7 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
-    if ([searchText  isEqual: @""]) {
+    if ([searchText isEqual: @""]) {
         
         self.searchResults = [NSArray new];
         [self.presenter reloadData];
@@ -215,7 +223,7 @@
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (AddressBookContact *abc in self.arrayOfContacts) {
         
-        if ([[abc.contactName uppercaseString] containsString:[searchText uppercaseString]] ) {
+        if ([[abc.contactName uppercaseString] containsString:[searchText uppercaseString]]) {
             
             [array addObject:abc];
         }
@@ -224,6 +232,20 @@
     self.searchResults = array;
     [self.presenter reloadData];
 }
+
+-(NSString *)replaceCharactersIsString:(NSString *)string{
+    
+    NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"()- "];
+    string = [[string componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @""];
+    return string;
+    
+}
+
+
+
+
+
+
 
 
 @end

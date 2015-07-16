@@ -17,6 +17,7 @@
 -(void)saveStatusToDefaults:(NSString *)string;
 -(void)passArrayOfContacts:(NSArray *)contacts withNumbers:(NSMutableArray *)numbers;
 -(NSArray *)returnSearchResults;
+-(void)updateUserPartnerWithFullName:(NSString *)fullName andNumber:(NSString *)number;
 
 
 @end
