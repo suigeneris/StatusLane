@@ -14,20 +14,25 @@
 #import "AddressBookContact.h"
 #import <AddressBook/AddressBook.h>
 #import "UIColor+StatusLane.h"
-#import <Parse/Parse.h>
+#import "NetworkManager.h"
+#import "AnonymousUserInteractor.h"
 
 
 @interface ChoosePartnerInteractor(){
     
-    int currentExpandedIndex;
-
+    NSString *status;
+    NSString *partnerName;
 }
+
 
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) ChoosePartnerDataSource *choosePartnerDataSource;
+@property (nonatomic, strong) AnonymousUserInteractor *anonymousUserInteractor;
 @property (nonatomic, strong) NSArray *arrayOfContacts;
 @property (nonatomic, strong) NSMutableArray *arrayOfContactNumbers;
 @property (nonatomic, strong) NSArray *searchResults;
+
+@property (nonatomic, strong) id<NetworkProvider> networkProvider;
 
 
 @end
@@ -38,6 +43,26 @@
 
 
 #pragma mark ChoosePartnerInteractor Delegate
+
+
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        _networkProvider = [NetworkManager new];
+    }
+    return _networkProvider;
+}
+
+-(AnonymousUserInteractor *)anonymousUserInteractor{
+    
+    if (!_anonymousUserInteractor) {
+        _anonymousUserInteractor = [AnonymousUserInteractor new];
+        _anonymousUserInteractor.presenter = self.presenter;
+    }
+    
+    return _anonymousUserInteractor;
+}
+
 
 -(NSString *)requestCountryCode{
     
@@ -69,7 +94,7 @@
     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized){
         
         [self.presenter reloadData];
-
+        
     }
     else {
         
@@ -86,12 +111,10 @@
                 else{
                     
                     [self.presenter reloadData];
-                
+                    
                 }
-            
-        });
-            
-        
+                
+            });
             
         });
     }
@@ -106,7 +129,8 @@
 
 -(void)updateUserPartnerWithFullName:(NSString *)fullName andNumber:(NSString *)number{
     
-    
+    number = [self replaceCharactersIsString:number];
+    [self searchUserWithUsername:number andFullName:fullName];
     
 }
 
@@ -134,14 +158,11 @@
     return 35;
 }
 
--(void)saveStatusToDefaults:(NSString *)status{
+-(void)saveStatusToDefaults:(NSString *)string andPartnerName:(NSString *)partnerNameString{
     
-    [Defaults setStatus:status];
-    
+    status = string;
+    partnerName = partnerNameString;
 }
-
-
-
 
 #pragma mark ChoosePartnerInteractor DataSource
 
@@ -240,6 +261,60 @@
     return string;
     
 }
+
+-(void)searchUserWithUsername:(NSString *)username andFullName:(NSString *)fullName{
+    
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:username];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
+    
+        if (error) {
+            [self.presenter stopAnimatingActivitiyView];
+            [self.presenter showErrorView:error.localizedDescription];
+        }
+        
+        else{
+            
+            if (array.count == 0) {
+                
+                [self searchAnonymousUserWithUsername:username andFullName:fullName];
+            }
+            
+            else{
+                
+                PFUser *user = [array objectAtIndex:0];
+            }
+        }
+    
+    }];
+    
+    [self.presenter startAnimatingActivityView];
+    
+}
+
+-(void)searchAnonymousUserWithUsername:(NSString *)username andFullName:(NSString *)fullName{
+    
+
+    [self.anonymousUserInteractor searchAnonymousUserWithUsername:[self replaceCharactersIsString:username]
+                                                      andfullName:fullName
+                                                        andStatus:status
+     ];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

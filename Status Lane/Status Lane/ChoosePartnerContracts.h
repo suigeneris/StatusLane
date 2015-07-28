@@ -12,11 +12,12 @@
 @protocol ChoosePartnerInteractorDelegate <NSObject>
 
 -(NSString *)requestCountryCode;
--(void)askUserForPermissionToViewContacts;
--(void)openSettings;
--(void)saveStatusToDefaults:(NSString *)string;
--(void)passArrayOfContacts:(NSArray *)contacts withNumbers:(NSMutableArray *)numbers;
 -(NSArray *)returnSearchResults;
+
+-(void)openSettings;
+-(void)askUserForPermissionToViewContacts;
+-(void)saveStatusToDefaults:(NSString *)string andPartnerName:(NSString *)partnerNameString;
+-(void)passArrayOfContacts:(NSArray *)contacts withNumbers:(NSMutableArray *)numbers;
 -(void)updateUserPartnerWithFullName:(NSString *)fullName andNumber:(NSString *)number;
 
 
@@ -31,9 +32,11 @@
 
 -(void)showAlertWithTitle:(NSString *)title errorMessage:(NSString *)error andActionTitle:(NSString *)actionTitle;
 -(void)reloadData;
-//-(void)reloadData2;
-
+-(void)dismissView;
 -(void)dismissTabelViewWithPartnerName:(NSString *)name andNumber:(NSString *)number;
 -(void)dismissSearchBar;
+-(void)showErrorView:(NSString *)errorMessage;
+-(void)startAnimatingActivityView;
+-(void)stopAnimatingActivitiyView;
 
 @end

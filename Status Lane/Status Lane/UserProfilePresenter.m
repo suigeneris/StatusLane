@@ -14,21 +14,31 @@
 @interface UserProfilePresenter ()
 
 @property (weak, nonatomic) IBOutlet PFImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *enlargedProfileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *partnerProfileImageView;
+
 @property (weak, nonatomic) IBOutlet UIView *bottomUIView;
+@property (weak, nonatomic) IBOutlet UIView *popUpView;
+
 @property (weak, nonatomic) IBOutlet UIButton *viewStatusButton;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButtonPressed;
 @property (weak, nonatomic) IBOutlet UIButton *cancellButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *searchUserStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *alertViewFullNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *partnerName;
+
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
-@property (weak, nonatomic) IBOutlet UIView *popUpView;
-@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet PFImageView *enlargedProfileImageView;
-@property (weak, nonatomic) IBOutlet PFImageView *partnerProfileImageView;
+
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *partnerProfileCenterXAlignment;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageCenterXAlignment;
+
+@property (strong, nonatomic) NSArray *arrayWithPartner;
 @end
 
 @implementation UserProfilePresenter
@@ -37,13 +47,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self additionalUIViewSetup];
+    //[self arrayWithPartner];
 
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    //[self crossDissolveBackgroundImage];
 
 }
 
@@ -51,6 +61,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(NSArray *)arrayWithPartner{
+    
+    if (!_arrayWithPartner) {
+        
+        _arrayWithPartner = self.user[@"partner"];
+    }
+    
+    return _arrayWithPartner;
+}
+
 
 -(UIActivityIndicatorView *)activityIndicator{
     
@@ -65,6 +85,7 @@
     return _activityIndicator;
 }
 
+
 -(void)additionalUIViewSetup{
     
     [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -74,31 +95,8 @@
     self.sendButton.layer.cornerRadius = 1.6;
     self.cancellButton.layer.cornerRadius = 1.6;
     
-    self.enlargedProfileImageView.layer.borderWidth = 2;
-    self.enlargedProfileImageView.layer.cornerRadius = self.enlargedProfileImageView.frame.size.width/2;
-    self.enlargedProfileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.enlargedProfileImageView.clipsToBounds = YES;
-
-    self.enlargedProfileImageView.file = self.user[@"userProfilePicture"];
-    [self.enlargedProfileImageView loadInBackground];
-    
-    
-    self.profileImageView.layer.borderWidth = 2;
-    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
-    self.profileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.profileImageView.clipsToBounds = YES;
-
-    self.profileImageView.file = self.user[@"userProfilePicture"];
-    [self.profileImageView loadInBackground];
-
-
-    self.partnerProfileImageView.layer.borderWidth = 2;
-    self.partnerProfileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
-    self.partnerProfileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.partnerProfileImageView.file = self.user[@"userProfilePicture"];
-    self.partnerProfileImageView.clipsToBounds = YES;
-
-    [self.partnerProfileImageView loadInBackground];
+    [self setUpImageViews];
+    [self setImageForImageViews];
     
     [self.bottomUIView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     
@@ -110,13 +108,81 @@
                                                                                    multiplier:0.30
                                                                                      constant:0
                                                         ];
-    [self.view addConstraint:buttomUIViewHeightConstraint];
     
+    [self.view addConstraint:buttomUIViewHeightConstraint];
     self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     self.searchUserStatusLabel.text = self.user[@"status"];
+    self.fullNameLabel.text = self.user[@"fullName"];
+    self.alertViewFullNameLabel.text = self.user[@"fullName"];
+    
+    
+}
+
+-(void)setUpImageViews{
+    
+    NSArray *imageViewArray = @[self.enlargedProfileImageView, self.profileImageView, self.partnerProfileImageView];
+    
+    for (PFImageView  *imageView in imageViewArray) {
+        imageView.layer.borderWidth = 2;
+        imageView.layer.cornerRadius = imageView.frame.size.width/2;
+        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+        imageView.clipsToBounds = YES;
+    }
+}
+
+-(void)setImageForImageViews{
+    
+    NSArray *imageViewArray = @[self.enlargedProfileImageView, self.profileImageView];
 
     
+        for (PFImageView *imageView in imageViewArray) {
+            
+            if (self.user[@"userProfilePicture"]) {
+
+            imageView.file = self.user[@"userProfilePicture"];
+            [imageView loadInBackground];
+                
+            }
+            
+            else{
+                
+                imageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+            }
+        }
     
+    if ([[self.arrayWithPartner objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
+        
+        PFUser *user = [self.arrayWithPartner objectAtIndex:0];
+        self.partnerName.text = user[@"fullName"];
+        if (user[@"userProfilePicture"]) {
+            
+            self.partnerProfileImageView.file = user[@"userProfilePicture"];
+        }
+        
+        else{
+            
+            self.partnerProfileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+
+        }
+    }
+    
+    else{
+        
+        PFObject *object = [self.arrayWithPartner objectAtIndex:0];
+        self.partnerName.text = object[@"fullName"];
+
+        if (object[@"userProfilePicture"]) {
+            
+            self.partnerProfileImageView.file = object[@"userProfilePicture"];
+            [self.partnerProfileImageView loadInBackground];
+        }
+        
+        else{
+            
+            self.partnerProfileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+        }
+
+    }
 }
 
 - (IBAction)backkButtonPressed:(id)sender {
@@ -195,6 +261,7 @@
                          } completion:^(BOOL finished) {
                              
                              self.searchUserStatusLabel.hidden = NO;
+                             self.partnerName.hidden = NO;
                              [self resetImageViewsPostition];
                              
                              
@@ -229,6 +296,7 @@
                          self.viewStatusButton.userInteractionEnabled = YES;
                          [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreen]];
                          self.searchUserStatusLabel.hidden = YES;
+                         self.partnerName.hidden = YES;
                      }];
     
     

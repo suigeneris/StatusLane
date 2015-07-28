@@ -16,6 +16,8 @@
 #import "UIColor+StatusLane.h"
 #import "UIImage+StatusLane.h"
 #import "Defaults.h"
+#import <Parse/Parse.h>
+
 
 
 @interface HomePageInteractor () 
@@ -24,6 +26,9 @@
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) HomePageDataSource *homePageDataSource;
 @property (nonatomic, strong) NSArray *arrayofStatusTypes;
+@property (nonatomic, strong) PFObject *partnerObject;
+@property (nonatomic, strong) PFUser *partnerUser;
+
 
 @end
 
@@ -60,6 +65,8 @@
     
     return _arrayofStatusTypes;
 }
+
+
 
 #pragma mark - Tableview Delegate Methods
 
@@ -205,7 +212,6 @@
 -(NSString *)returnUserStatusFromDefaults{
     
     if ([[Defaults status] isEqualToString:@"SINGLE"]) {
-        NSLog(@"The status is single");
         return [Defaults status];
     }
     
@@ -215,6 +221,11 @@
         return [Defaults status];
     }
     
+}
+
+-(NSString *)returnPartnerName{
+
+    return [Defaults partnerFullName];
 }
 
 #pragma mark - Internal Methods
@@ -288,6 +299,7 @@
     }
 
 }
+
 
 #pragma mark - RSKImageCropViewControllerDelegate
 

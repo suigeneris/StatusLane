@@ -7,9 +7,9 @@
 //
 
 #import "ChoosePartnerPresenter.h"
-#import "ChoosePartnerInteractor.h"
 #import "UIColor+StatusLane.h"
 #import "NSString+StatusLane.h"
+#import "StatusLaneErrorView.h"
 
 
 static void *countryCodeContext = &countryCodeContext;
@@ -32,6 +32,8 @@ static void *countryCodeContext = &countryCodeContext;
 
 @property (weak, nonatomic) IBOutlet UILabel *numberValidityLabel;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 
 @end
 
@@ -48,6 +50,7 @@ static void *countryCodeContext = &countryCodeContext;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUPUIElements];
+    //[self anonymousUserInteractor];
 
 }
 
@@ -93,13 +96,23 @@ static void *countryCodeContext = &countryCodeContext;
         interactor.presenter = self;
         _interactor = interactor;
         self.searchBar.delegate = _interactor;
-
-    
-        
     }
     
     return _interactor;
 }
+
+//-(id)anonymousUserInteractor{
+//    
+//    NSLog(@"Anonymous user interactor called");
+//    if (!_anonymousUserInteractor) {
+//        AnonymousUserInteractor *anonymousUserInteractor = [AnonymousUserInteractor new];
+//        anonymousUserInteractor.presenter = self;
+//        _anonymousUserInteractor = anonymousUserInteractor;
+//        
+//    }
+//    
+//    return _anonymousUserInteractor;
+//}
 
 -(UIButton *)countryCodeButton{
     
@@ -121,6 +134,18 @@ static void *countryCodeContext = &countryCodeContext;
     return _countryCodeButton;
 }
 
+-(UIActivityIndicatorView *)activityIndicator{
+    
+    if (!_activityIndicator) {
+        
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityIndicator.center = self.view.center;
+        _activityIndicator.color = [UIColor statusLaneGreenPressed];
+        _activityIndicator.hidesWhenStopped = YES;
+        _activityIndicator.tag = 1111;
+    }
+    return _activityIndicator;
+}
 
 -(void)setUPUIElements{
     
@@ -208,7 +233,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)saveStatusToDefaults{
     
-    [self.interactor saveStatusToDefaults:self.usersChosenStatus];
+    [self.interactor saveStatusToDefaults:self.usersChosenStatus andPartnerName:self.partnerNameTextField.text];
 }
 
 -(BOOL)isNumberInTextFieldValid{
@@ -239,8 +264,6 @@ static void *countryCodeContext = &countryCodeContext;
         [self.sendButton setBackgroundColor:[UIColor statusLaneGreenPressed]];
         
     }
-    
-
     
 }
 
@@ -293,7 +316,6 @@ static void *countryCodeContext = &countryCodeContext;
     
     [self saveStatusToDefaults];
     [self.interactor updateUserPartnerWithFullName:self.partnerNameTextField.text andNumber:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text]];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -400,7 +422,31 @@ static void *countryCodeContext = &countryCodeContext;
     [self.searchBar resignFirstResponder];
 }
 
+-(void)dismissView{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 
+}
+
+-(void)showErrorView:(NSString *)errorMessage{
+    
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage];
+    [errorView show];
+}
+
+-(void)startAnimatingActivityView{
+    
+    [self.view addSubview:self.activityIndicator];
+    [_activityIndicator startAnimating];
+}
+
+-(void)stopAnimatingActivitiyView{
+    
+    NSLog(@"Is this called");
+    [_activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
+}
 #pragma mark - Key Value Observer
 
 -(void)observeValueForKeyPath:(NSString *)keyPath

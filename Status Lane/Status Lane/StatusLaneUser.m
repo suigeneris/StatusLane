@@ -9,6 +9,7 @@
 #import "StatusLaneUser.h"
 
 #define kFullNameKey @"fullName"
+#define kPartnerFullNameKey @"partnerFullName"
 #define kPhoneNumberCountryCode @"phoneNumberCountryCode"
 #define KPhoneNumber @"phoneNumber"
 #define kEmailAddress @"emailAddress"
@@ -29,6 +30,7 @@
     if (self) {
         
         self.fullName = [dictionary objectForKey:kFullNameKey];
+        self.partnerFullName = [dictionary objectForKey:kPartnerFullNameKey];
         self.phoneNumberCountryCode = [dictionary objectForKey:kPhoneNumberCountryCode];
         self.phoneNumber = [dictionary objectForKey:KPhoneNumber];
         self.emailAddress = [dictionary objectForKey:kEmailAddress];
@@ -45,6 +47,7 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     
     [aCoder encodeObject:_fullName forKey:kFullNameKey];
+    [aCoder encodeObject:_partnerFullName forKey:kPartnerFullNameKey];
     [aCoder encodeObject:_phoneNumberCountryCode forKey:kPhoneNumberCountryCode];
     [aCoder encodeObject:_phoneNumber forKey:KPhoneNumber];
     [aCoder encodeObject:_emailAddress forKey:kEmailAddress];
@@ -62,6 +65,7 @@
     if (self) {
         
         self.fullName = [aDecoder decodeObjectForKey:kFullNameKey];
+        self.partnerFullName = [aDecoder decodeObjectForKey:kPartnerFullNameKey];
         self.phoneNumberCountryCode = [aDecoder decodeObjectForKey:kPhoneNumberCountryCode];
         self.phoneNumber = [aDecoder decodeObjectForKey:KPhoneNumber];
         self.emailAddress = [aDecoder decodeObjectForKey:kEmailAddress];

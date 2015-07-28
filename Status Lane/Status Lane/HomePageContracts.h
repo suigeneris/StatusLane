@@ -25,6 +25,8 @@ typedef void (^AlertControllerBlock)(void);
 -(UIImage *)returnBackgroundImageFromFile;
 -(UIImage *)returnProfileImageFromFile;
 -(NSString *)returnUserStatusFromDefaults;
+-(NSString *)returnPartnerName;
+
 
 
 @end

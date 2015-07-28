@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) SearchUsersDataSource *searchUsersDatasource;
-@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 
 
 @end
@@ -46,14 +46,27 @@
     return _searchUsersDatasource;
 }
 
+-(NSMutableArray *)searchResults{
+    
+    if (!_searchResults) {
+        
+        _searchResults = [[NSMutableArray alloc]init];
+        
+    }
+    return _searchResults;
+}
+
 
 #pragma mark - Internal Methods
 
 -(void)searchForUserWithUserDetails:(NSString *)details{
     
+    [self.searchResults removeAllObjects];
     PFQuery *query = [PFUser query];
-    query.limit = 20;
     [query whereKey:@"username" matchesRegex:details];
+    [query includeKey:@"partner"];
+    query.limit = 20;
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
         
         if (error) {
@@ -64,20 +77,54 @@
             
             if (array.count == 0) {
                 
-                self.searchResults = array;
+                //[self.searchResults addObjectsFromArray:array];
+                [self searchForAnonymousUser:details];
+            }
+            
+            else{
+        
+                [self.searchResults addObjectsFromArray:array];
+                [self searchForAnonymousUser:details];
+
+            }
+        }
+    
+    
+    }];
+    
+}
+
+-(void)searchForAnonymousUser:(NSString *)details{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"AnonymousUser"];
+    [query whereKey:@"username" matchesRegex:details];
+    [query includeKey:@"partner"];
+    query.limit = 20;
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
+        
+        if (error) {
+            
+        }
+        
+        else{
+            
+            if (array.count == 0) {
+                
+                [self.searchResults addObjectsFromArray:array];
                 [self.presenter reloadData];
             }
             
             else{
                 
                 
-                self.searchResults = array;
+                [self.searchResults addObjectsFromArray:array];
                 [self.presenter reloadData];
-           
+                
             }
         }
-    
-    
+        
+        
     }];
     
 }
@@ -115,6 +162,8 @@
     
     if ([searchText  isEqual: @""]) {
         
+        [self.searchResults removeAllObjects];
+        [self.presenter reloadData];
     }
     else{
         
@@ -128,8 +177,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PFUser *selectedUser = [self.searchResults objectAtIndex:indexPath.row];
-    [self.presenter showUserProfileForUser:selectedUser];
+    if ([[self.searchResults objectAtIndex:indexPath.row] isKindOfClass:NSClassFromString(@"PFUser")]) {
+        
+        PFUser *selectedUser = [self.searchResults objectAtIndex:indexPath.row];
+        [self.presenter showUserProfileForUser:selectedUser];
+
+    }
+    
+    else{
+        
+        PFObject *selectedObject = [self.searchResults objectAtIndex:indexPath.row];
+        [self.presenter showUserProfileForAnonymousUser:selectedObject];
+    }
 }
 
 #pragma mark - UIScrollView Delegate
@@ -144,15 +203,14 @@
 
 #pragma mark - Interactor Delegate Methods
 
--(NSArray *)returnArrayOfSearchResults{
+-(NSMutableArray *)returnArrayOfSearchResults{
     
     return self.searchResults;
 }
 
 -(void)emptyDataSourceArray{
     
-    NSArray *emptyArray = [NSArray new];
-    self.searchResults = emptyArray;
+    [self.searchResults removeAllObjects];
     [self.presenter reloadData];
     
 }

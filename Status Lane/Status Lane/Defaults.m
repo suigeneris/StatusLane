@@ -13,6 +13,7 @@
 #import "Parse/Parse.h"
 
 #define kFullNameKey @"fullName"
+#define kPartnerFullName @"partnerFullName"
 #define kPhoneNumberCountryCodeKey @"phoneNumberCountryCode"
 #define kphoneNumberKey @"phoneNumber"
 #define kEmailAddressKey @"emailAddress"
@@ -37,6 +38,15 @@
     [self putValue:fullName forkey:kFullNameKey];
 }
 
++(NSString *)partnerFullName{
+    
+    return [self getValue:kPartnerFullName];
+}
+
++(void)setPartnerFullName:(NSString *)partnerFullName{
+    
+    [self putValue:partnerFullName forkey:kPartnerFullName];
+}
 
 +(NSString *)phoneNumberCountyCode{
     
@@ -251,7 +261,17 @@
     NSLog(@"Attepmt update user");
     PFUser *currentUser = [PFUser currentUser];
     currentUser[column] = info;
-    [currentUser saveInBackground];
+    
+    if ([info isEqualToString:@"SINGLE"]) {
+        
+        [self changeStatusWithUser:currentUser];
+    }
+    
+    else{
+        
+        [currentUser saveInBackground];
+    }
+    
     
 }
 
@@ -344,7 +364,65 @@
     
 }
 
++(void)changeStatusWithUser:(PFUser *)currentUser{
+    
+    //NSLog(@"Is this called");
 
+    [currentUser fetchIfNeededInBackgroundWithBlock:^(NSObject *object, NSError *error){
+    
+        if (error) {
+            
+            NSLog(@"Failed to fetch user with error: %@", error.localizedDescription);
+        }
+        
+        else{
+            
+            //NSLog(@"Is this called");
+            NSArray *partnerArray = currentUser[@"partner"];
+            if (partnerArray) {
+                
+                if ([[partnerArray objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFObject")]) {
+                    
+                    PFObject *previousPartner = [partnerArray objectAtIndex:0];
+                    previousPartner[@"status"] = @"SINGLE";
+                    
+                    if (previousPartner[@"partner"] != nil) {
+                        
+                        //NSLog(@"Is this called");
+                        [previousPartner removeObjectForKey:@"partner"];
+                        
+                    }
+                    
+                    else{
+                        
+                        NSLog(@"There is no partner object");
+                    }
+                    [previousPartner saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+                        
+                        if (error) {
+                            NSLog(@"Error: %@", error.localizedDescription);
+                        }
+                        else{
+                            
+                            //NSLog(@"Is this calledddd");
+                            [currentUser removeObjectForKey:@"partner"];
+                            [currentUser saveInBackground];
+                            
+                        }
+                    }];
+                }
+            }
+            else{
+                
+                NSLog(@"NO Object");
+            }
+
+        }
+    
+    }];
+    
+
+}
 
 
 

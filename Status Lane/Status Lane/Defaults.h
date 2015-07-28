@@ -14,6 +14,9 @@
 +(NSString *)fullName;
 +(void)setFullName:(NSString *)fullName;
 
++(NSString *)partnerFullName;
++(void)setPartnerFullName:(NSString *)partnerFullName;
+
 +(NSString *)phoneNumberCountyCode;
 +(void)setPhoneNumberCountryCode:(NSString *)phoneNumberCountyCode;
 

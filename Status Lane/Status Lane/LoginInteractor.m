@@ -9,8 +9,13 @@
 #import "LoginInteractor.h"
 #import "CountryCode.h"
 #import "Defaults.h"
-#import <Parse/Parse.h>
+#import "NetworkManager.h"
 
+@interface LoginInteractor()
+
+@property (nonatomic, strong) id <NetworkProvider> networkProvider;
+
+@end
 
 @implementation LoginInteractor
 
@@ -24,42 +29,49 @@
     
 }
 
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        _networkProvider = [NetworkManager new];
+        
+    }
+    return _networkProvider;
+}
+
 -(void)attemptLoginWithUsername:(NSString *)username andPassword:(NSString *)password{
     
-    [PFUser logInWithUsernameInBackground:username password:password
-                                    block:^(PFUser *user, NSError *error) {
-                                        if (user) {
-                                            
-                                            [self.presenter hideActivityView];
-                                            [Defaults setStatus:user[@"status"]];
-                                            [self.presenter login];
+    
+    [self.networkProvider loginWithUsername:username
+                                andPassword:password
+                                    success:^(id responseObject) {
                                         
-                                        } else {
+                                        [self.presenter hideActivityView];
+                                        PFUser *user = responseObject;
+                                        [Defaults setStatus:user[@"status"]];
+                                        [self.presenter login];
+                                        
+                                    } failure:^(NSError *error) {
+                                        
+                                        [self.presenter hideActivityView];
+                                        if (error.code == kPFErrorObjectNotFound) {
                                             
-                                            [self.presenter hideActivityView];
-                                            if (error.code == kPFErrorObjectNotFound) {
-                                                
-                                                [self.presenter showErrorViewWithErrorMessage:@"Sorry we cant seem to match your details with any accounts"];
-                                                NSLog(@"%@", [error userInfo]);
-                                            }
+                                            [self.presenter showErrorViewWithErrorMessage:@"Sorry we cant seem to match your details with any accounts"];
+                                        }
+                                        
+                                        else if(error.code == kPFErrorTimeout || error.code == kPFErrorConnectionFailed){
                                             
-                                            else if(error.code == kPFErrorTimeout || error.code == kPFErrorConnectionFailed){
-                                                
-                                                [self.presenter showErrorViewWithErrorMessage:@"Cannot Connect To Servers, Please check your Internet Connection"];
-
-                                            }
-                                            else{
-                                                
-                                                [self.presenter showErrorViewWithErrorMessage:@"Please Check Your Phone Number and Password and Try again"];
-                                                NSLog(@"%@", [error userInfo]);
-                                            }
-
-
+                                            [self.presenter showErrorViewWithErrorMessage:@"Cannot Connect To Servers, Please check your Internet Connection"];
+                                            
+                                        }
+                                        else{
+                                            
+                                            [self.presenter showErrorViewWithErrorMessage:@"Please Check Your Phone Number and Password and Try again"];
                                         }
                                     }];
     
     [self.presenter showActivityView];
-     
+
+    
 }
 
 -(void)loginCachedUser{

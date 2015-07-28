@@ -13,6 +13,7 @@
 		2A020B651B233F8E000811FC /* BurgerMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A020B641B233F8E000811FC /* BurgerMenuDataSource.m */; };
 		2A020B681B233FAB000811FC /* BurgerMenuInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A020B671B233FAB000811FC /* BurgerMenuInteractor.m */; };
 		2A020B6B1B233FDE000811FC /* BurgerMenuPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A020B6A1B233FDE000811FC /* BurgerMenuPresenter.m */; };
+		2A06BC7A1B6816F0000BC5A5 /* RegisteredUserInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A06BC791B6816F0000BC5A5 /* RegisteredUserInteractor.m */; };
 		2A0C568F1B054203004198D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C568E1B054203004198D5 /* main.m */; };
 		2A0C56921B054203004198D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56911B054203004198D5 /* AppDelegate.m */; };
 		2A0C56951B054203004198D5 /* Status_Lane.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56931B054203004198D5 /* Status_Lane.xcdatamodeld */; };
@@ -67,6 +68,7 @@
 		2A458E371B14FE91008C21FA /* CountryListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A458E361B14FE91008C21FA /* CountryListDataSource.m */; };
 		2A458E3F1B150BCA008C21FA /* countrylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A458E3E1B150BCA008C21FA /* countrylist.json */; };
 		2A458E421B1516B4008C21FA /* CountryListInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A458E411B1516B4008C21FA /* CountryListInteractor.m */; };
+		2A495BCE1B66A7A100C6B234 /* AnonymousUserInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A495BCD1B66A7A100C6B234 /* AnonymousUserInteractor.m */; };
 		2A63CA2E1B244B75000F191E /* PurchaseRequestsInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63CA2D1B244B75000F191E /* PurchaseRequestsInteractor.m */; };
 		2A63CA321B244D46000F191E /* PurchseRequestPresenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63CA311B244D46000F191E /* PurchseRequestPresenterCell.m */; };
 		2A7679BD1B2251A100B616DE /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7679BC1B2251A100B616DE /* SWRevealViewController.m */; };
@@ -76,6 +78,7 @@
 		2AA9F4A81B2D7D0500B5C1A2 /* Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA9F4A71B2D7D0500B5C1A2 /* Defaults.m */; };
 		2AA9F4AB1B2D9DCD00B5C1A2 /* NSString+StatusLane.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA9F4AA1B2D9DCD00B5C1A2 /* NSString+StatusLane.m */; };
 		2AA9F4AE1B2D9FB600B5C1A2 /* UIImage+StatusLane.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA9F4AD1B2D9FB600B5C1A2 /* UIImage+StatusLane.m */; };
+		2AAF90A71B60073B00B9AA06 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF90A61B60073B00B9AA06 /* NetworkManager.m */; };
 		2AB99DA31B164934000535DA /* UIColor+StatusLane.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB99DA21B164934000535DA /* UIColor+StatusLane.m */; };
 		2AB99DA61B16513F000535DA /* CountryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB99DA51B16513F000535DA /* CountryListCell.m */; };
 		2AC27B541B3486B9009997AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC27B531B3486B9009997AF /* AudioToolbox.framework */; };
@@ -127,6 +130,8 @@
 		2A020B671B233FAB000811FC /* BurgerMenuInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurgerMenuInteractor.m; sourceTree = "<group>"; };
 		2A020B691B233FDE000811FC /* BurgerMenuPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurgerMenuPresenter.h; sourceTree = "<group>"; };
 		2A020B6A1B233FDE000811FC /* BurgerMenuPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurgerMenuPresenter.m; sourceTree = "<group>"; };
+		2A06BC781B6816F0000BC5A5 /* RegisteredUserInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredUserInteractor.h; sourceTree = "<group>"; };
+		2A06BC791B6816F0000BC5A5 /* RegisteredUserInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredUserInteractor.m; sourceTree = "<group>"; };
 		2A0C56891B054203004198D5 /* Status Lane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Status Lane.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0C568D1B054203004198D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A0C568E1B054203004198D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -237,6 +242,8 @@
 		2A458E401B1516B4008C21FA /* CountryListInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListInteractor.h; sourceTree = "<group>"; };
 		2A458E411B1516B4008C21FA /* CountryListInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListInteractor.m; sourceTree = "<group>"; };
 		2A458E441B15196E008C21FA /* CountryListContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListContracts.h; sourceTree = "<group>"; };
+		2A495BCC1B66A7A100C6B234 /* AnonymousUserInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousUserInteractor.h; sourceTree = "<group>"; };
+		2A495BCD1B66A7A100C6B234 /* AnonymousUserInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousUserInteractor.m; sourceTree = "<group>"; };
 		2A63CA2C1B244B75000F191E /* PurchaseRequestsInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseRequestsInteractor.h; sourceTree = "<group>"; };
 		2A63CA2D1B244B75000F191E /* PurchaseRequestsInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseRequestsInteractor.m; sourceTree = "<group>"; };
 		2A63CA2F1B244B98000F191E /* PurchaseRequestsContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseRequestsContracts.h; sourceTree = "<group>"; };
@@ -253,6 +260,9 @@
 		2AA9F4AA1B2D9DCD00B5C1A2 /* NSString+StatusLane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StatusLane.m"; sourceTree = "<group>"; };
 		2AA9F4AC1B2D9FB600B5C1A2 /* UIImage+StatusLane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StatusLane.h"; sourceTree = "<group>"; };
 		2AA9F4AD1B2D9FB600B5C1A2 /* UIImage+StatusLane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StatusLane.m"; sourceTree = "<group>"; };
+		2AAF90A51B60073B00B9AA06 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		2AAF90A61B60073B00B9AA06 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		2AAF90A81B60075E00B9AA06 /* NetworkProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkProvider.h; sourceTree = "<group>"; };
 		2AB99DA11B164934000535DA /* UIColor+StatusLane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+StatusLane.h"; sourceTree = "<group>"; };
 		2AB99DA21B164934000535DA /* UIColor+StatusLane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+StatusLane.m"; sourceTree = "<group>"; };
 		2AB99DA41B16513F000535DA /* CountryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListCell.h; sourceTree = "<group>"; };
@@ -415,6 +425,7 @@
 		2A0C568B1B054203004198D5 /* Status Lane */ = {
 			isa = PBXGroup;
 			children = (
+				2AAF90A41B60071C00B9AA06 /* Managers */,
 				2AC27B671B348746009997AF /* Resources */,
 				2A0C56B71B054281004198D5 /* App Delegate */,
 				2A0C56B61B05426E004198D5 /* Model */,
@@ -617,7 +628,6 @@
 				2A1BA5301B1B4400006703D5 /* Data Source */,
 				2A18A35D1B0CFDAD005FA738 /* Interactor */,
 				2A18A35C1B0CFDA1005FA738 /* Presenter */,
-				2A18A35E1B0CFDB9005FA738 /* Router */,
 			);
 			name = "Choose Partner";
 			sourceTree = "<group>";
@@ -638,15 +648,12 @@
 			children = (
 				2A1C7A1C1B180A0C003ADCF5 /* ChoosePartnerInteractor.h */,
 				2A1C7A1D1B180A0C003ADCF5 /* ChoosePartnerInteractor.m */,
+				2A495BCC1B66A7A100C6B234 /* AnonymousUserInteractor.h */,
+				2A495BCD1B66A7A100C6B234 /* AnonymousUserInteractor.m */,
+				2A06BC781B6816F0000BC5A5 /* RegisteredUserInteractor.h */,
+				2A06BC791B6816F0000BC5A5 /* RegisteredUserInteractor.m */,
 			);
 			name = Interactor;
-			sourceTree = "<group>";
-		};
-		2A18A35E1B0CFDB9005FA738 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Router;
 			sourceTree = "<group>";
 		};
 		2A18F32F1B39F4960005F061 /* Searched User Model */ = {
@@ -1097,6 +1104,16 @@
 			name = Defaults;
 			sourceTree = "<group>";
 		};
+		2AAF90A41B60071C00B9AA06 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2AAF90A51B60073B00B9AA06 /* NetworkManager.h */,
+				2AAF90A61B60073B00B9AA06 /* NetworkManager.m */,
+				2AAF90A81B60075E00B9AA06 /* NetworkProvider.h */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		2AB99DA01B1648FC000535DA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1440,6 +1457,7 @@
 				2AB99DA61B16513F000535DA /* CountryListCell.m in Sources */,
 				2A1C7A641B19EEC6003ADCF5 /* RelationshipHistoryDataSource.m in Sources */,
 				2AA9F4AB1B2D9DCD00B5C1A2 /* NSString+StatusLane.m in Sources */,
+				2A06BC7A1B6816F0000BC5A5 /* RegisteredUserInteractor.m in Sources */,
 				2AF8AD221B0E074000864270 /* UserProfilePresenter.m in Sources */,
 				2A18A34F1B0C9D7B005FA738 /* ForgotPasswordPresenter.m in Sources */,
 				2A232CFE1B3766CB00590B66 /* KeyChainWrapper.m in Sources */,
@@ -1471,6 +1489,7 @@
 				2AF8AD1B1B0DE28E00864270 /* SearchUsersPresenter.m in Sources */,
 				2A1C7A681B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.m in Sources */,
 				2A1C7A501B19BFD8003ADCF5 /* PendingRequestsDataSource.m in Sources */,
+				2AAF90A71B60073B00B9AA06 /* NetworkManager.m in Sources */,
 				2A1C7A381B18228C003ADCF5 /* SettingsInteractor.m in Sources */,
 				2A3883551B2BAE61002E5EDB /* HomePageDataSource.m in Sources */,
 				2A1C7A171B180630003ADCF5 /* LoginInteractor.m in Sources */,
@@ -1482,6 +1501,7 @@
 				2A0C568F1B054203004198D5 /* main.m in Sources */,
 				2A232CEE1B35987800590B66 /* StatusLaneButtonGreen.m in Sources */,
 				2A1BA5361B1B465B006703D5 /* ChoosePartnerCellPresenter.m in Sources */,
+				2A495BCE1B66A7A100C6B234 /* AnonymousUserInteractor.m in Sources */,
 				2A3DDE1E1B4C480E0037DFC8 /* AddressBookContact.m in Sources */,
 				2A1C7A2A1B18144D003ADCF5 /* SettingsDataSource.m in Sources */,
 				2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */,

@@ -13,7 +13,7 @@
 
 @protocol SearchUsersInteractorDelegate <NSObject>
 
--(NSArray *)returnArrayOfSearchResults;
+-(NSMutableArray *)returnArrayOfSearchResults;
 -(void)emptyDataSourceArray;
 
 
@@ -33,6 +33,8 @@
 -(void)resetFrontViewController;
 -(void)reloadData;
 -(void)showUserProfileForUser:(PFUser *)user;
+-(void)showUserProfileForAnonymousUser:(PFObject *)anonymousUser;
+
 -(void)dismissSearchBar;
 
 @end

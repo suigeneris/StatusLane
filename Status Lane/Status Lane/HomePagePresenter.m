@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UIImageView *partnerProfileImage;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *partnerName;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UILabel *quoteOfTheDay;
@@ -66,6 +67,7 @@
     
     [super viewDidAppear:animated];
     self.relationshipStatusLabel.text = [self.interactor returnUserStatusFromDefaults];
+    self.partnerName.text = [self.interactor returnPartnerName];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(hideTableView)
                                                 name:@"HideTableView"
@@ -392,12 +394,12 @@
 -(void)animateViews{
     
     self.partnerProfileImage.hidden = NO;
+    self.partnerName.hidden = NO;
     self.profileImageViewCenterX.constant = 100;
     self.partnerProfileImageViewCenterX.constant = 100;
     
     [UIView animateWithDuration:0.36
                      animations:^{
-                         
                          
                          [self.view layoutIfNeeded];
                      }];
@@ -407,10 +409,10 @@
     
     self.profileImageViewCenterX.constant = 0;
     self.partnerProfileImageViewCenterX.constant = 0;
+    self.partnerName.hidden = YES;
     
     [UIView animateWithDuration:0.36
                      animations:^{
-                         
                          
                          [self.view layoutIfNeeded];
                      }];
@@ -514,7 +516,6 @@
     _isTableViewHidden = YES;
     self.burgerMenu.userInteractionEnabled = YES;
     self.searchButton.userInteractionEnabled = YES;
-
     
     [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
     [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];

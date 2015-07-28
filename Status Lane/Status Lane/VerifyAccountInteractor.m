@@ -7,16 +7,25 @@
 //
 
 #import "VerifyAccountInteractor.h"
-#import <Parse/Parse.h>
 #import "Defaults.h"
+#import "NetworkManager.h"
 
 @interface VerifyAccountInteractor()
 
+@property (nonatomic, strong) id <NetworkProvider> networkProvider;
 
 @end
 
 @implementation VerifyAccountInteractor
 
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        
+        _networkProvider = [NetworkManager new];
+    }
+    return _networkProvider;
+}
 
 -(NSString *)generateVerificationCode{
     
@@ -32,27 +41,20 @@
 -(NSString *)resendVerificationCodeToNumber:(NSString *)number{
     
     NSString *newCode = [self generateVerificationCode];
-                [PFCloud callFunctionInBackground:@"verifyNumber"
-                                   withParameters:@{ @"number" : number,
-                                                     @"verificationCode" : newCode}
-                 
-                                            block:^(id object, NSError *error) {
+    [self.networkProvider resendVerificationCodeToNumber:number
+                                                withCode:newCode
+                                                 success:^(id responseObject) {
+                                                     
+                                                     [self.presenter hideActivityView];
+                                                     NSLog(@"%@", responseObject);
+                                                     
+                                                 } failure:^(NSError *error) {
+                                                     
+                                                     [self.presenter hideActivityView];
+                                                     NSLog(@"%@", error.localizedDescription);
+                                                     [self.presenter showErrorViewWithMessage:error.localizedDescription];
+                                                 }];
     
-    
-                                                if (!error) {
-                                                    
-                                                    [self.presenter hideActivityView];
-                                                    NSLog(@"%@", object);
-                                                }
-    
-                                                else{
-                                                    
-                                                    [self.presenter hideActivityView];
-                                                    NSLog(@"%@", error.localizedDescription);
-                                                    [self.presenter showErrorViewWithMessage:error.localizedDescription];
-    
-                                                }
-                                            }];
     [self.presenter showActivityView];
     return newCode;
     
@@ -63,33 +65,23 @@
 
     [Defaults setPassword:password];
     [Defaults setStatus:@"SINGLE"];
+    
+    [self.networkProvider attemptRegistrationWithUsername:username
+                                              andPassword:password
+                                                  success:^(id responseObject) {
+                                                      
+                                                      [self.presenter hideActivityView];
+                                                      [self.presenter createAccountSuccessfull];
 
-    PFUser *user = [PFUser user];
-    user.username = username;
-    user.password = password;
-    user[@"status"] = @"SINGLE";
-    user[@"fullName"] = @"Full Name";
-    user[@"gender"] = @"Gender not set";
+                                                      
+                                                  } failure:^(NSError *error) {
+                                                      
+                                                      [self.presenter hideActivityView];
+                                                      NSString *errorString = [error userInfo][@"error"];
+                                                      [self.presenter showErrorViewWithMessage:errorString];
+                                                      
+                                                  }];
 
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
-    
-    
-            if (!error) {
-                
-                [self.presenter hideActivityView];
-                [self.presenter createAccountSuccessfull];
-            }
-            else{
-    
-                [self.presenter hideActivityView];
-                NSString *errorString = [error userInfo][@"error"];
-                [self.presenter showErrorViewWithMessage:errorString];
-
-    
-            }
-        
-    }];
-    
     [self.presenter showActivityView];
 
     

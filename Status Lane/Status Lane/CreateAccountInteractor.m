@@ -6,15 +6,16 @@
 //  Copyright (c) 2015 Sui Generis Innovations. All rights reserved.
 //
 
-#import <Parse/Parse.h>
 #import "CreateAccountInteractor.h"
 #import "CountryCode.h"
+#import "NetworkManager.h"
 
 @interface CreateAccountInteractor()
 
-
+@property (nonatomic, strong) id<NetworkProvider> networkProvider;
 
 @end
+
 @implementation CreateAccountInteractor
 
 -(NSString *)requestCountryCode{
@@ -22,6 +23,14 @@
     CountryCode *code = [CountryCode sharedInstance];
     NSString *string = code.countryCode;
     return string;
+}
+
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        _networkProvider = [NetworkManager new];
+    }
+    return _networkProvider;
 }
 
 
@@ -38,28 +47,21 @@
 
 -(void)sendSMSWithVerificationCode:(NSString *)number withCode:(NSString *)code{
     
-        [PFCloud callFunctionInBackground:@"verifyNumber"
-                           withParameters:@{ @"number" : number,
-                                             @"verificationCode" : code}
-                                    block:^(id object, NSError *error) {
-    
-    
-                                        if (!error) {
-                                            
-                                            [self.presenter hideActivityView];
-                                            NSLog(@"%@", object);
-
-                                            [self.presenter showVerifyAccount];
-                                        }
-    
-                                        else{
-                                            
-                                            [self.presenter hideActivityView];
-                                            NSLog(@"%@", error.localizedDescription);
-                                            [self.presenter showErrorView:error.localizedDescription];
-                                        }
-                                    }];
-    
+    [self.networkProvider sendSMSWithVerificationCode:number
+                                             withCode:code
+                                              success:^(id responseObject) {
+                                                  
+                                                  [self.presenter hideActivityView];
+                                                  NSLog(@"%@", responseObject);
+                                                  [self.presenter showVerifyAccount];
+                                                  
+                                              } failure:^(NSError *error) {
+                                                  
+                                                  [self.presenter hideActivityView];
+                                                  NSLog(@"%@", error.localizedDescription);
+                                                  [self.presenter showErrorView:error.localizedDescription];
+                                                  
+                                              }];
     [self.presenter showActivityView];
 
     
@@ -67,35 +69,30 @@
 
 -(void)queryParseForUsernmae:(NSString *)username andCode:(NSString *)code{
     
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"username" equalTo:username];
-
-    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
-        
-        if (error) {
-            
-            [self.presenter hideActivityView];
-            [self.presenter showErrorView:error.localizedDescription];
-            
-        }
-        
-        else{
-            
-            [self.presenter hideActivityView];
-
-            if (array.count == 0) {
-                
-                [self sendSMSWithVerificationCode:username withCode:code];
-            }
-            
-            else{
-                
-                [self.presenter showErrorView:@"A User With that Number Already Exists"];
-            }
-        }
     
-    }];
+    [self.networkProvider searchDatabaseForUsername:username
+                                            andCode: code
+                                            success:^(id responseObject) {
+                                                
+                                                [self.presenter hideActivityView];
+                                                NSArray *array = responseObject;
+                                                if (array.count == 0) {
+                                                    
+                                                    [self sendSMSWithVerificationCode:username withCode:code];
+                                                }
+                                                
+                                                else{
+                                                    
+                                                    [self.presenter showErrorView:@"A User With that Number Already Exists"];
+                                                }
+                                                
+                                            } failure:^(NSError *error) {
+                                                
+                                                [self.presenter hideActivityView];
+                                                [self.presenter showErrorView:error.localizedDescription];
+                                            }];
     [self.presenter showActivityView];
+
 
     
 }

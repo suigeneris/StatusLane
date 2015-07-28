@@ -12,6 +12,7 @@
 @interface StatusLaneUser : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *fullName;
+@property (nonatomic, strong) NSString *partnerFullName;
 @property (nonatomic, strong) NSString *phoneNumberCountryCode;
 @property (nonatomic, strong) NSString *phoneNumber;
 @property (nonatomic, strong) NSString *emailAddress;

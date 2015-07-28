@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ChoosePartnerInteractor.h"
+#import "AnonymousUserInteractor.h"
+
 
 @interface ChoosePartnerPresenter : UIViewController <ChoosePartnerPresenterDelegate>
 
 @property (nonatomic, strong) id<ChoosePartnerInteractorDelegate, UITableViewDelegate, ChoosePartnerInteractorDataSource, UISearchBarDelegate> interactor;
+
+@property (nonatomic, strong) id anonymousUserInteractor;
 @property (nonatomic, strong) NSString *usersChosenStatus;
 @end

@@ -12,13 +12,19 @@
 #import "SWRevealViewController.h"
 #import "UserProfilePresenter.h"
 
-@interface SearchUsersPresenter ()
+@interface SearchUsersPresenter (){
+    
+    BOOL isUser;
+}
+
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) PFObject *anonymousUser;
+
 
 
 @property (strong, nonatomic) SWRevealViewController *revealController;
@@ -117,8 +123,15 @@
     
     if ([segue.identifier isEqualToString:@"showUserProfile"]) {
         
-        UserProfilePresenter *userProfilePresenter = segue.destinationViewController;
-        userProfilePresenter.user = self.user;
+        UserProfilePresenter *userProfilePresenter = segue.destinationViewController;\
+        if (isUser) {
+            
+            userProfilePresenter.user = self.user;
+        }
+        else{
+            
+            userProfilePresenter.user = self.anonymousUser;
+        }
     }
 }
 
@@ -154,7 +167,17 @@
 -(void)showUserProfileForUser:(PFUser *)user{
     
     self.user = user;
+    isUser = YES;
     [self performSegueWithIdentifier:@"showUserProfile" sender:self];
+}
+
+-(void)showUserProfileForAnonymousUser:(PFObject *)anonymousUser{
+    
+    self.anonymousUser = anonymousUser;
+    isUser = NO;
+    [self performSegueWithIdentifier:@"showUserProfile" sender:self];
+
+
 }
 
 -(void)dismissSearchBar{

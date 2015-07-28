@@ -11,5 +11,6 @@
 
 @interface UserProfilePresenter : UIViewController
 
-@property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) id user;
+
 @end

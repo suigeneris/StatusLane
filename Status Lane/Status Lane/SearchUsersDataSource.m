@@ -12,26 +12,63 @@
 
 @interface SearchUsersDataSource()
 
-@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 
 @end
 
 @implementation SearchUsersDataSource
 
-
+-(NSMutableArray *)searchResults{
+    
+    if (!_searchResults) {
+        _searchResults = [[NSMutableArray alloc]init];
+    }
+    return _searchResults;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
     SearchUsersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    PFUser *user = [self.searchResults objectAtIndex:indexPath.row];
-    cell.phoneNumberLabel.text = user.username;
-    cell.nameLabel.text = user[@"fullName"];
-    cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
-    cell.profileImageView.clipsToBounds = YES;
-    cell.profileImageView.file = user[@"userProfilePicture"];
-    [cell.profileImageView loadInBackground];
-    return cell;
+    if ([[self.searchResults objectAtIndex:indexPath.row] isKindOfClass:NSClassFromString(@"PFUser")]) {
+        
+        PFUser *user = [self.searchResults objectAtIndex:indexPath.row];
+        cell.phoneNumberLabel.text = user.username;
+        cell.nameLabel.text = user[@"fullName"];
+        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
+        cell.profileImageView.clipsToBounds = YES;
+        cell.profileImageView.file = user[@"userProfilePicture"];
+        [cell.profileImageView loadInBackground];
+        if (user[@"userProfilePicture"]) {
+            cell.profileImageView.file = user[@"userProfilePicture"];
+            [cell.profileImageView loadInBackground];
+        }
+        else{
+            
+            cell.profileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+            
+        }
+        return cell;
+    }
     
+    else{
+        
+        PFObject *user = [self.searchResults objectAtIndex:indexPath.row];
+        cell.phoneNumberLabel.text = user[@"username"];
+        cell.nameLabel.text = user[@"fullName"];
+        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
+        cell.profileImageView.clipsToBounds = YES;
+        
+        if (user[@"userProfilePicture"]) {
+            cell.profileImageView.file = user[@"userProfilePicture"];
+            [cell.profileImageView loadInBackground];
+        }
+        else{
+            
+            cell.profileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+
+        }
+        return cell;
+    }
 }
 
 
