@@ -50,7 +50,6 @@ static void *countryCodeContext = &countryCodeContext;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUPUIElements];
-    //[self anonymousUserInteractor];
 
 }
 
@@ -100,19 +99,6 @@ static void *countryCodeContext = &countryCodeContext;
     
     return _interactor;
 }
-
-//-(id)anonymousUserInteractor{
-//    
-//    NSLog(@"Anonymous user interactor called");
-//    if (!_anonymousUserInteractor) {
-//        AnonymousUserInteractor *anonymousUserInteractor = [AnonymousUserInteractor new];
-//        anonymousUserInteractor.presenter = self;
-//        _anonymousUserInteractor = anonymousUserInteractor;
-//        
-//    }
-//    
-//    return _anonymousUserInteractor;
-//}
 
 -(UIButton *)countryCodeButton{
     
@@ -315,6 +301,7 @@ static void *countryCodeContext = &countryCodeContext;
 - (IBAction)sendButtonPressed:(id)sender {
     
     [self saveStatusToDefaults];
+    [self touchesBegan:nil withEvent:nil];
     [self.interactor updateUserPartnerWithFullName:self.partnerNameTextField.text andNumber:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text]];
 }
 
@@ -442,7 +429,6 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)stopAnimatingActivitiyView{
     
-    NSLog(@"Is this called");
     [_activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
     

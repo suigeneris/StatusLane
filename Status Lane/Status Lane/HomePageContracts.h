@@ -45,5 +45,9 @@ typedef void (^AlertControllerBlock)(void);
 -(void)changeUserStatusToSingle;
 -(void)animateViews;
 -(void)resetImageViewsPostition;
+-(void)startAnimatingActivityView;
+-(void)stopAnimatingActivitiyView;
+-(void)showErrorView:(NSString *)errorMessage;
+
 
 @end

@@ -77,7 +77,6 @@
             
             if (array.count == 0) {
                 
-                //[self.searchResults addObjectsFromArray:array];
                 [self searchForAnonymousUser:details];
             }
             

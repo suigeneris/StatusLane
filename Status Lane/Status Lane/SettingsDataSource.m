@@ -146,6 +146,7 @@
         SettingsCell *cell = (SettingsCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell 1"];
         cell.label.attributedText = [self.myAccountSectionArray objectAtIndex:indexPath.row];
         cell.textField.attributedPlaceholder = [self.arrayOfPlaceholderText objectAtIndex:indexPath.row];
+        cell.textField.tag = indexPath.row;
         cell.textField.delegate = cell;
 
         return cell;

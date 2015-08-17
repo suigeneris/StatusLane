@@ -16,6 +16,7 @@
 #import "UIColor+StatusLane.h"
 #import "NetworkManager.h"
 #import "AnonymousUserInteractor.h"
+#import "RegisteredUserInteractor.h"
 
 
 @interface ChoosePartnerInteractor(){
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) ChoosePartnerDataSource *choosePartnerDataSource;
 @property (nonatomic, strong) AnonymousUserInteractor *anonymousUserInteractor;
+@property (nonatomic, strong) RegisteredUserInteractor *registeredUserInteractor;
 @property (nonatomic, strong) NSArray *arrayOfContacts;
 @property (nonatomic, strong) NSMutableArray *arrayOfContactNumbers;
 @property (nonatomic, strong) NSArray *searchResults;
@@ -63,6 +65,17 @@
     return _anonymousUserInteractor;
 }
 
+
+-(RegisteredUserInteractor *)registeredUserInteractor{
+    
+    if (!_registeredUserInteractor) {
+        
+        _registeredUserInteractor = [RegisteredUserInteractor new];
+        _registeredUserInteractor.presenter = self.presenter;
+    }
+    
+    return _registeredUserInteractor;
+}
 
 -(NSString *)requestCountryCode{
     
@@ -266,28 +279,30 @@
     
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:username];
+    [query includeKey:@"User.partner"];
     
-    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
-    
-        if (error) {
-            [self.presenter stopAnimatingActivitiyView];
-            [self.presenter showErrorView:error.localizedDescription];
-        }
-        
-        else{
-            
-            if (array.count == 0) {
-                
-                [self searchAnonymousUserWithUsername:username andFullName:fullName];
-            }
-            
-            else{
-                
-                PFUser *user = [array objectAtIndex:0];
-            }
-        }
-    
-    }];
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                             
+                                             NSArray *array = responseObject;
+                                             if (array.count == 0) {
+                                                 
+                                                 [self searchAnonymousUserWithUsername:username andFullName:fullName];
+
+                                             }
+                                             
+                                             else{
+                                                 
+                                                 PFUser *user = [array objectAtIndex:0];
+                                                 [self.registeredUserInteractor determineRelationshipStatus:status ForUser:user];
+                                             }
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                             [self.presenter stopAnimatingActivitiyView];
+                                             [self.presenter showErrorView:error.localizedDescription];
+                                             
+                                         }];
     
     [self.presenter startAnimatingActivityView];
     
@@ -295,7 +310,6 @@
 
 -(void)searchAnonymousUserWithUsername:(NSString *)username andFullName:(NSString *)fullName{
     
-
     [self.anonymousUserInteractor searchAnonymousUserWithUsername:[self replaceCharactersIsString:username]
                                                       andfullName:fullName
                                                         andStatus:status

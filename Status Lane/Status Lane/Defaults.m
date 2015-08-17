@@ -112,18 +112,9 @@
 
 +(void)setStatus:(NSString *)status{
     
-    if ([status isEqualToString:[self status]]) {
-        
-        [self putValue:status forkey:kStatus];
-    }
-    
-    else {
-        [self putValue:status forkey:kStatus];
-        [self updatePFUserColoum:@"status" withInfo:status];
-
-    }
+    [self putValue:status forkey:kStatus];
+   
 }
-
 
 +(UIImage *)profileImage{
 
@@ -256,24 +247,24 @@
 
 
 
-+(void)updatePFUserColoum:(NSString *)column withInfo:(NSString *)info{
-    
-    NSLog(@"Attepmt update user");
-    PFUser *currentUser = [PFUser currentUser];
-    currentUser[column] = info;
-    
-    if ([info isEqualToString:@"SINGLE"]) {
-        
-        [self changeStatusWithUser:currentUser];
-    }
-    
-    else{
-        
-        [currentUser saveInBackground];
-    }
-    
-    
-}
+//+(void)updatePFUserColoum:(NSString *)column withInfo:(NSString *)info{
+//    
+//    NSLog(@"Attepmt update user");
+//    PFUser *currentUser = [PFUser currentUser];
+//    currentUser[column] = info;
+//    
+//    if ([info isEqualToString:@"SINGLE"]) {
+//        
+//        [self changeStatusWithUser:currentUser];
+//    }
+//    
+//    else{
+//        
+//        [currentUser saveInBackground];
+//    }
+//    
+//    
+//}
 
 +(void)updatePFUserProfileImage:(UIImage *)profileImage{
     
@@ -404,7 +395,6 @@
                         }
                         else{
                             
-                            //NSLog(@"Is this calledddd");
                             [currentUser removeObjectForKey:@"partner"];
                             [currentUser saveInBackground];
                             

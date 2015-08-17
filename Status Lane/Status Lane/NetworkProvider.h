@@ -52,32 +52,24 @@ typedef void (^FailureBlock)(NSError *error);
 
 #pragma mark - User Interactor
 
--(void)searchForUserWithUsername:(NSString *)username
-                     andFullName:(NSString *)fullName
-                         success:(SuccessBlock)successBlock
-                         failure:(FailureBlock)failureBlock;
-
+-(void)fetchCurrentUserWithSuccesss:(SuccessBlock)success
+                         andFailure:(FailureBlock)failure;
 
 #pragma mark - Annoymous User Interactor
 
--(void)searchAnonymousUserWithUsername:(NSString *)username
-                           andFullName:(NSString *)fullName
-                               success:(SuccessBlock)successBlock
-                               failure:(FailureBlock)failureBlock;
+-(void)queryDatabaseWithQuery:(PFQuery *)query
+                      success:(SuccessBlock)successBlock
+                      failure:(FailureBlock)failureBlock;
 
 -(void)saveWithPFObject:(PFObject *)object
                 success:(SuccessBlock)sucessBlock
                 failure:(FailureBlock)failureBlock;
 
--(void)createRelationshipWithAnnoymousUser:(PFObject *)anonymousUser
-                                   success:(SuccessBlock)sucessBlock
-                                   failure:(FailureBlock)failureBlock;
+#pragma mark - Pending Notification Feature
 
--(void)setNewPartner:(PFObject *)newPartner
-             success:(SuccessBlock)successBlock
-             failure:(FailureBlock)failureBlock;
-
-
+-(void)deleteRowWithObject:(PFObject *)object
+                   success:(SuccessBlock)successBlock
+                   failure:(FailureBlock)failureBlock;
 
 @end
 

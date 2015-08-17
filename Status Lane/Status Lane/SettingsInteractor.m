@@ -48,7 +48,6 @@
     if (indexPath.section == 2) {
         
         [PFUser logOut];
-        PFUser *currentUser = [PFUser currentUser];
         [self.presenter logOut];
     }
     

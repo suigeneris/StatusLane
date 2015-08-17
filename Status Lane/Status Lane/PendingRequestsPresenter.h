@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PendingRequestsContracts.h"
 
-@interface PendingRequestsPresenter : UIViewController
+@interface PendingRequestsPresenter : UIViewController <PendingRequestsPresenter>
 
-@property (nonatomic, strong) id <UITableViewDelegate, PendingRequestsInteractorDataSource> interactor;
+@property (nonatomic, strong) id <UITableViewDelegate, PendingRequestsInteractorDataSource, PendingRequestsInteractor> interactor;
 
 
 @end

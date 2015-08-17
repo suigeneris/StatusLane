@@ -101,7 +101,6 @@ static const CGFloat animationDuration = 0.35f;
 }
 -(void)layoutSubviews{
     
-
     if (!self.backGroundView.superview) {
         [self addSubview:self.backGroundView];
     }
@@ -161,8 +160,6 @@ static const CGFloat animationDuration = 0.35f;
     [self.backGroundView addConstraint:messageLabelCenterX];
     [self.backGroundView addConstraint:messageLabelCenterY];
     [self.backGroundView addConstraint:messageWidth];
-
-
 
     [super layoutSubviews];
     

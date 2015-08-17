@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PendingRequestsContracts.h"
+
 #import <UIKit/UIKit.h>
 
 @interface PendingRequestsDataSource : NSObject <UITableViewDataSource>
+
+@property (nonatomic, weak) id <PendingRequestsInteractor> interactor;
 
 @end

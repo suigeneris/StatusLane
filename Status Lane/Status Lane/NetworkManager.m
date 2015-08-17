@@ -43,7 +43,6 @@
                            success:(SuccessBlock)successBlock
                            failure:(FailureBlock)failureBlock{
     
-    
     [PFCloud callFunctionInBackground:@"verifyNumber"
                        withParameters:@{ @"number" : number,
                                          @"verificationCode" : code}
@@ -61,8 +60,6 @@
                                         failureBlock(error);
                                     }
                                 }];
-    
-
     
 }
 
@@ -95,7 +92,6 @@
                               withCode:(NSString *)newCode
                                success:(SuccessBlock)successBlock
                                failure:(FailureBlock)failureBlock{
-    
     
     [PFCloud callFunctionInBackground:@"verifyNumber"
                        withParameters:@{ @"number" : number,
@@ -149,25 +145,32 @@
 
 #pragma mark - User Interactor
 
--(void)searchForUserWithUsername:(NSString *)username
-                     andFullName:(NSString *)fullName
-                         success:(SuccessBlock)successBlock
-                         failure:(FailureBlock)failureBlock{
+
+-(void)fetchCurrentUserWithSuccesss:(SuccessBlock)success
+                         andFailure:(FailureBlock)failure{
     
+    PFUser *user = [PFUser currentUser];
+    [user fetchIfNeededInBackgroundWithBlock:^(NSObject *object, NSError *error){
     
+        if (error) {
+            failure(error);
+        }
+        
+        else{
+            
+            success(object);
+        }
+    }];
 }
 
 
 #pragma mark - Annoymous User Interactor
 
--(void)searchAnonymousUserWithUsername:(NSString *)username
-                           andFullName:(NSString *)fullName
-                               success:(SuccessBlock)successBlock
-                               failure:(FailureBlock)failureBlock{
+-(void)queryDatabaseWithQuery:(PFQuery *)query
+                      success:(SuccessBlock)successBlock
+                      failure:(FailureBlock)failureBlock{
     
-    PFQuery *query = [PFQuery queryWithClassName:@"AnonymousUser"];
-    [query whereKey:@"username" equalTo:username];
-    
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
         
         if (error) {
@@ -178,12 +181,10 @@
         else{
             
             successBlock(array);
-        
+            
         }
         
     }];
-
-    
     
 }
 
@@ -208,32 +209,29 @@
     
 }
 
--(void)createRelationshipWithAnnoymousUser:(PFObject *)anonymousUser
-                                   success:(SuccessBlock)sucessBlock
-                                   failure:(FailureBlock)failureBlock{
+
+#pragma mark - Pending Notification Feature
+
+-(void)deleteRowWithObject:(PFObject *)object
+                   success:(SuccessBlock)successBlock
+                   failure:(FailureBlock)failureBlock{
     
+    
+    [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+    
+        if (error) {
+            
+            failureBlock(error);
+        }
+        
+        else{
+            
+            NSNumber *number = [NSNumber numberWithBool:succeeded];
+            successBlock(number);
+        }
+    }];
     
 }
-
--(void)setNewPartner:(PFObject *)newPartner
-             success:(SuccessBlock)successBlock
-             failure:(FailureBlock)failureBlock{
-    
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

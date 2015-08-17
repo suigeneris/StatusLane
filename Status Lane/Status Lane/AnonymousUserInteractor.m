@@ -39,47 +39,50 @@
     
     partnerStatus = status;
     partnerName = fullName;
-    [self.networkProvider searchAnonymousUserWithUsername:username
-                                              andFullName:fullName
-                                                  success:^(id responseObject) {
-                                                      
-                                                      NSArray *array = responseObject;
-                                                      if (array.count == 0) {
-                                                          
-                                                          //Create annonymous user
-                                                          [self createAnonymouseUserWithUsername:username fullName:fullName andStatus:status];
-                                                          
-                                                      }
-                                                      else{
-                                                          
-                                                          PFObject *object = [array objectAtIndex:0];
-                                                          if ([object[@"status"] isEqualToString:@"SINGLE"]) {
-                                                              
-                                                              [self setNewPartnerWithAnonymousUser:object];
-                                                              
-                                                          }
-                                                          
-                                                          else if ([[[PFUser currentUser] objectId] isEqualToString:[self determinePartnerOfAnonymousUser:object]]){
-                                                              
-                                                              [self setNewPartnerWithAnonymousUser:object];
-                                                              
-                                                          }
-                                                          
-                                                          else{
-                                                              
-                                                              [self.presenter stopAnimatingActivitiyView];
-                                                              [self.presenter showErrorView:@"This user is in a relationship with someone else"];
-                                                              
-                                                          }
-                                                      }
-                                                      
-                                                      
-                                                  }failure:^(NSError *error) {
-                                                      
-                                                      [self.presenter stopAnimatingActivitiyView];
-                                                      [self.presenter showErrorView:error.localizedDescription];
-                                                      
-                                                  }];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"AnonymousUser"];
+    [query whereKey:@"username" equalTo:username];
+    
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                             
+                                             NSArray *array = responseObject;
+                                             if (array.count == 0) {
+                                                 
+                                                 //Create annonymous user
+                                                 [self createAnonymouseUserWithUsername:username fullName:fullName andStatus:status];
+                                                 
+                                             }
+                                             else{
+                                                 
+                                                 PFObject *object = [array objectAtIndex:0];
+                                                 if ([object[@"status"] isEqualToString:@"SINGLE"]) {
+                                                     
+                                                     [self setNewPartnerWithAnonymousUser:object];
+                                                     
+                                                 }
+                                                 
+                                                 else if ([[[PFUser currentUser] objectId] isEqualToString:[self determinePartnerOfAnonymousUser:object]]){
+                                                     
+                                                     [self setNewPartnerWithAnonymousUser:object];
+                                                     
+                                                 }
+                                                 
+                                                 else{
+                                                     
+                                                     [self.presenter stopAnimatingActivitiyView];
+                                                     [self.presenter showErrorView:@"This user is in a relationship with someone else"];
+                                                     
+                                                 }
+                                             }
+                                             
+                                             
+                                         }failure:^(NSError *error) {
+                                             
+                                             [self.presenter stopAnimatingActivitiyView];
+                                             [self.presenter showErrorView:error.localizedDescription];
+                                             
+                                         }];
     
     
 }
@@ -131,7 +134,7 @@
     
     if (arrayWithPreviousUser) {
         
-        if ([[arrayWithPreviousUser objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFObject")]) {
+        if (![[arrayWithPreviousUser objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
             
             PFObject *previousPartner = [arrayWithPreviousUser objectAtIndex:0];
             previousPartner[@"status"] = @"SINGLE";
@@ -144,6 +147,7 @@
                                                
                                            } failure:^(NSError *error) {
                                                
+                                               [self.presenter stopAnimatingActivitiyView];
                                                [self.presenter showErrorView:error.localizedDescription];
 
                                            }];
@@ -175,7 +179,7 @@
     
     PFUser *currentUser = [PFUser currentUser];
     NSArray *partnerArray2 = @[currentUser];
-    
+    currentUser[@"status"] = partnerStatus;
     [currentUser setObject:partnerArray forKey:@"partner"];
     [anonymousUser setObject:partnerArray2 forKey:@"partner"];
     
@@ -210,14 +214,13 @@
     [self.networkProvider saveWithPFObject:anonymousObject
                                    success:^(id responseObject) {
                                        
-                                       NSLog(@"set partner on anonymous use success");
                                        [Defaults setPartnerFullName:partnerName];
                                        [Defaults setStatus:partnerStatus];
                                        [self.presenter stopAnimatingActivitiyView];
                                        [self.presenter dismissView];
                                        
                                    } failure:^(NSError *error) {
-                                       NSLog(@"set partner on anonymous use failed");
+
                                        [self.presenter stopAnimatingActivitiyView];
                                        [self.presenter showErrorView:error.localizedDescription];
                                        
