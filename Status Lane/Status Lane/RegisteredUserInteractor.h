@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "ChoosePartnerContracts.h"
+#import "NetworkManager.h"
 
 @interface RegisteredUserInteractor : NSObject
 
 @property (nonatomic, weak) id <ChoosePartnerPresenterDelegate> presenter;
+
+-(void)determineRelationshipStatus:(NSString *)status ForUser:(PFUser *)user;
 
 @end

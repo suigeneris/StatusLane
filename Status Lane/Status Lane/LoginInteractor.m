@@ -38,6 +38,7 @@
     return _networkProvider;
 }
 
+
 -(void)attemptLoginWithUsername:(NSString *)username andPassword:(NSString *)password{
     
     
@@ -86,6 +87,8 @@
         
     }
 }
+
+
 
 #pragma mark - Interanl Methods
 

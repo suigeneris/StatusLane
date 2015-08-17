@@ -16,15 +16,22 @@
 #import "UIColor+StatusLane.h"
 #import "UIImage+StatusLane.h"
 #import "Defaults.h"
-#import <Parse/Parse.h>
+#import "NetworkManager.h"
+#import "PushNotificationManager.h"
 
 
 
-@interface HomePageInteractor () 
+@interface HomePageInteractor () {
+    
+    NSString *selectedStatus;
+}
 
 @property (nonatomic, assign) int flagForAlertViewButton;
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) HomePageDataSource *homePageDataSource;
+@property (nonatomic, strong) id <NetworkProvider> networkProvider;
+@property (nonatomic) id <PushNotificationProvider> pushNotificationProvider;
+
 @property (nonatomic, strong) NSArray *arrayofStatusTypes;
 @property (nonatomic, strong) PFObject *partnerObject;
 @property (nonatomic, strong) PFUser *partnerUser;
@@ -55,6 +62,24 @@
     return _homePageDataSource;
 }
 
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        _networkProvider = [NetworkManager new];
+    }
+    return _networkProvider;
+}
+
+-(id<PushNotificationProvider>)pushNotificationProvider{
+    
+    if (!_pushNotificationProvider) {
+        
+        _pushNotificationProvider = [PushNotificationManager new];
+        
+    }
+    return _pushNotificationProvider;
+}
+
 
 -(NSArray *)arrayofStatusTypes{
     
@@ -77,13 +102,23 @@
     [cell.statusTypeLabel setFont:[UIFont statusLaneAsapBold:15]];
     cell.statusTypeLabel.textColor = [UIColor statusLaneGreen];
     cell.tickImageView.image = [UIImage imageNamed:@"Tick"];
-    
     if (indexPath.row == 0) {
-        [Defaults setStatus:cell.statusTypeLabel.text];
-        [self.presenter hideTableView];
-        [self.presenter changeUserStatusToSingle];
-        [self.presenter resetImageViewsPostition];
-
+        
+        if ([[Defaults status] isEqualToString:cell.statusTypeLabel.text]) {
+        
+            [self.presenter hideTableView];
+            [self.presenter changeUserStatusToSingle];
+            [self.presenter resetImageViewsPostition];
+        }
+        
+        else{
+            
+            NSLog(@"Change status to single");
+            [self.presenter startAnimatingActivityView];
+            selectedStatus = cell.statusTypeLabel.text;
+            [self fetchUserObjectIfNeeded];
+        }
+        
     }
     
     else {
@@ -229,6 +264,130 @@
 }
 
 #pragma mark - Internal Methods
+-(void)fetchUserObjectIfNeeded{
+
+    [self.networkProvider fetchCurrentUserWithSuccesss:^(id responseObject) {
+        
+        NSLog(@"Fetch current user success");
+        PFUser *user = responseObject;
+        [self updatePreviousPartnerOfUser:user];
+        
+    } andFailure:^(NSError *error) {
+        
+        NSLog(@"Fetch user failed with error: %@", error.localizedDescription);
+        [self.presenter stopAnimatingActivitiyView];
+        [self.presenter hideTableView];
+        [self.presenter showErrorView:error.localizedDescription];
+    }];
+    
+}
+-(void)updatePreviousPartnerOfUser:(PFUser*)user{
+
+    NSLog(@"Update previous partner called");
+    
+    NSArray *partnerArray = user[@"partner"];
+
+    if (partnerArray) {
+        
+        if (![[partnerArray objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
+            
+            PFObject *previousPartner = [partnerArray objectAtIndex:0];
+            previousPartner[@"status"] = @"SINGLE";
+            [previousPartner removeObjectForKey:@"partner"];
+            [self.networkProvider saveWithPFObject:previousPartner
+                                           success:^(id responseObject) {
+                                               
+                                               NSLog(@"update previous partner sucess");
+                                               [user removeObjectForKey:@"partner"];
+                                               user[@"status"] = selectedStatus;
+                                               [self updatePFUserStatusWithUser:user];
+                                        
+                                           } failure:^(NSError *error) {
+                                               
+                                               NSLog(@"Failed to update previous partner");
+                                               [self.presenter stopAnimatingActivitiyView];
+                                               [self.presenter hideTableView];
+                                               [self.presenter showErrorView:error.localizedDescription];
+                                               
+                                           }];
+        }
+        
+        else{
+            
+            NSLog(@"Previous partner is a user");
+            [self notifyUserOfPartnerStatusChangeViaPushWithUser:user andPartner:[partnerArray objectAtIndex:0]];
+        }
+        
+    }
+    else{
+        
+        NSLog(@"NO PARTNER");
+        [self.presenter stopAnimatingActivitiyView];
+        [self.presenter changeUserStatusToSingle];
+        [self.presenter hideTableView];
+        [self.presenter resetImageViewsPostition];
+    }
+}
+
+-(void)updatePFUserStatusWithUser:(PFUser *)user{
+    
+    NSLog(@"update pf user status with user called");
+    [self.networkProvider saveWithPFObject:user
+                                   success:^(id responseObject) {
+                                       
+                                       NSLog(@"update pf user status with user success");
+
+                                       [Defaults setStatus:selectedStatus];
+                                       [self.presenter changeUserStatusToSingle];
+                                       [self.presenter resetImageViewsPostition];
+                                       [self.presenter stopAnimatingActivitiyView];
+                                       [self.presenter hideTableView];
+                                       
+                                   } failure:^(NSError *error) {
+                                       
+                                       [self.presenter stopAnimatingActivitiyView];
+                                       [self.presenter hideTableView];
+                                       [self.presenter showErrorView:error.localizedDescription];
+                                       NSLog(@"could not update user status");
+                                   }];
+}
+
+-(void)notifyUserOfPartnerStatusChangeViaPushWithUser:(PFUser *)user andPartner:(PFUser *)partner{
+    
+    PFUser *notifiedUser = partner;
+    NSString *channel = [notifiedUser objectId];
+    NSLog(@"This is the channel %@", channel);
+    NSString *message = @"Your partner changed their status to SINGLE";
+    
+    NSDictionary *dictionary = @{
+                                 @"alert" : message,
+                                 @"badge" : @"Increment",
+                                 @"channel" : channel,
+                                 @"objectId" : [[PFUser currentUser] objectId],
+                                 @"fullName" : [[PFUser currentUser] objectForKey:@"fullName"]
+                                 };
+    
+    
+    [self.pushNotificationProvider callCloudFuntionWithName:@"sendPushNotification"
+                                                 parameters:dictionary
+                                                    success:^(id responseObject) {
+                                                        
+                                                        NSLog(@"This is the response: %@", responseObject);
+                                                        NSLog(@"Sucessful push");
+                                                        [user removeObjectForKey:@"partner"];
+                                                        user[@"status"] = selectedStatus;
+                                                        [self updatePFUserStatusWithUser:user];
+                                                        
+                                                    } andFailure:^(NSError *error) {
+                                                        
+                                                        NSLog(@"This is the error %@", error.localizedDescription);
+                                                        [self.presenter stopAnimatingActivitiyView];
+                                                        [self.presenter hideTableView];
+                                                        [self.presenter showErrorView:error.localizedDescription];
+                                                        
+                                                    }];
+    
+}
 
 -(NSString *)getMediaAutorizationForMediaType:(UIImagePickerControllerSourceType)sourceType {
     
@@ -324,8 +483,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"showChoosePartner"]) {
-
-        NSLog(@"IS this called");
 
     }
 }

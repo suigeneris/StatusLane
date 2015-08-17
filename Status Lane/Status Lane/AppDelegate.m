@@ -7,20 +7,26 @@
 //
 
 #import "AppDelegate.h"
+#import "NotificationView.h"
+#import "NSString+StatusLane.h"
+#import "SWRevealViewController.h"
 
 @interface AppDelegate ()
 
+@property (nonatomic, assign) BOOL foregroundNotification;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    _createAccount = [[CreateAccountPresenter alloc]init];
-//    [self.window setRootViewController:self.createAccount];
-//    [self.window makeKeyAndVisible];
+    
+    //    Override point for customization after application launch.
+    //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //    _createAccount = [[CreateAccountPresenter alloc]init];
+    //    [self.window setRootViewController:self.createAccount];
+    //    [self.window makeKeyAndVisible];
+    
     [Parse enableLocalDatastore];
     
     [Parse setApplicationId:@"nilSvL4G2SkPGxCgBuZkhjHLOraM4dtp8YFNQadT"
@@ -28,6 +34,15 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+    
 
     return YES;
 }
@@ -40,10 +55,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    self.foregroundNotification = NO;
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    self.foregroundNotification = YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -55,6 +73,33 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    NSLog(@"Is this called");
+
+    if (self.foregroundNotification) {
+        
+        [self openPendingRequests];
+    }
+    else{
+        
+        NSDictionary *notificationPayload = userInfo;
+        NotificationView *notificationView = [[NotificationView alloc] initWithDictionary:notificationPayload];
+        [notificationView getMetaData];
+        
+    }
+
+
+}
+
 
 #pragma mark - Core Data stack
 
@@ -136,4 +181,52 @@
     }
 }
 
+
+#pragma mark - Internal Methods
+
+-(void)openPendingRequests{
+    
+    SWRevealViewController *revealViewController = [[SWRevealViewController alloc]init];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *frontViewController = [storyboard instantiateViewControllerWithIdentifier:@"Pending Requests"];
+    UIViewController *rearViewController = [storyboard instantiateViewControllerWithIdentifier:@"Burger Menu"];
+    UIViewController *rightViewController = [storyboard instantiateViewControllerWithIdentifier:@"Search Users"];
+    UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:rightViewController];
+    navigationController.navigationBar.hidden = YES;
+    
+    revealViewController.frontViewController = frontViewController;
+    revealViewController.rearViewController = rearViewController;
+    revealViewController.rightViewController = navigationController;
+    
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app.window setRootViewController:revealViewController];
+    
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,7 @@
 		2A020B681B233FAB000811FC /* BurgerMenuInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A020B671B233FAB000811FC /* BurgerMenuInteractor.m */; };
 		2A020B6B1B233FDE000811FC /* BurgerMenuPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A020B6A1B233FDE000811FC /* BurgerMenuPresenter.m */; };
 		2A06BC7A1B6816F0000BC5A5 /* RegisteredUserInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A06BC791B6816F0000BC5A5 /* RegisteredUserInteractor.m */; };
+		2A0BC3EC1B69684D00ED82C9 /* PushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0BC3EB1B69684D00ED82C9 /* PushNotificationManager.m */; };
 		2A0C568F1B054203004198D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C568E1B054203004198D5 /* main.m */; };
 		2A0C56921B054203004198D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56911B054203004198D5 /* AppDelegate.m */; };
 		2A0C56951B054203004198D5 /* Status_Lane.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C56931B054203004198D5 /* Status_Lane.xcdatamodeld */; };
@@ -95,6 +96,7 @@
 		2AC27B6B1B34881B009997AF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC27B6A1B34881B009997AF /* Social.framework */; };
 		2AC702601B0A737D00FA1950 /* Asap-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7025F1B0A729900FA1950 /* Asap-Bold.otf */; };
 		2ACF523B1B17855200DDC1EE /* CountryCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF523A1B17855200DDC1EE /* CountryCode.m */; };
+		2ACF8E001B6FE0ED00410AEB /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF8DFF1B6FE0ED00410AEB /* NotificationView.m */; };
 		2AD6AB031B1CCE9A00457102 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD6AB021B1CCE9A00457102 /* AddressBook.framework */; };
 		2ADA30711B3B69BE00F791BF /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADA30701B3B69BE00F791BF /* ParseUI.framework */; };
 		2AED54871B08C92600B392C7 /* Launch Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AED54861B08C92600B392C7 /* Launch Image.png */; };
@@ -132,6 +134,9 @@
 		2A020B6A1B233FDE000811FC /* BurgerMenuPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurgerMenuPresenter.m; sourceTree = "<group>"; };
 		2A06BC781B6816F0000BC5A5 /* RegisteredUserInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredUserInteractor.h; sourceTree = "<group>"; };
 		2A06BC791B6816F0000BC5A5 /* RegisteredUserInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredUserInteractor.m; sourceTree = "<group>"; };
+		2A0BC3EA1B69684D00ED82C9 /* PushNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationManager.h; sourceTree = "<group>"; };
+		2A0BC3EB1B69684D00ED82C9 /* PushNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationManager.m; sourceTree = "<group>"; };
+		2A0BC3ED1B69686A00ED82C9 /* PushNotificationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationProvider.h; sourceTree = "<group>"; };
 		2A0C56891B054203004198D5 /* Status Lane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Status Lane.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0C568D1B054203004198D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A0C568E1B054203004198D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -282,6 +287,8 @@
 		2AC7025F1B0A729900FA1950 /* Asap-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Bold.otf"; sourceTree = "<group>"; };
 		2ACF52391B17855200DDC1EE /* CountryCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryCode.h; sourceTree = "<group>"; };
 		2ACF523A1B17855200DDC1EE /* CountryCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryCode.m; sourceTree = "<group>"; };
+		2ACF8DFE1B6FE0ED00410AEB /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
+		2ACF8DFF1B6FE0ED00410AEB /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
 		2AD6AB021B1CCE9A00457102 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2ADA30701B3B69BE00F791BF /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		2AED54861B08C92600B392C7 /* Launch Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch Image.png"; sourceTree = "<group>"; };
@@ -400,11 +407,30 @@
 			name = Contracts;
 			sourceTree = "<group>";
 		};
+		2A0BC3E81B69680E00ED82C9 /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2AAF90A51B60073B00B9AA06 /* NetworkManager.h */,
+				2AAF90A61B60073B00B9AA06 /* NetworkManager.m */,
+				2AAF90A81B60075E00B9AA06 /* NetworkProvider.h */,
+			);
+			name = "Network Manager";
+			sourceTree = "<group>";
+		};
+		2A0BC3E91B69682700ED82C9 /* Push Notification Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2A0BC3EA1B69684D00ED82C9 /* PushNotificationManager.h */,
+				2A0BC3EB1B69684D00ED82C9 /* PushNotificationManager.m */,
+				2A0BC3ED1B69686A00ED82C9 /* PushNotificationProvider.h */,
+			);
+			name = "Push Notification Manager";
+			sourceTree = "<group>";
+		};
 		2A0C56801B054203004198D5 = {
 			isa = PBXGroup;
 			children = (
 				2A0C568B1B054203004198D5 /* Status Lane */,
-				2AA9F4A41B2D7CD900B5C1A2 /* Utilities */,
 				2AA9F49D1B2D74C300B5C1A2 /* 3rd Party Libraries */,
 				2AD6AB011B1CCE6900457102 /* Frameworks */,
 				2A0C56A81B054203004198D5 /* Status LaneTests */,
@@ -745,8 +771,8 @@
 			children = (
 				2A1C7A551B19C00A003ADCF5 /* Contacts */,
 				2A1C7A511B19BFDF003ADCF5 /* Data Source */,
-				2A1C7A471B19AB67003ADCF5 /* Presenter */,
 				2A1C7A461B19AB59003ADCF5 /* Interactor */,
+				2A1C7A471B19AB67003ADCF5 /* Presenter */,
 			);
 			name = "Pending Requests";
 			sourceTree = "<group>";
@@ -847,8 +873,10 @@
 		2A232CEB1B35983500590B66 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				2ACF8DFD1B6FE09200410AEB /* Notification View */,
 				2A232CF01B35DDE100590B66 /* Status Lane Error View */,
 				2A232CEF1B35DDD000590B66 /* Buttons */,
+				2AA9F4A41B2D7CD900B5C1A2 /* Utilities */,
 			);
 			name = "Shared Components";
 			sourceTree = "<group>";
@@ -1092,7 +1120,6 @@
 				2AA9F4A51B2D7CEA00B5C1A2 /* Defaults */,
 			);
 			name = Utilities;
-			path = "Status Lane";
 			sourceTree = "<group>";
 		};
 		2AA9F4A51B2D7CEA00B5C1A2 /* Defaults */ = {
@@ -1107,9 +1134,8 @@
 		2AAF90A41B60071C00B9AA06 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				2AAF90A51B60073B00B9AA06 /* NetworkManager.h */,
-				2AAF90A61B60073B00B9AA06 /* NetworkManager.m */,
-				2AAF90A81B60075E00B9AA06 /* NetworkProvider.h */,
+				2A0BC3E91B69682700ED82C9 /* Push Notification Manager */,
+				2A0BC3E81B69680E00ED82C9 /* Network Manager */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1155,6 +1181,15 @@
 				2ACF523A1B17855200DDC1EE /* CountryCode.m */,
 			);
 			name = "Country Code Model";
+			sourceTree = "<group>";
+		};
+		2ACF8DFD1B6FE09200410AEB /* Notification View */ = {
+			isa = PBXGroup;
+			children = (
+				2ACF8DFE1B6FE0ED00410AEB /* NotificationView.h */,
+				2ACF8DFF1B6FE0ED00410AEB /* NotificationView.m */,
+			);
+			name = "Notification View";
 			sourceTree = "<group>";
 		};
 		2AD6AB011B1CCE6900457102 /* Frameworks */ = {
@@ -1353,6 +1388,7 @@
 				TargetAttributes = {
 					2A0C56881B054203004198D5 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 2C66DF4N9Y;
 					};
 					2A0C56A41B054203004198D5 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -1454,6 +1490,7 @@
 				2A63CA321B244D46000F191E /* PurchseRequestPresenterCell.m in Sources */,
 				2A18A3561B0CB943005FA738 /* HomePagePresenter.m in Sources */,
 				2A25C0411B0BC5770063472B /* VerifyAccountPresenter.m in Sources */,
+				2ACF8E001B6FE0ED00410AEB /* NotificationView.m in Sources */,
 				2AB99DA61B16513F000535DA /* CountryListCell.m in Sources */,
 				2A1C7A641B19EEC6003ADCF5 /* RelationshipHistoryDataSource.m in Sources */,
 				2AA9F4AB1B2D9DCD00B5C1A2 /* NSString+StatusLane.m in Sources */,
@@ -1507,6 +1544,7 @@
 				2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */,
 				2A1C7A271B181308003ADCF5 /* SettingsPresenter.m in Sources */,
 				2AA9F4A81B2D7D0500B5C1A2 /* Defaults.m in Sources */,
+				2A0BC3EC1B69684D00ED82C9 /* PushNotificationManager.m in Sources */,
 				2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */,
 				2A7679BD1B2251A100B616DE /* SWRevealViewController.m in Sources */,
 				2A1C7A5C1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m in Sources */,
@@ -1638,6 +1676,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/'Status Lane'",
@@ -1645,6 +1685,7 @@
 				INFOPLIST_FILE = "Status Lane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1655,6 +1696,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/'Status Lane'",
@@ -1662,6 +1705,7 @@
 				INFOPLIST_FILE = "Status Lane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

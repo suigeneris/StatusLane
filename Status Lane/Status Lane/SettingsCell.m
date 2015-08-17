@@ -15,9 +15,30 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
+    if (textField.tag == 0) {
+        
+        [self validateUserName:textField.text];
+
+    }
+    
+    else if(textField.tag == 2){
+        
+        [self validateEmail:textField.text];
+    }
     [textField resignFirstResponder];
     return NO;
 }
 
+-(BOOL)validateUserName:(NSString *)username{
+    
+    
+    return YES;
+}
+
+-(BOOL)validateEmail:(NSString *)email{
+    
+    
+    return YES;
+}
 
 @end

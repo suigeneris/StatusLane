@@ -13,6 +13,8 @@
 #import "SWRevealViewController.h"
 #import "StatusListPresenterCell.h"
 #import "ChoosePartnerPresenter.h"
+#import "StatusLaneErrorView.h"
+
 
 
 @interface HomePagePresenter () <UIGestureRecognizerDelegate>
@@ -31,6 +33,8 @@
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, assign) bool isTableViewHidden;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideTableView;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 
 @property (nonatomic, strong) NSIndexPath *indexPathForSelectedCell;
 
@@ -59,7 +63,7 @@
     [self additionalUIViewSetup];
     [self revealControllerSetUp];
     [self constraintsForTableView];
-
+    
 
 }
 
@@ -68,6 +72,7 @@
     [super viewDidAppear:animated];
     self.relationshipStatusLabel.text = [self.interactor returnUserStatusFromDefaults];
     self.partnerName.text = [self.interactor returnPartnerName];
+    [self setFullNameLabel:self.fullNameLabel];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(hideTableView)
                                                 name:@"HideTableView"
@@ -124,7 +129,18 @@
     return _backgroundImageView;
 }
 
-
+-(UIActivityIndicatorView *)activityIndicator{
+    
+    if (!_activityIndicator) {
+        
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityIndicator.center = self.view.center;
+        _activityIndicator.color = [UIColor statusLaneGreenPressed];
+        _activityIndicator.hidesWhenStopped = YES;
+        _activityIndicator.tag = 1111;
+    }
+    return _activityIndicator;
+}
 
 -(void)additionalUIViewSetup{
     
@@ -144,6 +160,7 @@
     [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self chooseProfileImage];
     [self setBackGroundImage];
+    
     _partnerProfileImage.hidden = YES;
     _partnerProfileImage.layer.borderWidth = 2;
     _partnerProfileImage.layer.cornerRadius = _partnerProfileImage.frame.size.width/2;
@@ -152,6 +169,14 @@
     
 
     
+}
+
+-(void)setFullNameLabel:(UILabel *)fullNameLabel{
+    
+    if ([Defaults fullName]) {
+        
+        fullNameLabel.text = [Defaults fullName];
+    }
 }
 
 -(void)revealControllerSetUp{
@@ -417,6 +442,25 @@
                          [self.view layoutIfNeeded];
                      }];
     
+}
+
+-(void)startAnimatingActivityView{
+    
+    [self.view addSubview:self.activityIndicator];
+    [_activityIndicator startAnimating];
+}
+
+-(void)stopAnimatingActivitiyView{
+    
+    [_activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
+}
+
+-(void)showErrorView:(NSString *)errorMessage{
+    
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage];
+    [errorView show];
 }
 
 #pragma mark - UIGestureReognizer Delegate Methods

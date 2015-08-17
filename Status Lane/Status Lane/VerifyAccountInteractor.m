@@ -9,10 +9,13 @@
 #import "VerifyAccountInteractor.h"
 #import "Defaults.h"
 #import "NetworkManager.h"
+#import "PushNotificationManager.h"
+
 
 @interface VerifyAccountInteractor()
 
 @property (nonatomic, strong) id <NetworkProvider> networkProvider;
+@property (nonatomic, strong) id <PushNotificationProvider> pushNotificationProvider;
 
 @end
 
@@ -25,6 +28,15 @@
         _networkProvider = [NetworkManager new];
     }
     return _networkProvider;
+}
+
+-(id<PushNotificationProvider>)pushNotificationProvider{
+    
+    if (!_pushNotificationProvider) {
+        
+        _pushNotificationProvider = [PushNotificationManager new];
+    }
+    return _pushNotificationProvider;
 }
 
 -(NSString *)generateVerificationCode{
@@ -71,6 +83,8 @@
                                                   success:^(id responseObject) {
                                                       
                                                       [self.presenter hideActivityView];
+                                                      
+                                                      [self subscriibeToPushNotificationChannel];
                                                       [self.presenter createAccountSuccessfull];
 
                                                       
@@ -87,6 +101,17 @@
     
 }
 
+
+-(void)subscriibeToPushNotificationChannel{
+    
+    [self.pushNotificationProvider subcribeToReciveChannelWithSuccess:^(id responseObject) {
+        
+        
+    } andFailure:^(NSError *error) {
+        
+        
+    }];
+}
 
 
 

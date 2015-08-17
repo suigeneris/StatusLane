@@ -479,7 +479,7 @@
         <!--Burger Menu Presenter-->
         <scene sceneID="fye-Gw-vs3">
             <objects>
-                <viewController id="wHx-g1-ffQ" customClass="BurgerMenuPresenter" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Burger Menu" id="wHx-g1-ffQ" customClass="BurgerMenuPresenter" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sd9-Y1-9jD"/>
                         <viewControllerLayoutGuide type="bottom" id="GZs-Y1-YBq"/>
@@ -961,11 +961,15 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvE-WT-dgC">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvE-WT-dgC">
                                         <rect key="frame" x="116" y="53" width="89" height="18"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="DIN-Medium" family="DIN Medium" pointSize="19"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="9XS-bL-e7u" appends="YES" id="Q19-7L-z5l"/>
+                                        </connections>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partner Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llx-Ow-CTZ" userLabel="Partner Name">
                                         <rect key="frame" x="99" y="53" width="122" height="18"/>
@@ -1095,9 +1099,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3X-29-xpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Qv2-BZ-Rqd">
+                <tapGestureRecognizer id="Qv2-BZ-Rqd" userLabel="Add profile Tap Gesture Recognizer">
                     <connections>
                         <action selector="addProfileImagePressed:" destination="dO0-sg-jeZ" id="aGy-7i-gc0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="9XS-bL-e7u" userLabel="Full Name Tap Gesture Recognizer">
+                    <connections>
+                        <segue destination="QeQ-ir-i8P" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Mhl-iS-jf3"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1335,7 +1344,7 @@
         <!--Search Users Presenter-->
         <scene sceneID="JWc-5r-Fgm">
             <objects>
-                <viewController id="0IC-ua-N1k" customClass="SearchUsersPresenter" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Search Users" id="0IC-ua-N1k" customClass="SearchUsersPresenter" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f7b-9Z-7Zp"/>
                         <viewControllerLayoutGuide type="bottom" id="CgZ-c8-yyd"/>
@@ -1922,7 +1931,7 @@
         <!--Pending Requests Presenter-->
         <scene sceneID="uuD-iB-6Bf">
             <objects>
-                <viewController id="qWN-Vy-Tli" customClass="PendingRequestsPresenter" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Pending Requests" id="qWN-Vy-Tli" customClass="PendingRequestsPresenter" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R9j-OB-Iwg"/>
                         <viewControllerLayoutGuide type="bottom" id="Bcg-2g-fMK"/>
@@ -1989,17 +1998,21 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bxK-gH-FG0" id="xjF-Po-L7u">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="40" placeholderIntrinsicHeight="40" image="sample profile image" translatesAutoresizingMaskIntoConstraints="NO" id="kcz-be-rN4">
-                                                    <rect key="frame" x="25" y="25" width="40" height="40"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kcz-be-rN4" customClass="PFImageView">
+                                                    <rect key="frame" x="11" y="25" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="pKb-Ih-Szw"/>
+                                                        <constraint firstAttribute="width" constant="40" id="qgv-a6-BhT"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMy-Cf-wwh">
-                                                    <rect key="frame" x="77" y="25" width="64" height="18"/>
+                                                    <rect key="frame" x="65" y="25" width="64" height="18"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wants to see your status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCz-UV-Akd">
-                                                    <rect key="frame" x="77" y="47" width="148" height="18"/>
+                                                    <rect key="frame" x="65" y="47" width="148" height="18"/>
                                                     <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -2010,7 +2023,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="denyRequestButtonPressed:" destination="bxK-gH-FG0" eventType="touchUpInside" id="MpW-e4-rpN"/>
+                                                        <action selector="xButtonPressed:" destination="qWN-Vy-Tli" eventType="touchUpInside" id="SfE-ch-84I"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zs-ei-Cvs">
@@ -2019,22 +2032,22 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="acceptRequestButtonPressed:" destination="bxK-gH-FG0" eventType="touchUpInside" id="aKW-dL-LHa"/>
+                                                        <action selector="acceptButtonPressed:" destination="qWN-Vy-Tli" eventType="touchUpInside" id="JsF-AN-qo1"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2zs-ei-Cvs" firstAttribute="top" secondItem="kCz-UV-Akd" secondAttribute="bottom" constant="15" id="0zy-M8-Hnr"/>
                                                 <constraint firstItem="kcz-be-rN4" firstAttribute="top" secondItem="xjF-Po-L7u" secondAttribute="topMargin" constant="16.5" id="9d9-T6-y7I"/>
-                                                <constraint firstItem="uMy-Cf-wwh" firstAttribute="leading" secondItem="kcz-be-rN4" secondAttribute="trailing" constant="11.5" id="Fne-Kr-73N"/>
+                                                <constraint firstItem="uMy-Cf-wwh" firstAttribute="leading" secondItem="kcz-be-rN4" secondAttribute="trailing" constant="14" id="Fne-Kr-73N"/>
                                                 <constraint firstItem="kCz-UV-Akd" firstAttribute="bottom" secondItem="kcz-be-rN4" secondAttribute="bottom" id="HmN-cp-cnu"/>
                                                 <constraint firstItem="2zs-ei-Cvs" firstAttribute="leading" secondItem="QMj-py-gWf" secondAttribute="trailing" constant="90" id="PQj-fx-4e0"/>
-                                                <constraint firstItem="kCz-UV-Akd" firstAttribute="leading" secondItem="kcz-be-rN4" secondAttribute="trailing" constant="11.5" id="Srs-tg-sld"/>
+                                                <constraint firstItem="kCz-UV-Akd" firstAttribute="leading" secondItem="kcz-be-rN4" secondAttribute="trailing" constant="14" id="Srs-tg-sld"/>
                                                 <constraint firstItem="QMj-py-gWf" firstAttribute="bottom" secondItem="2zs-ei-Cvs" secondAttribute="bottom" constant="-2" id="Ujn-ED-Was"/>
-                                                <constraint firstItem="kcz-be-rN4" firstAttribute="leading" secondItem="xjF-Po-L7u" secondAttribute="leadingMargin" constant="16.5" id="a7p-Ed-B7Z"/>
+                                                <constraint firstItem="kcz-be-rN4" firstAttribute="leading" secondItem="xjF-Po-L7u" secondAttribute="leadingMargin" constant="3" id="a7p-Ed-B7Z"/>
                                                 <constraint firstItem="QMj-py-gWf" firstAttribute="top" secondItem="kCz-UV-Akd" secondAttribute="bottom" constant="15" id="ezQ-hB-TIc"/>
                                                 <constraint firstItem="kcz-be-rN4" firstAttribute="top" secondItem="uMy-Cf-wwh" secondAttribute="top" id="fqd-cL-2Yq"/>
-                                                <constraint firstItem="kCz-UV-Akd" firstAttribute="leading" secondItem="QMj-py-gWf" secondAttribute="leading" id="gn8-jF-O1j"/>
+                                                <constraint firstItem="kCz-UV-Akd" firstAttribute="leading" secondItem="QMj-py-gWf" secondAttribute="leading" constant="-12" id="gn8-jF-O1j"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2681,6 +2694,7 @@
         <image name="sample profile image" width="41" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fHY-dK-ILO"/>
         <segue reference="2Ia-dS-d0E"/>
         <segue reference="Qtg-Qj-Kr7"/>
         <segue reference="A1T-yW-fbn"/>

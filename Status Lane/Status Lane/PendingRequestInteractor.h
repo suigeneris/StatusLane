@@ -11,7 +11,7 @@
 #import "PendingRequestsContracts.h"
 #import "PendingRequestsPresenter.h"
 
-@interface PendingRequestInteractor : NSObject <UITableViewDelegate, PendingRequestsInteractorDataSource>
+@interface PendingRequestInteractor : NSObject <UITableViewDelegate, PendingRequestsInteractorDataSource, PendingRequestsInteractor>
 
 @property (nonatomic, weak) PendingRequestsPresenter *presenter;
 
