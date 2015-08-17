@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Asap-Regular.otf">
+            <string>Asap-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell 1" rowHeight="71" id="aNC-W2-zwA" customClass="StatusListPresenterCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aNC-W2-zwA" id="KaB-E2-D1b">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7K-6G-qsH">
+                        <rect key="frame" x="142" y="25" width="37" height="19"/>
+                        <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kc2-hi-F5E">
+                        <rect key="frame" x="8" y="29" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="4fJ-U6-IDv"/>
+                            <constraint firstAttribute="width" constant="12" id="jAf-vr-E43"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="kc2-hi-F5E" secondAttribute="centerY" id="B5u-4o-QME"/>
+                    <constraint firstItem="kc2-hi-F5E" firstAttribute="leading" secondItem="KaB-E2-D1b" secondAttribute="leadingMargin" id="CWu-oy-l6f"/>
+                    <constraint firstAttribute="centerY" secondItem="k7K-6G-qsH" secondAttribute="centerY" id="ew7-2V-dx1"/>
+                    <constraint firstAttribute="centerX" secondItem="k7K-6G-qsH" secondAttribute="centerX" id="iNi-0b-gMH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="statusTypeLabel" destination="k7K-6G-qsH" id="PYp-6k-UAU"/>
+                <outlet property="tickImageView" destination="kc2-hi-F5E" id="6rg-N6-7zc"/>
+            </connections>
+            <point key="canvasLocation" x="973" y="559.5"/>
+        </tableViewCell>
+    </objects>
+</document>
