@@ -28,9 +28,9 @@
     
     // Do any additional setup after loading the view.
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fullName"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"emailAddress"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fullName"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"emailAddress"];
     
     SettingsInteractor *interactor = [SettingsInteractor new];
     interactor.presenter = self;
