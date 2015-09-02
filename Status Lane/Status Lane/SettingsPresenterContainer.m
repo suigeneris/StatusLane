@@ -8,6 +8,10 @@
 
 #import "SettingsPresenterContainer.h"
 #import "SWRevealViewController.h"
+#import "StatusLaneErrorView.h"
+#import "SettingsInteractor.h"
+#import "Defaults.h"
+
 @interface SettingsPresenterContainer()
 
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
@@ -21,10 +25,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fullName"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"emailAddress"];
+    
+    SettingsInteractor *interactor = [SettingsInteractor new];
+    interactor.presenter = self;
+    self.interactor = interactor;
+
     [self setUpUIElements];
     [self revealControllerSetUp];
+    
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +61,6 @@
                                                           alpha:0.3
                                            ];
     
-    
 }
 
 -(void)revealControllerSetUp{
@@ -50,12 +68,19 @@
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        [self.burgerMenuButton addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-        [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
-        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [self.burgerMenuButton addTarget:self action:@selector(toggleBurgerMenu) forControlEvents:UIControlEventTouchUpInside];
+        [self.searchButton addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
+        
+//        [self.burgerMenuButton addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+
+
+        //[self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+        //[self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
     }
 }
+
 /*
  #pragma mark - Navigation
  
@@ -68,7 +93,41 @@
 
 #pragma mark - internal methods
 
+-(void)toggleBurgerMenu{
+    
+    if ([Defaults fullName]
+        && [Defaults emailAddress]
+        && [Defaults sex]) {
+        
+        [self.revealViewController revealToggle:self];
+        
+    }
+    
+    else{
+        
+        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form"];
+        [errorView show];
+    }
+    
+}
 
+-(void)toggleSearch{
+    
+    if ([Defaults fullName]
+        && [Defaults emailAddress]
+        && [Defaults sex]) {
+        
+        [self.revealViewController rightRevealToggle:self];
+
+    }
+    
+    else{
+        
+        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form"];
+        [errorView show];
+    }
+    
+}
 
 
 

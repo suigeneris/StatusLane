@@ -46,7 +46,6 @@
     
     [self performSegueWithIdentifier:@"Logout"sender:self];
     
-    
 }
 
 

@@ -176,6 +176,11 @@
     if ([Defaults fullName]) {
         
         fullNameLabel.text = [Defaults fullName];
+        fullNameLabel.userInteractionEnabled = NO;
+        
+    }else{
+        
+        fullNameLabel.text = @"Full Name";
     }
 }
 

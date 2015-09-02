@@ -17,6 +17,7 @@
 
 @protocol SettingsPresenterDelegate <NSObject>
 
+@optional
 -(void)logOut;
 
 @end

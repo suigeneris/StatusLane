@@ -44,6 +44,8 @@ static const CGFloat animationDuration = 0.35f;
     if (!_backGroundView) {
         _backGroundView = [[UIView alloc]init];
         _backGroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.85];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hide)];
+        [_backGroundView addGestureRecognizer:tapGesture];
     }
     return _backGroundView;
 }
