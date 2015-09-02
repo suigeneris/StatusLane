@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SettingsContracts.h"
 
-@interface SettingsPresenterContainer : UIViewController 
+@interface SettingsPresenterContainer : UIViewController <SettingsPresenterDelegate>
+
+@property (nonatomic) id <UITableViewDelegate, SettingsInteractor> interactor;
 
 
 @end

@@ -10,6 +10,7 @@
 #import "SettingsCell.h"
 #import "UIFont+StatusLaneFonts.h"
 #import "UIColor+StatusLane.h"
+#import "Defaults.h"
 
 @interface SettingsDataSource()
 
@@ -34,7 +35,7 @@
         NSAttributedString *fullName = [[NSAttributedString alloc]initWithString:@"Full Name" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                                                            NSFontAttributeName: [UIFont statusLaneAsapRegular:14]}];
         
-        NSAttributedString *username = [[NSAttributedString alloc]initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
+        NSAttributedString *username = [[NSAttributedString alloc]initWithString:@"Gender" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                                                           NSFontAttributeName: [UIFont statusLaneAsapRegular:14]}];
         
         NSAttributedString *email = [[NSAttributedString alloc]initWithString:@"Email" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
@@ -58,7 +59,7 @@
                                                                                                                                    NSFontAttributeName : [UIFont statusLaneAsapRegular:14]
                                                                                                                                     }];
         
-        NSAttributedString *userNamePlaceHolder = [[NSAttributedString alloc]initWithString:@"Enter your username" attributes:@{NSForegroundColorAttributeName : [UIColor statusLaneGreen],
+        NSAttributedString *userNamePlaceHolder = [[NSAttributedString alloc]initWithString:@"Male/Female" attributes:@{NSForegroundColorAttributeName : [UIColor statusLaneGreen],
                                                                                                                                     NSFontAttributeName : [UIFont statusLaneAsapRegular:14]
                                                                                                                                     }];
         
@@ -148,6 +149,27 @@
         cell.textField.attributedPlaceholder = [self.arrayOfPlaceholderText objectAtIndex:indexPath.row];
         cell.textField.tag = indexPath.row;
         cell.textField.delegate = cell;
+        
+        if (indexPath.row == 0) {
+            
+            cell.textField.text = [Defaults fullName];
+            //cell.textField.userInteractionEnabled = NO;
+            
+        }
+        
+        else if (indexPath.row == 1){
+         
+            cell.textField.text = [Defaults sex];
+            //cell.textField.userInteractionEnabled = NO;
+
+        }
+        
+        else if (indexPath.row == 2){
+            
+            cell.textField.text = [Defaults emailAddress];
+            //cell.textField.userInteractionEnabled = NO;
+
+        }
 
         return cell;
         
