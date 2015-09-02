@@ -28,56 +28,13 @@
 
 #pragma mark - TextField Delegate Methods
 
+
 -(void)awakeFromNib{
     
     [super awakeFromNib];
     
 
 }
-
-
-//-(void)textFieldDidEndEditing:(UITextField *)textField{
-//    
-//    if (textField.tag == 0) {
-//        
-//        if ([self validateFullName:textField.text]) {
-//            [Defaults setFullName:textField.text];
-//        }
-//        else{
-//            
-//            [self showErrorViewWithMessage:@"Please Enter a valid username :)" withResignTextField:textField];
-//        }
-//        
-//    }
-//    
-//    else if (textField.tag == 1){
-//        
-//        if ([self validateGender:textField.text]) {
-//            [Defaults setSex:textField.text];
-//            
-//        }
-//        else{
-//            
-//            [self showErrorViewWithMessage:@"Please Enter either Male or Female :)" withResignTextField:textField];
-//        }
-//        
-//    }
-//    
-//    if (textField.tag == 2) {
-//        
-//        if ([textField.text isValidEmail]) {
-//            [Defaults setEmailAddress:textField.text];
-//            self.fullName = textField.text;
-//            
-//        }
-//        else{
-//            
-//            [self showErrorViewWithMessage:@"Please Enter a valid email :)" withResignTextField:textField];
-//        }
-//        
-//    }
-//    
-//}
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
 
@@ -86,7 +43,8 @@
     if (textField.tag == 0) {
         
         if ([self validateFullName:textField.text]) {
-            [Defaults setFullName:textField.text];
+            //[Defaults setFullName:textField.text];
+            self.fullName = textField.text;
             final = YES;
             
         }
@@ -101,7 +59,8 @@
     else if (textField.tag == 1) {
         
         if ([self validateGender:textField.text]) {
-            [Defaults setSex:textField.text];
+            //[Defaults setSex:textField.text];
+            self.gender = textField.text;
             final = YES;
             
         }
@@ -115,7 +74,8 @@
     else if (textField.tag == 2) {
         
         if ([textField.text isValidEmail]) {
-            [Defaults setEmailAddress:textField.text];
+            //[Defaults setEmailAddress:textField.text];
+            self.email = textField.text;
             final = YES;
             
         }
@@ -133,28 +93,85 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
-
-    if ([Defaults fullName]
-        && [Defaults emailAddress]
-        && [Defaults sex]) {
+    BOOL returnTextfeild;
+    
+    if (textField.tag == 0) {
         
-        NSLog(@"Return");
-        [textField resignFirstResponder];
-        return YES;
+        id view = [textField superview];
+        while (view && [view isKindOfClass:[UITableView class]] == NO) {
+            view = [view superview];
+        }
+        
+        UITableView *tableView = (UITableView *)view;
+        SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        UIResponder *nextResponder = cell.textField;
+        
+        if (nextResponder) {
+            
+            [nextResponder becomeFirstResponder];
+        }
+        returnTextfeild = NO;
+        
     }
     
-    else{
+    else if (textField.tag == 1) {
         
-        [self showErrorViewWithMessage:@"Please Complete the form :)" withResignTextField:textField];
-        return NO;
-
+        id view = [textField superview];
+        
+        while (view && [view isKindOfClass:[UITableView class]] == NO) {
+            view = [view superview];
+        }
+        
+        UITableView *tableView = (UITableView *)view;
+        SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        UIResponder *nextResponder = cell.textField;
+        
+        if (nextResponder) {
+            
+            [nextResponder becomeFirstResponder];
+        }
+        returnTextfeild = NO;
+        
     }
     
+    else if (textField.tag == 2) {
+        
+        id view = [textField superview];
+        while (view && [view isKindOfClass:[UITableView class]] == NO) {
+            view = [view superview];
+        }
+        
+        UITableView *tableView = (UITableView *)view;
+        SettingsCell *cell1 = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        SettingsCell *cell2 = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        SettingsCell *cell3 = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+
+        
+        if (cell1.textField.text && cell2.textField.text) {
+            
+            [Defaults setFullName:cell1.textField.text];
+            [Defaults setSex:cell2.textField.text];
+            [Defaults setEmailAddress:cell3.textField.text];
+            
+            [textField resignFirstResponder];
+            returnTextfeild =  YES;
+        }
+        
+        else{
+            
+            [self showErrorViewWithMessage:@"Please Complete the form :)" withResignTextField:textField];
+            returnTextfeild =  NO;
+            
+        }
+    }
+    
+    
+    return returnTextfeild;
 }
 
 -(BOOL)validateFullName:(NSString *)username{
     
-    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"];
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"];
     set = [set invertedSet];
 
     NSRange range = [username rangeOfCharacterFromSet:set];
@@ -183,13 +200,15 @@
 
 -(void)showErrorViewWithMessage:(NSString *)message withResignTextField:(UITextField *)textField {
     
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message];
     
-    [errorView show];
-    
+    if (app.window.subviews.count < 2) {
+        
+        [errorView show];
+
+    }
 }
-
-
 
 @end
 

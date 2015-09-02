@@ -152,22 +152,34 @@
         
         if (indexPath.row == 0) {
             
-            cell.textField.text = [Defaults fullName];
-            //cell.textField.userInteractionEnabled = NO;
+            if ([Defaults fullName]) {
+             
+                cell.textField.text = [Defaults fullName];
+                cell.textField.userInteractionEnabled = NO;
+            }
+            
             
         }
         
         else if (indexPath.row == 1){
          
-            cell.textField.text = [Defaults sex];
-            //cell.textField.userInteractionEnabled = NO;
+            if ([Defaults sex]) {
+                
+                cell.textField.text = [Defaults sex];
+                cell.textField.userInteractionEnabled = NO;
+            }
+            
 
         }
         
         else if (indexPath.row == 2){
             
-            cell.textField.text = [Defaults emailAddress];
-            //cell.textField.userInteractionEnabled = NO;
+            if ([Defaults emailAddress]) {
+              
+                cell.textField.text = [Defaults emailAddress];
+                cell.textField.userInteractionEnabled = NO;
+            }
+            
 
         }
 
