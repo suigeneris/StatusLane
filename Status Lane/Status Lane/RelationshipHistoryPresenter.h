@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "RelationshipHistoryContracts.h"
 
-@interface RelatioinshipHistoryPresenter : UIViewController
+@interface RelationshipHistoryPresenter : UIViewController <RelationshipHistoryPresenter>
 
-@property (nonatomic, strong) id <UITableViewDelegate, RelationshipHistoryInteractorDatasource> interactor;
+@property (nonatomic, strong) id <UITableViewDelegate, RelationshipHistoryInteractorDatasource, RelationshipHistoryInteractor> interactor;
 
 @end

@@ -11,6 +11,8 @@
 @protocol SettingsInteractor <NSObject>
 
 -(id<UITableViewDataSource>)dataSource;
+-(void)deleteUserAccount;
+-(void)updateUserDetailsIfEmailChanged:(NSString *)email;
 
 @end
 
@@ -19,5 +21,6 @@
 
 @optional
 -(void)logOut;
+-(void)showAlertView;
 
 @end

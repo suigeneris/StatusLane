@@ -11,7 +11,9 @@
 @interface NSString (StatusLane)
 
 +(NSString *)documentsPathForFileName:(NSString *)name;
-+(bool)isPhoneNumberValid:(NSString*)phoneNumber;
++(void)deleteDocumentForName:(NSString *)name;
++(NSDictionary *)allFormatsForPhoneNumber:(NSString *)phoneNumber;
++(BOOL)isPhoneNumberValid:(NSString*)phoneNumber;
 -(BOOL)isValidEmail;
 
 @end

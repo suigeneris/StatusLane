@@ -97,7 +97,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"AnonymousUser"];
     [query whereKey:@"username" matchesRegex:details];
-    [query includeKey:@"partner"];
+    [query includeKey:@"User.partner"];
     query.limit = 20;
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){

@@ -12,7 +12,7 @@
 
 
 -(NSString *)resendVerificationCodeToNumber:(NSString*)number;
--(void)attemptRegisterUserWithUsername:(NSString *)username andPassword:(NSString *)password;
+-(void)queryParseForAnonymousUser:(NSString *)username andPasswordIfAnonymousUserIsFound:(NSString *)password;
 
 @end
 

@@ -464,7 +464,7 @@
 
 -(void)showErrorView:(NSString *)errorMessage{
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
     [errorView show];
 }
 

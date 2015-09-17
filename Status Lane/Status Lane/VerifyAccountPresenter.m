@@ -106,7 +106,7 @@
         
         if ([self.password isEqualToString:self.passwordTextField.text]) {
             
-            [self.interactor attemptRegisterUserWithUsername:self.phonenumber andPassword:self.password];
+            [self.interactor queryParseForAnonymousUser:self.phonenumber andPasswordIfAnonymousUserIsFound:self.password];
 
         }
         else{
@@ -145,7 +145,7 @@
 
 -(void)showErrorViewWithMessage:(NSString *)message {
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:@"OOOOPs!"];
     [errorView show];
 
 }

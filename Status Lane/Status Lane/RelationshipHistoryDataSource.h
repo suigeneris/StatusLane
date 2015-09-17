@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RelationshipHistoryContracts.h"
+
 #import "UIKit/UIKit.h"
 
 @interface RelationshipHistoryDataSource : NSObject <UITableViewDataSource>
+
+@property (nonatomic, weak) id <RelationshipHistoryInteractor> interactor;
+
 
 @end

@@ -177,7 +177,6 @@
             if ([Defaults emailAddress]) {
               
                 cell.textField.text = [Defaults emailAddress];
-                cell.textField.userInteractionEnabled = NO;
             }
             
 

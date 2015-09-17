@@ -10,15 +10,14 @@
 
 @protocol ForgotPasswordInteractor <NSObject>
 
--(NSString *)requestCountryCode;
--(void)queryUsernameFor:(NSString *)username;
+-(void)resetPasswordForEmail:(NSString *)email;
 
 @end
 
 
 @protocol ForgotPasswordPresenter <NSObject>
 
--(void)showErrorViewWithMessage:(NSString *)message;
+-(void)showErrorViewWithMessage:(NSString *)message andTitle:(NSString *)title;
 -(void)dismissView;
 
 

@@ -49,4 +49,33 @@
 }
 
 
+-(void)showAlertView{
+    
+    UIAlertController *deleteAccountAlert = [UIAlertController alertControllerWithTitle:@"Delete Account"
+                                                                                message:@"Are you sure you want to delete you account?"
+                                                                         preferredStyle:UIAlertControllerStyleAlert
+                                             
+                                             ];
+    
+    [deleteAccountAlert addAction:[UIAlertAction actionWithTitle:@"YES"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             
+                                                             [self.interactor deleteUserAccount];
+                                                             
+                                                         }]];
+    
+    [deleteAccountAlert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             
+                                                         }]];
+    
+    
+    [self presentViewController:deleteAccountAlert animated:YES completion:nil];
+    
+    
+}
+
+
 @end

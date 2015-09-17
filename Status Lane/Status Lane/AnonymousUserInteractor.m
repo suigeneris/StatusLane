@@ -151,8 +151,6 @@
                                                [self.presenter showErrorView:error.localizedDescription];
 
                                            }];
-            
-            
 
         }
         
@@ -191,6 +189,7 @@
                                        if (success) {
                                            
                                            [self setPartnerOnAnonymousUser:anonymousUser];
+                                           [self updateStatusHistoryForUser:currentUser usingAnonymousUserAsPartner:anonymousUser];
                                        }
                                        
                                        else{
@@ -227,6 +226,16 @@
                                    }];
 }
 
+-(void)updateStatusHistoryForUser:(PFUser  *)user usingAnonymousUserAsPartner:(PFObject*)anonymousUserPartner{
+    
+    PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+    statusHistoryObject[@"historyId"] = user.objectId;
+    statusHistoryObject[@"statusType"] = user[@"status"];
+    statusHistoryObject[@"statusDate"] = [NSDate date];
+    statusHistoryObject[@"partnerId"] = anonymousUserPartner.objectId;
+    statusHistoryObject[@"partnerName"] = partnerName;
+    [statusHistoryObject saveInBackground];
+}
 
 
 

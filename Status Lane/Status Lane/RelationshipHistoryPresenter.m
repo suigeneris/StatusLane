@@ -6,28 +6,28 @@
 //  Copyright (c) 2015 Sui Generis Innovations. All rights reserved.
 //
 
-#import "RelatioinshipHistoryPresenter.h"
+#import "RelationshipHistoryPresenter.h"
 #import "RelationshipHistoryInteractor.h"
 #import "SWRevealViewController.h"
+#import "UIColor+StatusLane.h"
 
 
-@interface RelatioinshipHistoryPresenter()
+
+@interface RelationshipHistoryPresenter()
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
-
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
 
-@implementation RelatioinshipHistoryPresenter
+@implementation RelationshipHistoryPresenter
 
 
 -(void)awakeFromNib{
     
     [super awakeFromNib];
-    RelationshipHistoryInteractor *interactor = [RelationshipHistoryInteractor new];
-    self.interactor = interactor;
 }
 
 
@@ -44,6 +44,30 @@
                                                       alpha:0.13
                                        ]];
     [self revealControllerSetUp];
+    [self.interactor retrieveStatusHistoryForUser];
+}
+
+-(id<UITableViewDelegate,RelationshipHistoryInteractorDatasource>)interactor{
+    
+    if (!_interactor) {
+        RelationshipHistoryInteractor *interactor = [RelationshipHistoryInteractor new];
+        interactor.presenter = self;
+        self.interactor = interactor;
+    }
+    return _interactor;
+}
+
+-(UIActivityIndicatorView *)activityIndicator{
+    
+    if (!_activityIndicator) {
+        
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityIndicator.center = self.view.center;
+        _activityIndicator.color = [UIColor statusLaneGreenPressed];
+        _activityIndicator.hidesWhenStopped = YES;
+        _activityIndicator.tag = 1111;
+    }
+    return _activityIndicator;
 }
 
 -(void)revealControllerSetUp{
@@ -67,4 +91,30 @@
 - (IBAction)searchIconPressed:(id)sender {
 }
 
+#pragma mark - Presenter Delegate Methods
+
+-(void)reloadDatasource{
+    
+    [self.tableView reloadData];
+}
+
+-(void)startAnimatingActivityView{
+    
+    [self.view addSubview:self.activityIndicator];
+    [_activityIndicator startAnimating];
+}
+
+-(void)stopAnimatingActivitiyView{
+    
+    [_activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
+}
+
+
+
+
 @end
+
+
+

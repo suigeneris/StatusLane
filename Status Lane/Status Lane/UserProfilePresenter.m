@@ -47,7 +47,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self additionalUIViewSetup];
-    //[self arrayWithPartner];
 
 }
 
@@ -60,15 +59,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(NSArray *)arrayWithPartner{
-    
-    if (!_arrayWithPartner) {
-        
-        _arrayWithPartner = self.user[@"partner"];
-    }
-    
-    return _arrayWithPartner;
 }
 
 
@@ -150,39 +140,43 @@
             }
         }
     
-    if ([[self.arrayWithPartner objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
+    if (self.user[@"partner"] && [self.user[@"partner"] count] > 0 ) {
         
-        PFUser *user = [self.arrayWithPartner objectAtIndex:0];
-        self.partnerName.text = user[@"fullName"];
-        if (user[@"userProfilePicture"]) {
+        if ([[self.user[@"partner"] objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
+
+            PFUser *partner = [self.user[@"partner"] objectAtIndex:0];
+            self.partnerName.text = partner[@"fullName"];
+            if (partner[@"userProfilePicture"]) {
+                
+                self.partnerProfileImageView.file = partner[@"userProfilePicture"];
+            }
             
-            self.partnerProfileImageView.file = user[@"userProfilePicture"];
+            else{
+                
+                self.partnerProfileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+                
+            }
         }
         
         else{
             
-            self.partnerProfileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
-
+            PFObject *object = [self.user[@"partner"] objectAtIndex:0];
+            self.partnerName.text = object[@"fullName"];
+            
+            if (object[@"userProfilePicture"]) {
+                
+                self.partnerProfileImageView.file = object[@"userProfilePicture"];
+                [self.partnerProfileImageView loadInBackground];
+            }
+            
+            else{
+                
+                self.partnerProfileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
+            }
+            
         }
     }
-    
-    else{
-        
-        PFObject *object = [self.arrayWithPartner objectAtIndex:0];
-        self.partnerName.text = object[@"fullName"];
 
-        if (object[@"userProfilePicture"]) {
-            
-            self.partnerProfileImageView.file = object[@"userProfilePicture"];
-            [self.partnerProfileImageView loadInBackground];
-        }
-        
-        else{
-            
-            self.partnerProfileImageView.image = [UIImage imageNamed:@"Default_Profile_Image"];
-        }
-
-    }
 }
 
 - (IBAction)backkButtonPressed:(id)sender {
