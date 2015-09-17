@@ -63,6 +63,7 @@
     
     PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
     [compoundQuery orderByDescending:@"statusDate"];
+    compoundQuery.limit = 20;
 
     [self.networkProvider queryDatabaseWithQuery:compoundQuery
                                          success:^(id responseObject) {

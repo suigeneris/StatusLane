@@ -392,7 +392,6 @@
     [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
                                              
-                                             NSLog(@"This is the respons object %@", responseObject);
                                              NSArray *array = responseObject;
                                              if (array.count > 0) {
                                                  //User has a history, so send the end date of the last relationship

@@ -228,13 +228,47 @@
 
 -(void)updateStatusHistoryForUser:(PFUser  *)user usingAnonymousUserAsPartner:(PFObject*)anonymousUserPartner{
     
-    PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
-    statusHistoryObject[@"historyId"] = user.objectId;
-    statusHistoryObject[@"statusType"] = user[@"status"];
-    statusHistoryObject[@"statusDate"] = [NSDate date];
-    statusHistoryObject[@"partnerId"] = anonymousUserPartner.objectId;
-    statusHistoryObject[@"partnerName"] = partnerName;
-    [statusHistoryObject saveInBackground];
+    PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query whereKey:@"historyId" equalTo:user.objectId];
+    [query orderByDescending:@"statusDate"];
+    
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                           
+                                             NSArray *array = responseObject;
+                                             if (array.count > 0) {
+                                                 //User has a history, so send the end date of the last relationship
+                                                 PFObject *object = [array objectAtIndex:0];
+                                                 object[@"statusEndDate"] = [NSDate date];
+                                                 [object saveInBackground];
+                                                 
+                                                 //Then create the new history
+                                                 PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+                                                 statusHistoryObject[@"historyId"] = user.objectId;
+                                                 statusHistoryObject[@"statusType"] = user[@"status"];
+                                                 statusHistoryObject[@"statusDate"] = [NSDate date];
+                                                 statusHistoryObject[@"partnerId"] = anonymousUserPartner.objectId;
+                                                 statusHistoryObject[@"partnerName"] = partnerName;
+                                                 [statusHistoryObject saveInBackground];
+                                                 
+                                             }
+                                             else{
+                                                 
+                                                 //User has no history so create history as normal
+                                                 PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+                                                 statusHistoryObject[@"historyId"] = user.objectId;
+                                                 statusHistoryObject[@"statusType"] = user[@"status"];
+                                                 statusHistoryObject[@"statusDate"] = [NSDate date];
+                                                 statusHistoryObject[@"partnerId"] = anonymousUserPartner.objectId;
+                                                 statusHistoryObject[@"partnerName"] = partnerName;
+                                                 [statusHistoryObject saveInBackground];
+                                             }
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                         }];
+    
+
 }
 
 
