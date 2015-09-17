@@ -20,6 +20,7 @@
 
 -(void)retrieveStatusHistoryForUser;
 -(NSArray *)returnArrayOfHistoryObjects;
+-(NSMutableArray *)returnArrayOfUsersInStatusHistory;
 
 @end
 

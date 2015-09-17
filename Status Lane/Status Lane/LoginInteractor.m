@@ -172,8 +172,6 @@
         [self.networkProvider queryDatabaseWithQuery:query
                                              success:^(id responseObject) {
                                                  
-                                                 NSLog(@"Is this called");
-
                                                  PFObject *object = [responseObject objectAtIndex:0];
                                                  [Defaults setPartnerFullName:object[@"fullName"]];
                                                  [self.presenter login];
