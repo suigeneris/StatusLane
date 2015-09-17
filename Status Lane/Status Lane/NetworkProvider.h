@@ -23,7 +23,11 @@ typedef void (^FailureBlock)(NSError *error);
                  success:(SuccessBlock)successBlock
                  failure:(FailureBlock)failureBlock;
 
+#pragma mark - Reset Password Feature
 
+-(void)resetPasswordForUserWithEmail:(NSString *)email
+                            succcess:(SuccessBlock)successBlock
+                             failure:(FailureBlock)failureBlock;
 
 #pragma mark - Create Account Feature
 
@@ -45,15 +49,15 @@ typedef void (^FailureBlock)(NSError *error);
                               success:(SuccessBlock)successBlock
                               failure:(FailureBlock)failure;
 
--(void)attemptRegistrationWithUsername:(NSString *)username
-                           andPassword:(NSString *)password
-                               success:(SuccessBlock)suceessBlock
-                               failure:(FailureBlock)failureBlock;
+-(void)attemptRegistrationWithPFUser:(PFUser *)user
+                             success:(SuccessBlock)suceessBlock
+                             failure:(FailureBlock)failureBlock;
 
 #pragma mark - User Interactor
 
 -(void)fetchCurrentUserWithSuccesss:(SuccessBlock)success
                          andFailure:(FailureBlock)failure;
+
 
 #pragma mark - Annoymous User Interactor
 
@@ -71,6 +75,17 @@ typedef void (^FailureBlock)(NSError *error);
                    success:(SuccessBlock)successBlock
                    failure:(FailureBlock)failureBlock;
 
+#pragma mark - Downloading Image Data
+
+-(void)downloadDataFromFile:(PFFile *)file
+                    success:(SuccessBlock)successBlock
+                    failure:(FailureBlock)failureBlock;
+
+#pragma mark - Delete Accont 
+
+-(void)deleteUserAccountWithAccount:(PFUser *)user
+                            success:(SuccessBlock)successBlock
+                            failure:(FailureBlock)failureBlock;
 @end
 
 

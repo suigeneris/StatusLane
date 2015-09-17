@@ -32,7 +32,6 @@
 		2A18F3321B39F51B0005F061 /* SearchedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A18F3311B39F51B0005F061 /* SearchedUser.m */; };
 		2A1BA5331B1B4427006703D5 /* ChoosePartnerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1BA5321B1B4427006703D5 /* ChoosePartnerDataSource.m */; };
 		2A1BA5361B1B465B006703D5 /* ChoosePartnerCellPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1BA5351B1B465B006703D5 /* ChoosePartnerCellPresenter.m */; };
-		2A1C7A171B180630003ADCF5 /* LoginInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A161B180630003ADCF5 /* LoginInteractor.m */; };
 		2A1C7A1E1B180A0C003ADCF5 /* ChoosePartnerInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A1D1B180A0C003ADCF5 /* ChoosePartnerInteractor.m */; };
 		2A1C7A241B1811FE003ADCF5 /* SettingsPresenterContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A231B1811FE003ADCF5 /* SettingsPresenterContainer.m */; };
 		2A1C7A271B181308003ADCF5 /* SettingsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A261B181308003ADCF5 /* SettingsPresenter.m */; };
@@ -46,7 +45,7 @@
 		2A1C7A4D1B19B199003ADCF5 /* PendingRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A4C1B19B199003ADCF5 /* PendingRequestCell.m */; };
 		2A1C7A501B19BFD8003ADCF5 /* PendingRequestsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A4F1B19BFD8003ADCF5 /* PendingRequestsDataSource.m */; };
 		2A1C7A541B19C003003ADCF5 /* PendingRequestInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A531B19C003003ADCF5 /* PendingRequestInteractor.m */; };
-		2A1C7A5C1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A5B1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m */; };
+		2A1C7A5C1B19E31A003ADCF5 /* RelationshipHistoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A5B1B19E31A003ADCF5 /* RelationshipHistoryPresenter.m */; };
 		2A1C7A641B19EEC6003ADCF5 /* RelationshipHistoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A631B19EEC6003ADCF5 /* RelationshipHistoryDataSource.m */; };
 		2A1C7A681B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A671B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.m */; };
 		2A1C7A6C1B1A01B5003ADCF5 /* RelationshipHistoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A6B1B1A01B5003ADCF5 /* RelationshipHistoryInteractor.m */; };
@@ -58,7 +57,8 @@
 		2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CF91B36D49900590B66 /* VerifyAccountInteractor.m */; };
 		2A232CFE1B3766CB00590B66 /* KeyChainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CFD1B3766CB00590B66 /* KeyChainWrapper.m */; };
 		2A25C0411B0BC5770063472B /* VerifyAccountPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A25C0401B0BC5770063472B /* VerifyAccountPresenter.m */; };
-		2A25C0471B0C7E3E0063472B /* LoginPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A25C0461B0C7E3E0063472B /* LoginPresenter.m */; };
+		2A2B730C1B9E448000CF3351 /* LoginInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B73091B9E448000CF3351 /* LoginInteractor.m */; };
+		2A2B730D1B9E448000CF3351 /* LoginPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B730B1B9E448000CF3351 /* LoginPresenter.m */; };
 		2A2D30151B28B5EB00CD7E8E /* SearchUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D30141B28B5EB00CD7E8E /* SearchUsersCell.m */; };
 		2A3883551B2BAE61002E5EDB /* HomePageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3883541B2BAE61002E5EDB /* HomePageDataSource.m */; };
 		2A3883581B2BC342002E5EDB /* StatusListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A3883571B2BC342002E5EDB /* StatusListCell.xib */; };
@@ -168,9 +168,6 @@
 		2A1BA5341B1B465B006703D5 /* ChoosePartnerCellPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePartnerCellPresenter.h; sourceTree = "<group>"; };
 		2A1BA5351B1B465B006703D5 /* ChoosePartnerCellPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePartnerCellPresenter.m; sourceTree = "<group>"; };
 		2A1C7A141B17F2E9003ADCF5 /* CreateAccountContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountContracts.h; sourceTree = "<group>"; };
-		2A1C7A151B180630003ADCF5 /* LoginInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInteractor.h; sourceTree = "<group>"; };
-		2A1C7A161B180630003ADCF5 /* LoginInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInteractor.m; sourceTree = "<group>"; };
-		2A1C7A191B18064D003ADCF5 /* LoginContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginContracts.h; sourceTree = "<group>"; };
 		2A1C7A1B1B1809E0003ADCF5 /* ChoosePartnerContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePartnerContracts.h; sourceTree = "<group>"; };
 		2A1C7A1C1B180A0C003ADCF5 /* ChoosePartnerInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePartnerInteractor.h; sourceTree = "<group>"; };
 		2A1C7A1D1B180A0C003ADCF5 /* ChoosePartnerInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePartnerInteractor.m; sourceTree = "<group>"; };
@@ -201,8 +198,8 @@
 		2A1C7A521B19C003003ADCF5 /* PendingRequestInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestInteractor.h; sourceTree = "<group>"; };
 		2A1C7A531B19C003003ADCF5 /* PendingRequestInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestInteractor.m; sourceTree = "<group>"; };
 		2A1C7A561B19C02C003ADCF5 /* PendingRequestsContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestsContracts.h; sourceTree = "<group>"; };
-		2A1C7A5A1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatioinshipHistoryPresenter.h; sourceTree = "<group>"; };
-		2A1C7A5B1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatioinshipHistoryPresenter.m; sourceTree = "<group>"; };
+		2A1C7A5A1B19E31A003ADCF5 /* RelationshipHistoryPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipHistoryPresenter.h; sourceTree = "<group>"; };
+		2A1C7A5B1B19E31A003ADCF5 /* RelationshipHistoryPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipHistoryPresenter.m; sourceTree = "<group>"; };
 		2A1C7A621B19EEC6003ADCF5 /* RelationshipHistoryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipHistoryDataSource.h; sourceTree = "<group>"; };
 		2A1C7A631B19EEC6003ADCF5 /* RelationshipHistoryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipHistoryDataSource.m; sourceTree = "<group>"; };
 		2A1C7A661B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipHistoryCellPresenter.h; sourceTree = "<group>"; };
@@ -226,8 +223,11 @@
 		2A232CFD1B3766CB00590B66 /* KeyChainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainWrapper.m; sourceTree = "<group>"; };
 		2A25C03F1B0BC5770063472B /* VerifyAccountPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyAccountPresenter.h; sourceTree = "<group>"; };
 		2A25C0401B0BC5770063472B /* VerifyAccountPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyAccountPresenter.m; sourceTree = "<group>"; };
-		2A25C0451B0C7E3E0063472B /* LoginPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPresenter.h; sourceTree = "<group>"; };
-		2A25C0461B0C7E3E0063472B /* LoginPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPresenter.m; sourceTree = "<group>"; };
+		2A2B73071B9E448000CF3351 /* LoginContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginContracts.h; sourceTree = "<group>"; };
+		2A2B73081B9E448000CF3351 /* LoginInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInteractor.h; sourceTree = "<group>"; };
+		2A2B73091B9E448000CF3351 /* LoginInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInteractor.m; sourceTree = "<group>"; };
+		2A2B730A1B9E448000CF3351 /* LoginPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPresenter.h; sourceTree = "<group>"; };
+		2A2B730B1B9E448000CF3351 /* LoginPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPresenter.m; sourceTree = "<group>"; };
 		2A2D30131B28B5EB00CD7E8E /* SearchUsersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUsersCell.h; sourceTree = "<group>"; };
 		2A2D30141B28B5EB00CD7E8E /* SearchUsersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUsersCell.m; sourceTree = "<group>"; };
 		2A3883531B2BAE61002E5EDB /* HomePageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageDataSource.h; sourceTree = "<group>"; };
@@ -523,8 +523,8 @@
 		2A0C56B81B0548AA004198D5 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				2A2B73061B9E445D00CF3351 /* Login */,
 				2A020B5C1B233EC1000811FC /* Burger Menu */,
-				2A0C56C31B0549B8004198D5 /* Login */,
 				2A0C56B91B0548BD004198D5 /* Create Account */,
 				2A25C03B1B0BC4A00063472B /* Verify Password */,
 				2A458E2E1B14FA48008C21FA /* Country List  */,
@@ -566,25 +566,6 @@
 			children = (
 				2A0C56CB1B054AD9004198D5 /* CreateAccountInteractor.h */,
 				2A0C56CC1B054AD9004198D5 /* CreateAccountInteractor.m */,
-			);
-			name = Interactor;
-			sourceTree = "<group>";
-		};
-		2A0C56C31B0549B8004198D5 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				2A1C7A181B180635003ADCF5 /* Contracts */,
-				2A0C56C41B0549C1004198D5 /* Interactor */,
-				2A25C0431B0C7DE40063472B /* Presenter */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
-		2A0C56C41B0549C1004198D5 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				2A1C7A151B180630003ADCF5 /* LoginInteractor.h */,
-				2A1C7A161B180630003ADCF5 /* LoginInteractor.m */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -700,14 +681,6 @@
 			name = "Data Source";
 			sourceTree = "<group>";
 		};
-		2A1C7A181B180635003ADCF5 /* Contracts */ = {
-			isa = PBXGroup;
-			children = (
-				2A1C7A191B18064D003ADCF5 /* LoginContracts.h */,
-			);
-			name = Contracts;
-			sourceTree = "<group>";
-		};
 		2A1C7A1A1B1809AE003ADCF5 /* Choose Partner Contracts */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,8 +792,8 @@
 			children = (
 				2A1C7A5D1B19EE47003ADCF5 /* Contracts */,
 				2A1C7A5E1B19EE4F003ADCF5 /* DataSource */,
-				2A1C7A591B19E2F0003ADCF5 /* Presenter */,
 				2A1C7A581B19E2E8003ADCF5 /* Interactor */,
+				2A1C7A591B19E2F0003ADCF5 /* Presenter */,
 			);
 			name = "Relationship History";
 			sourceTree = "<group>";
@@ -837,8 +810,8 @@
 		2A1C7A591B19E2F0003ADCF5 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				2A1C7A5A1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.h */,
-				2A1C7A5B1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m */,
+				2A1C7A5A1B19E31A003ADCF5 /* RelationshipHistoryPresenter.h */,
+				2A1C7A5B1B19E31A003ADCF5 /* RelationshipHistoryPresenter.m */,
 				2A1C7A661B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.h */,
 				2A1C7A671B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.m */,
 			);
@@ -945,11 +918,38 @@
 			name = "Forgot Password";
 			sourceTree = "<group>";
 		};
-		2A25C0431B0C7DE40063472B /* Presenter */ = {
+		2A2B73061B9E445D00CF3351 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2A25C0451B0C7E3E0063472B /* LoginPresenter.h */,
-				2A25C0461B0C7E3E0063472B /* LoginPresenter.m */,
+				2A2B730E1B9E451200CF3351 /* Contracts */,
+				2A2B730F1B9E452400CF3351 /* Interactor */,
+				2A2B73101B9E453E00CF3351 /* Presenter */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		2A2B730E1B9E451200CF3351 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				2A2B73071B9E448000CF3351 /* LoginContracts.h */,
+			);
+			name = Contracts;
+			sourceTree = "<group>";
+		};
+		2A2B730F1B9E452400CF3351 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2A2B73081B9E448000CF3351 /* LoginInteractor.h */,
+				2A2B73091B9E448000CF3351 /* LoginInteractor.m */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		2A2B73101B9E453E00CF3351 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2A2B730A1B9E448000CF3351 /* LoginPresenter.h */,
+				2A2B730B1B9E448000CF3351 /* LoginPresenter.m */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -1513,7 +1513,6 @@
 				2A020B651B233F8E000811FC /* BurgerMenuDataSource.m in Sources */,
 				2A458E331B14FAC0008C21FA /* CountryListPresenter.m in Sources */,
 				2A3883611B2C8897002E5EDB /* StatusLaneUser.m in Sources */,
-				2A25C0471B0C7E3E0063472B /* LoginPresenter.m in Sources */,
 				2ACF523B1B17855200DDC1EE /* CountryCode.m in Sources */,
 				2A38835B1B2BD868002E5EDB /* StatusListPresenterCell.m in Sources */,
 				AB967F2E1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m in Sources */,
@@ -1529,9 +1528,9 @@
 				2AAF90A71B60073B00B9AA06 /* NetworkManager.m in Sources */,
 				2A1C7A381B18228C003ADCF5 /* SettingsInteractor.m in Sources */,
 				2A3883551B2BAE61002E5EDB /* HomePageDataSource.m in Sources */,
-				2A1C7A171B180630003ADCF5 /* LoginInteractor.m in Sources */,
 				2A0C56C01B054985004198D5 /* CreateAccountPresenter.m in Sources */,
 				2A18F3321B39F51B0005F061 /* SearchedUser.m in Sources */,
+				2A2B730D1B9E448000CF3351 /* LoginPresenter.m in Sources */,
 				2A020B6B1B233FDE000811FC /* BurgerMenuPresenter.m in Sources */,
 				2A1C7A411B18C5BB003ADCF5 /* ReferAFriendPresenter.m in Sources */,
 				2A458E421B1516B4008C21FA /* CountryListInteractor.m in Sources */,
@@ -1543,11 +1542,12 @@
 				2A1C7A2A1B18144D003ADCF5 /* SettingsDataSource.m in Sources */,
 				2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */,
 				2A1C7A271B181308003ADCF5 /* SettingsPresenter.m in Sources */,
+				2A2B730C1B9E448000CF3351 /* LoginInteractor.m in Sources */,
 				2AA9F4A81B2D7D0500B5C1A2 /* Defaults.m in Sources */,
 				2A0BC3EC1B69684D00ED82C9 /* PushNotificationManager.m in Sources */,
 				2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */,
 				2A7679BD1B2251A100B616DE /* SWRevealViewController.m in Sources */,
-				2A1C7A5C1B19E31A003ADCF5 /* RelatioinshipHistoryPresenter.m in Sources */,
+				2A1C7A5C1B19E31A003ADCF5 /* RelationshipHistoryPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

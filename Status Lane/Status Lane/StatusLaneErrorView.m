@@ -29,11 +29,12 @@ static const CGFloat animationDuration = 0.35f;
 
 @implementation StatusLaneErrorView
 
--(id)initWithMessage:(NSString *)message {
+-(id)initWithMessage:(NSString *)message andTitle:(NSString *)title {
     
     self = [super init];
     if (self) {
         self.message = message;
+        self.title = title;
     }
     
     return self;
@@ -76,7 +77,7 @@ static const CGFloat animationDuration = 0.35f;
         
         _errorLabel = [[UILabel alloc]init];
         _errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _errorLabel.text = @"OOOOPs!";
+        _errorLabel.text = self.title;
         _errorLabel.textColor = [UIColor statusLaneRed];
         _errorLabel.font = [UIFont statusLaneAsapRegular:18];
         [_errorLabel sizeToFit];

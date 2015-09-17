@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) id<NetworkProvider> networkProvider;
 
+
 @end
 
 @implementation CreateAccountInteractor
@@ -64,14 +65,13 @@
                                               }];
     [self.presenter showActivityView];
 
-    
 }
+
 
 -(void)queryParseForUsernmae:(NSString *)username andCode:(NSString *)code{
     
-    
     [self.networkProvider searchDatabaseForUsername:username
-                                            andCode: code
+                                            andCode:code
                                             success:^(id responseObject) {
                                                 
                                                 [self.presenter hideActivityView];
@@ -92,8 +92,7 @@
                                                 [self.presenter showErrorView:error.localizedDescription];
                                             }];
     [self.presenter showActivityView];
-
-
+    
     
 }
 

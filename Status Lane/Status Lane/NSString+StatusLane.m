@@ -15,12 +15,18 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths objectAtIndex:0];
-    
     return [documentPath stringByAppendingPathComponent:name];
 }
 
++(void)deleteDocumentForName:(NSString *)name{
+    
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [NSString documentsPathForFileName:name];
+    [fileManager removeItemAtPath:filePath error:&error];
+}
 
-+(bool)isPhoneNumberValid:(NSString*)phoneNumber{
++(BOOL)isPhoneNumberValid:(NSString*)phoneNumber{
     
     NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc]init];
     
@@ -60,7 +66,6 @@
 //    
 //    NSLog (@"extractCountryCode [%@] [%@]", countryCode, nationalNumber);
     
-    
     return [phoneUtil isValidNumber:myNumber];
 }
 
@@ -74,8 +79,33 @@
     return [emailTest evaluateWithObject:self];
 }
 
++(NSDictionary *)allFormatsForPhoneNumber:(NSString *)phoneNumber{
+    
+    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc]init];
+    NSError *anError = nil;
+    
+    NBPhoneNumber *myNumber = [phoneUtil parse:phoneNumber
+                                 defaultRegion:@"" error:&anError];
 
-
-
+    NSString *nationalNumber = nil;
+    
+    NSString *finalNationalNumber = [NSString stringWithFormat:@"+%@%@", [phoneUtil extractCountryCode:phoneNumber nationalNumber:&nationalNumber], [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatNATIONAL error:&anError]];
+    
+    NSDictionary *phoneNumberFormats = @{@"E164": [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164
+                                                              error:&anError],
+                                         @"National" : [finalNationalNumber stringByReplacingOccurrencesOfString:@" "
+                                                                                                      withString:@""
+                                                        
+                                         
+                                         ]};
+    
+    return phoneNumberFormats;
+}
 
 @end
+
+
+
+
+
+

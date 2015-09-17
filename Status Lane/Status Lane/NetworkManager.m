@@ -7,7 +7,6 @@
 //
 
 #import "NetworkManager.h"
-//#import <Parse/Parse.h>
 
 @implementation NetworkManager
 
@@ -33,6 +32,27 @@
                                     }];
     
     
+    
+    
+}
+
+#pragma mark - Reset Password Feature
+
+-(void)resetPasswordForUserWithEmail:(NSString *)email
+                            succcess:(SuccessBlock)successBlock
+                             failure:(FailureBlock)failureBlock{
+    
+    [PFUser requestPasswordResetForEmailInBackground:email block:^(BOOL sucesss, NSError *error){
+    
+        if (error) {
+            failureBlock(error);
+        }
+        
+        else{
+            successBlock(nil);
+        }
+        
+    }];
     
     
 }
@@ -111,17 +131,16 @@
                                 }];
 }
 
--(void)attemptRegistrationWithUsername:(NSString *)username
-                           andPassword:(NSString *)password
-                               success:(SuccessBlock)suceessBlock
-                               failure:(FailureBlock)failureBlock{
+-(void)attemptRegistrationWithPFUser:(PFUser *)user
+                             success:(SuccessBlock)suceessBlock
+                             failure:(FailureBlock)failureBlock{
     
-    PFUser *user = [PFUser user];
-    user.username = username;
-    user.password = password;
-    user[@"status"] = @"SINGLE";
-    user[@"fullName"] = @"Full Name";
-    user[@"gender"] = @"Gender not set";
+//    PFUser *user = [PFUser user];
+//    user.username = username;
+//    user.password = password;
+//    user[@"status"] = @"SINGLE";
+//    user[@"fullName"] = @"Full Name";
+//    user[@"gender"] = @"Gender not set";
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
         
@@ -234,6 +253,47 @@
 }
 
 
+#pragma mark - Downloading Image Data
+
+-(void)downloadDataFromFile:(PFFile *)file
+                    success:(SuccessBlock)successBlock
+                    failure:(FailureBlock)failureBlock{
+    
+    
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+        
+        if (error) {
+            
+            failureBlock(error);
+        }
+        
+        else{
+            
+            successBlock(data);
+        }
+        
+    }];
+}
+
+#pragma mark - Delete Accont
+
+-(void)deleteUserAccountWithAccount:(PFUser *)user
+                            success:(SuccessBlock)successBlock
+                            failure:(FailureBlock)failureBlock{
+    
+    
+    [user deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+        
+        if (error) {
+        
+            failureBlock(error);
+        }
+        else{
+            
+            successBlock(nil);
+        }
+    }];
+}
 
 @end
 

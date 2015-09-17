@@ -10,12 +10,15 @@
 #import "SettingsDataSource.h"
 #import "UIColor+StatusLane.h"
 #import "UIFont+StatusLaneFonts.h"
-#import <Parse/Parse.h>
+#import "NetworkManager.h"
+#import "Defaults.h"
 
 @interface SettingsInteractor()
 
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) SettingsDataSource *settingsDataSource;
+@property (nonatomic, strong) id <NetworkProvider> networkProvider;
+
 
 @end
 
@@ -42,17 +45,44 @@
     return _settingsDataSource;
 }
 
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        _networkProvider = [NetworkManager new];
+    }
+    return _networkProvider;
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 2) {
         
-        [PFUser logOut];
-        [self.presenter logOut];
+        if (indexPath.row == 0) {
+            
+            [PFUser logOut];
+            [self.presenter logOut];
+        }
+        
+        else{
+            
+            [self.presenter showAlertView];
+            
+        }
+
     }
     
+}
+
+-(void)updateUserDetailsIfEmailChanged:(NSString *)email{
     
-    
+    PFUser *currentUser = [PFUser currentUser];
+    if (![email isEqualToString:[Defaults emailAddress]]) {
+        
+        currentUser[@"fullName"] = [Defaults fullName];
+        currentUser[@"gender"] = [Defaults sex];
+        currentUser.email = [Defaults emailAddress];
+        [currentUser saveInBackground];
+    }
     
 }
 
@@ -86,6 +116,23 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     return 35;
+}
+
+#pragma mark - Interactor Delegate
+-(void)deleteUserAccount{
+    
+    PFUser *currentUser = [PFUser currentUser];
+    [self.networkProvider deleteUserAccountWithAccount:currentUser
+                                               success:^(id responseObject) {
+                                                   
+                                                   [PFUser logOut];
+                                                   [self.presenter logOut];
+                                                   
+                                               } failure:^(NSError *error) {
+                                                   
+                                                   NSLog(@"This is the error %@", error.localizedDescription);
+                                                   
+                                               }];
 }
 
 

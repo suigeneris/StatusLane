@@ -119,7 +119,6 @@ static void *countryCodeContext = &countryCodeContext;
 }
 
 - (IBAction)loginButtonPressed:(id)sender {
-    
 
     [self.interactor attemptLoginWithUsername:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text] andPassword:self.passwordTextfield.text];
 }
@@ -129,7 +128,7 @@ static void *countryCodeContext = &countryCodeContext;
 -(void)showErrorViewWithErrorMessage:(NSString *)errorMessage{
     
     [self touchesBegan:nil withEvent:nil];
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
     [errorView show];
 }
 

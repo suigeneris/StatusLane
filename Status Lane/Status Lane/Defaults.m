@@ -130,20 +130,20 @@
     NSString *filePath = [NSString documentsPathForFileName:@"profileImage.png"];
     [pngData writeToFile:filePath atomically:YES];
     
-    UIBackgroundTaskIdentifier backgoundTask;
-    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        
-        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
-    }];
-    
-    
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-        [self updatePFUserProfileImage:profileImage];
-        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
-
-
-    });
+//    UIBackgroundTaskIdentifier backgoundTask;
+//    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+//        
+//        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+//    }];
+//    
+//    
+//    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//        [self updatePFUserProfileImage:profileImage];
+//        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+//
+//
+//    });
 }
 
 +(UIImage *)backgroundImage{
@@ -161,20 +161,20 @@
     NSString *filePath = [NSString documentsPathForFileName:@"backgroundImage.png"];
     [pngData writeToFile:filePath atomically:YES];
     
-    UIBackgroundTaskIdentifier backgoundTask;
-    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        
-        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
-    }];
-    
-    
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [self updatePFUserBackgroundImage:backgroundImage];
-        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
-        
-        
-    });
+//    UIBackgroundTaskIdentifier backgoundTask;
+//    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+//        
+//        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+//    }];
+//    
+//    
+//    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        [self updatePFUserBackgroundImage:backgroundImage];
+//        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+//        
+//        
+//    });
 
 }
 

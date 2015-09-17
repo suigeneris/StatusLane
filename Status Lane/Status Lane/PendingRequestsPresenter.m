@@ -21,8 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
-
-
 @end
 @implementation PendingRequestsPresenter
 
@@ -32,7 +30,7 @@
     
     [super viewDidLoad];
     [self setUpUIElements];
-    [self interactor];
+    //[self interactor];
     self.tableView.delegate = self.interactor;
     self.tableView.dataSource = [self.interactor dataSource];
     [self revealControllerSetUp];
@@ -167,7 +165,6 @@
     
     NSArray *array = [NSArray arrayWithObject:indexPath];
     [self.tableView beginUpdates];
-    //[self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
 }

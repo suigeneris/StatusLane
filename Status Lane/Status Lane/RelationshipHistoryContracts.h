@@ -7,10 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol RelationshipHistoryInteractorDatasource <NSObject>
 
 -(id<UITableViewDataSource>)dataSource;
 
+
+@end
+
+@protocol RelationshipHistoryInteractor <NSObject>
+
+-(void)retrieveStatusHistoryForUser;
+-(NSArray *)returnArrayOfHistoryObjects;
+
+@end
+
+@protocol RelationshipHistoryPresenter <NSObject>
+
+-(void)reloadDatasource;
+-(void)startAnimatingActivityView;
+-(void)stopAnimatingActivitiyView;
 
 @end

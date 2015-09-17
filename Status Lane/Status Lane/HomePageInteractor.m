@@ -113,7 +113,6 @@
         
         else{
             
-            NSLog(@"Change status to single");
             [self.presenter startAnimatingActivityView];
             selectedStatus = cell.statusTypeLabel.text;
             [self fetchUserObjectIfNeeded];
@@ -155,6 +154,7 @@
             }
             
             [Defaults setBackgroundImage:[UIImage grayishImage:chosenImage]];
+            [self createBackgroundTaskForImageUpload:chosenImage];
             [self.presenter setBackGroundImage];
             
         }
@@ -282,8 +282,6 @@
     
 }
 -(void)updatePreviousPartnerOfUser:(PFUser*)user{
-
-    NSLog(@"Update previous partner called");
     
     NSArray *partnerArray = user[@"partner"];
 
@@ -293,18 +291,16 @@
             
             PFObject *previousPartner = [partnerArray objectAtIndex:0];
             previousPartner[@"status"] = @"SINGLE";
-            [previousPartner removeObjectForKey:@"partner"];
+            [previousPartner removeObject:user forKey:@"partner"];
             [self.networkProvider saveWithPFObject:previousPartner
                                            success:^(id responseObject) {
                                                
-                                               NSLog(@"update previous partner sucess");
-                                               [user removeObjectForKey:@"partner"];
+                                               [user removeObject:previousPartner forKey:@"partner"];
                                                user[@"status"] = selectedStatus;
                                                [self updatePFUserStatusWithUser:user];
                                         
                                            } failure:^(NSError *error) {
                                                
-                                               NSLog(@"Failed to update previous partner");
                                                [self.presenter stopAnimatingActivitiyView];
                                                [self.presenter hideTableView];
                                                [self.presenter showErrorView:error.localizedDescription];
@@ -342,13 +338,13 @@
                                        [self.presenter resetImageViewsPostition];
                                        [self.presenter stopAnimatingActivitiyView];
                                        [self.presenter hideTableView];
+                                       [self updateStatusHistoryForUser:user];
                                        
                                    } failure:^(NSError *error) {
                                        
                                        [self.presenter stopAnimatingActivitiyView];
                                        [self.presenter hideTableView];
                                        [self.presenter showErrorView:error.localizedDescription];
-                                       NSLog(@"could not update user status");
                                    }];
 }
 
@@ -356,7 +352,6 @@
     
     PFUser *notifiedUser = partner;
     NSString *channel = [notifiedUser objectId];
-    NSLog(@"This is the channel %@", channel);
     NSString *message = @"Your partner changed their status to SINGLE";
     
     NSDictionary *dictionary = @{
@@ -372,21 +367,62 @@
                                                  parameters:dictionary
                                                     success:^(id responseObject) {
                                                         
-                                                        NSLog(@"This is the response: %@", responseObject);
-                                                        NSLog(@"Sucessful push");
                                                         [user removeObjectForKey:@"partner"];
                                                         user[@"status"] = selectedStatus;
                                                         [self updatePFUserStatusWithUser:user];
                                                         
                                                     } andFailure:^(NSError *error) {
                                                         
-                                                        NSLog(@"This is the error %@", error.localizedDescription);
                                                         [self.presenter stopAnimatingActivitiyView];
                                                         [self.presenter hideTableView];
                                                         [self.presenter showErrorView:error.localizedDescription];
                                                         
                                                     }];
     
+}
+
+-(void)updateStatusHistoryForUser:(PFUser  *)user{
+    
+    //Check if user has a status history
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query whereKey:@"historyId" equalTo:user.objectId];
+    [query orderByDescending:@"statusDate"];
+    
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                             
+                                             NSLog(@"This is the respons object %@", responseObject);
+                                             NSArray *array = responseObject;
+                                             if (array.count > 0) {
+                                                 //User has a history, so send the end date of the last relationship
+                                                 PFObject *object = [array objectAtIndex:0];
+                                                 object[@"statusEndDate"] = [NSDate date];
+                                                 [object saveInBackground];
+                                                 
+                                                 //Then create the new history
+                                                 PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+                                                 statusHistoryObject[@"historyId"] = user.objectId;
+                                                 statusHistoryObject[@"statusType"] = user[@"status"];
+                                                 statusHistoryObject[@"statusDate"] = [NSDate date];
+                                                 [statusHistoryObject saveInBackground];
+                                                 
+                                             }
+                                             else{
+                                                 
+                                                 //User has no history so create history as normal
+                                                 PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+                                                 statusHistoryObject[@"historyId"] = user.objectId;
+                                                 statusHistoryObject[@"statusType"] = user[@"status"];
+                                                 statusHistoryObject[@"statusDate"] = [NSDate date];
+                                                 [statusHistoryObject saveInBackground];
+                                             }
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                             NSLog(@"This is the error %@", error.localizedDescription);
+                                         }];
+
 }
 
 -(NSString *)getMediaAutorizationForMediaType:(UIImagePickerControllerSourceType)sourceType {
@@ -472,6 +508,7 @@
 {
     croppedImage = [UIImage imageWithImage:croppedImage scaledToSize:CGSizeMake(100, 100)];
     [Defaults setProfileImage:croppedImage];
+    [self createBackgroundTaskForImageUpload:croppedImage];
     [self.presenter chooseProfileImage];
     [self.presenter dissmissImageCropper];
 }
@@ -486,4 +523,76 @@
 
     }
 }
+
+
+#pragma mark - Image Upload
+
+-(void)createBackgroundTaskForImageUpload:(UIImage *)image{
+    
+    UIBackgroundTaskIdentifier backgoundTask;
+    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
+    }];
+    
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self updatePFUserImageWithImage:image];
+        [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
+        
+        
+    });
+}
+
+-(void)updatePFUserImageWithImage:(UIImage *)image{
+    
+    if ([UIImage isImageToLarge:image]) {
+        
+        image = [UIImage shrinkImage:image];
+        
+    }
+    
+    NSData *backgroundImageData = UIImagePNGRepresentation(image);
+    PFFile *backgroundImageFile = [PFFile fileWithData:backgroundImageData];
+    
+    [backgroundImageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded) {
+            
+            PFUser *user = [PFUser currentUser];
+            [user setObject:backgroundImageFile forKey:@"userBackgroundPicture"];
+            [user saveEventually:^(BOOL suceeded, NSError *error){
+                
+                if (succeeded) {
+                    NSLog(@"Image uploaded");
+                    
+                }
+                
+                else{
+                    
+                    NSLog(@"%@", [error userInfo]);
+                }
+                
+                
+            }];
+            
+        }
+        
+        else{
+            
+            NSLog(@"Error from saving file: %@", [error userInfo]);
+            
+        }
+        
+    }];
+}
+
 @end
+
+
+
+
+
+
+

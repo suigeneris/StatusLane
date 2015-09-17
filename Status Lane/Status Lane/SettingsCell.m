@@ -11,6 +11,7 @@
 #import "NSString+StatusLane.h"
 #import "Defaults.h"
 #import "AppDelegate.h"
+#import "NetworkManager.h"
 
 @interface SettingsCell() {
     
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) NSString *fullName;
 @property (nonatomic, strong) NSString *gender;
 @property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) id<NetworkProvider> networkProvider;
 
 @end
 
@@ -36,6 +38,16 @@
 
 }
 
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        
+        _networkProvider = [[NetworkManager alloc]init];
+    }
+    
+    return _networkProvider;
+}
+
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
 
     BOOL final;
@@ -43,7 +55,6 @@
     if (textField.tag == 0) {
         
         if ([self validateFullName:textField.text]) {
-            //[Defaults setFullName:textField.text];
             self.fullName = textField.text;
             final = YES;
             
@@ -59,7 +70,6 @@
     else if (textField.tag == 1) {
         
         if ([self validateGender:textField.text]) {
-            //[Defaults setSex:textField.text];
             self.gender = textField.text;
             final = YES;
             
@@ -74,7 +84,6 @@
     else if (textField.tag == 2) {
         
         if ([textField.text isValidEmail]) {
-            //[Defaults setEmailAddress:textField.text];
             self.email = textField.text;
             final = YES;
             
@@ -82,6 +91,8 @@
         else{
             
             [self showErrorViewWithMessage:@"Please Enter a valid email :)" withResignTextField:textField];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"emailAddress"];
+
             final =  NO;
         }
 
@@ -171,7 +182,7 @@
 
 -(BOOL)validateFullName:(NSString *)username{
     
-    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"];
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_ "];
     set = [set invertedSet];
 
     NSRange range = [username rangeOfCharacterFromSet:set];
@@ -201,7 +212,7 @@
 -(void)showErrorViewWithMessage:(NSString *)message withResignTextField:(UITextField *)textField {
     
     AppDelegate *app = [UIApplication sharedApplication].delegate;
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message andTitle:@"OOOOPs!"];
     
     if (app.window.subviews.count < 2) {
         
@@ -209,6 +220,9 @@
 
     }
 }
+
+
+
 
 @end
 

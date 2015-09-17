@@ -8,6 +8,7 @@
 
 #import "VerifyAccountInteractor.h"
 #import "Defaults.h"
+#import "NSString+StatusLane.h"
 #import "NetworkManager.h"
 #import "PushNotificationManager.h"
 
@@ -72,34 +73,99 @@
     
 }
 
-
--(void)attemptRegisterUserWithUsername:(NSString *)username andPassword:(NSString *)password{
-
-    [Defaults setPassword:password];
-    [Defaults setStatus:@"SINGLE"];
+-(void)queryParseForAnonymousUser:(NSString *)username andPasswordIfAnonymousUserIsFound:(NSString *)password {
     
-    [self.networkProvider attemptRegistrationWithUsername:username
-                                              andPassword:password
-                                                  success:^(id responseObject) {
-                                                      
-                                                      [self.presenter hideActivityView];
-                                                      
-                                                      [self subscriibeToPushNotificationChannel];
-                                                      [self.presenter createAccountSuccessfull];
+    NSDictionary *dictionary = [NSString allFormatsForPhoneNumber:username];
+    
+    NSArray *array = @[[dictionary objectForKey:@"E164"],
+                       [dictionary objectForKey:@"National"]];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"AnonymousUser"];
+    [query whereKey:@"username" containedIn:array];
+    [query includeKey:@"partner"];
 
-                                                      
-                                                  } failure:^(NSError *error) {
-                                                      
-                                                      [self.presenter hideActivityView];
-                                                      NSString *errorString = [error userInfo][@"error"];
-                                                      [self.presenter showErrorViewWithMessage:errorString];
-                                                      
-                                                  }];
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                             
+                                             [self.presenter hideActivityView];
+                                             NSArray *responseArray = responseObject;
+                                             if (responseArray.count == 1) {
+                                                 
+                                                 PFObject *anonymousUser = [responseArray objectAtIndex:0];
+                                                 PFUser *user = [PFUser user];
+                                                 user.username = username;
+                                                 user.password = password;
+                                                 user[@"fullName"] = anonymousUser[@"fullName"];
+                                                 user[@"status"] = anonymousUser[@"status"];
+                                                 if (![anonymousUser[@"status"] isEqualToString:@"SINGLE"]) {
+                                                     user[@"partner"] = anonymousUser[@"partner"];
 
+                                                 }
+                                                 [self attemptRegisterUserWithUser:user];
+                                                 [anonymousUser deleteInBackground];
+                                             }
+                                             else if (responseArray.count == 0){
+                                                 
+                                                 PFUser *user = [PFUser user];
+                                                 user.username = username;
+                                                 user.password = password;
+                                                 user[@"status"] = @"SINGLE";
+                                                 user[@"fullName"] = @"Full Name";
+                                                 user[@"gender"] = @"Gender not set";
+                                                 [self attemptRegisterUserWithUser:user];
+                                             }
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                             [self.presenter hideActivityView];
+                                             [self.presenter showErrorViewWithMessage:error.localizedDescription];
+                                         }];
+    
+    [self.presenter showActivityView];
+}
+
+
+
+-(void)attemptRegisterUserWithUser:(PFUser *)user{
+
+    [self.networkProvider attemptRegistrationWithPFUser:user
+                                                success:^(id responseObject) {
+                                                    
+                                                    [self.presenter hideActivityView];
+                                                    
+                                                    if (user[@"fullName"]) {
+                                                        [Defaults setFullName:user[@"fullName"]];
+                                                    }
+                                                    if (user[@"gender"]) {
+                                                        [Defaults setSex:user[@"gender"]];
+                                                    }
+                                                    if (user[@"partner"]) {
+                                                        
+                                                        PFUser *partnerForAnonymousUser = [user[@"partner"] objectAtIndex:0];
+                                                        [Defaults setPartnerFullName:partnerForAnonymousUser[@"fullName"]];
+                                                    }
+                                                    
+                                                    [Defaults setUsername:user.username];
+                                                    [Defaults setPassword:user.password];
+                                                    [Defaults setStatus:user[@"status"]];
+                                                    
+                                                    [self subscriibeToPushNotificationChannel];
+                                                    [self.presenter createAccountSuccessfull];
+                                                    
+                                                    
+                                                } failure:^(NSError *error) {
+                                                    
+                                                    [self.presenter hideActivityView];
+                                                    NSString *errorString = [error userInfo][@"error"];
+                                                    [self.presenter showErrorViewWithMessage:errorString];
+                                                    
+                                                }];
+    
     [self.presenter showActivityView];
 
     
 }
+
 
 
 -(void)subscriibeToPushNotificationChannel{

@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "RelationshipHistoryContracts.h"
+#import "RelationshipHistoryPresenter.h"
 
-@interface RelationshipHistoryInteractor : NSObject <UITableViewDelegate, RelationshipHistoryInteractorDatasource>
+@interface RelationshipHistoryInteractor : NSObject <UITableViewDelegate, RelationshipHistoryInteractorDatasource, RelationshipHistoryInteractor>
 
+@property (nonatomic, weak) RelationshipHistoryPresenter *presenter;
 
 @end

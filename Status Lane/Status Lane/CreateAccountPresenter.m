@@ -238,7 +238,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)showErrorView:(NSString *)errorMessage{
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
     [errorView show];
 }
 
@@ -278,9 +278,6 @@ static void *countryCodeContext = &countryCodeContext;
         [self validatePassword];
     }
 }
-
-
-
 
 
 #pragma mark - Key Value Observer 

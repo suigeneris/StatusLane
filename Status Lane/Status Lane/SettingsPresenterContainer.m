@@ -12,7 +12,10 @@
 #import "SettingsInteractor.h"
 #import "Defaults.h"
 
-@interface SettingsPresenterContainer()
+@interface SettingsPresenterContainer(){
+    
+    NSString  *currentEmail;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -28,10 +31,7 @@
     
     // Do any additional setup after loading the view.
     
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fullName"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"emailAddress"];
-    
+    currentEmail = [Defaults emailAddress];
     SettingsInteractor *interactor = [SettingsInteractor new];
     interactor.presenter = self;
     self.interactor = interactor;
@@ -39,6 +39,11 @@
     [self setUpUIElements];
     [self revealControllerSetUp];
     
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [self.interactor updateUserDetailsIfEmailChanged:currentEmail];
 }
 
 -(void)dealloc{
@@ -71,13 +76,6 @@
         [self.burgerMenuButton addTarget:self action:@selector(toggleBurgerMenu) forControlEvents:UIControlEventTouchUpInside];
         [self.searchButton addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
         
-//        [self.burgerMenuButton addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
-
-
-        //[self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-        //[self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
     }
 }
 
@@ -89,7 +87,7 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
- */
+*/
 
 #pragma mark - internal methods
 
@@ -105,7 +103,7 @@
     
     else{
         
-        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form"];
+        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" andTitle:@"OOOOPs!"];
         [errorView show];
     }
     
@@ -123,7 +121,7 @@
     
     else{
         
-        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form"];
+        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" andTitle:@"OOOOPs!"];
         [errorView show];
     }
     
