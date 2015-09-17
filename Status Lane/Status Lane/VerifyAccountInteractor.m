@@ -133,11 +133,21 @@
                                                     
                                                     [self.presenter hideActivityView];
                                                     
-                                                    if (user[@"fullName"]) {
+                                                    if (user[@"fullName"] && ![user[@"fullName"] isEqualToString:@"Full Name"]) {
                                                         [Defaults setFullName:user[@"fullName"]];
                                                     }
-                                                    if (user[@"gender"]) {
+                                                    else{
+                                                        
+                                                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fullName"];
+                                                    }
+                                                    
+                                                    if (user[@"gender"] && [user[@"gender"] isEqualToString:@"Gender Not Set"]) {
                                                         [Defaults setSex:user[@"gender"]];
+                                                    }
+                                                    else{
+                                                        
+                                                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
+                                                        
                                                     }
                                                     if (user[@"partner"]) {
                                                         
