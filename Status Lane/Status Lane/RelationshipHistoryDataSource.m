@@ -15,11 +15,20 @@
 @interface RelationshipHistoryDataSource()
 
 @property(nonatomic, strong) NSArray *arrayOfStatusHistoryObjects;
+@property(nonatomic, strong) NSMutableArray *arrayOfPFUsers;
+
 
 @end
 
 @implementation RelationshipHistoryDataSource
 
+-(NSMutableArray *)arrayOfPFUsers{
+    
+    if (!_arrayOfPFUsers) {
+        _arrayOfPFUsers = [NSMutableArray new];
+    }
+    return _arrayOfPFUsers;
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -34,6 +43,12 @@
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.arrayOfPFUsers.count == 0) {
+        
+        self.arrayOfPFUsers = [self.interactor returnArrayOfUsersInStatusHistory];
+
+    }
     
     RelationshipHistoryCellPresenter *cell = (RelationshipHistoryCellPresenter *)[tableView dequeueReusableCellWithIdentifier:@"Cell 1"];
     
@@ -67,6 +82,10 @@
             cell.userStatusDate.text = [NSString stringWithFormat:@"%@ - Till Date", startDate];
             cell.statusDuration.text = [self returnStatusDurationWithStartDate:date andEndDate:nil];
 
+        }
+        
+        for (PFObject *object in self.arrayOfPFUsers){
+            
         }
 
     }
@@ -119,9 +138,6 @@
     
     return intervalBetweenDates;
 }
-
-
-
 
 
 

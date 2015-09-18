@@ -83,8 +83,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    NSLog(@"Is this called");
-
     if (self.foregroundNotification) {
         
         [self openPendingRequests];

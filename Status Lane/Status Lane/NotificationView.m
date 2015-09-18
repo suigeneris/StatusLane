@@ -168,7 +168,6 @@ static const CGFloat animationDuration = 0.35f;
 
 
 -(void)getMetaData{
-    NSLog(@"Is this called");
     NSString *objectId = [self.notificationDictionary objectForKey:@"objectId"];
     PFQuery *query = [PFUser query];
     [query  whereKey:@"objectId" equalTo:objectId];
