@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -2140,7 +2140,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TGG-1L-SNE" id="zkc-JW-GoU">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample profile image" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-kZ-pt6">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample profile image" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-kZ-pt6" customClass="PFImageView">
                                                     <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="RId-dd-o30"/>
@@ -2159,7 +2159,7 @@
                                                     <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWz-sc-D25">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWz-sc-D25">
                                                     <rect key="frame" x="170" y="16" width="142" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="ahx-Uo-nVl"/>
@@ -2174,7 +2174,7 @@
                                                         </mask>
                                                     </variation>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="By9-JK-Isn">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="By9-JK-Isn">
                                                     <rect key="frame" x="147" y="35" width="165" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="165" id="QuD-ht-pkL"/>
@@ -2214,7 +2214,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="fullNameLabel" destination="zA9-l2-lud" id="xaH-Jd-Z37"/>
-                                            <outlet property="profileImageView" destination="ljh-kZ-pt6" id="VfD-Nt-NLj"/>
+                                            <outlet property="profileImageView" destination="ljh-kZ-pt6" id="vVB-qP-dLG"/>
                                             <outlet property="statusDuration" destination="By9-JK-Isn" id="aYJ-sV-liG"/>
                                             <outlet property="userStatusDate" destination="gWz-sc-D25" id="Xtm-5C-9vQ"/>
                                             <outlet property="userStatusLabel" destination="vCR-3b-CXk" id="0YR-06-cL2"/>

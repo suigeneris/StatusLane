@@ -47,49 +47,73 @@
     if (self.arrayOfPFUsers.count == 0) {
         
         self.arrayOfPFUsers = [self.interactor returnArrayOfUsersInStatusHistory];
-
+       
     }
     
     RelationshipHistoryCellPresenter *cell = (RelationshipHistoryCellPresenter *)[tableView dequeueReusableCellWithIdentifier:@"Cell 1"];
     
     if (self.arrayOfStatusHistoryObjects) {
-    
-        PFObject *object = [self.arrayOfStatusHistoryObjects objectAtIndex:indexPath.row];
-        if (object[@"partnerName"]) {
-            
-            cell.fullNameLabel.text = object[@"partnerName"];
-        }
-        else{
-            
-            cell.fullNameLabel.text = @"";
-        }
-        cell.userStatusLabel.text = object[@"statusType"];
         
-        NSDate *date = object[@"statusDate"];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        NSString *startDate = [formatter stringFromDate:date];
-
-        if (object[@"statusEndDate"]) {
-         
-            NSDate *date2 = object[@"statusEndDate"];
-            NSString *endDate = [formatter stringFromDate:date2];
+        NSMutableDictionary *dict = [self.arrayOfStatusHistoryObjects objectAtIndex:indexPath.row];
+        
+        cell.fullNameLabel.text = [dict objectForKey:@"partnerName"];
+        cell.userStatusLabel.text = [dict objectForKey:@"statusType"];
+        
+        if ([[dict objectForKey:@"statusEndDate"] isKindOfClass:NSClassFromString(@"NSString" )]) {
+            
+            NSString *startDate = [self returnStringFromDate:[dict objectForKey:@"statusDate"]];
+            
+            NSString *endDate = @"Till Date";
+            
             cell.userStatusDate.text = [NSString stringWithFormat:@"%@ - %@", startDate, endDate];
-            cell.statusDuration.text = [self returnStatusDurationWithStartDate:date andEndDate:date2];
+            
+            cell.statusDuration.text = [self returnStatusDurationWithStartDate:[dict objectForKey:@"statusDate"] andEndDate:nil];
+            
         }
         else{
             
-            cell.userStatusDate.text = [NSString stringWithFormat:@"%@ - Till Date", startDate];
-            cell.statusDuration.text = [self returnStatusDurationWithStartDate:date andEndDate:nil];
-
-        }
-        
-        for (PFObject *object in self.arrayOfPFUsers){
+            NSString *startDate = [self returnStringFromDate:[dict objectForKey:@"statusDate"]];
+            
+            NSString *endDate = [self returnStringFromDate:[dict objectForKey:@"statusEndDate"]];
+            
+            cell.userStatusDate.text = [NSString stringWithFormat:@"%@ - %@", startDate, endDate];
+            
+            cell.statusDuration.text = [self returnStatusDurationWithStartDate:[dict objectForKey:@"statusDate"] andEndDate:[dict objectForKey:@"statusEndDate"]];
             
         }
+        
+        for (PFObject *object in self.arrayOfPFUsers) {
+            
+            if ([object.objectId isEqualToString:[dict objectForKey:@"partnerId"]]) {
 
+                if (object[@"userProfilePicture"]) {
+                    
+                    [dict setObject:object[@"userProfilePicture"] forKey:@"profilePicFile"];
+                    
+                }
+                else{
+                    
+                    [dict setObject:[UIImage imageNamed:@"Default_Profile_Image"] forKey:@"profilePicFile"];
+                }
+                
+            }
+        }
+        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
+        cell.profileImageView.clipsToBounds = YES;
+        
+        if ([[dict objectForKey:@"profilePicFile"] isKindOfClass:NSClassFromString(@"PFFile")]) {
+            
+            cell.profileImageView.file = [dict objectForKey:@"profilePicFile"];
+            [cell.profileImageView loadInBackground];
+            
+        }
+        
+        else{
+            
+            cell.profileImageView.image = [dict objectForKey:@"profilePicFile"];
+            
+        }
     }
-    
     return cell;
 }
 
@@ -139,6 +163,15 @@
     return intervalBetweenDates;
 }
 
+
+-(NSString *)returnStringFromDate:(NSDate *)date{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    NSString *startDate = [formatter stringFromDate:date];
+    return startDate;
+    
+}
 
 
 @end

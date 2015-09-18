@@ -9,13 +9,13 @@
 #import "RelationshipHistoryInteractor.h"
 #import "RelationshipHistoryDataSource.h"
 #import "NetworkManager.h"
+#import "Defaults.h"
 
 @interface RelationshipHistoryInteractor()
 
 @property (nonatomic, strong) id<UITableViewDataSource> dataSource;
 @property (nonatomic, strong) NSMutableArray *arrayOfHistoryObjects;
 @property (nonatomic, strong) NSMutableArray *arrayOfUsersInStatusHistory;
-@property (nonatomic, strong) NSMutableArray *tempArray;
 @property (nonatomic, strong) RelationshipHistoryDataSource *relationshipDataSource;
 @property (nonatomic, strong) id<NetworkProvider> networkProvider;
 
@@ -65,13 +65,15 @@
     
     PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
     [compoundQuery orderByDescending:@"statusDate"];
+    [compoundQuery includeKey:@"StatusHistory.partnerId"];
     compoundQuery.limit = 20;
 
     [self.networkProvider queryDatabaseWithQuery:compoundQuery
                                          success:^(id responseObject) {
                                              
-                                             self.arrayOfHistoryObjects = responseObject;
-                                             [self getListOfUsersInStatusHistoryFromArray:self.arrayOfHistoryObjects];
+                                             self.arrayOfHistoryObjects = [self pourStatusHistoryObjectsIntoMutableDictionary:responseObject];
+                                             [self getListOfUsersInStatusHistoryFromArray:responseObject];
+                                             [self.presenter reloadDatasource];
                                              
                                          } failure:^(NSError *error) {
                                              
@@ -119,7 +121,8 @@
     [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
                                              
-                                             self.tempArray = responseObject;
+
+                                             self.arrayOfUsersInStatusHistory = responseObject;
                                              [self getListOfAnonymousUsersInStatusHistoryWithQuery:query2];
                                              
                                          } failure:^(NSError *error) {
@@ -138,8 +141,7 @@
                                          success:^(id responseObject) {
                                              
                                              [self.presenter stopAnimatingActivitiyView];
-                                             [self.tempArray addObjectsFromArray:responseObject];
-                                             self.arrayOfUsersInStatusHistory = [self pourStatusHistoryObjectsIntoMutableDictionary:self.tempArray];
+                                             [self.arrayOfUsersInStatusHistory addObjectsFromArray:responseObject];
                                              [self.presenter reloadDatasource];
                                              
                                          } failure:^(NSError *error) {
@@ -156,19 +158,54 @@
 }
 
 -(NSMutableArray *)returnArrayOfUsersInStatusHistory{
-    
+
    return  self.arrayOfUsersInStatusHistory;
 }
 
--(NSMutableArray *)pourStatusHistoryObjectsIntoMutableDictionary:(NSMutableArray *)array{
+-(NSMutableArray *)pourStatusHistoryObjectsIntoMutableDictionary:(NSArray *)array{
     
     NSMutableArray *finalArray = [NSMutableArray new];
-    
+
     for (PFObject *object in array) {
         NSMutableDictionary *dict = [NSMutableDictionary new];
+        
+        if (object[@"partnerId"]) {
+            [dict setObject:object[@"partnerId"] forKey:@"partnerId"];
+
+        }
+        else{
+            
+            [dict setObject:@"no partner id" forKey:@"partnerId"];
+
+        }
         [dict setObject:[object objectId] forKey:@"objectId"];
+        [dict setObject:object[@"statusType"] forKey:@"statusType"];
+        [dict setObject:object[@"statusDate"] forKey:@"statusDate"];
+
+        if (object[@"partnerName"]) {
+            [dict setObject:object[@"partnerName"] forKey:@"partnerName"];
+
+        }
+        else{
+            
+            [dict setObject:@"" forKey:@"partnerName"];
+
+        }
+        
+        if (object[@"statusEndDate"]) {
+            [dict setObject:object[@"statusEndDate"] forKey:@"statusEndDate"];
+
+        }
+        else{
+            
+            [dict setObject:@"Till Date" forKey:@"statusEndDate"];
+
+        }
+        
+
         [finalArray addObject:dict];
     }
+
     return finalArray;
 }
 
