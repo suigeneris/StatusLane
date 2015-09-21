@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 
 @interface RelationshipHistoryCellPresenter : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userStatusLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userStatusDate;
