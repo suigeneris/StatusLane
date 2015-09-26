@@ -107,7 +107,7 @@
         if ([[Defaults status] isEqualToString:cell.statusTypeLabel.text]) {
         
             [self.presenter hideTableView];
-            [self.presenter changeUserStatusToSingle];
+            [self.presenter changeUserStatusWithStatus:cell.statusTypeLabel.text];
             [self.presenter resetImageViewsPostition];
         }
         
@@ -119,11 +119,24 @@
         }
         
     }
-    
     else {
         
-        [self.presenter indexPathForSelectedRow:indexPath];
-        [self.presenter showChoosePartner];
+        if ([[Defaults status] isEqualToString:@"SINGLE"]) {
+            [self.presenter indexPathForSelectedRow:indexPath];
+            [self.presenter showChoosePartner];
+        }
+        else if ([[Defaults status] isEqualToString:cell.statusTypeLabel.text]){
+            
+            [self.presenter hideTableView];
+
+        }
+        else{
+            
+            [self.presenter startAnimatingActivityView];
+            selectedStatus = cell.statusTypeLabel.text;
+            [self fetchUserObjectIfNeeded];
+        }
+        
     }
     
 }
@@ -287,16 +300,24 @@
 
     if (partnerArray) {
         
+
         if (![[partnerArray objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
             
+            NSLog(@"Is this called");
+
             PFObject *previousPartner = [partnerArray objectAtIndex:0];
-            previousPartner[@"status"] = @"SINGLE";
-            [previousPartner removeObject:user forKey:@"partner"];
+            previousPartner[@"status"] = selectedStatus;
+            if ([selectedStatus isEqualToString:@"SINGLE"]) {
+                [previousPartner removeObject:user forKey:@"partner"];
+            }
             [self.networkProvider saveWithPFObject:previousPartner
                                            success:^(id responseObject) {
                                                
-                                               [user removeObject:previousPartner forKey:@"partner"];
+                                               
                                                user[@"status"] = selectedStatus;
+                                               if ([selectedStatus isEqualToString:@"SINGLE"]) {
+                                                   [user removeObject:previousPartner forKey:@"partner"];
+                                               }
                                                [self updatePFUserStatusWithUser:user];
                                         
                                            } failure:^(NSError *error) {
@@ -306,6 +327,7 @@
                                                [self.presenter showErrorView:error.localizedDescription];
                                                
                                            }];
+            
         }
         
         else{
@@ -319,7 +341,7 @@
         
         NSLog(@"NO PARTNER");
         [self.presenter stopAnimatingActivitiyView];
-        [self.presenter changeUserStatusToSingle];
+        [self.presenter changeUserStatusWithStatus:@"SINGLE"];
         [self.presenter hideTableView];
         [self.presenter resetImageViewsPostition];
     }
@@ -334,8 +356,11 @@
                                        NSLog(@"update pf user status with user success");
 
                                        [Defaults setStatus:selectedStatus];
-                                       [self.presenter changeUserStatusToSingle];
-                                       [self.presenter resetImageViewsPostition];
+                                       [self.presenter changeUserStatusWithStatus:selectedStatus];
+                                       if ([selectedStatus isEqualToString:@"SINGLE"]) {
+                                           [self.presenter resetImageViewsPostition];
+
+                                       }
                                        [self.presenter stopAnimatingActivitiyView];
                                        [self.presenter hideTableView];
                                        [self updateStatusHistoryForUser:user];
@@ -397,11 +422,16 @@
                                                  //User has a history, so send the end date of the last relationship
                                                  PFObject *object = [array objectAtIndex:0];
                                                  object[@"statusEndDate"] = [NSDate date];
+                                                 NSString *lastPartnerId = object[@"partnerId"];
+                                                 NSString *lastPartnerName = object[@"partnerName"];
                                                  [object saveInBackground];
                                                  
                                                  //Then create the new history
                                                  PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
                                                  statusHistoryObject[@"historyId"] = user.objectId;
+                                                 statusHistoryObject[@"partnerId"] = lastPartnerId;
+                                                 statusHistoryObject[@"partnerName"] = lastPartnerName;
+                                                 statusHistoryObject[@"fullName"] = user[@"fullName"];
                                                  statusHistoryObject[@"statusType"] = user[@"status"];
                                                  statusHistoryObject[@"statusDate"] = [NSDate date];
                                                  [statusHistoryObject saveInBackground];

@@ -415,9 +415,9 @@
     self.indexPathForSelectedCell = indexPath;
 }
 
--(void)changeUserStatusToSingle{
+-(void)changeUserStatusWithStatus:(NSString *)status{
     
-    self.relationshipStatusLabel.text = @"SINGLE";
+    self.relationshipStatusLabel.text = status;
 }
 
 
