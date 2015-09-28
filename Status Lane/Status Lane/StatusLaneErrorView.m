@@ -22,6 +22,7 @@ static const CGFloat animationDuration = 0.35f;
 @property (nonatomic) UIView *backGroundView;
 @property (nonatomic) UILabel *errorLabel;
 @property (nonatomic) UILabel *messageLabel;
+@property (nonatomic, copy) void (^completionBlock)(void);
 
 
 @end
@@ -63,7 +64,7 @@ static const CGFloat animationDuration = 0.35f;
         _dismissButton.backgroundColor = [UIColor clearColor];
         [_dismissButton setAttributedTitle:string forState:UIControlStateNormal];
         [_dismissButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_dismissButton addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
+        [_dismissButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
         _dismissButton.frame = CGRectMake((CGRectGetWidth(self.bounds)/2) - 25, CGRectGetHeight(self.bounds) - 100, 100, 50);
         [_dismissButton sizeToFit];
     }
@@ -168,9 +169,12 @@ static const CGFloat animationDuration = 0.35f;
     
 }
 
--(void)show{
+-(void)showWithCompletionBlock:(void(^)(void))completionBlock{
 
     [self show:YES];
+    self.completionBlock = completionBlock;
+
+    
 }
 
 -(void)show:(BOOL)animated{
@@ -190,6 +194,10 @@ static const CGFloat animationDuration = 0.35f;
 -(void)hide{
     
     [self hide:YES];
+    if (self.completionBlock) {
+        self.completionBlock();
+
+    }
 }
 
 

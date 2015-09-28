@@ -36,7 +36,7 @@
     [self.networkProvider resetPasswordForUserWithEmail:email
                                                succcess:^(id responseObject) {
                                                    
-                                                   [self.presenter showErrorViewWithMessage:@"Please check your email for your Password reset link" andTitle:nil];
+                                                   [self.presenter showErrorViewWithMessage:@"Please check your email for your Password reset link" andTitle:@"Yaaay!"];
                                                    
                                                } failure:^(NSError *error) {
                                                    
