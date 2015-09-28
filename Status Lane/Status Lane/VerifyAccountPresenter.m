@@ -101,7 +101,7 @@
 
 -(void)validateDataInTextFields{
     
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     if ([self.verificationCode isEqualToString:self.verificationCodeTextfield.text]) {
         
         if ([self.password isEqualToString:self.passwordTextField.text]) {
@@ -146,7 +146,7 @@
 -(void)showErrorViewWithMessage:(NSString *)message {
     
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:@"OOOOPs!"];
-    [errorView show];
+    [errorView showWithCompletionBlock:nil];
 
 }
 

@@ -12,5 +12,5 @@
 
 
 -(id)initWithMessage:(NSString *)message andTitle:(NSString *)title;
--(void)show;
+-(void)showWithCompletionBlock:(void(^)(void))completionBlock;
 @end

@@ -289,7 +289,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 - (IBAction)contactListButtonPressed:(id)sender {
     
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     [self switchButtonsBackgroundColor:sender];
     [self hideUIElements:sender];
     self.contactListTableView.delegate = self.interactor;
@@ -301,7 +301,7 @@ static void *countryCodeContext = &countryCodeContext;
 - (IBAction)sendButtonPressed:(id)sender {
     
     [self saveStatusToDefaults];
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     [self.interactor updateUserPartnerWithFullName:self.partnerNameTextField.text andNumber:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text]];
 }
 
@@ -418,7 +418,7 @@ static void *countryCodeContext = &countryCodeContext;
 -(void)showErrorView:(NSString *)errorMessage{
     
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
-    [errorView show];
+    [errorView showWithCompletionBlock:nil];
 }
 
 -(void)startAnimatingActivityView{

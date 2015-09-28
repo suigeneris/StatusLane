@@ -185,7 +185,7 @@
         
     } andFailure:^(NSError *error) {
         
-        
+        NSLog(@"This is the error: %@", error.localizedDescription);
     }];
 }
 

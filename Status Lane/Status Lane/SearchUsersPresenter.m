@@ -24,9 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) PFObject *anonymousUser;
-
-
-
 @property (strong, nonatomic) SWRevealViewController *revealController;
 @end
 

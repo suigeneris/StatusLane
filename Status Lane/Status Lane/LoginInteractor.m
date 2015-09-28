@@ -93,7 +93,6 @@
 
 -(void)updateUserDefaultsWithLoggedInUser:(PFUser *)user{
     
-    NSLog(@"This is the logged in user: %@", user);
     [Defaults setUsername:user.username];
     [Defaults setPassword:user.password];
     [Defaults setStatus:user[@"status"]];
@@ -106,7 +105,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fullName"];
     }
     
-    if (user[@"gender"] && [user[@"gender"] isEqualToString:@"Gender Not Set"]) {
+    if (user[@"gender"] && ![user[@"gender"] isEqualToString:@"Gender not set"]) {
         [Defaults setSex:user[@"gender"]];
     }
     else{
@@ -193,6 +192,8 @@
 
 -(void)downloadImageType:(NSString *)type fromPFFile:(PFFile *)file{
     
+    NSLog(@"Is this called");
+
     [self.networkProvider downloadDataFromFile:file
                                        success:^(id responseObject) {
                                            

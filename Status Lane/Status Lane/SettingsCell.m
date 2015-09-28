@@ -216,7 +216,7 @@
     
     if (app.window.subviews.count < 2) {
         
-        [errorView show];
+        [errorView showWithCompletionBlock:nil];
 
     }
 }

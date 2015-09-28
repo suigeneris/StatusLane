@@ -167,7 +167,7 @@
             }
             
             [Defaults setBackgroundImage:[UIImage grayishImage:chosenImage]];
-            [self createBackgroundTaskForImageUpload:chosenImage];
+            [self createBackgroundTaskForImageUpload:chosenImage withImageName:@"userBackgroundPicture"];
             [self.presenter setBackGroundImage];
             
         }
@@ -537,7 +537,7 @@
 {
     croppedImage = [UIImage imageWithImage:croppedImage scaledToSize:CGSizeMake(100, 100)];
     [Defaults setProfileImage:croppedImage];
-    [self createBackgroundTaskForImageUpload:croppedImage];
+    [self createBackgroundTaskForImageUpload:croppedImage withImageName:@"userProfilePicture"];
     [self.presenter chooseProfileImage];
     [self.presenter dissmissImageCropper];
 }
@@ -556,7 +556,7 @@
 
 #pragma mark - Image Upload
 
--(void)createBackgroundTaskForImageUpload:(UIImage *)image{
+-(void)createBackgroundTaskForImageUpload:(UIImage *)image withImageName:(NSString *)name{
     
     UIBackgroundTaskIdentifier backgoundTask;
     backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
@@ -567,14 +567,14 @@
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [self updatePFUserImageWithImage:image];
+        [self updatePFUserImageWithImage:image andImageName:name];
         [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
         
         
     });
 }
 
--(void)updatePFUserImageWithImage:(UIImage *)image{
+-(void)updatePFUserImageWithImage:(UIImage *)image andImageName:(NSString *)name{
     
     if ([UIImage isImageToLarge:image]) {
         
@@ -590,7 +590,7 @@
         if (succeeded) {
             
             PFUser *user = [PFUser currentUser];
-            [user setObject:backgroundImageFile forKey:@"userBackgroundPicture"];
+            [user setObject:backgroundImageFile forKey:name];
             [user saveEventually:^(BOOL suceeded, NSError *error){
                 
                 if (succeeded) {
