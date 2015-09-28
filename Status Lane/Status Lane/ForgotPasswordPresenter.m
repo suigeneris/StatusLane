@@ -78,7 +78,7 @@
 }
 - (IBAction)submitButtonPressed:(id)sender {
     
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     
     if ([self.mobileNumberTextfield.text isValidEmail]) {
         
@@ -94,7 +94,7 @@
 }
 - (IBAction)backButtonPressed:(id)sender {
     
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     [self dismissView];
 
 }
@@ -109,9 +109,16 @@
 -(void)showErrorViewWithMessage:(NSString *)message andTitle:(NSString *)title{
     
 
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:title];
-    [errorView show];
+    [errorView showWithCompletionBlock:^{
+        
+        if (![title isEqualToString:@"OOOOPs!"]) {
+            
+            [self dismissView];
+
+        }
+    }];
 }
 
 -(void)dismissView{

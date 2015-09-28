@@ -63,6 +63,7 @@
     [self additionalUIViewSetup];
     [self revealControllerSetUp];
     [self constraintsForTableView];
+
     
 
 }
@@ -77,6 +78,7 @@
                                             selector:@selector(hideTableView)
                                                 name:@"HideTableView"
                                               object:nil];
+    
 }
 
 
@@ -122,8 +124,10 @@
 -(UIImageView *)backgroundImageView{
     
     if (!_backgroundImageView) {
-        
+        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         _backgroundImageView.image = [self.interactor returnBackgroundImageFromFile];
+        _backgroundImageView.clipsToBounds = YES;
+        _backgroundImageView.frame = self.view.bounds;
     }
     
     return _backgroundImageView;
@@ -203,12 +207,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"showChoosePartner"]) {
+    //if ([segue.identifier isEqualToString:@"showChoosePartner"]) {
         
-        StatusListPresenterCell *cell = (StatusListPresenterCell *)[self.tableview cellForRowAtIndexPath:self.indexPathForSelectedCell];
-        ChoosePartnerPresenter *vc = segue.destinationViewController;
-        vc.usersChosenStatus = cell.statusTypeLabel.text;
-    }
+        //StatusListPresenterCell *cell = (StatusListPresenterCell *)[self.tableview cellForRowAtIndexPath:self.indexPathForSelectedCell];
+        //ChoosePartnerPresenter *vc = segue.destinationViewController;
+        //vc.usersChosenStatus = cell.statusTypeLabel.text;
+    //}
 
 }
 
@@ -415,9 +419,9 @@
     self.indexPathForSelectedCell = indexPath;
 }
 
--(void)changeUserStatusToSingle{
+-(void)changeUserStatusWithStatus:(NSString *)status{
     
-    self.relationshipStatusLabel.text = @"SINGLE";
+    self.relationshipStatusLabel.text = status;
 }
 
 
@@ -465,7 +469,7 @@
 -(void)showErrorView:(NSString *)errorMessage{
     
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
-    [errorView show];
+    [errorView showWithCompletionBlock:nil];
 }
 
 #pragma mark - UIGestureReognizer Delegate Methods

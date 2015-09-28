@@ -208,7 +208,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 - (IBAction)continueButtonPressed:(id)sender {
     
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     NSString  *string = [self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text];
     self.verificationCode = [self.interactor generateVerificationCode];
     [self.interactor queryParseForUsernmae:string andCode:self.verificationCode];
@@ -239,7 +239,7 @@ static void *countryCodeContext = &countryCodeContext;
 -(void)showErrorView:(NSString *)errorMessage{
     
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
-    [errorView show];
+    [errorView showWithCompletionBlock:nil];
 }
 
 -(void)showVerifyAccount{

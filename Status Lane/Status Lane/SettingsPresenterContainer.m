@@ -104,7 +104,7 @@
     else{
         
         StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" andTitle:@"OOOOPs!"];
-        [errorView show];
+        [errorView showWithCompletionBlock:nil];
     }
     
 }
@@ -122,7 +122,7 @@
     else{
         
         StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" andTitle:@"OOOOPs!"];
-        [errorView show];
+        [errorView showWithCompletionBlock:nil];
     }
     
 }

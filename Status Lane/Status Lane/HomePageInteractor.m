@@ -107,7 +107,7 @@
         if ([[Defaults status] isEqualToString:cell.statusTypeLabel.text]) {
         
             [self.presenter hideTableView];
-            [self.presenter changeUserStatusToSingle];
+            [self.presenter changeUserStatusWithStatus:cell.statusTypeLabel.text];
             [self.presenter resetImageViewsPostition];
         }
         
@@ -119,11 +119,24 @@
         }
         
     }
-    
     else {
         
-        [self.presenter indexPathForSelectedRow:indexPath];
-        [self.presenter showChoosePartner];
+        if ([[Defaults status] isEqualToString:@"SINGLE"]) {
+            [self.presenter indexPathForSelectedRow:indexPath];
+            [self.presenter showChoosePartner];
+        }
+        else if ([[Defaults status] isEqualToString:cell.statusTypeLabel.text]){
+            
+            [self.presenter hideTableView];
+
+        }
+        else{
+            
+            [self.presenter startAnimatingActivityView];
+            selectedStatus = cell.statusTypeLabel.text;
+            [self fetchUserObjectIfNeeded];
+        }
+        
     }
     
 }
@@ -154,7 +167,7 @@
             }
             
             [Defaults setBackgroundImage:[UIImage grayishImage:chosenImage]];
-            [self createBackgroundTaskForImageUpload:chosenImage];
+            [self createBackgroundTaskForImageUpload:chosenImage withImageName:@"userBackgroundPicture"];
             [self.presenter setBackGroundImage];
             
         }
@@ -287,16 +300,24 @@
 
     if (partnerArray) {
         
+
         if (![[partnerArray objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
             
+            NSLog(@"Is this called");
+
             PFObject *previousPartner = [partnerArray objectAtIndex:0];
-            previousPartner[@"status"] = @"SINGLE";
-            [previousPartner removeObject:user forKey:@"partner"];
+            previousPartner[@"status"] = selectedStatus;
+            if ([selectedStatus isEqualToString:@"SINGLE"]) {
+                [previousPartner removeObject:user forKey:@"partner"];
+            }
             [self.networkProvider saveWithPFObject:previousPartner
                                            success:^(id responseObject) {
                                                
-                                               [user removeObject:previousPartner forKey:@"partner"];
+                                               
                                                user[@"status"] = selectedStatus;
+                                               if ([selectedStatus isEqualToString:@"SINGLE"]) {
+                                                   [user removeObject:previousPartner forKey:@"partner"];
+                                               }
                                                [self updatePFUserStatusWithUser:user];
                                         
                                            } failure:^(NSError *error) {
@@ -306,6 +327,7 @@
                                                [self.presenter showErrorView:error.localizedDescription];
                                                
                                            }];
+            
         }
         
         else{
@@ -319,7 +341,7 @@
         
         NSLog(@"NO PARTNER");
         [self.presenter stopAnimatingActivitiyView];
-        [self.presenter changeUserStatusToSingle];
+        [self.presenter changeUserStatusWithStatus:@"SINGLE"];
         [self.presenter hideTableView];
         [self.presenter resetImageViewsPostition];
     }
@@ -334,8 +356,11 @@
                                        NSLog(@"update pf user status with user success");
 
                                        [Defaults setStatus:selectedStatus];
-                                       [self.presenter changeUserStatusToSingle];
-                                       [self.presenter resetImageViewsPostition];
+                                       [self.presenter changeUserStatusWithStatus:selectedStatus];
+                                       if ([selectedStatus isEqualToString:@"SINGLE"]) {
+                                           [self.presenter resetImageViewsPostition];
+
+                                       }
                                        [self.presenter stopAnimatingActivitiyView];
                                        [self.presenter hideTableView];
                                        [self updateStatusHistoryForUser:user];
@@ -397,11 +422,16 @@
                                                  //User has a history, so send the end date of the last relationship
                                                  PFObject *object = [array objectAtIndex:0];
                                                  object[@"statusEndDate"] = [NSDate date];
+                                                 NSString *lastPartnerId = object[@"partnerId"];
+                                                 NSString *lastPartnerName = object[@"partnerName"];
                                                  [object saveInBackground];
                                                  
                                                  //Then create the new history
                                                  PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
                                                  statusHistoryObject[@"historyId"] = user.objectId;
+                                                 statusHistoryObject[@"partnerId"] = lastPartnerId;
+                                                 statusHistoryObject[@"partnerName"] = lastPartnerName;
+                                                 statusHistoryObject[@"fullName"] = user[@"fullName"];
                                                  statusHistoryObject[@"statusType"] = user[@"status"];
                                                  statusHistoryObject[@"statusDate"] = [NSDate date];
                                                  [statusHistoryObject saveInBackground];
@@ -507,7 +537,7 @@
 {
     croppedImage = [UIImage imageWithImage:croppedImage scaledToSize:CGSizeMake(100, 100)];
     [Defaults setProfileImage:croppedImage];
-    [self createBackgroundTaskForImageUpload:croppedImage];
+    [self createBackgroundTaskForImageUpload:croppedImage withImageName:@"userProfilePicture"];
     [self.presenter chooseProfileImage];
     [self.presenter dissmissImageCropper];
 }
@@ -526,7 +556,7 @@
 
 #pragma mark - Image Upload
 
--(void)createBackgroundTaskForImageUpload:(UIImage *)image{
+-(void)createBackgroundTaskForImageUpload:(UIImage *)image withImageName:(NSString *)name{
     
     UIBackgroundTaskIdentifier backgoundTask;
     backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
@@ -537,14 +567,14 @@
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [self updatePFUserImageWithImage:image];
+        [self updatePFUserImageWithImage:image andImageName:name];
         [[UIApplication sharedApplication]endBackgroundTask:backgoundTask];
         
         
     });
 }
 
--(void)updatePFUserImageWithImage:(UIImage *)image{
+-(void)updatePFUserImageWithImage:(UIImage *)image andImageName:(NSString *)name{
     
     if ([UIImage isImageToLarge:image]) {
         
@@ -560,7 +590,7 @@
         if (succeeded) {
             
             PFUser *user = [PFUser currentUser];
-            [user setObject:backgroundImageFile forKey:@"userBackgroundPicture"];
+            [user setObject:backgroundImageFile forKey:name];
             [user saveEventually:^(BOOL suceeded, NSError *error){
                 
                 if (succeeded) {

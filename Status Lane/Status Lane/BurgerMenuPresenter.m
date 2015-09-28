@@ -9,6 +9,8 @@
 #import "BurgerMenuPresenter.h"
 #import "UIColor+StatusLane.h"
 #import "BurgerMenuInteractor.h"
+#import "SWRevealViewController.h"
+
 
 @interface BurgerMenuPresenter()
 
@@ -23,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
+@property (strong, nonatomic) SWRevealViewController *revealController;
+
 @end
 
 @implementation BurgerMenuPresenter
@@ -31,6 +35,7 @@
     
     [super viewDidLoad];
     [self setUpUIElements];
+    [self setRightSideViewCOntroller];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -53,7 +58,7 @@
 
 -(void)setUpUIElements{
     
-    [self.buttonContainerView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
+    //[self.buttonContainerView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     self.unseenRequestImageView.layer.cornerRadius = self.unseenRequestImageView.bounds.size.width/2;
     
     // show image
@@ -115,6 +120,12 @@
     self.profileImageView.clipsToBounds = YES;
 }
 
+
+-(void)setRightSideViewCOntroller{
+    
+    _revealController = self.revealViewController;
+    [_revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+}
 
 @end
 

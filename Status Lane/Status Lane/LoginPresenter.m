@@ -127,14 +127,15 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)showErrorViewWithErrorMessage:(NSString *)errorMessage{
     
-    [self touchesBegan:nil withEvent:nil];
+    [self touchesBegan:[NSSet new] withEvent:nil];
     StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
-    [errorView show];
+    [errorView showWithCompletionBlock:nil];
 }
 
 -(void)login{
     
     [self performSegueWithIdentifier:@"Login" sender:self];
+    
 }
 
 -(void)showActivityView{

@@ -42,7 +42,7 @@ typedef void (^AlertControllerBlock)(void);
 -(void)dissmissImageCropper;
 -(void)hideTableView;
 -(void)indexPathForSelectedRow:(NSIndexPath*)indexPath;
--(void)changeUserStatusToSingle;
+-(void)changeUserStatusWithStatus:(NSString *)status;
 -(void)animateViews;
 -(void)resetImageViewsPostition;
 -(void)startAnimatingActivityView;
