@@ -12,7 +12,6 @@
 @implementation PurchaseRequestsDataSource
 
 
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return  4;
@@ -33,14 +32,14 @@
         
         [cell.seletedButton setImage:[UIImage imageNamed:@"Purchase Unchecked"] forState:UIControlStateNormal];
 
-        cell.numberOfRequestsLabel.text = @"1 Status Request";
+        cell.numberOfRequestsLabel.text = @"10 Status Request";
         cell.priceLabel.text = @"£0.99";
     }
     
     else if (indexPath.row ==1){
         
         [cell.seletedButton setImage:[UIImage imageNamed:@"Purchase Unchecked"] forState:UIControlStateNormal];
-        cell.numberOfRequestsLabel.text = @"3 Status Requests";
+        cell.numberOfRequestsLabel.text = @"30 Status Requests";
         cell.priceLabel.text = @"£1.99";
         
     }
@@ -48,7 +47,7 @@
     else if (indexPath.row == 2){
         
         [cell.seletedButton setImage:[UIImage imageNamed:@"Purchase Unchecked"] forState:UIControlStateNormal];
-        cell.numberOfRequestsLabel.text = @"5 Status Requests";
+        cell.numberOfRequestsLabel.text = @"50 Status Requests";
         cell.priceLabel.text = @"£3.99";
         
     }
