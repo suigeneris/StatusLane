@@ -49,6 +49,7 @@
     
     partnerStatus = status;
     partnerName = user[@"fullName"];
+    NSLog(@"This is the status %@", partnerStatus);
     
     if (user[@"partner"]) {
         
@@ -113,25 +114,33 @@
 
 -(void)setRelationshipStatusWithUser:(PFUser *)user{
     
+
     PFUser *currentUser = [PFUser currentUser];
-    currentUser[@"status"] = partnerStatus;
     
-    NSArray *partnerArray = @[user];
-    [currentUser setObject:partnerArray forKey:@"partner"];
+
+            currentUser[@"status"] = partnerStatus;
+            NSLog(@"Is this called");
+
+            NSArray *partnerArray = @[user];
+            [currentUser setObject:partnerArray forKey:@"partner"];
+            
+            [self.networkProvider saveWithPFObject:currentUser
+                                           success:^(id responseObject) {
+                                               
+                                               
+                                               [Defaults setPartnerFullName:partnerName];
+                                               [Defaults setStatus:partnerStatus];
+                                               [self.presenter stopAnimatingActivitiyView];
+                                               [self.presenter dismissView];
+                                               
+                                           } failure:^(NSError *error) {
+                                               
+                                               [self.presenter stopAnimatingActivitiyView];
+                                               [self.presenter showErrorView:error.localizedDescription];
+                                           }];
+
+
     
-    [self.networkProvider saveWithPFObject:currentUser
-                                  success:^(id responseObject) {
-                                      
-                                      [Defaults setPartnerFullName:partnerName];
-                                      [Defaults setStatus:partnerStatus];
-                                      [self.presenter stopAnimatingActivitiyView];
-                                      [self.presenter dismissView];
-                                      
-                                  } failure:^(NSError *error) {
-                                      
-                                      [self.presenter stopAnimatingActivitiyView];
-                                      [self.presenter showErrorView:error.localizedDescription];
-                                  }];
     
     
     

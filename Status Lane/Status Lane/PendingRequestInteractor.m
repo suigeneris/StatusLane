@@ -10,12 +10,15 @@
 #import "PendingRequestsDataSource.h"
 #import "NSString+StatusLane.h"
 #import "NetworkManager.h"
+#import "PushNotificationManager.h"
+#import "Defaults.h"
 
 @interface PendingRequestInteractor ()
 
 @property (nonatomic, strong) id<UITableViewDataSource> datasource;
 @property (nonatomic, strong) PendingRequestsDataSource *pendingRequestsDatasource;
 @property (nonatomic, strong) id <NetworkProvider> networkProvider;
+@property (nonatomic, strong) id <PushNotificationProvider> pushNotificationProvider;
 @property (nonatomic, strong) NSMutableArray *arrayOfNotifications;
 @property (nonatomic, strong) NSArray *arrayOfNotificationSenders;
 
@@ -95,6 +98,7 @@
                                       success:^(id responseObject) {
                                           
                                           [self.arrayOfNotifications removeObjectAtIndex:indexPath.row];
+                                          [self determineReqestTypeWithDictionary:dict];
                                           [self.presenter deleteTableViewRowWithIndexPaths:indexPath];
                                           
                                       } failure:^(NSError *error) {
@@ -102,7 +106,7 @@
                                           NSLog(@"failed with error :%@", error.localizedDescription);
                                       }];
     
-    
+    [self.presenter startAnimatingActivityView];
     
 }
 
@@ -110,6 +114,18 @@
     
     
 }
+
+-(void)determineReqestTypeWithDictionary:(NSDictionary *)dictionary{
+    
+    NSString *string = [dictionary objectForKey:@"alert"];
+    if ([string isEqualToString:@"Sent You a Partner Request"]) {
+    
+        //Send Notification to to tell the user who sent the request that their request was rejected
+        NSString *alertMessage = [NSString stringWithFormat:@"Unfortunately, %@ did not approve your Partner Status Request", [Defaults fullName]];
+        [self sendPushNotificationWithDictionary:dictionary andMessage:alertMessage];
+    }
+}
+
 
 -(NSArray *)returnArrayOfNotifications{
     
@@ -190,6 +206,29 @@
 }
 
 
+-(void)sendPushNotificationWithDictionary:(NSDictionary *)dictionary andMessage:(NSString *)message{
+    
+    NSDictionary *pushDictionary = @{
+                                 @"alert" : message,
+                                 @"badge" : @"Increment",
+                                 @"channel" : [dictionary objectForKey:@"objectId"],
+                                 @"objectId" : [[PFUser currentUser] objectId],
+                                 @"fullName" : [[PFUser currentUser] objectForKey:@"fullName"]
+                                 };
+    
+    [self.pushNotificationProvider callCloudFuntionWithName:@"sendPushNotification"
+                                                 parameters:pushDictionary
+                                                    success:^(id responseObject) {
+                                                       
+                                                        [self.presenter stopAnimatingActivitiyView];
+                                                        
+                                                    } andFailure:^(NSError *error) {
+                                                        
+                                                        [self.presenter stopAnimatingActivitiyView];
+                                                        //[self.presenter showErrorView:error.localizedDescription];
+                                                        
+                                                    }];
+}
 
 @end
 

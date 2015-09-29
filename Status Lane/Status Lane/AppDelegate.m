@@ -13,7 +13,6 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, assign) BOOL foregroundNotification;
 @end
 
 @implementation AppDelegate
@@ -42,8 +41,6 @@
                                                                              categories:nil];
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
-    self.foregroundNotification = YES;
-    NSLog(@"Application is in foreground");
 
 
 
@@ -58,15 +55,11 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    NSLog(@"Application is in background");
-    self.foregroundNotification = NO;
 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    NSLog(@"Application is in foreground");
-    self.foregroundNotification = YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -88,22 +81,16 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    NSLog(@"This is the state of the forground bool %d", self.foregroundNotification);
-    if (self.foregroundNotification) {
+    UIApplicationState state  = [application applicationState];
+    if (state == UIApplicationStateActive) {
         
-        //[self openPendingRequests];
-        NSLog(@"This is the payload %@", userInfo);
         NSDictionary *notificationPayload = userInfo;
-        //NotificationView *notificationView = [[NotificationView alloc] initWithDictionary:notificationPayload];
-        //[notificationView getMetaData];
-        
+        NotificationView *notificationView = [[NotificationView alloc] initWithDictionary:notificationPayload];
+        [notificationView getMetaData];
     }
     else{
         
-        //NSDictionary *notificationPayload = userInfo;
-        //NotificationView *notificationView = [[NotificationView alloc] initWithDictionary:notificationPayload];
-        //[notificationView getMetaData];
-        
+        [self openPendingRequests];
     }
 
 

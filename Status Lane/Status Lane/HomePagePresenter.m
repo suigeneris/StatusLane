@@ -207,12 +207,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    //if ([segue.identifier isEqualToString:@"showChoosePartner"]) {
+    if ([segue.identifier isEqualToString:@"showChoosePartner"]) {
         
-        //StatusListPresenterCell *cell = (StatusListPresenterCell *)[self.tableview cellForRowAtIndexPath:self.indexPathForSelectedCell];
-        //ChoosePartnerPresenter *vc = segue.destinationViewController;
-        //vc.usersChosenStatus = cell.statusTypeLabel.text;
-    //}
+        StatusListPresenterCell *cell = (StatusListPresenterCell *)[self.tableview cellForRowAtIndexPath:self.indexPathForSelectedCell];
+        ChoosePartnerPresenter *vc = segue.destinationViewController;
+        vc.usersChosenStatus = cell.statusTypeLabel.text;
+    }
 
 }
 

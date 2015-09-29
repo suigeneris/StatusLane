@@ -58,7 +58,6 @@
                         success:(SuccessBlock)successBlock
                      andFailure:(FailureBlock)failureBlock{
     
-    NSLog(@"These are the parameters %@", parameters);
     [PFCloud callFunctionInBackground:name
                        withParameters:parameters
                                 block:^(id object, NSError *error) {
