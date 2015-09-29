@@ -192,8 +192,6 @@
 
 -(void)downloadImageType:(NSString *)type fromPFFile:(PFFile *)file{
     
-    NSLog(@"Is this called");
-
     [self.networkProvider downloadDataFromFile:file
                                        success:^(id responseObject) {
                                            

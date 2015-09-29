@@ -277,6 +277,7 @@
 
 -(void)searchUserWithUsername:(NSString *)username andFullName:(NSString *)fullName{
     
+
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:username];
     [query includeKey:@"User.partner"];
