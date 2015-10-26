@@ -10,6 +10,9 @@
 #import "NotificationView.h"
 #import "NSString+StatusLane.h"
 #import "SWRevealViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+
 
 @interface AppDelegate ()
 
@@ -44,7 +47,8 @@
 
 
 
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                           didFinishLaunchingWithOptions:launchOptions];;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -98,6 +102,18 @@
 
 }
 
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    
+    
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation
+            ];
+}
 
 #pragma mark - Core Data stack
 

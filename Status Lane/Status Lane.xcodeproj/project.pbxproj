@@ -106,6 +106,10 @@
 		2AF8AD1B1B0DE28E00864270 /* SearchUsersPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD1A1B0DE28E00864270 /* SearchUsersPresenter.m */; };
 		2AF8AD221B0E074000864270 /* UserProfilePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD211B0E074000864270 /* UserProfilePresenter.m */; };
 		2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD281B0E54B100864270 /* PurchaseRequestsPresenter.m */; };
+		AB5A5B091BBAD3FB008D115E /* ReferAFriendInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */; settings = {ASSET_TAGS = (); }; };
+		AB5A5B0D1BBAD5F6008D115E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */; };
+		AB8AD9301BC2D8BD00C722C5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8AD92F1BC2D8BD00C722C5 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		AB927A711BC3D3D900324380 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB927A701BC3D3D900324380 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		AB967F2E1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AB967F2D1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m */; };
 /* End PBXBuildFile section */
 
@@ -306,6 +310,12 @@
 		2AF8AD281B0E54B100864270 /* PurchaseRequestsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseRequestsPresenter.m; sourceTree = "<group>"; };
 		4602F9F818E2C03E31641169 /* Pods-Status Lane.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status Lane.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane.debug.xcconfig"; sourceTree = "<group>"; };
 		69C04E1D27BAC18D563ECC0B /* Pods-Status Lane.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status Lane.release.xcconfig"; path = "Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane.release.xcconfig"; sourceTree = "<group>"; };
+		AB5A5B071BBAD3FB008D115E /* ReferAFriendInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferAFriendInteractor.h; sourceTree = "<group>"; };
+		AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferAFriendInteractor.m; sourceTree = "<group>"; };
+		AB5A5B0B1BBAD42A008D115E /* ReferAFriendContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferAFriendContracts.h; sourceTree = "<group>"; };
+		AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		AB8AD92F1BC2D8BD00C722C5 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-20150910/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		AB927A701BC3D3D900324380 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		AB967F2C1B25A45E00A5AA9B /* PurchaseRequestsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseRequestsDataSource.h; sourceTree = "<group>"; };
 		AB967F2D1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseRequestsDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,11 +325,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB5A5B0D1BBAD5F6008D115E /* MessageUI.framework in Frameworks */,
 				2A232CE81B34B42E00590B66 /* Parse.framework in Frameworks */,
 				2A232CEA1B34B43400590B66 /* Bolts.framework in Frameworks */,
+				AB8AD9301BC2D8BD00C722C5 /* FBSDKCoreKit.framework in Frameworks */,
 				2ADA30711B3B69BE00F791BF /* ParseUI.framework in Frameworks */,
 				2AC27B6B1B34881B009997AF /* Social.framework in Frameworks */,
 				2AC27B691B348814009997AF /* Accounts.framework in Frameworks */,
+				AB927A711BC3D3D900324380 /* FBSDKShareKit.framework in Frameworks */,
 				2AC27B661B348723009997AF /* libsqlite3.dylib in Frameworks */,
 				2AC27B641B348717009997AF /* libz.dylib in Frameworks */,
 				2AC27B621B348709009997AF /* SystemConfiguration.framework in Frameworks */,
@@ -721,8 +734,9 @@
 		2A1C7A3C1B18C56C003ADCF5 /* Refer A Friend */ = {
 			isa = PBXGroup;
 			children = (
-				2A1C7A3E1B18C593003ADCF5 /* Presenter */,
+				AB5A5B0A1BBAD403008D115E /* Contracts */,
 				2A1C7A3D1B18C589003ADCF5 /* Interactor */,
+				2A1C7A3E1B18C593003ADCF5 /* Presenter */,
 			);
 			name = "Refer A Friend";
 			sourceTree = "<group>";
@@ -730,6 +744,8 @@
 		2A1C7A3D1B18C589003ADCF5 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				AB5A5B071BBAD3FB008D115E /* ReferAFriendInteractor.h */,
+				AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -1207,6 +1223,9 @@
 		2AD6AB011B1CCE6900457102 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB927A701BC3D3D900324380 /* FBSDKShareKit.framework */,
+				AB8AD92F1BC2D8BD00C722C5 /* FBSDKCoreKit.framework */,
+				AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */,
 				2AC27B6A1B34881B009997AF /* Social.framework */,
 				2AC27B681B348814009997AF /* Accounts.framework */,
 				2AC27B651B348723009997AF /* libsqlite3.dylib */,
@@ -1332,6 +1351,14 @@
 				2A63CA311B244D46000F191E /* PurchseRequestPresenterCell.m */,
 			);
 			name = Presenter;
+			sourceTree = "<group>";
+		};
+		AB5A5B0A1BBAD403008D115E /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				AB5A5B0B1BBAD42A008D115E /* ReferAFriendContracts.h */,
+			);
+			name = Contracts;
 			sourceTree = "<group>";
 		};
 		AB967F2B1B25A43500A5AA9B /* Data Source */ = {
@@ -1560,6 +1587,7 @@
 				2A1C7A271B181308003ADCF5 /* SettingsPresenter.m in Sources */,
 				2A2B730C1B9E448000CF3351 /* LoginInteractor.m in Sources */,
 				2AA9F4A81B2D7D0500B5C1A2 /* Defaults.m in Sources */,
+				AB5A5B091BBAD3FB008D115E /* ReferAFriendInteractor.m in Sources */,
 				2A0BC3EC1B69684D00ED82C9 /* PushNotificationManager.m in Sources */,
 				2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */,
 				2A7679BD1B2251A100B616DE /* SWRevealViewController.m in Sources */,
@@ -1700,6 +1728,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/'Status Lane'",
+					"$(PROJECT_DIR)/Status",
+					Lane,
 				);
 				INFOPLIST_FILE = "Status Lane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1721,6 +1751,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/'Status Lane'",
+					"$(PROJECT_DIR)/Status",
+					Lane,
 				);
 				INFOPLIST_FILE = "Status Lane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
