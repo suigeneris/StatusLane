@@ -57,6 +57,8 @@
 		2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CF91B36D49900590B66 /* VerifyAccountInteractor.m */; };
 		2A232CFE1B3766CB00590B66 /* KeyChainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CFD1B3766CB00590B66 /* KeyChainWrapper.m */; };
 		2A25C0411B0BC5770063472B /* VerifyAccountPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A25C0401B0BC5770063472B /* VerifyAccountPresenter.m */; };
+		2A268CA01BDEC44B0096B38B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A268C9F1BDEC44B0096B38B /* FBSDKShareKit.framework */; };
+		2A268CA21BDEC45D0096B38B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A268CA11BDEC45D0096B38B /* FBSDKCoreKit.framework */; };
 		2A2B730C1B9E448000CF3351 /* LoginInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B73091B9E448000CF3351 /* LoginInteractor.m */; };
 		2A2B730D1B9E448000CF3351 /* LoginPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B730B1B9E448000CF3351 /* LoginPresenter.m */; };
 		2A2D30151B28B5EB00CD7E8E /* SearchUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D30141B28B5EB00CD7E8E /* SearchUsersCell.m */; };
@@ -106,10 +108,8 @@
 		2AF8AD1B1B0DE28E00864270 /* SearchUsersPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD1A1B0DE28E00864270 /* SearchUsersPresenter.m */; };
 		2AF8AD221B0E074000864270 /* UserProfilePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD211B0E074000864270 /* UserProfilePresenter.m */; };
 		2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD281B0E54B100864270 /* PurchaseRequestsPresenter.m */; };
-		AB5A5B091BBAD3FB008D115E /* ReferAFriendInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */; settings = {ASSET_TAGS = (); }; };
+		AB5A5B091BBAD3FB008D115E /* ReferAFriendInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */; };
 		AB5A5B0D1BBAD5F6008D115E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */; };
-		AB8AD9301BC2D8BD00C722C5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8AD92F1BC2D8BD00C722C5 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		AB927A711BC3D3D900324380 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB927A701BC3D3D900324380 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		AB967F2E1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AB967F2D1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +228,8 @@
 		2A232CFD1B3766CB00590B66 /* KeyChainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainWrapper.m; sourceTree = "<group>"; };
 		2A25C03F1B0BC5770063472B /* VerifyAccountPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyAccountPresenter.h; sourceTree = "<group>"; };
 		2A25C0401B0BC5770063472B /* VerifyAccountPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyAccountPresenter.m; sourceTree = "<group>"; };
+		2A268C9F1BDEC44B0096B38B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		2A268CA11BDEC45D0096B38B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		2A2B73071B9E448000CF3351 /* LoginContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginContracts.h; sourceTree = "<group>"; };
 		2A2B73081B9E448000CF3351 /* LoginInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInteractor.h; sourceTree = "<group>"; };
 		2A2B73091B9E448000CF3351 /* LoginInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInteractor.m; sourceTree = "<group>"; };
@@ -314,8 +316,6 @@
 		AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferAFriendInteractor.m; sourceTree = "<group>"; };
 		AB5A5B0B1BBAD42A008D115E /* ReferAFriendContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferAFriendContracts.h; sourceTree = "<group>"; };
 		AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		AB8AD92F1BC2D8BD00C722C5 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Documents/FacebookSDKs-iOS-20150910/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		AB927A701BC3D3D900324380 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		AB967F2C1B25A45E00A5AA9B /* PurchaseRequestsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseRequestsDataSource.h; sourceTree = "<group>"; };
 		AB967F2D1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseRequestsDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -328,11 +328,10 @@
 				AB5A5B0D1BBAD5F6008D115E /* MessageUI.framework in Frameworks */,
 				2A232CE81B34B42E00590B66 /* Parse.framework in Frameworks */,
 				2A232CEA1B34B43400590B66 /* Bolts.framework in Frameworks */,
-				AB8AD9301BC2D8BD00C722C5 /* FBSDKCoreKit.framework in Frameworks */,
 				2ADA30711B3B69BE00F791BF /* ParseUI.framework in Frameworks */,
 				2AC27B6B1B34881B009997AF /* Social.framework in Frameworks */,
 				2AC27B691B348814009997AF /* Accounts.framework in Frameworks */,
-				AB927A711BC3D3D900324380 /* FBSDKShareKit.framework in Frameworks */,
+				2A268CA01BDEC44B0096B38B /* FBSDKShareKit.framework in Frameworks */,
 				2AC27B661B348723009997AF /* libsqlite3.dylib in Frameworks */,
 				2AC27B641B348717009997AF /* libz.dylib in Frameworks */,
 				2AC27B621B348709009997AF /* SystemConfiguration.framework in Frameworks */,
@@ -346,6 +345,7 @@
 				2AC27B541B3486B9009997AF /* AudioToolbox.framework in Frameworks */,
 				2A871C381B1F8D6200A2779B /* Photos.framework in Frameworks */,
 				2A9E5DD41B1E1FF3008033AB /* AVFoundation.framework in Frameworks */,
+				2A268CA21BDEC45D0096B38B /* FBSDKCoreKit.framework in Frameworks */,
 				2AD6AB031B1CCE9A00457102 /* AddressBook.framework in Frameworks */,
 				0AE957B32B8AC0E3E5455448 /* libPods-Status Lane.a in Frameworks */,
 			);
@@ -1223,8 +1223,8 @@
 		2AD6AB011B1CCE6900457102 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AB927A701BC3D3D900324380 /* FBSDKShareKit.framework */,
-				AB8AD92F1BC2D8BD00C722C5 /* FBSDKCoreKit.framework */,
+				2A268CA11BDEC45D0096B38B /* FBSDKCoreKit.framework */,
+				2A268C9F1BDEC44B0096B38B /* FBSDKShareKit.framework */,
 				AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */,
 				2AC27B6A1B34881B009997AF /* Social.framework */,
 				2AC27B681B348814009997AF /* Accounts.framework */,
@@ -1730,6 +1730,8 @@
 					"$(PROJECT_DIR)/'Status Lane'",
 					"$(PROJECT_DIR)/Status",
 					Lane,
+					"$(PROJECT_DIR)/Status",
+					Lane,
 				);
 				INFOPLIST_FILE = "Status Lane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1751,6 +1753,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/'Status Lane'",
+					"$(PROJECT_DIR)/Status",
+					Lane,
 					"$(PROJECT_DIR)/Status",
 					Lane,
 				);
