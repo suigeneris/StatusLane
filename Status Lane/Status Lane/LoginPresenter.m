@@ -14,6 +14,7 @@
 #import "NSString+StatusLane.h"
 #import "UIColor+StatusLane.h"
 
+
 static void *countryCodeContext = &countryCodeContext;
 
 
@@ -24,6 +25,7 @@ static void *countryCodeContext = &countryCodeContext;
 @property (weak, nonatomic) IBOutlet UIButton *countryCodeButton;
 @property (weak, nonatomic) IBOutlet StatusLaneButtonGreen *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *isValidLabel;
+
 
 @end
 
@@ -36,6 +38,8 @@ static void *countryCodeContext = &countryCodeContext;
     // Do any additional setup after loading the view.
 
 }
+
+
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -133,13 +137,14 @@ static void *countryCodeContext = &countryCodeContext;
 }
 
 -(void)login{
-    
+
     [self performSegueWithIdentifier:@"Login" sender:self];
     
 }
 
 -(void)showActivityView{
     
+    self.loginButton.userInteractionEnabled = NO;
     [self activityIndicator];
     
 }
@@ -224,7 +229,6 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)activityIndicator{
     
-    
     UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activityView.center = self.view.center;
     activityView.color = [UIColor statusLaneGreenPressed];
@@ -238,6 +242,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)hide{
     
+    self.loginButton.userInteractionEnabled = YES;
     [[self.view viewWithTag:1111] removeFromSuperview];
 }
 

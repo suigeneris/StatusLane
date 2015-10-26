@@ -15,5 +15,6 @@
 +(NSDictionary *)allFormatsForPhoneNumber:(NSString *)phoneNumber;
 +(BOOL)isPhoneNumberValid:(NSString*)phoneNumber;
 -(BOOL)isValidEmail;
++(NSString *)verifyObjectId:(NSString *)objectId;
 
 @end

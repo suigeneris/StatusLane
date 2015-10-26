@@ -34,10 +34,7 @@
 @property (nonatomic, assign) bool isTableViewHidden;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideTableView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-
-
 @property (nonatomic, strong) NSIndexPath *indexPathForSelectedCell;
-
 
 //NSLayout Constraints
 @property (nonatomic, strong) NSLayoutConstraint *tableViewLeading;
@@ -71,19 +68,33 @@
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    self.relationshipStatusLabel.text = [self.interactor returnUserStatusFromDefaults];
+    [self.interactor returnUserStatusFromAPI];
     self.partnerName.text = [self.interactor returnPartnerName];
     [self setFullNameLabel:self.fullNameLabel];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(hideTableView)
                                                 name:@"HideTableView"
                                               object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(setUserToSingle:)
+                                                 name:@"setUserToSingle"
+                                               object:nil
+     ];
+    
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     // Dispose of any resources that can be recreated.
 }
 
@@ -347,6 +358,15 @@
     
 }
 
+-(void)setUserToSingle:(NSNotification *)notification{
+    
+    NSDictionary *info = [[notification userInfo] objectForKey:@"aps"];
+    NSString *string = [info objectForKey:@"alert"];
+    if ([string isEqualToString:@"did not approve your Partner Status Request"]) {
+        
+        [self.interactor resetUserToSingle];
+    }
+}
 
 
 #pragma mark - Presenter Delegate Methods
@@ -454,13 +474,14 @@
 }
 
 -(void)startAnimatingActivityView{
-    
+    self.tableview.userInteractionEnabled = NO;
     [self.view addSubview:self.activityIndicator];
     [_activityIndicator startAnimating];
 }
 
 -(void)stopAnimatingActivitiyView{
     
+    self.tableview.userInteractionEnabled = YES;
     [_activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
     
@@ -541,6 +562,8 @@
 
 -(void)showTableView{
     
+    [self.tableview reloadData];
+
     _isTableViewHidden = NO;
     self.burgerMenu.userInteractionEnabled = NO;
     self.searchButton.userInteractionEnabled = NO;

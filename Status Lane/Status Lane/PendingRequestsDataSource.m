@@ -59,7 +59,7 @@
     NSMutableDictionary *dict = [_arrayOfNotifications objectAtIndex:indexPath.row];
     cell.usernameLabel.text = [dict objectForKey:@"senderFullName"];
     cell.descriptionLabel.text = [dict objectForKey:@"alert"];
-    
+    cell.descriptionLabel.adjustsFontSizeToFitWidth = YES;
         for (PFUser *user in self.arrayOfPFUsers) {
             
             if ([[user objectId] isEqualToString:[dict objectForKey:@"senderObjectId"]]) {
@@ -92,6 +92,51 @@
 
     }
 
+    bool re = [[dict objectForKey:@"needsResponse"] boolValue];
+    
+    if (re) {
+        cell.okButton.hidden = YES;
+        cell.xbutton.hidden = NO;
+        cell.tickButton.hidden = NO;
+        cell.disclosureArrow.hidden = YES;
+        cell.disclosureArrow2.hidden = YES;
+
+
+    }
+    else if ([cell.descriptionLabel.text isEqualToString:@"Approved Your Status Request"]){
+        
+        cell.okButton.hidden = YES;
+        cell.xbutton.hidden = YES;
+        cell.tickButton.hidden = YES;
+        cell.disclosureArrow.transform = CGAffineTransformMakeRotation(-M_PI); //rotation in radians
+        cell.disclosureArrow.hidden = NO;
+        cell.disclosureArrow2.hidden = YES;
+        cell.disclosureArrow2.userInteractionEnabled = NO;
+        NSLog(@"%@", cell.descriptionLabel.text);
+
+
+    }
+    else if ([cell.descriptionLabel.text isEqualToString:@"Approved Your Status History Request"]){
+        
+        cell.okButton.hidden = YES;
+        cell.xbutton.hidden = YES;
+        cell.tickButton.hidden = YES;
+        cell.disclosureArrow.userInteractionEnabled = NO;
+        cell.disclosureArrow.hidden = YES;
+        cell.disclosureArrow2.transform = CGAffineTransformMakeRotation(-M_PI); //rotation in radians
+        cell.disclosureArrow2.hidden = NO;
+
+    }
+    else {
+        
+        cell.okButton.hidden = NO;
+        cell.xbutton.hidden = YES;
+        cell.tickButton.hidden = YES;
+        cell.disclosureArrow.hidden = YES;
+        cell.disclosureArrow2.hidden = YES;
+
+
+    }
     
     return cell;
 }

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "UserProfileContracts.h"
 
-@interface UserProfilePresenter : UIViewController
+@interface UserProfilePresenter : UIViewController <UserProfilePresenter>
 
+@property (nonatomic, strong) id<UserProfileInteractor> interactor;
 @property (nonatomic, strong) id user;
+@property (nonatomic, assign) BOOL animateViewOnAppear;
 
 @end

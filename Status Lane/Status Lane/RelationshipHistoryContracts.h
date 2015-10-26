@@ -21,6 +21,8 @@
 -(void)retrieveStatusHistoryForUser;
 -(NSArray *)returnArrayOfHistoryObjects;
 -(NSMutableArray *)returnArrayOfUsersInStatusHistory;
+-(void)retriveHistoryFormPendingNotificationsWithArray:(NSArray *)array;
+
 
 @end
 

@@ -13,4 +13,7 @@
 
 @property (nonatomic, strong) id <UITableViewDelegate, RelationshipHistoryInteractorDatasource, RelationshipHistoryInteractor> interactor;
 
+@property (nonatomic, strong) NSArray *array;
+@property (nonatomic, assign) BOOL fromPendingRequests;
+
 @end

@@ -9,6 +9,8 @@
 #import "PendingRequestsPresenter.h"
 #import "PendingRequestInteractor.h"
 #import "SWRevealViewController.h"
+#import "UserProfilePresenter.h"
+#import "RelationshipHistoryPresenter.h"
 #import "UIColor+StatusLane.h"
 
 
@@ -20,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) PFUser *user;
 
 @end
 @implementation PendingRequestsPresenter
@@ -30,7 +33,6 @@
     
     [super viewDidLoad];
     [self setUpUIElements];
-    //[self interactor];
     self.tableView.delegate = self.interactor;
     self.tableView.dataSource = [self.interactor dataSource];
     [self revealControllerSetUp];
@@ -101,7 +103,6 @@
 
 
 - (IBAction)burgerMenuPressed:(id)sender {
-    NSLog(@"Burger menu pressed");
 }
 
 - (IBAction)xButtonPressed:(id)sender {
@@ -124,6 +125,35 @@
     }
 }
 
+- (IBAction)okButtonPressed:(id)sender {
+    
+    UIButton *butn = (UIButton *)sender;
+    UITableViewCell *cell = [self parentCellForView:butn];
+    if (cell != nil) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [self.interactor acknowledgeNotificationForUserAtIndexPath:indexPath];
+    }
+}
+
+- (IBAction)disclosureArrowPressed:(id)sender {
+    
+    UIButton *butn = (UIButton *)sender;
+    UITableViewCell *cell = [self parentCellForView:butn];
+    if (cell != nil) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [self.interactor getProfileForUserAtIndexPath:indexPath];
+    }
+}
+
+- (IBAction)disclosureArrow2Pressed:(id)sender {
+    
+    UIButton *butn = (UIButton *)sender;
+    UITableViewCell *cell = [self parentCellForView:butn];
+    if (cell != nil) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [self.interactor getHistoryForUserAtIndexPath:indexPath];
+    }
+}
 
 -(UITableViewCell *)parentCellForView:(id)theView
 {
@@ -139,6 +169,13 @@
     return nil;
 }
 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"notificationsToProfile"]) {
+        
+    }
+}
 
 
 #pragma mark - Presenter Delegate Methods
@@ -167,6 +204,24 @@
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+}
+
+-(void)showUserProfileWithUser:(id)user{
+    self.user = user;
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UserProfilePresenter *vc = [storyBoard instantiateViewControllerWithIdentifier:@"UserProfilePresenter"];
+    vc.user = user;
+    vc.animateViewOnAppear = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)showUserHistoryWithHistory:(NSArray *)history{
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    RelationshipHistoryPresenter *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RelationshipHistory"];
+    vc.array = history;
+    vc.fromPendingRequests = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
 

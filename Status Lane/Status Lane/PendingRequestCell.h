@@ -13,5 +13,10 @@
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *xbutton;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
+@property (weak, nonatomic) IBOutlet UIButton *tickButton;
+@property (weak, nonatomic) IBOutlet UIButton *disclosureArrow;
+@property (weak, nonatomic) IBOutlet UIButton *disclosureArrow2;
 
 @end

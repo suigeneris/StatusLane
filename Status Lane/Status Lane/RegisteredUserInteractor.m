@@ -11,6 +11,7 @@
 #import "NetworkManager.h"
 #import "PushNotificationManager.h"
 #import "Defaults.h"
+#import "NSString+StatusLane.h"
 
 @interface RegisteredUserInteractor() {
     
@@ -51,7 +52,7 @@
     partnerName = user[@"fullName"];
     NSLog(@"This is the status %@", partnerStatus);
     
-    if (user[@"partner"]) {
+    if (user[@"partner"] && [user[@"partner"] count] > 0) {
         
         [self.presenter stopAnimatingActivitiyView];
         [self.presenter showErrorView:[NSString stringWithFormat:@"This User has a %@ status with someone else", user[@"status"]]];
@@ -87,13 +88,14 @@
 
 -(void)sendRelationshipRequestToUser:(PFUser *)user withRequestMessage:(NSString *)requestMessage{
     
-    NSString *channel = [user objectId];
+    NSString *channel = [NSString verifyObjectId:[user objectId]];
     NSDictionary *dictionary = @{
                                  @"alert" : requestMessage,
                                  @"badge" : @"Increment",
                                  @"channel" : channel,
                                  @"objectId" : [[PFUser currentUser] objectId],
-                                 @"fullName" : [[PFUser currentUser] objectForKey:@"fullName"]
+                                 @"fullName" : [[PFUser currentUser] objectForKey:@"fullName"],
+                                 @"needsResponse" : [NSNumber numberWithBool:YES]
                                  };
     
     [self.pushNotificationProvider callCloudFuntionWithName:@"sendPushNotification"
@@ -119,7 +121,6 @@
     
 
             currentUser[@"status"] = partnerStatus;
-            NSLog(@"Is this called");
 
             NSArray *partnerArray = @[user];
             [currentUser setObject:partnerArray forKey:@"partner"];
@@ -134,7 +135,7 @@
                                                [self.presenter dismissView];
                                                
                                            } failure:^(NSError *error) {
-                                               
+                                            
                                                [self.presenter stopAnimatingActivitiyView];
                                                [self.presenter showErrorView:error.localizedDescription];
                                            }];

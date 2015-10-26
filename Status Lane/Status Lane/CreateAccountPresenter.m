@@ -251,12 +251,14 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)showActivityView{
     
+    self.createAccountButton.userInteractionEnabled = NO;
     [self activityIndicator];
     
 }
 
 -(void)hideActivityView{
     
+    self.createAccountButton.userInteractionEnabled = YES;
     [self hide];
 }
 

@@ -55,9 +55,11 @@ typedef void (^FailureBlock)(NSError *error);
 
 #pragma mark - User Interactor
 
+-(void)fetchCurrentUserIfNeededWithSuccesss:(SuccessBlock)success
+                                 andFailure:(FailureBlock)failure;
+
 -(void)fetchCurrentUserWithSuccesss:(SuccessBlock)success
                          andFailure:(FailureBlock)failure;
-
 
 #pragma mark - Annoymous User Interactor
 

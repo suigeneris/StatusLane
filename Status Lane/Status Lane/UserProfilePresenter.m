@@ -7,6 +7,8 @@
 //
 
 #import "UserProfilePresenter.h"
+#import "UserProfileInteractor.h"
+#import "StatusLaneErrorView.h"
 #import "UIColor+StatusLane.h"
 #import "UIImage+StatusLane.h"
 #import <ParseUI/ParseUI.h>
@@ -30,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *alertViewFullNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *partnerName;
+@property (weak, nonatomic) IBOutlet UILabel *approvalMessageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sendRequestLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
@@ -48,11 +52,26 @@
     // Do any additional setup after loading the view.
     [self additionalUIViewSetup];
 
+
 }
 
+-(id<UserProfileInteractor>)interactor{
+    
+    if (!_interactor) {
+        
+        UserProfileInteractor *interactor = [UserProfileInteractor new];
+        interactor.presenter = self;
+        _interactor = interactor;
+    }
+    return _interactor;
+}
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
+    
+    if (self.animateViewOnAppear) {
+        [self animateViews];
+    }
 
 }
 
@@ -178,6 +197,7 @@
     }
 
 }
+#pragma mark - IBOutlets
 
 - (IBAction)backkButtonPressed:(id)sender {
     
@@ -188,13 +208,52 @@
 
 - (IBAction)viewStatusButtonPressed:(id)sender {
     
-    self.popUpView.hidden = NO;
-    [UIView animateWithDuration:0.35
-                     animations:^{
-                         
-                         self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.85];
+    if([self.viewStatusButton.titleLabel.text isEqualToString:@"VIEW HISTORY"]){
+        
+        if ([self.user isKindOfClass:NSClassFromString(@"PFUser")]) {
+            
+            self.popUpView.hidden = NO;
+            self.sendRequestLabel.text = @"SEND STATUS HISTORY REQUEST";
+            [UIView animateWithDuration:0.35
+                             animations:^{
+                                 
+                                 self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.85];
+                                 
+                             }];
+        }
+        
+        else{
+            
+            //Show Status history view controller;
+        }
+    }
+    else{
+        
+        if ([self.user isKindOfClass:NSClassFromString(@"PFUser")]) {
+            
+            self.popUpView.hidden = NO;
+            [UIView animateWithDuration:0.35
+                             animations:^{
+                                 
+                                 self.sendRequestLabel.text = @"SEND STATUS REQUEST";
+                                 self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.85];
+                                 
+                             }];
+        }
+        
+        else{
+            
+            [UIView animateWithDuration:0.35
+                             animations:^{
+                                 
+                                 self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+                                 self.popUpView.hidden = YES;
+                                 [self animateViews];
+                                 
+                             }];
+        }
+    }
 
-                     }];
     
     
 }
@@ -212,16 +271,16 @@
 }
 - (IBAction)sendButtonPressed:(id)sender {
     
-    [UIView animateWithDuration:0.35
-                     animations:^{
-                         
-                         self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-                         self.popUpView.hidden = YES;
-                         [self animateViews];
+    if ([self.viewStatusButton.titleLabel.text isEqualToString:@"VIEW HISTORY"]) {
+     
+        [self.interactor sendStatusHistoryRequestToUser:self.user];
+    }
+    else{
+        
+        [self.interactor sendStatusRequestToUser:self.user];
 
-                     }];
-
-
+    }
+    
 }
 
 -(void)animateViews{
@@ -237,8 +296,9 @@
                              
                          } completion:nil];
         
-        self.viewStatusButton.userInteractionEnabled = NO;
-        [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreenPressed]];
+        [self.viewStatusButton setTitle:@"VIEW HISTORY" forState:UIControlStateNormal];
+        [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreen]];
+
     }
     
     else {
@@ -256,20 +316,31 @@
                              
                              self.searchUserStatusLabel.hidden = NO;
                              self.partnerName.hidden = NO;
-                             [self resetImageViewsPostition];
+                             
+                             if (!self.animateViewOnAppear) {
+                                 
+                                 [self resetImageViewsPostition];
+
+                             }
                              
                              
                          }];
         
-        self.viewStatusButton.userInteractionEnabled = NO;
-        [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreenPressed]];
+        if (self.animateViewOnAppear) {
+            
+            self.viewStatusButton.userInteractionEnabled = YES;
+            [self.viewStatusButton setTitle:@"VIEW HISTORY" forState:UIControlStateNormal];
+            [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreen]];
+        }
+        else{
+            
+            self.viewStatusButton.userInteractionEnabled = NO;
+            [self.viewStatusButton setBackgroundColor:[UIColor statusLaneGreenPressed]];
+        }
+
         
     }
-
     
-    
-
-
 }
 
 -(void)resetImageViewsPostition{
@@ -314,7 +385,6 @@
             else{
                 
                 if (data) {
-                    
                 
                     UIImage *image = [UIImage imageWithData:data];
                     self.backgroundImageView.alpha = 1;
@@ -336,6 +406,37 @@
         
     }
     
+
+}
+
+
+-(void)showResponseViewWithMessage:(NSString *)message andTitle:(NSString *)title{
+    
+    [UIView animateWithDuration:0.35
+                     animations:^{
+                         
+                         self.popUpView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+                         self.popUpView.hidden = YES;
+                         
+                     }completion:^(BOOL finished) {
+                         
+                         StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:title];
+                         [errorView showWithCompletionBlock:nil];
+                         
+                     }];
+}
+
+
+-(void)startAnimating{
+    
+    [self.view addSubview:self.activityIndicator];
+    [_activityIndicator startAnimating];
+}
+
+-(void)stopAnimating{
+
+    [_activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
 
 }
 @end

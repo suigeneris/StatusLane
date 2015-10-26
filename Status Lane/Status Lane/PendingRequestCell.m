@@ -11,17 +11,4 @@
 @implementation PendingRequestCell
 
 
-
-- (IBAction)denyRequestButtonPressed:(id)sender {
-    
-}
-
-
-- (IBAction)acceptRequestButtonPressed:(id)sender {
-    
-    NSLog(@"accept request pressed");
-    NSLog(@"sender: %@", sender);
-}
-
-
 @end

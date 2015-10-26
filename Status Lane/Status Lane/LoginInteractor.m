@@ -10,11 +10,14 @@
 #import "CountryCode.h"
 #import "Defaults.h"
 #import "NetworkManager.h"
+#import "PushNotificationManager.h"
 #import "NSString+StatusLane.h"
 
 @interface LoginInteractor()
 
 @property (nonatomic, strong) id <NetworkProvider> networkProvider;
+@property (nonatomic, strong) id <PushNotificationProvider> pushNotificationProvider;
+
 
 @end
 
@@ -37,6 +40,15 @@
         
     }
     return _networkProvider;
+}
+
+-(id<PushNotificationProvider>)pushNotificationProvider{
+    
+    if (!_pushNotificationProvider) {
+        _pushNotificationProvider = [PushNotificationManager new];
+        
+    }
+    return _pushNotificationProvider;
 }
 
 
@@ -173,6 +185,7 @@
                                                  
                                                  PFObject *object = [responseObject objectAtIndex:0];
                                                  [Defaults setPartnerFullName:object[@"fullName"]];
+                                                 [self subscribeToPush];
                                                  [self.presenter login];
  
                                              } failure:^(NSError *error) {
@@ -184,6 +197,7 @@
     }
     else{
         
+        [self subscribeToPush];
         [self.presenter login];
             
     }
@@ -214,5 +228,14 @@
                                        }];
 }
 
-
+-(void)subscribeToPush{
+    
+    [self.pushNotificationProvider subcribeToReciveChannelWithSuccess:^(id responseObject) {
+        
+        
+    } andFailure:^(NSError *error) {
+        
+        
+    }];
+}
 @end

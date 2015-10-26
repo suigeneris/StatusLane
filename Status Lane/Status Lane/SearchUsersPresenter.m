@@ -11,6 +11,7 @@
 #import "SearchUsersInteractor.h"
 #import "SWRevealViewController.h"
 #import "UserProfilePresenter.h"
+#import "StatusLaneErrorView.h"
 
 @interface SearchUsersPresenter (){
     
@@ -25,6 +26,9 @@
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) PFObject *anonymousUser;
 @property (strong, nonatomic) SWRevealViewController *revealController;
+
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation SearchUsersPresenter
@@ -63,7 +67,18 @@
     return _interactor;
 }
 
-
+-(UIActivityIndicatorView *)activityIndicator{
+    
+    if (!_activityIndicator) {
+        
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityIndicator.center = self.view.center;
+        _activityIndicator.color = [UIColor statusLaneGreenPressed];
+        _activityIndicator.hidesWhenStopped = YES;
+        _activityIndicator.tag = 1111;
+    }
+    return _activityIndicator;
+}
 
 #pragma mark - Additional UI Setup
 
@@ -122,7 +137,7 @@
     
     if ([segue.identifier isEqualToString:@"showUserProfile"]) {
         
-        UserProfilePresenter *userProfilePresenter = segue.destinationViewController;\
+        UserProfilePresenter *userProfilePresenter = segue.destinationViewController;
         if (isUser) {
             
             userProfilePresenter.user = self.user;
@@ -182,6 +197,27 @@
 -(void)dismissSearchBar{
     
     [self.searchBar resignFirstResponder];
+}
+
+-(void)startAnimating{
+    
+    [self.view addSubview:self.activityIndicator];
+    [_activityIndicator startAnimating];
+}
+
+-(void)stopAnimating{
+    
+    [_activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
+}
+
+-(void)showResponseViewWithMessage:(NSString *)message andTitle:(NSString *)title{
+    
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:title];
+    [errorView showWithCompletionBlock:nil];
+    
+    
 }
 
 @end

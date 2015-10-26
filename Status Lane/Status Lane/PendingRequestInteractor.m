@@ -46,6 +46,15 @@
     return _networkProvider;
 }
 
+-(id<PushNotificationProvider>)pushNotificationProvider{
+    
+    if (!_pushNotificationProvider) {
+        
+        _pushNotificationProvider = [PushNotificationManager new];
+    }
+    
+    return _pushNotificationProvider;
+}
 
 -(PendingRequestsDataSource *)pendingRequestsDatasource{
     
@@ -94,38 +103,118 @@
     PFObject *notificationObject = [PFObject objectWithoutDataWithClassName:@"NotificationObject"
                                                                    objectId:objectId];
     
-    [self.networkProvider deleteRowWithObject:notificationObject
-                                      success:^(id responseObject) {
-                                          
-                                          [self.arrayOfNotifications removeObjectAtIndex:indexPath.row];
-                                          [self determineReqestTypeWithDictionary:dict];
-                                          [self.presenter deleteTableViewRowWithIndexPaths:indexPath];
-                                          
-                                      } failure:^(NSError *error) {
-                                          
-                                          NSLog(@"failed with error :%@", error.localizedDescription);
-                                      }];
-    
-    [self.presenter startAnimatingActivityView];
+    [self deleteRowWithNotificationObject:notificationObject withIndexPath:indexPath withResponse:NO];
     
 }
 
 -(void)acceptNotificationForUserAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSDictionary *dict = [self.arrayOfNotifications objectAtIndex:indexPath.row];
+    NSString *objectId = [dict objectForKey:@"objectId"];
     
+    PFObject *notificationObject = [PFObject objectWithoutDataWithClassName:@"NotificationObject"
+                                                                   objectId:objectId];
+    
+    [self deleteRowWithNotificationObject:notificationObject withIndexPath:indexPath withResponse:YES];
 }
 
--(void)determineReqestTypeWithDictionary:(NSDictionary *)dictionary{
+-(void)acknowledgeNotificationForUserAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *string = [dictionary objectForKey:@"alert"];
-    if ([string isEqualToString:@"Sent You a Partner Request"]) {
+    NSDictionary *dict = [self.arrayOfNotifications objectAtIndex:indexPath.row];
+    NSString *objectId = [dict objectForKey:@"objectId"];
     
-        //Send Notification to to tell the user who sent the request that their request was rejected
-        NSString *alertMessage = [NSString stringWithFormat:@"Unfortunately, %@ did not approve your Partner Status Request", [Defaults fullName]];
-        [self sendPushNotificationWithDictionary:dictionary andMessage:alertMessage];
-    }
+    PFObject *notificationObject = [PFObject objectWithoutDataWithClassName:@"NotificationObject"
+                                                                   objectId:objectId];
+    
+        [self.networkProvider deleteRowWithObject:notificationObject
+                                          success:^(id responseObject) {
+                                             
+                                              [self.presenter stopAnimatingActivitiyView];
+                                              [self.arrayOfNotifications removeObjectAtIndex:indexPath.row];
+                                              [self.presenter deleteTableViewRowWithIndexPaths:indexPath];
+                                              [self updateBadgeNumber];
+
+                                              
+                                          } failure:^(NSError *error) {
+                                              
+                                              [self.presenter stopAnimatingActivitiyView];
+                                              [self updateBadgeNumber];
+                                              NSLog(@"failed with error :%@", error.localizedDescription);
+
+
+                                          }];
 }
 
+-(void)getProfileForUserAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary *dict = [self.arrayOfNotifications objectAtIndex:indexPath.row];
+    NSString *senderObjectId = [dict objectForKey:@"senderObjectId"];
+    
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" equalTo:senderObjectId];
+    [query includeKey:@"User.partner"];
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                             
+                                             [self.presenter stopAnimatingActivitiyView];
+                                             PFUser *user = [responseObject objectAtIndex:0];
+                                             [self.presenter showUserProfileWithUser:user];
+                                             [self updateBadgeNumber];
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                             [self.presenter stopAnimatingActivitiyView];
+                                             [self updateBadgeNumber];
+                                             NSLog(@"This is the error %@", error.localizedDescription);
+                                             
+                                         }];
+    
+    [self.presenter startAnimatingActivityView];
+    
+
+
+}
+
+
+-(void)getHistoryForUserAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary *dict = [self.arrayOfNotifications objectAtIndex:indexPath.row];
+    NSString *senderObjectId = [dict objectForKey:@"senderObjectId"];
+    PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query whereKey:@"historyId" equalTo:senderObjectId];
+    
+    PFQuery *query2 = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query whereKey:@"partnerId" equalTo:senderObjectId];
+    
+    PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [compoundQuery orderByDescending:@"statusDate"];
+    [compoundQuery includeKey:@"StatusHistory.partnerId"];
+    compoundQuery.limit = 20;
+    
+    [self.networkProvider queryDatabaseWithQuery:compoundQuery
+                                         success:^(id responseObject) {
+                                             
+                                             [self.presenter stopAnimatingActivitiyView];
+                                             [self.presenter showUserHistoryWithHistory:responseObject];
+                                             [self updateBadgeNumber];
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                             [self.presenter stopAnimatingActivitiyView];
+                                             [self updateBadgeNumber];
+                                             NSLog(@"This is the error %@", error.localizedDescription);
+                                             
+                                         }];
+    
+    [self.presenter startAnimatingActivityView];
+    
+    NSLog(@"Get history pressed");
+}
+
+#pragma mark - Table Delegate Methods
+
+
+#pragma mark - Internal Methods
 
 -(NSArray *)returnArrayOfNotifications{
     
@@ -138,11 +227,85 @@
     return self.arrayOfNotificationSenders;
 }
 
+-(void)deleteRowWithNotificationObject:(PFObject *)notificationObject withIndexPath:(NSIndexPath *)indexPath withResponse:(BOOL)response{
+    
+    NSDictionary *dict = [self.arrayOfNotifications objectAtIndex:indexPath.row];
 
-#pragma mark - Table Delegate Methods
+    [self.networkProvider deleteRowWithObject:notificationObject
+                                      success:^(id responseObject) {
+                                          
+                                          [self.presenter stopAnimatingActivitiyView];
+                                          [self.arrayOfNotifications removeObjectAtIndex:indexPath.row];
+                                          [self determineReqestTypeWithDictionary:dict andResponse:response];
+                                          [self.presenter deleteTableViewRowWithIndexPaths:indexPath];
+                                          [self updateBadgeNumber];
+
+                                          
+                                      } failure:^(NSError *error) {
+                                          
+                                          [self.presenter stopAnimatingActivitiyView];
+                                          NSLog(@"failed with error :%@", error.localizedDescription);
+                                      }];
+    
+    [self.presenter startAnimatingActivityView];
+
+    
+}
 
 
-#pragma mark - Internal Methods
+-(void)determineReqestTypeWithDictionary:(NSDictionary *)dictionary andResponse:(BOOL)response{
+    
+    if (!response) {
+        
+        
+        //Send Notification to to tell the user who sent the request that their request was rejected
+        [self.pushNotificationProvider callCloudFuntionWithName:@"updateUserWithMasterKey"
+                                                     parameters:@{@"updatingUserObjectId" : [dictionary objectForKey:@"senderObjectId"],
+                                                                  @"updatingStatus" : @"SINGLE"}
+                                                        success:^(id responseObject) {
+                                                            
+                                                            [self sendPushNotificationWithDictionary:dictionary andMessage:[self returnAlertResponseForRejectedAlertMessage:[dictionary objectForKey:@"alert"]] withNeedsResponse:NO];
+
+                                                            
+                                                        } andFailure:^(NSError *error) {
+                                                            
+                                                            NSLog(@"This is the error %@", error.localizedDescription);
+                                                        }];
+    }
+    
+    else {
+        
+        PFUser *currentUser = [PFUser currentUser];
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" equalTo:[dictionary objectForKey:@"senderObjectId"]];
+        [self.networkProvider queryDatabaseWithQuery:query
+                                             success:^(id responseObject) {
+                                                 
+                                                 PFUser *foundUser = [responseObject objectAtIndex:0];
+                                                 currentUser[@"status"] = foundUser[@"status"];
+                                                 NSArray *arrayWithPartner = @[foundUser];
+                                                 currentUser[@"partner"] = arrayWithPartner;
+                                                 [Defaults setPartnerFullName:foundUser[@"fullName"]];
+                                                 
+                                                 [self.networkProvider saveWithPFObject:currentUser
+                                                                                success:^(id responseObject) {
+                                                                                    
+                                                                                    [self sendPushNotificationWithDictionary:dictionary andMessage:[self returnAlertResponseForAcceptedAlertMessage:[dictionary objectForKey:@"alert"]] withNeedsResponse:NO];
+                                                                                    
+
+                                                                                } failure:^(NSError *error) {
+                                                                                    
+                                                                                    NSLog(@"This is the error %@", error.localizedDescription);
+                                                                                }];
+                                                 
+                                             } failure:^(NSError *error) {
+                                                 
+                                                 NSLog(@"This is the error %@", error.localizedDescription);
+                                             }];
+
+    }
+    
+}
 
 -(void)getNotificationSendersFromArray:(NSMutableArray *)array{
     
@@ -198,24 +361,32 @@
         NSMutableDictionary *dict = [NSMutableDictionary new];
         [dict setObject:object[@"senderFullName"] forKey:@"senderFullName"];
         [dict setObject:object[@"senderObjectId"] forKey:@"senderObjectId"];
+        [dict setObject:object[@"receiverObjectId"] forKey:@"receiverObjectId"];
         [dict setObject:[object objectId] forKey:@"objectId"];
         [dict setObject:object[@"alert"] forKey:@"alert"];
+        [dict setObject:object[@"needsResponse"] forKey:@"needsResponse"];
+
         [finalArray addObject:dict];
     }
     return finalArray;
 }
 
 
--(void)sendPushNotificationWithDictionary:(NSDictionary *)dictionary andMessage:(NSString *)message{
+-(void)sendPushNotificationWithDictionary:(NSDictionary *)dictionary andMessage:(NSString *)message withNeedsResponse:(BOOL)needsResponse{
+    
+    PFUser *currentUser = [PFUser currentUser];
     
     NSDictionary *pushDictionary = @{
+                                     
                                  @"alert" : message,
                                  @"badge" : @"Increment",
-                                 @"channel" : [dictionary objectForKey:@"objectId"],
-                                 @"objectId" : [[PFUser currentUser] objectId],
-                                 @"fullName" : [[PFUser currentUser] objectForKey:@"fullName"]
+                                 @"channel" : [NSString verifyObjectId:[dictionary objectForKey:@"senderObjectId"]],
+                                 @"objectId" : currentUser.objectId,
+                                 @"fullName" : currentUser[@"fullName"],
+                                 @"needsResponse" : [NSNumber numberWithBool:needsResponse]
+
                                  };
-    
+
     [self.pushNotificationProvider callCloudFuntionWithName:@"sendPushNotification"
                                                  parameters:pushDictionary
                                                     success:^(id responseObject) {
@@ -226,10 +397,65 @@
                                                         
                                                         [self.presenter stopAnimatingActivitiyView];
                                                         //[self.presenter showErrorView:error.localizedDescription];
+                                                        NSLog(@"This is the error %@", error.localizedDescription);
                                                         
                                                     }];
 }
 
+-(void)updateBadgeNumber{
+    
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    currentInstallation.badge = currentInstallation.badge - 1;
+    [currentInstallation saveInBackground];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber - 1;
+
+}
+
+
+-(NSString *)returnAlertResponseForRejectedAlertMessage:(NSString *)alertMessage{
+    
+    NSString *alertResponse;
+    
+    if ([alertMessage isEqualToString:@"Sent You a Partner Request"]) {
+        
+        alertResponse = [NSString stringWithFormat:@"Did Not Approve Your Partner Request"];
+    }
+    
+    else if ([alertMessage isEqualToString:@"Wants To View Your Status"]) {
+        
+        alertResponse = [NSString stringWithFormat:@"Did Not Approve Your Status Request"];
+    }
+    
+    else if ([alertMessage isEqualToString:@"Wants To View Your Status Histroy"]) {
+        
+        alertResponse = [NSString stringWithFormat:@"Did Not Approve Your Status History Request"];
+    }
+    
+    return alertResponse;
+}
+
+
+-(NSString *)returnAlertResponseForAcceptedAlertMessage:(NSString *)alertMessage{
+    
+    NSString *alertResponse;
+    
+    if ([alertMessage isEqualToString:@"Sent You a Partner Request"]) {
+        
+        alertResponse = [NSString stringWithFormat:@"Approved Your Partner Request"];
+    }
+    
+    else if ([alertMessage isEqualToString:@"Wants To View Your Status"]) {
+        
+        alertResponse = [NSString stringWithFormat:@"Approved Your Status Request"];
+    }
+    
+    else if ([alertMessage isEqualToString:@"Wants To View Your Status Histroy"]) {
+        
+        alertResponse = [NSString stringWithFormat:@"Approved Your Status History Request"];
+    }
+    
+    return alertResponse;
+}
 @end
 
 

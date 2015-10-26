@@ -54,6 +54,12 @@
 
 #pragma mark - Interactor Delegate Methods
 
+-(void)retriveHistoryFormPendingNotificationsWithArray:(NSArray *)array{
+    
+    self.arrayOfHistoryObjects = [self pourStatusHistoryObjectsIntoMutableDictionary:array];
+    [self getListOfUsersInStatusHistoryFromArray:[array mutableCopy]];
+    [self.presenter reloadDatasource];
+}
 -(void)retrieveStatusHistoryForUser{
     
     NSString *userObjectId = [[PFUser currentUser] objectId];

@@ -30,7 +30,7 @@
     [self setAttributesForUILabel];
     NSLog(@"%@", self.phonenumber);
     NSLog(@"%@", self.password);
-    NSLog(@"verification code passed on throug segue: %@", self.verificationCode);
+    NSLog(@"verification code passed on through segue: %@", self.verificationCode);
 
     // Do any additional setup after loading the view.
 }
@@ -159,12 +159,14 @@
 
 -(void)showActivityView{
     
+    self.registerButton.userInteractionEnabled = NO;
     [self activityIndicator];
     
 }
 
 -(void)hideActivityView{
     
+    self.registerButton.userInteractionEnabled = YES;
     [self hide];
 }
 

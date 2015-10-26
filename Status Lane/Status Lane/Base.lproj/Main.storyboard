@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9052" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -108,7 +108,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="50R-KM-iHZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-uJ-GDf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Create account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-uJ-GDf">
                                 <rect key="frame" x="85" y="20" width="150" height="35"/>
                                 <fontDescription key="fontDescription" name="LobsterTwo" family="Lobster Two" pointSize="28"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,7 +123,7 @@
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="alert"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFQ-DN-OaZ">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFQ-DN-OaZ">
                                 <rect key="frame" x="53" y="519" width="214" height="29"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                 <state key="normal" title="Already have an Account? Click Here.">
@@ -175,7 +175,7 @@
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" secureTextEntry="YES"/>
                             </textField>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KC2-Y0-9bb">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KC2-Y0-9bb">
                                 <rect key="frame" x="172" y="147" width="32" height="17"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="13"/>
                                 <color key="textColor" red="0.24313725489999999" green="0.56078431370000004" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -238,12 +238,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background 2" translatesAutoresizingMaskIntoConstraints="NO" id="yjB-w0-25J">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xZ-mO-Anz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Verify account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xZ-mO-Anz">
                                 <rect key="frame" x="87" y="20" width="146" height="35"/>
                                 <fontDescription key="fontDescription" name="LobsterTwo" family="Lobster Two" pointSize="28"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-Va-4Bu">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-Va-4Bu">
                                 <rect key="frame" x="123" y="519" width="75" height="29"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                 <state key="normal" title="Resend Code">
@@ -293,7 +293,7 @@
                                     <action selector="registerButtonnPressed:" destination="Ntz-dp-65P" eventType="touchUpInside" id="ArP-Tb-wV9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4u-TN-vYs">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4u-TN-vYs">
                                 <rect key="frame" x="10" y="18" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="W1X-hv-bD1"/>
@@ -362,7 +362,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtd-2J-UD7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHOOSE YOUR COUNTRY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7Y-Zn-haY">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHOOSE YOUR COUNTRY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7Y-Zn-haY">
                                         <rect key="frame" x="80" y="28" width="161" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -494,7 +494,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background Image Bright" translatesAutoresizingMaskIntoConstraints="NO" id="aLZ-Av-QF2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXH-Cg-0K2">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXH-Cg-0K2">
                                 <rect key="frame" x="107" y="243" width="46" height="34"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
                                 <state key="normal" title="Home">
@@ -526,7 +526,7 @@
                                             <segue destination="ANi-G5-hoQ" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="QfD-PQ-cf9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NY-uJ-4h2">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NY-uJ-4h2">
                                         <rect key="frame" x="7" y="51" width="141" height="34"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
                                         <state key="normal" title="Purchase Requests">
@@ -537,26 +537,26 @@
                                             <segue destination="TX9-FR-bgt" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="D57-TX-Hwq"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xep-6b-87G">
-                                        <rect key="frame" x="43" y="105" width="68" height="34"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xep-6b-87G">
+                                        <rect key="frame" x="29" y="105" width="96" height="34"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
-                                        <state key="normal" title="Requests">
+                                        <state key="normal" title="Notifications">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="qWN-Vy-Tli" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="JPg-D1-CUZ"/>
+                                            <segue destination="g2m-j4-Heh" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="JPg-D1-CUZ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="neR-EU-Yud">
-                                        <rect key="frame" x="117" y="119" width="5" height="5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="neR-EU-Yud">
+                                        <rect key="frame" x="131" y="119" width="5" height="5"/>
                                         <color key="backgroundColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="5" id="Qrk-14-8gz"/>
                                             <constraint firstAttribute="height" constant="5" id="ba6-i3-JVD"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPx-DC-qut">
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPx-DC-qut">
                                         <rect key="frame" x="24" y="159" width="107" height="34"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
                                         <state key="normal" title="Refer A Friend">
@@ -567,7 +567,7 @@
                                             <segue destination="L6q-vi-Z3r" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="GfU-TX-3yQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKI-1V-8fP">
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKI-1V-8fP">
                                         <rect key="frame" x="45" y="213" width="64" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Settings">
@@ -709,13 +709,13 @@
                                     <segue destination="oVx-Qb-AON" kind="show" id="sxa-A7-M9C"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKi-hS-oJo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKi-hS-oJo">
                                 <rect key="frame" x="131" y="20" width="58" height="35"/>
                                 <fontDescription key="fontDescription" name="LobsterTwo" family="Lobster Two" pointSize="28"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98p-Bw-YS3">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98p-Bw-YS3">
                                 <rect key="frame" x="117" y="519" width="95" height="29"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                 <state key="normal" title="Create Account?">
@@ -726,7 +726,7 @@
                                     <segue destination="hQK-1q-JUX" kind="show" id="aMu-S3-FSQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKd-pG-lhp">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKd-pG-lhp">
                                 <rect key="frame" x="78" y="362" width="165" height="29"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -738,7 +738,7 @@
                                     <segue destination="lR1-HK-JcC" kind="presentation" id="Ejg-n9-utJ"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFL-Dg-tuh">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFL-Dg-tuh">
                                 <rect key="frame" x="144" y="147" width="32" height="17"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="13"/>
                                 <color key="textColor" red="0.20784313730000001" green="0.4941176471" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -826,13 +826,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSA-Pb-nCL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Forgot password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSA-Pb-nCL">
                                 <rect key="frame" x="75" y="20" width="171" height="35"/>
                                 <fontDescription key="fontDescription" name="LobsterTwo" family="Lobster Two" pointSize="28"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgu-Cb-TUU">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgu-Cb-TUU">
                                 <rect key="frame" x="11" y="18" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5Le-sm-FBw"/>
@@ -917,7 +917,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKr-lX-slG">
                                 <rect key="frame" x="0.0" y="404" width="320" height="164"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmu-vw-edy">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmu-vw-edy">
                                         <rect key="frame" x="17" y="90" width="129" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="2B6-ey-aUW"/>
@@ -937,7 +937,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvE-WT-dgC">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvE-WT-dgC">
                                         <rect key="frame" x="116" y="53" width="89" height="18"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="DIN-Medium" family="DIN Medium" pointSize="19"/>
@@ -947,7 +947,7 @@
                                             <outletCollection property="gestureRecognizers" destination="9XS-bL-e7u" appends="YES" id="Q19-7L-z5l"/>
                                         </connections>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partner Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llx-Ow-CTZ" userLabel="Partner Name">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Partner Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llx-Ow-CTZ" userLabel="Partner Name">
                                         <rect key="frame" x="99" y="53" width="122" height="18"/>
                                         <fontDescription key="fontDescription" name="DIN-Medium" family="DIN Medium" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -972,7 +972,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DC-To-WTz">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DC-To-WTz">
                                 <rect key="frame" x="86" y="210" width="149" height="30"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                 <state key="normal" title="TAP TO CHANGE IMAGE">
@@ -1017,7 +1017,7 @@
                                     <outletCollection property="gestureRecognizers" destination="Qv2-BZ-Rqd" appends="YES" id="bNu-Kz-DUT"/>
                                 </connections>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;When there is love there is life&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDt-b7-7N8">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&quot;When there is love there is life&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDt-b7-7N8">
                                 <rect key="frame" x="57" y="44" width="207" height="17"/>
                                 <fontDescription key="fontDescription" name="Lobster1.3" family="Lobster 1.3" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1117,7 +1117,7 @@
                                             <action selector="backButtonPressed:" destination="v2d-g8-i4g" eventType="touchUpInside" id="SNc-R9-QEb"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHOOSE PARTNER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Daj-IT-6Tc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHOOSE PARTNER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Daj-IT-6Tc">
                                         <rect key="frame" x="102" y="28" width="117" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1257,7 +1257,7 @@
                                     <action selector="contactListButtonPressed:" destination="v2d-g8-i4g" eventType="touchUpInside" id="KQu-LO-EER"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="invalid number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSw-w2-I04">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="invalid number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSw-w2-I04">
                                 <rect key="frame" x="117" y="350" width="87" height="17"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="13"/>
                                 <color key="textColor" red="0.20784313730000001" green="0.4941176471" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1349,7 +1349,7 @@
                                             <action selector="backButtonPressed:" destination="0IC-ua-N1k" eventType="touchUpInside" id="M9T-oW-aLf"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEARCH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tr1-QW-eOP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SEARCH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tr1-QW-eOP">
                                         <rect key="frame" x="135" y="28" width="51" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1400,13 +1400,13 @@
                                                         <constraint firstAttribute="width" constant="40" id="dDi-5X-TFU"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joathan Aguele" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvy-Ae-RAD">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Joathan Aguele" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvy-Ae-RAD">
                                                     <rect key="frame" x="63" y="10" width="96" height="18"/>
                                                     <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+447587479334" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44d-5V-kas">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="+447587479334" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44d-5V-kas">
                                                     <rect key="frame" x="62" y="31" width="91" height="17"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                                     <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -1490,7 +1490,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Da0-JD-OM2" userLabel="Navigation View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REQUESTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-4c-usE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="REQUESTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-4c-usE">
                                         <rect key="frame" x="127" y="28" width="66" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1533,7 +1533,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYO-rl-ZZH">
                                 <rect key="frame" x="0.0" y="65" width="320" height="234"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 MORE REQUESTS LEFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-gx-qow">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2 MORE REQUESTS LEFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-gx-qow">
                                         <rect key="frame" x="74" y="183" width="173" height="21"/>
                                         <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1571,13 +1571,13 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Status Request" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOx-tr-d6c">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1 Status Request" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOx-tr-d6c">
                                                     <rect key="frame" x="62" y="38" width="110" height="19"/>
                                                     <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£0.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-U9-VqM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="£0.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-U9-VqM">
                                                     <rect key="frame" x="277" y="38" width="35" height="19"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="15"/>
                                                     <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -1671,7 +1671,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozI-Nh-lYt">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQe-5K-3xB">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SETTINGS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQe-5K-3xB">
                                         <rect key="frame" x="130" y="29" width="61" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1755,7 +1755,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT2-2x-BNi">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REFER A FRIEND" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5O-zR-t2Z">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="REFER A FRIEND" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5O-zR-t2Z">
                                         <rect key="frame" x="109" y="28" width="102" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1819,13 +1819,13 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1j-Ub-You">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="EMAIL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1j-Ub-You">
                                         <rect key="frame" x="13" y="76" width="42" height="19"/>
                                         <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWD-L5-3T3">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SMS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWD-L5-3T3">
                                         <rect key="frame" x="137" y="76" width="28" height="19"/>
                                         <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1864,13 +1864,13 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TWITTER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXz-gM-F1i">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TWITTER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXz-gM-F1i">
                                 <rect key="frame" x="188" y="413" width="60" height="19"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FACEBOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6o-nv-4Zm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FACEBOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6o-nv-4Zm">
                                 <rect key="frame" x="65" y="413" width="74" height="19"/>
                                 <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1926,8 +1926,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0r-Lg-5Gz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENDING REQUESTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jm6-yp-hll">
-                                        <rect key="frame" x="96" y="32" width="128" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NOTIFICATIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jm6-yp-hll">
+                                        <rect key="frame" x="110" y="32" width="100" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1986,13 +1986,13 @@
                                                         <constraint firstAttribute="width" constant="40" id="qgv-a6-BhT"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMy-Cf-wwh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMy-Cf-wwh">
                                                     <rect key="frame" x="65" y="25" width="64" height="18"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wants to see your status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCz-UV-Akd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="wants to see your status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCz-UV-Akd">
                                                     <rect key="frame" x="65" y="47" width="148" height="18"/>
                                                     <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2016,26 +2016,68 @@
                                                         <action selector="acceptButtonPressed:" destination="qWN-Vy-Tli" eventType="touchUpInside" id="JsF-AN-qo1"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fo-FX-hF1">
+                                                    <rect key="frame" x="145" y="85" width="30" height="30"/>
+                                                    <state key="normal" title="OK">
+                                                        <color key="titleColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="okButtonPressed:" destination="qWN-Vy-Tli" eventType="touchUpInside" id="zr3-Wj-d4D"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwh-3D-dWo">
+                                                    <rect key="frame" x="276" y="81" width="40" height="40"/>
+                                                    <state key="normal" image="Arrow"/>
+                                                    <connections>
+                                                        <action selector="disclosureArrowPressed:" destination="qWN-Vy-Tli" eventType="touchUpInside" id="gK6-Jt-Yuq"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O7-Dz-twl" userLabel="Disclosure Arrow2">
+                                                    <rect key="frame" x="276" y="81" width="40" height="40"/>
+                                                    <state key="normal" image="Arrow"/>
+                                                    <connections>
+                                                        <action selector="disclosureArrow2Pressed:" destination="qWN-Vy-Tli" eventType="touchUpInside" id="8hY-vk-ftq"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2zs-ei-Cvs" firstAttribute="top" secondItem="kCz-UV-Akd" secondAttribute="bottom" constant="15" id="0zy-M8-Hnr"/>
+                                                <constraint firstItem="Nwh-3D-dWo" firstAttribute="bottom" secondItem="2zs-ei-Cvs" secondAttribute="bottom" id="2sP-qx-0Yj"/>
+                                                <constraint firstAttribute="trailing" secondItem="Nwh-3D-dWo" secondAttribute="trailing" constant="4" id="7QD-JA-KFi"/>
                                                 <constraint firstItem="kcz-be-rN4" firstAttribute="top" secondItem="xjF-Po-L7u" secondAttribute="topMargin" constant="16.5" id="9d9-T6-y7I"/>
+                                                <constraint firstItem="1O7-Dz-twl" firstAttribute="centerY" secondItem="Nwh-3D-dWo" secondAttribute="centerY" id="E69-t7-MjP"/>
                                                 <constraint firstItem="uMy-Cf-wwh" firstAttribute="leading" secondItem="kcz-be-rN4" secondAttribute="trailing" constant="14" id="Fne-Kr-73N"/>
                                                 <constraint firstItem="kCz-UV-Akd" firstAttribute="bottom" secondItem="kcz-be-rN4" secondAttribute="bottom" id="HmN-cp-cnu"/>
                                                 <constraint firstItem="2zs-ei-Cvs" firstAttribute="leading" secondItem="QMj-py-gWf" secondAttribute="trailing" constant="90" id="PQj-fx-4e0"/>
+                                                <constraint firstItem="3fo-FX-hF1" firstAttribute="leading" secondItem="QMj-py-gWf" secondAttribute="trailing" constant="21" id="RwS-fG-GDn"/>
                                                 <constraint firstItem="kCz-UV-Akd" firstAttribute="leading" secondItem="kcz-be-rN4" secondAttribute="trailing" constant="14" id="Srs-tg-sld"/>
                                                 <constraint firstItem="QMj-py-gWf" firstAttribute="bottom" secondItem="2zs-ei-Cvs" secondAttribute="bottom" constant="-2" id="Ujn-ED-Was"/>
+                                                <constraint firstItem="2zs-ei-Cvs" firstAttribute="leading" secondItem="3fo-FX-hF1" secondAttribute="trailing" constant="23" id="a3R-H8-HLn"/>
                                                 <constraint firstItem="kcz-be-rN4" firstAttribute="leading" secondItem="xjF-Po-L7u" secondAttribute="leadingMargin" constant="3" id="a7p-Ed-B7Z"/>
+                                                <constraint firstItem="3fo-FX-hF1" firstAttribute="centerY" secondItem="QMj-py-gWf" secondAttribute="centerY" id="amc-Gw-QIq"/>
+                                                <constraint firstItem="3fo-FX-hF1" firstAttribute="centerX" secondItem="xjF-Po-L7u" secondAttribute="centerX" id="awM-Z5-xam"/>
                                                 <constraint firstItem="QMj-py-gWf" firstAttribute="top" secondItem="kCz-UV-Akd" secondAttribute="bottom" constant="15" id="ezQ-hB-TIc"/>
                                                 <constraint firstItem="kcz-be-rN4" firstAttribute="top" secondItem="uMy-Cf-wwh" secondAttribute="top" id="fqd-cL-2Yq"/>
                                                 <constraint firstItem="kCz-UV-Akd" firstAttribute="leading" secondItem="QMj-py-gWf" secondAttribute="leading" constant="-12" id="gn8-jF-O1j"/>
+                                                <constraint firstItem="1O7-Dz-twl" firstAttribute="centerX" secondItem="Nwh-3D-dWo" secondAttribute="centerX" id="kmw-UC-Xiq"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="RwS-fG-GDn"/>
+                                                    <exclude reference="a3R-H8-HLn"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="kCz-UV-Akd" id="w9b-AE-hxt"/>
+                                            <outlet property="disclosureArrow" destination="Nwh-3D-dWo" id="reo-rp-XcE"/>
+                                            <outlet property="disclosureArrow2" destination="1O7-Dz-twl" id="Hzl-io-ykZ"/>
+                                            <outlet property="okButton" destination="3fo-FX-hF1" id="8Ga-s3-FgG"/>
                                             <outlet property="profileImageView" destination="kcz-be-rN4" id="wW1-8v-pGh"/>
+                                            <outlet property="tickButton" destination="2zs-ei-Cvs" id="P5G-GS-0OI"/>
                                             <outlet property="usernameLabel" destination="uMy-Cf-wwh" id="3Mg-6N-zuq"/>
+                                            <outlet property="xbutton" destination="QMj-py-gWf" id="zQT-Xg-Am7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2056,6 +2098,7 @@
                             <constraint firstItem="Bcg-2g-fMK" firstAttribute="top" secondItem="nMc-Ed-uMU" secondAttribute="bottom" id="wdk-JV-beq"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="apo-SA-6Id"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="backgroundImage" destination="MPx-cU-NLN" id="CBZ-QQ-ZEM"/>
@@ -2067,12 +2110,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hkC-2S-v2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682" y="7189"/>
+            <point key="canvasLocation" x="1494" y="7189"/>
         </scene>
         <!--Relationship History Presenter-->
         <scene sceneID="xsE-QM-FgG">
             <objects>
-                <viewController id="ANi-G5-hoQ" customClass="RelationshipHistoryPresenter" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RelationshipHistory" id="ANi-G5-hoQ" customClass="RelationshipHistoryPresenter" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vfY-Rj-lEK"/>
                         <viewControllerLayoutGuide type="bottom" id="cNo-Uy-pCo"/>
@@ -2087,7 +2130,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfL-sU-Cte">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATUS HISTORY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDT-Sg-rDi">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STATUS HISTORY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDT-Sg-rDi">
                                         <rect key="frame" x="107" y="28" width="107" height="18"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2156,19 +2199,19 @@
                                                         <constraint firstAttribute="width" constant="40" id="xEi-ch-2bk"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name and Second Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA9-l2-lud">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name and Second Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA9-l2-lud">
                                                     <rect key="frame" x="75" y="16" width="142" height="16"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="SEEING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCR-3b-CXk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" misplaced="YES" text="SEEING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCR-3b-CXk">
                                                     <rect key="frame" x="74" y="35" width="43" height="17"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                                     <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWz-sc-D25">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWz-sc-D25">
                                                     <rect key="frame" x="170" y="16" width="142" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="ahx-Uo-nVl"/>
@@ -2183,7 +2226,7 @@
                                                         </mask>
                                                     </variation>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="By9-JK-Isn">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="By9-JK-Isn">
                                                     <rect key="frame" x="147" y="35" width="165" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="165" id="QuD-ht-pkL"/>
@@ -2356,7 +2399,7 @@
         <!--User Profile Presenter-->
         <scene sceneID="43R-iE-we3">
             <objects>
-                <viewController id="AVQ-XS-rta" customClass="UserProfilePresenter" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserProfilePresenter" id="AVQ-XS-rta" customClass="UserProfilePresenter" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Edv-kO-1Hh"/>
                         <viewControllerLayoutGuide type="bottom" id="CLH-3P-coc"/>
@@ -2397,13 +2440,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqL-pd-gTM">
                                 <rect key="frame" x="0.0" y="404" width="320" height="164"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ht-zK-TlM">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ht-zK-TlM">
                                         <rect key="frame" x="116" y="42" width="89" height="18"/>
                                         <fontDescription key="fontDescription" name="DIN-Medium" family="DIN Medium" pointSize="19"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOm-My-tfU" userLabel="Partner Name">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOm-My-tfU" userLabel="Partner Name">
                                         <rect key="frame" x="116" y="42" width="89" height="18"/>
                                         <fontDescription key="fontDescription" name="DIN-Medium" family="DIN Medium" pointSize="19"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2414,7 +2457,7 @@
                                         <color key="backgroundColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="cbk-zt-og4"/>
-                                            <constraint firstAttribute="width" constant="155" id="rnf-X0-kQz"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="155" id="rnf-X0-kQz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="DIN-Medium" family="DIN Medium" pointSize="14"/>
                                         <inset key="titleEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="-3"/>
@@ -2445,7 +2488,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hD-BO-A9o" userLabel="Searched User Status Label">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hD-BO-A9o" userLabel="Searched User Status Label">
                                 <rect key="frame" x="139" y="329" width="42" height="22"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -2520,20 +2563,20 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJv-Hj-shj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJv-Hj-shj">
                                         <rect key="frame" x="150" y="119" width="20" height="19"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yakubu Shawulu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-HH-cET">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Yakubu Shawulu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-HH-cET">
                                         <rect key="frame" x="105" y="332" width="110" height="19"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yakubu Shawulu would have to approve this" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDk-gF-gBt">
-                                        <rect key="frame" x="14" y="393" width="293" height="19"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDk-gF-gBt">
+                                        <rect key="frame" x="160" y="403" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2610,6 +2653,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="alertViewFullNameLabel" destination="PRC-HH-cET" id="czD-bA-o7Q"/>
+                        <outlet property="approvalMessageLabel" destination="cDk-gF-gBt" id="kuA-ya-Fy1"/>
                         <outlet property="backgroundImageView" destination="1qK-zo-ba5" id="J62-LW-9ZB"/>
                         <outlet property="bottomUIView" destination="gqL-pd-gTM" id="0Mg-V4-2pM"/>
                         <outlet property="burgerMenuButton" destination="Yeb-vL-eMh" id="pgl-cS-qc0"/>
@@ -2625,6 +2669,7 @@
                         <outlet property="searchButtonPressed" destination="GhS-vz-aqs" id="W89-R5-Wp4"/>
                         <outlet property="searchUserStatusLabel" destination="6hD-BO-A9o" id="mIa-a2-JWL"/>
                         <outlet property="sendButton" destination="Ej1-Xc-hCR" id="x2n-0f-3fl"/>
+                        <outlet property="sendRequestLabel" destination="rdF-j8-CvT" id="m6u-Pb-MXU"/>
                         <outlet property="viewStatusButton" destination="EUJ-xO-5M3" id="2Wu-py-CYG"/>
                     </connections>
                 </viewController>
@@ -2672,6 +2717,25 @@
             </objects>
             <point key="canvasLocation" x="682" y="4601"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WO1-NH-Vq9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="g2m-j4-Heh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AKj-A4-zwl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qWN-Vy-Tli" kind="relationship" relationship="rootViewController" id="7gp-Xq-pdk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Twu-6b-VIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682" y="7189"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Accpet Request Button" width="38" height="39"/>
@@ -2695,9 +2759,9 @@
         <image name="sample profile image" width="41" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qtg-Qj-Kr7"/>
         <segue reference="MJI-6u-jXI"/>
         <segue reference="A1T-yW-fbn"/>
+        <segue reference="Qtg-Qj-Kr7"/>
         <segue reference="Mhl-iS-jf3"/>
     </inferredMetricsTieBreakers>
 </document>

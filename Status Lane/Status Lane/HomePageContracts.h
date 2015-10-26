@@ -21,10 +21,11 @@ typedef void (^AlertControllerBlock)(void);
 -(BOOL)checkImagePickerSourceTypeAvailability:(Class )imagePickerClass;
 -(NSString *)checkAuthorizationForSourceType:(UIImagePickerControllerSourceType)sourceType;
 -(void)openSettings;
+-(void)resetUserToSingle;
 -(int)setFlagForAlertViewButtonPressed:(int)interger;
 -(UIImage *)returnBackgroundImageFromFile;
 -(UIImage *)returnProfileImageFromFile;
--(NSString *)returnUserStatusFromDefaults;
+-(void)returnUserStatusFromAPI;
 -(NSString *)returnPartnerName;
 
 

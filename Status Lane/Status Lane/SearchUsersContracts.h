@@ -34,7 +34,9 @@
 -(void)reloadData;
 -(void)showUserProfileForUser:(PFUser *)user;
 -(void)showUserProfileForAnonymousUser:(PFObject *)anonymousUser;
-
+-(void)startAnimating;
+-(void)stopAnimating;
+-(void)showResponseViewWithMessage:(NSString *)message andTitle:(NSString *)title;
 -(void)dismissSearchBar;
 
 @end

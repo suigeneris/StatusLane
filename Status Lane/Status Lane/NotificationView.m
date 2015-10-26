@@ -104,7 +104,6 @@ static const CGFloat animationDuration = 0.35f;
         _nameLabel.textColor = [UIColor statusLaneGreen];
         _nameLabel.font = [UIFont statusLaneAsapRegular:13];
         _nameLabel.text = self.returnedUser[@"fullName"];
-        NSLog(@"This is the name of the user %@", _nameLabel.text);
         [_nameLabel sizeToFit];
 
     }
@@ -276,7 +275,6 @@ static const CGFloat animationDuration = 0.35f;
         if ([subview.layer.presentationLayer hitTest:touchLocation])
         {
             if ([subview isKindOfClass:NSClassFromString(@"UIButton")]) {
-                NSLog(@"Button Tapped");
                 [self hide];
             }
             

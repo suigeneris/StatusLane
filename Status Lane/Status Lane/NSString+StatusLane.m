@@ -102,6 +102,29 @@
     return phoneNumberFormats;
 }
 
++(NSString *)verifyObjectId:(NSString *)objectId{
+    
+    NSString *firstLetter = [objectId substringToIndex:1];
+
+    
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    set = [set invertedSet];
+    
+    NSRange range = [firstLetter rangeOfCharacterFromSet:set];
+    
+    if (range.location != NSNotFound) {
+        
+        NSString *newObjectId = [NSString stringWithFormat:@"T%@", objectId];
+
+        return newObjectId;
+    }
+    
+    else {
+        
+        return objectId;
+        
+    }
+}
 @end
 
 

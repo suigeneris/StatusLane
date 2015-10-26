@@ -44,7 +44,16 @@
                                                       alpha:0.13
                                        ]];
     [self revealControllerSetUp];
-    [self.interactor retrieveStatusHistoryForUser];
+    
+    if (self.fromPendingRequests) {
+        
+        [self.interactor retriveHistoryFormPendingNotificationsWithArray:self.array];
+    }
+    else{
+        
+        [self.interactor retrieveStatusHistoryForUser];
+
+    }
 }
 
 -(id<UITableViewDelegate,RelationshipHistoryInteractorDatasource>)interactor{
@@ -75,10 +84,21 @@
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        [self.burgerMenuButton addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-        [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
-        [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.fromPendingRequests) {
+            
+            self.searchButton.hidden = YES;
+            [self.burgerMenuButton setImage:[UIImage imageNamed:@"Arrow"] forState:UIControlStateNormal];
+            [self.burgerMenuButton addTarget:self action:@selector(dismissViewController) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else{
+            
+            [self.burgerMenuButton addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+            [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];
+            [self.searchButton addTarget:self.revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        
     }
 }
 
@@ -109,6 +129,11 @@
     [_activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
     
+}
+
+-(void)dismissViewController{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

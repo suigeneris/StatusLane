@@ -7,15 +7,18 @@
 //
 
 #import "PushNotificationManager.h"
+#import "NSString+StatusLane.h"
 
 @implementation PushNotificationManager
 
 -(void)subcribeToReciveChannelWithSuccess:(SuccessBlock)success andFailure:(FailureBlock)failure{
     
     PFUser *currentUser = [PFUser currentUser];
-    NSString *objectID = [currentUser objectId];
     
-    [PFPush subscribeToChannelInBackground:objectID
+    NSString *objectID = [currentUser objectId];
+    NSString *newObjectID = [NSString verifyObjectId:objectID];
+    
+    [PFPush subscribeToChannelInBackground:newObjectID
                                      block:^(BOOL succeeded, NSError * __nullable error) {
                                          
                                          if (error) {

@@ -73,6 +73,7 @@
 		2A63CA2E1B244B75000F191E /* PurchaseRequestsInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63CA2D1B244B75000F191E /* PurchaseRequestsInteractor.m */; };
 		2A63CA321B244D46000F191E /* PurchseRequestPresenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63CA311B244D46000F191E /* PurchseRequestPresenterCell.m */; };
 		2A7679BD1B2251A100B616DE /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7679BC1B2251A100B616DE /* SWRevealViewController.m */; };
+		2A8342361BCC2B00002D042C /* UserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8342351BCC2B00002D042C /* UserProfileInteractor.m */; };
 		2A871C381B1F8D6200A2779B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A871C371B1F8D6200A2779B /* Photos.framework */; };
 		2A9E5DD41B1E1FF3008033AB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9E5DD31B1E1FF3008033AB /* AVFoundation.framework */; };
 		2AA9F4A31B2D7C2300B5C1A2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AA9F4A21B2D7C2300B5C1A2 /* Security.framework */; };
@@ -256,6 +257,9 @@
 		2A63CA311B244D46000F191E /* PurchseRequestPresenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchseRequestPresenterCell.m; sourceTree = "<group>"; };
 		2A7679BB1B2251A100B616DE /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		2A7679BC1B2251A100B616DE /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		2A8342341BCC2B00002D042C /* UserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileInteractor.h; sourceTree = "<group>"; };
+		2A8342351BCC2B00002D042C /* UserProfileInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileInteractor.m; sourceTree = "<group>"; };
+		2A8342381BCC2B31002D042C /* UserProfileContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileContracts.h; sourceTree = "<group>"; };
 		2A871C371B1F8D6200A2779B /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		2A9E5DD31B1E1FF3008033AB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2AA9F4A21B2D7C2300B5C1A2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1095,6 +1099,14 @@
 			name = "Reveal View Controller";
 			sourceTree = "<group>";
 		};
+		2A8342371BCC2B05002D042C /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				2A8342381BCC2B31002D042C /* UserProfileContracts.h */,
+			);
+			name = Contracts;
+			sourceTree = "<group>";
+		};
 		2AA9F49D1B2D74C300B5C1A2 /* 3rd Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -1266,6 +1278,7 @@
 		2AF8AD1C1B0E06C800864270 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
+				2A8342371BCC2B05002D042C /* Contracts */,
 				2AF8AD1D1B0E06E900864270 /* Interactor */,
 				2AF8AD1E1B0E06FA00864270 /* Presenter */,
 			);
@@ -1275,6 +1288,8 @@
 		2AF8AD1D1B0E06E900864270 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				2A8342341BCC2B00002D042C /* UserProfileInteractor.h */,
+				2A8342351BCC2B00002D042C /* UserProfileInteractor.m */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -1482,6 +1497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A0C56921B054203004198D5 /* AppDelegate.m in Sources */,
+				2A8342361BCC2B00002D042C /* UserProfileInteractor.m in Sources */,
 				2A1C7A3B1B18685E003ADCF5 /* UIFont+StatusLaneFonts.m in Sources */,
 				2A1C7A1E1B180A0C003ADCF5 /* ChoosePartnerInteractor.m in Sources */,
 				2A1C7A351B181F85003ADCF5 /* SettingsCell.m in Sources */,

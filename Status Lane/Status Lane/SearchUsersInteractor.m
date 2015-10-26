@@ -71,6 +71,9 @@
         
         if (error) {
             
+            [self.presenter stopAnimating];
+            [self.presenter showResponseViewWithMessage:error.localizedDescription
+                                               andTitle:@"OOOOPs!"];
         }
         
         else{
@@ -91,6 +94,8 @@
     
     }];
     
+    [self.presenter startAnimating];
+    
 }
 
 -(void)searchForAnonymousUser:(NSString *)details{
@@ -104,19 +109,23 @@
         
         if (error) {
             
+            [self.presenter stopAnimating];
+            [self.presenter showResponseViewWithMessage:error.localizedDescription
+                                               andTitle:@"OOOOPs!"];
         }
         
         else{
             
             if (array.count == 0) {
                 
+                [self.presenter stopAnimating];
                 [self.searchResults addObjectsFromArray:array];
                 [self.presenter reloadData];
             }
             
             else{
                 
-                
+                [self.presenter stopAnimating];
                 [self.searchResults addObjectsFromArray:array];
                 [self.presenter reloadData];
                 

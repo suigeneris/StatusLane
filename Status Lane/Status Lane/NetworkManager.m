@@ -134,13 +134,7 @@
 -(void)attemptRegistrationWithPFUser:(PFUser *)user
                              success:(SuccessBlock)suceessBlock
                              failure:(FailureBlock)failureBlock{
-    
-//    PFUser *user = [PFUser user];
-//    user.username = username;
-//    user.password = password;
-//    user[@"status"] = @"SINGLE";
-//    user[@"fullName"] = @"Full Name";
-//    user[@"gender"] = @"Gender not set";
+
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
         
@@ -165,12 +159,30 @@
 #pragma mark - User Interactor
 
 
+-(void)fetchCurrentUserIfNeededWithSuccesss:(SuccessBlock)success
+                                 andFailure:(FailureBlock)failure{
+    
+    PFUser *user = [PFUser currentUser];
+    [user fetchIfNeededInBackgroundWithBlock:^(NSObject *object, NSError *error){
+        
+        if (error) {
+            failure(error);
+        }
+        
+        else{
+            
+            success(object);
+        }
+    }];
+}
+
+
 -(void)fetchCurrentUserWithSuccesss:(SuccessBlock)success
                          andFailure:(FailureBlock)failure{
     
     PFUser *user = [PFUser currentUser];
-    [user fetchIfNeededInBackgroundWithBlock:^(NSObject *object, NSError *error){
-    
+    [user fetchInBackgroundWithBlock:^(NSObject *object, NSError *error){
+        
         if (error) {
             failure(error);
         }
