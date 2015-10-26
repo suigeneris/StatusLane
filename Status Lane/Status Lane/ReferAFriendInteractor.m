@@ -15,7 +15,8 @@
 @implementation ReferAFriendInteractor
 
 
-#pragma mark -
+#pragma mark - MFMailComposeViewControllerDelegate
+
 -(UIViewController *)returnMailViewController{
     
     NSString *emailTitle = @"Status Lane Invitation";
@@ -71,14 +72,14 @@
     switch (result)
     {
         case MessageComposeResultCancelled:
-            NSLog(@"Mail cancelled");
+            NSLog(@"sms cancelled");
             
             break;
         case MessageComposeResultFailed:
-            NSLog(@"Mail saved");
+            NSLog(@"sms saved");
             break;
         case MessageComposeResultSent:
-            NSLog(@"Mail sent");
+            NSLog(@"sms sent");
             break;
         default:
             break;
@@ -89,5 +90,27 @@
     
 }
 
+
+#pragma mark - FBSDKSharingDelegate
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results{
+    
+    NSLog(@"Did complete with results %@", results);
+}
+
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error{
+    
+    
+    NSLog(@"Did fail with results %@", error);
+    
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer{
+    
+    
+    NSLog(@"Did cancel");
+    
+}
 
 @end

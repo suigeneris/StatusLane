@@ -11,6 +11,6 @@
 
 @interface ReferAFriendPresenter : UIViewController <ReferAFriendPresenter>
 
-@property (nonatomic, strong) id<ReferAFriendInteractor> interactor;
+@property (nonatomic, strong) id<ReferAFriendInteractor, FBSDKSharingDelegate> interactor;
 
 @end

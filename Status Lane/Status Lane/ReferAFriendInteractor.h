@@ -10,7 +10,7 @@
 #import "ReferAFriendContracts.h"
 #import <MessageUI/MessageUI.h>
 
-@interface ReferAFriendInteractor : NSObject <ReferAFriendInteractor>
+@interface ReferAFriendInteractor : NSObject <ReferAFriendInteractor, FBSDKSharingDelegate>
 
 @property (nonatomic, weak) id<ReferAFriendPresenter> presenter;
 
