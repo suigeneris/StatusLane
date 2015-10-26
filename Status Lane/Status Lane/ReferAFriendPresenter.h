@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReferAFriendContracts.h"
 
-@interface ReferAFriendPresenter : UIViewController
+@interface ReferAFriendPresenter : UIViewController <ReferAFriendPresenter>
+
+@property (nonatomic, strong) id<ReferAFriendInteractor, FBSDKSharingDelegate> interactor;
 
 @end
