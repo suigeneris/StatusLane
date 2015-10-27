@@ -395,7 +395,7 @@
     
     PFUser *notifiedUser = partner;
     NSString *channel = [NSString verifyObjectId:[notifiedUser objectId]];
-    NSString *message = [NSString stringWithFormat:@"Your partner changed Their Status To %@", self.selectedStatus];
+    NSString *message = [NSString stringWithFormat:@"Your Partner Changed Thier Status To %@", self.selectedStatus];
     
     NSDictionary *dictionary = @{
                                  @"alert" : message,
@@ -451,20 +451,32 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
     [query whereKey:@"historyId" equalTo:user.objectId];
-    [query orderByDescending:@"statusDate"];
     
-    [self.networkProvider queryDatabaseWithQuery:query
+    PFQuery *query2 = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query whereKey:@"partnerId" equalTo:user.objectId];
+    
+    PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [compoundQuery orderByDescending:@"statusDate"];
+    [compoundQuery includeKey:@"StatusHistory.partnerId"];
+    compoundQuery.limit = 20;
+    
+    [self.networkProvider queryDatabaseWithQuery:compoundQuery
                                          success:^(id responseObject) {
                                              
+                                             NSLog(@"These are the objects from the query %@", responseObject);
                                              NSArray *array = responseObject;
                                              if (array.count > 0) {
                                                  //User has a history, so send the end date of the last relationship
                                                  PFObject *object = [array objectAtIndex:0];
+                                                 PFObject *object2 = [array objectAtIndex:1];
                                                  object[@"statusEndDate"] = [NSDate date];
+                                                 object2[@"statusEndDate"] = [NSDate date];
                                                  NSString *lastPartnerId = object[@"partnerId"];
                                                  NSString *lastPartnerName = object[@"partnerName"];
                                                  [object saveInBackground];
-                                                 
+                                                 [object2 saveInBackground];
+
+    
                                                  //Then create the new history
                                                  PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
                                                  statusHistoryObject[@"historyId"] = user.objectId;
@@ -474,6 +486,15 @@
                                                  statusHistoryObject[@"statusType"] = user[@"status"];
                                                  statusHistoryObject[@"statusDate"] = [NSDate date];
                                                  [statusHistoryObject saveInBackground];
+                                                 
+                                                 PFObject *statusHistoryObject2 = [PFObject objectWithClassName:@"StatusHistory"];
+                                                 statusHistoryObject2[@"historyId"] = lastPartnerId;
+                                                 statusHistoryObject2[@"partnerId"] = user.objectId;
+                                                 statusHistoryObject2[@"partnerName"] = user[@"fullName"];
+                                                 statusHistoryObject2[@"fullName"] = lastPartnerName;
+                                                 statusHistoryObject2[@"statusType"] = user[@"status"];
+                                                 statusHistoryObject2[@"statusDate"] = [NSDate date];
+                                                 [statusHistoryObject2 saveInBackground];
                                                  
                                              }
                                              else{

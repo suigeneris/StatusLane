@@ -59,28 +59,8 @@
     }
     else{
         
-//        if ([self determinePartnerOfUser:user] && [[Defaults status] isEqualToString:status]) {
-//            
-//            NSLog(@"trying to set same user with same status");
-//            [self.presenter stopAnimatingActivitiyView];
-//            [self.presenter dismissView];
-//        }
-//        
-//        else{
-//            
-//            if ([self determinePartnerOfUser:user]) {
-//                
-//                NSString *string = [NSString stringWithFormat:@"Your partner has updated you guys status to %@", status];
-//                [self sendRelationshipRequestToUser:user withRequestMessage:string];
-//            }
-//            
-//            else{
+        [self sendRelationshipRequestToUser:user withRequestMessage:@"Sent You a Partner Request"];
         
-                [self sendRelationshipRequestToUser:user withRequestMessage:@"Sent You a Partner Request"];
-                
-//            }
-
-//        }
     }
     
 }
@@ -146,7 +126,6 @@
     
     
 }
-
 
 
 -(BOOL)determinePartnerOfUser:(PFUser *)user{

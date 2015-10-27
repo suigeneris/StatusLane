@@ -65,18 +65,12 @@
     NSString *userObjectId = [[PFUser currentUser] objectId];
     PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
     [query whereKey:@"historyId" equalTo:userObjectId];
+    [query includeKey:@"StatusHistory.partnerId"];
     
-    PFQuery *query2 = [PFQuery queryWithClassName:@"StatusHistory"];
-    [query2 whereKey:@"partnerId" equalTo:userObjectId];
-    
-    PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
-    [compoundQuery orderByDescending:@"statusDate"];
-    [compoundQuery includeKey:@"StatusHistory.partnerId"];
-    compoundQuery.limit = 20;
-
-    [self.networkProvider queryDatabaseWithQuery:compoundQuery
+    [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
                                              
+                                             NSLog(@"This is the response object %@", responseObject);
                                              self.arrayOfHistoryObjects = [self pourStatusHistoryObjectsIntoMutableDictionary:responseObject];
                                              [self getListOfUsersInStatusHistoryFromArray:responseObject];
                                              [self.presenter reloadDatasource];
@@ -127,7 +121,6 @@
     [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
                                              
-
                                              self.arrayOfUsersInStatusHistory = responseObject;
                                              [self getListOfAnonymousUsersInStatusHistoryWithQuery:query2];
                                              
@@ -188,13 +181,13 @@
         [dict setObject:object[@"statusType"] forKey:@"statusType"];
         [dict setObject:object[@"statusDate"] forKey:@"statusDate"];
 
-        if (object[@"partnerName"]) {
-            [dict setObject:object[@"partnerName"] forKey:@"partnerName"];
+        if ([object[@"partnerName"] isEqualToString:[Defaults fullName]]) {
+            [dict setObject:object[@"fullName"] forKey:@"partnerName"];
 
         }
         else{
             
-            [dict setObject:@"" forKey:@"partnerName"];
+            [dict setObject:object[@"partnerName"] forKey:@"partnerName"];
 
         }
         

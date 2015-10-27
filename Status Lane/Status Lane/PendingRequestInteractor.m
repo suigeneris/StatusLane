@@ -291,7 +291,7 @@
                                                                                 success:^(id responseObject) {
                                                                                     
                                                                                     [self sendPushNotificationWithDictionary:dictionary andMessage:[self returnAlertResponseForAcceptedAlertMessage:[dictionary objectForKey:@"alert"]] withNeedsResponse:NO];
-                                                                                    
+                                                                                    [self createHistoryObjectsForCurrentUser:currentUser AndPartner:foundUser];
 
                                                                                 } failure:^(NSError *error) {
                                                                                     
@@ -402,6 +402,29 @@
                                                     }];
 }
 
+-(void)createHistoryObjectsForCurrentUser:(PFUser *)currentUser AndPartner:(PFUser *)partner{
+    
+    PFObject *currentUserHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+    currentUserHistoryObject[@"historyId"] = currentUser.objectId;
+    currentUserHistoryObject[@"partnerId"] = partner.objectId;
+    currentUserHistoryObject[@"partnerName"] = partner[@"fullName"];
+    currentUserHistoryObject[@"fullName"] = currentUser[@"fullName"];
+    currentUserHistoryObject[@"statusType"] = currentUser[@"status"];
+    currentUserHistoryObject[@"statusDate"] = [NSDate date];
+    [currentUserHistoryObject saveInBackground];
+    
+    PFObject *partnerHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];
+    partnerHistoryObject[@"historyId"] = partner.objectId;
+    partnerHistoryObject[@"partnerId"] = currentUser.objectId;
+    partnerHistoryObject[@"partnerName"] = currentUser[@"fullName"];
+    partnerHistoryObject[@"fullName"] = partner[@"fullName"];
+    partnerHistoryObject[@"statusType"] = currentUser[@"status"];
+    partnerHistoryObject[@"statusDate"] = [NSDate date];
+    [partnerHistoryObject saveInBackground];
+    
+    
+    
+}
 -(void)updateBadgeNumber{
     
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
