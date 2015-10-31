@@ -70,7 +70,6 @@
     [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
                                              
-                                             NSLog(@"This is the response object %@", responseObject);
                                              self.arrayOfHistoryObjects = [self pourStatusHistoryObjectsIntoMutableDictionary:responseObject];
                                              [self getListOfUsersInStatusHistoryFromArray:responseObject];
                                              [self.presenter reloadDatasource];

@@ -222,6 +222,7 @@
     vc.array = history;
     vc.fromPendingRequests = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 @end
 

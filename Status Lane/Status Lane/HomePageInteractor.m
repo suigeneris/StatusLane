@@ -299,13 +299,11 @@
 
     [self.networkProvider fetchCurrentUserWithSuccesss:^(id responseObject) {
         
-        NSLog(@"Fetch current user success");
         PFUser *user = responseObject;
         [self updatePreviousPartnerOfUser:user];
         
     } andFailure:^(NSError *error) {
         
-        NSLog(@"Fetch user failed with error: %@", error.localizedDescription);
         [self.presenter stopAnimatingActivitiyView];
         [self.presenter hideTableView];
         [self.presenter showErrorView:error.localizedDescription];
@@ -320,9 +318,7 @@
         
 
         if (![[partnerArray objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
-            
-            NSLog(@"Is this called");
-
+        
             PFObject *previousPartner = [partnerArray objectAtIndex:0];
             previousPartner[@"status"] = self.selectedStatus;
             if ([self.selectedStatus isEqualToString:@"SINGLE"]) {
@@ -350,14 +346,12 @@
         
         else{
             
-            NSLog(@"Previous partner is a user");
             [self notifyUserOfPartnerStatusChangeViaPushWithUser:user andPartner:[partnerArray objectAtIndex:0]];
         }
         
     }
     else{
         
-        NSLog(@"NO PARTNER");
         [self.presenter stopAnimatingActivitiyView];
         [self.presenter changeUserStatusWithStatus:@"SINGLE"];
         [self.presenter hideTableView];
@@ -406,8 +400,6 @@
                                  @"needsResponse" : [NSNumber numberWithBool:NO]
 
                                  };
-    
-    
     [self.pushNotificationProvider callCloudFuntionWithName:@"sendPushNotification"
                                                  parameters:dictionary
                                                     success:^(id responseObject) {
@@ -448,7 +440,6 @@
 -(void)updateStatusHistoryForUser:(PFUser  *)user{
     
     //Check if user has a status history
-    
     PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
     [query whereKey:@"historyId" equalTo:user.objectId];
     
@@ -463,7 +454,6 @@
     [self.networkProvider queryDatabaseWithQuery:compoundQuery
                                          success:^(id responseObject) {
                                              
-                                             NSLog(@"These are the objects from the query %@", responseObject);
                                              NSArray *array = responseObject;
                                              if (array.count > 0) {
                                                  //User has a history, so send the end date of the last relationship
@@ -471,8 +461,20 @@
                                                  PFObject *object2 = [array objectAtIndex:1];
                                                  object[@"statusEndDate"] = [NSDate date];
                                                  object2[@"statusEndDate"] = [NSDate date];
-                                                 NSString *lastPartnerId = object[@"partnerId"];
-                                                 NSString *lastPartnerName = object[@"partnerName"];
+                                                 NSString *lastPartnerId;
+                                                 NSString *lastPartnerName;
+                                                 if ([object[@"partnerName"] isEqualToString:[Defaults fullName]]) {
+                                                     
+                                                     lastPartnerId = object2[@"partnerId"];
+                                                     lastPartnerName = object2[@"partnerName"];
+                                                 }
+                                                 else{
+                                                     
+                                                     lastPartnerId = object[@"partnerId"];
+                                                     lastPartnerName = object[@"partnerName"];
+                                                     
+                                                 }
+                                                 
                                                  [object saveInBackground];
                                                  [object2 saveInBackground];
 

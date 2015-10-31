@@ -13,6 +13,8 @@
 
 -(void)sendStatusRequestToUser:(PFUser *)user;
 -(void)sendStatusHistoryRequestToUser:(PFUser *)user;
+-(void)getHistoryForAnonymousUser:(PFObject *)anonymousUser;
+
 
 @end
 
@@ -21,6 +23,7 @@
 
 -(void)startAnimating;
 -(void)stopAnimating;
+-(void)showUserHistoryWithHistory:(NSArray *)arrayHistory;
 -(void)showResponseViewWithMessage:(NSString *)message andTitle:(NSString *)title;
 
 @end

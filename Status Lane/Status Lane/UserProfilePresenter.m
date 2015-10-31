@@ -11,6 +11,7 @@
 #import "StatusLaneErrorView.h"
 #import "UIColor+StatusLane.h"
 #import "UIImage+StatusLane.h"
+#import "RelationshipHistoryPresenter.h"
 #import <ParseUI/ParseUI.h>
 
 @interface UserProfilePresenter ()
@@ -224,7 +225,8 @@
         
         else{
             
-            //Show Status history view controller;
+            [self.interactor getHistoryForAnonymousUser:self.user];
+
         }
     }
     else{
@@ -438,6 +440,15 @@
     [_activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
 
+}
+
+-(void)showUserHistoryWithHistory:(NSArray *)arrayHistory{
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    RelationshipHistoryPresenter *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RelationshipHistory"];
+    vc.array = arrayHistory;
+    vc.fromPendingRequests = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
 
