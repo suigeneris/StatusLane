@@ -11,6 +11,7 @@
 #import "SWRevealViewController.h"
 #import "StatusLaneErrorView.h"
 #import <Social/Social.h>
+#import "UIColor+StatusLane.h"
 
 @interface ReferAFriendPresenter()
 
@@ -143,7 +144,7 @@
 
 -(void)presentErrorMessageWithString:(NSString *)errorMessage andTitle:(NSString *)title{
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:title];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage color:[UIColor statusLaneRed] andTitle:title];
     [errorView showWithCompletionBlock:nil];
     
 }

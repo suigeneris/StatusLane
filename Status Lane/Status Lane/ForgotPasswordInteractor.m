@@ -9,6 +9,7 @@
 #import "ForgotPasswordInteractor.h"
 #import "NetworkManager.h"
 #import "Defaults.h"
+#import "UIColor+StatusLane.h"
 
 @interface ForgotPasswordInteractor ()
 
@@ -36,11 +37,11 @@
     [self.networkProvider resetPasswordForUserWithEmail:email
                                                succcess:^(id responseObject) {
                                                    
-                                                   [self.presenter showErrorViewWithMessage:@"Please check your email for your Password reset link" andTitle:@"Yaaay!"];
+                                                   [self.presenter showErrorViewWithMessage:@"Please check your email for your Password reset link" color:[UIColor statusLaneGreen] andTitle:@"Yaaay!"];
                                                    
                                                } failure:^(NSError *error) {
                                                    
-                                                   [self.presenter showErrorViewWithMessage:error.localizedDescription andTitle:@"OOOOPs!"];
+                                                   [self.presenter showErrorViewWithMessage:error.localizedDescription color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
                                                    
                                                }];
     

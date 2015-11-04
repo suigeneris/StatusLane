@@ -11,6 +11,7 @@
 #import "StatusLaneErrorView.h"
 #import "SettingsInteractor.h"
 #import "Defaults.h"
+#import "UIColor+StatusLane.h"
 
 @interface SettingsPresenterContainer(){
     
@@ -102,8 +103,8 @@
     }
     
     else{
-        
-        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" andTitle:@"OOOOPs!"];
+    
+        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
         [errorView showWithCompletionBlock:nil];
     }
     
@@ -121,7 +122,7 @@
     
     else{
         
-        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" andTitle:@"OOOOPs!"];
+        StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:@"Please Complete The Form" color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
         [errorView showWithCompletionBlock:nil];
     }
     

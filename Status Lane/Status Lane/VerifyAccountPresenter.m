@@ -145,7 +145,7 @@
 
 -(void)showErrorViewWithMessage:(NSString *)message {
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message color:[UIColor redColor] andTitle:@"OOOOPs!"];
     [errorView showWithCompletionBlock:nil];
 
 }

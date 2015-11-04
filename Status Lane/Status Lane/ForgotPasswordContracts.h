@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol ForgotPasswordInteractor <NSObject>
 
@@ -17,7 +18,7 @@
 
 @protocol ForgotPasswordPresenter <NSObject>
 
--(void)showErrorViewWithMessage:(NSString *)message andTitle:(NSString *)title;
+-(void)showErrorViewWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title;
 -(void)dismissView;
 
 

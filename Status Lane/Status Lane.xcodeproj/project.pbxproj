@@ -50,8 +50,6 @@
 		2A1C7A681B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A671B19F85F003ADCF5 /* RelationshipHistoryCellPresenter.m */; };
 		2A1C7A6C1B1A01B5003ADCF5 /* RelationshipHistoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A6B1B1A01B5003ADCF5 /* RelationshipHistoryInteractor.m */; };
 		2A1C7A711B1A2034003ADCF5 /* HomePageInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C7A701B1A2034003ADCF5 /* HomePageInteractor.m */; };
-		2A232CE81B34B42E00590B66 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A232CE71B34B42E00590B66 /* Parse.framework */; };
-		2A232CEA1B34B43400590B66 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A232CE91B34B43400590B66 /* Bolts.framework */; };
 		2A232CEE1B35987800590B66 /* StatusLaneButtonGreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CED1B35987800590B66 /* StatusLaneButtonGreen.m */; };
 		2A232CF31B35DE0800590B66 /* StatusLaneErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CF21B35DE0800590B66 /* StatusLaneErrorView.m */; };
 		2A232CFA1B36D49900590B66 /* VerifyAccountInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A232CF91B36D49900590B66 /* VerifyAccountInteractor.m */; };
@@ -101,13 +99,15 @@
 		2ACF523B1B17855200DDC1EE /* CountryCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF523A1B17855200DDC1EE /* CountryCode.m */; };
 		2ACF8E001B6FE0ED00410AEB /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF8DFF1B6FE0ED00410AEB /* NotificationView.m */; };
 		2AD6AB031B1CCE9A00457102 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD6AB021B1CCE9A00457102 /* AddressBook.framework */; };
-		2ADA30711B3B69BE00F791BF /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADA30701B3B69BE00F791BF /* ParseUI.framework */; };
 		2AED54871B08C92600B392C7 /* Launch Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AED54861B08C92600B392C7 /* Launch Image.png */; };
 		2AED54B51B0940B800B392C7 /* LobsterTwo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AED54B31B093AEE00B392C7 /* LobsterTwo-Regular.otf */; };
 		2AED54B81B09531C00B392C7 /* Asap-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AED54B71B09530600B392C7 /* Asap-Regular.otf */; };
 		2AF8AD1B1B0DE28E00864270 /* SearchUsersPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD1A1B0DE28E00864270 /* SearchUsersPresenter.m */; };
 		2AF8AD221B0E074000864270 /* UserProfilePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD211B0E074000864270 /* UserProfilePresenter.m */; };
 		2AF8AD291B0E54B100864270 /* PurchaseRequestsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8AD281B0E54B100864270 /* PurchaseRequestsPresenter.m */; };
+		AB26A6341BE0F12800532C54 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB26A6311BE0F12800532C54 /* Bolts.framework */; };
+		AB26A6351BE0F12800532C54 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB26A6321BE0F12800532C54 /* Parse.framework */; };
+		AB26A6361BE0F12800532C54 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB26A6331BE0F12800532C54 /* ParseUI.framework */; };
 		AB5A5B091BBAD3FB008D115E /* ReferAFriendInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */; };
 		AB5A5B0D1BBAD5F6008D115E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */; };
 		AB967F2E1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AB967F2D1B25A45E00A5AA9B /* PurchaseRequestsDataSource.m */; };
@@ -215,8 +215,6 @@
 		2A1C7A6E1B1A1F7E003ADCF5 /* HomePageContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageContracts.h; sourceTree = "<group>"; };
 		2A1C7A6F1B1A2034003ADCF5 /* HomePageInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageInteractor.h; sourceTree = "<group>"; };
 		2A1C7A701B1A2034003ADCF5 /* HomePageInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageInteractor.m; sourceTree = "<group>"; };
-		2A232CE71B34B42E00590B66 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		2A232CE91B34B43400590B66 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		2A232CEC1B35987800590B66 /* StatusLaneButtonGreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusLaneButtonGreen.h; sourceTree = "<group>"; };
 		2A232CED1B35987800590B66 /* StatusLaneButtonGreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusLaneButtonGreen.m; sourceTree = "<group>"; };
 		2A232CF11B35DE0800590B66 /* StatusLaneErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusLaneErrorView.h; sourceTree = "<group>"; };
@@ -300,7 +298,6 @@
 		2ACF8DFE1B6FE0ED00410AEB /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
 		2ACF8DFF1B6FE0ED00410AEB /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
 		2AD6AB021B1CCE9A00457102 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		2ADA30701B3B69BE00F791BF /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		2AED54861B08C92600B392C7 /* Launch Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch Image.png"; sourceTree = "<group>"; };
 		2AED54B31B093AEE00B392C7 /* LobsterTwo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LobsterTwo-Regular.otf"; sourceTree = "<group>"; };
 		2AED54B71B09530600B392C7 /* Asap-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Asap-Regular.otf"; sourceTree = "<group>"; };
@@ -312,6 +309,9 @@
 		2AF8AD281B0E54B100864270 /* PurchaseRequestsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseRequestsPresenter.m; sourceTree = "<group>"; };
 		4602F9F818E2C03E31641169 /* Pods-Status Lane.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status Lane.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane.debug.xcconfig"; sourceTree = "<group>"; };
 		69C04E1D27BAC18D563ECC0B /* Pods-Status Lane.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status Lane.release.xcconfig"; path = "Pods/Target Support Files/Pods-Status Lane/Pods-Status Lane.release.xcconfig"; sourceTree = "<group>"; };
+		AB26A6311BE0F12800532C54 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		AB26A6321BE0F12800532C54 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		AB26A6331BE0F12800532C54 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		AB5A5B071BBAD3FB008D115E /* ReferAFriendInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferAFriendInteractor.h; sourceTree = "<group>"; };
 		AB5A5B081BBAD3FB008D115E /* ReferAFriendInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferAFriendInteractor.m; sourceTree = "<group>"; };
 		AB5A5B0B1BBAD42A008D115E /* ReferAFriendContracts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferAFriendContracts.h; sourceTree = "<group>"; };
@@ -326,14 +326,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB5A5B0D1BBAD5F6008D115E /* MessageUI.framework in Frameworks */,
-				2A232CE81B34B42E00590B66 /* Parse.framework in Frameworks */,
-				2A232CEA1B34B43400590B66 /* Bolts.framework in Frameworks */,
-				2ADA30711B3B69BE00F791BF /* ParseUI.framework in Frameworks */,
 				2AC27B6B1B34881B009997AF /* Social.framework in Frameworks */,
 				2AC27B691B348814009997AF /* Accounts.framework in Frameworks */,
 				2A268CA01BDEC44B0096B38B /* FBSDKShareKit.framework in Frameworks */,
 				2AC27B661B348723009997AF /* libsqlite3.dylib in Frameworks */,
 				2AC27B641B348717009997AF /* libz.dylib in Frameworks */,
+				AB26A6351BE0F12800532C54 /* Parse.framework in Frameworks */,
+				AB26A6341BE0F12800532C54 /* Bolts.framework in Frameworks */,
 				2AC27B621B348709009997AF /* SystemConfiguration.framework in Frameworks */,
 				2AC27B601B3486FB009997AF /* StoreKit.framework in Frameworks */,
 				2AA9F4A31B2D7C2300B5C1A2 /* Security.framework in Frameworks */,
@@ -347,6 +346,7 @@
 				2A9E5DD41B1E1FF3008033AB /* AVFoundation.framework in Frameworks */,
 				2A268CA21BDEC45D0096B38B /* FBSDKCoreKit.framework in Frameworks */,
 				2AD6AB031B1CCE9A00457102 /* AddressBook.framework in Frameworks */,
+				AB26A6361BE0F12800532C54 /* ParseUI.framework in Frameworks */,
 				0AE957B32B8AC0E3E5455448 /* libPods-Status Lane.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1223,6 +1223,9 @@
 		2AD6AB011B1CCE6900457102 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB26A6311BE0F12800532C54 /* Bolts.framework */,
+				AB26A6321BE0F12800532C54 /* Parse.framework */,
+				AB26A6331BE0F12800532C54 /* ParseUI.framework */,
 				2A268CA11BDEC45D0096B38B /* FBSDKCoreKit.framework */,
 				2A268C9F1BDEC44B0096B38B /* FBSDKShareKit.framework */,
 				AB5A5B0C1BBAD5F6008D115E /* MessageUI.framework */,
@@ -1230,9 +1233,6 @@
 				2AC27B681B348814009997AF /* Accounts.framework */,
 				2AC27B651B348723009997AF /* libsqlite3.dylib */,
 				2AC27B631B348717009997AF /* libz.dylib */,
-				2ADA30701B3B69BE00F791BF /* ParseUI.framework */,
-				2A232CE91B34B43400590B66 /* Bolts.framework */,
-				2A232CE71B34B42E00590B66 /* Parse.framework */,
 				2AC27B611B348709009997AF /* SystemConfiguration.framework */,
 				2AC27B5F1B3486FB009997AF /* StoreKit.framework */,
 				2AC27B5D1B3486E9009997AF /* QuartzCore.framework */,
@@ -1732,6 +1732,8 @@
 					Lane,
 					"$(PROJECT_DIR)/Status",
 					Lane,
+					"$(PROJECT_DIR)/Status",
+					Lane,
 				);
 				INFOPLIST_FILE = "Status Lane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1753,6 +1755,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/'Status Lane'",
+					"$(PROJECT_DIR)/Status",
+					Lane,
 					"$(PROJECT_DIR)/Status",
 					Lane,
 					"$(PROJECT_DIR)/Status",

@@ -105,6 +105,8 @@
 
 -(void)updateUserDefaultsWithLoggedInUser:(PFUser *)user{
     
+    [self.presenter showActivityView];
+
     [Defaults setUsername:user.username];
     [Defaults setPassword:user.password];
     [Defaults setStatus:user[@"status"]];
@@ -183,6 +185,7 @@
         [self.networkProvider queryDatabaseWithQuery:query
                                              success:^(id responseObject) {
                                                  
+                                                 [self.presenter hideActivityView];
                                                  PFObject *object = [responseObject objectAtIndex:0];
                                                  [Defaults setPartnerFullName:object[@"fullName"]];
                                                  [self subscribeToPush];
@@ -197,6 +200,7 @@
     }
     else{
         
+        [self.presenter hideActivityView];
         [self subscribeToPush];
         [self.presenter login];
             

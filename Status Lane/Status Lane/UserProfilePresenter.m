@@ -52,7 +52,6 @@
     // Do any additional setup after loading the view.
     [self additionalUIViewSetup];
 
-
 }
 
 -(id<UserProfileInteractor>)interactor{
@@ -410,7 +409,7 @@
 }
 
 
--(void)showResponseViewWithMessage:(NSString *)message andTitle:(NSString *)title{
+-(void)showResponseViewWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title{
     
     [UIView animateWithDuration:0.35
                      animations:^{
@@ -420,7 +419,7 @@
                          
                      }completion:^(BOOL finished) {
                          
-                         StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:title];
+                         StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message color:color andTitle:title];
                          [errorView showWithCompletionBlock:nil];
                          
                      }];

@@ -12,6 +12,7 @@
 #import "Defaults.h"
 #import "AppDelegate.h"
 #import "NetworkManager.h"
+#import "UIColor+StatusLane.h"
 
 @interface SettingsCell() {
     
@@ -212,7 +213,7 @@
 -(void)showErrorViewWithMessage:(NSString *)message withResignTextField:(UITextField *)textField {
     
     AppDelegate *app = [UIApplication sharedApplication].delegate;
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message color:[UIColor redColor] andTitle:@"OOOOPs!"];
     
     if (app.window.subviews.count < 2) {
         

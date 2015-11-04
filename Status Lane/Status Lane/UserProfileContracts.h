@@ -21,6 +21,6 @@
 
 -(void)startAnimating;
 -(void)stopAnimating;
--(void)showResponseViewWithMessage:(NSString *)message andTitle:(NSString *)title;
+-(void)showResponseViewWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title;
 
 @end

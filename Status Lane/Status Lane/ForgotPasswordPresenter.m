@@ -87,7 +87,7 @@
     
     else{
         
-        [self showErrorViewWithMessage:@"Please Enter A Valid Email" andTitle:@"OOOOPs!"];
+        [self showErrorViewWithMessage:@"Please Enter A Valid Email" color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
     }
 
     
@@ -106,11 +106,11 @@
 
 #pragma mark - Presenter Delegate Methods
 
--(void)showErrorViewWithMessage:(NSString *)message andTitle:(NSString *)title{
+-(void)showErrorViewWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title{
     
 
     [self touchesBegan:[NSSet new] withEvent:nil];
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message andTitle:title];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:message color:color andTitle:title];
     [errorView showWithCompletionBlock:^{
         
         if (![title isEqualToString:@"OOOOPs!"]) {

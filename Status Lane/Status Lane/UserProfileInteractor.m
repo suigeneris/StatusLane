@@ -9,6 +9,7 @@
 #import "UserProfileInteractor.h"
 #import "PushNotificationManager.h"
 #import "NSString+StatusLane.h"
+#import "UIColor+StatusLane.h"
 
 @interface UserProfileInteractor ()
 
@@ -49,13 +50,13 @@
                                                        
                                                         [self.presenter stopAnimating];
                                                         [self.presenter showResponseViewWithMessage:[NSString stringWithFormat:@"Your Request Has Been Sent Successfully, Pending Approval from %@", user[@"fullName"]]
-                                                                                           andTitle:@"Yayyyy!"];
+                                                                                          color:[UIColor statusLaneGreen] andTitle:@"Yayyyy!"];
                                                         
                                                     } andFailure:^(NSError *error) {
                                                         
                                                         [self.presenter stopAnimating];
                                                         [self.presenter showResponseViewWithMessage:error.localizedDescription
-                                                                                           andTitle:@"OOOOPs!"];
+                                                                                           color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
                                                         
                                                     }];
     
@@ -80,13 +81,13 @@
                                                         
                                                         [self.presenter stopAnimating];
                                                         [self.presenter showResponseViewWithMessage:[NSString stringWithFormat:@"Your Request Has Been Sent Successfully, Pending Approval from %@", user[@"fullName"]]
-                                                                                           andTitle:@"Yayyyy!"];
+                                                                                           color:[UIColor statusLaneGreen] andTitle:@"Yayyyy!"];
                                                         
                                                     } andFailure:^(NSError *error) {
                                                         
                                                         [self.presenter stopAnimating];
                                                         [self.presenter showResponseViewWithMessage:error.localizedDescription
-                                                                                           andTitle:@"OOOOPs!"];
+                                                                                           color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
                                                         
                                                         
                                                     }];

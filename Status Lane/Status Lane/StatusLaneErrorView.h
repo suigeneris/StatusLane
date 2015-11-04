@@ -11,6 +11,6 @@
 @interface StatusLaneErrorView : UIView
 
 
--(id)initWithMessage:(NSString *)message andTitle:(NSString *)title;
+-(id)initWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title;
 -(void)showWithCompletionBlock:(void(^)(void))completionBlock;
 @end

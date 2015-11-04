@@ -132,7 +132,7 @@ static void *countryCodeContext = &countryCodeContext;
 -(void)showErrorViewWithErrorMessage:(NSString *)errorMessage{
     
     [self touchesBegan:[NSSet new] withEvent:nil];
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
     [errorView showWithCompletionBlock:nil];
 }
 

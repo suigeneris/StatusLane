@@ -18,6 +18,7 @@ static const CGFloat animationDuration = 0.35f;
 
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *message;
+@property (nonatomic) UIColor *messageAndTitleColour;
 @property (nonatomic) UIButton *dismissButton;
 @property (nonatomic) UIView *backGroundView;
 @property (nonatomic) UILabel *errorLabel;
@@ -30,12 +31,13 @@ static const CGFloat animationDuration = 0.35f;
 
 @implementation StatusLaneErrorView
 
--(id)initWithMessage:(NSString *)message andTitle:(NSString *)title {
+-(id)initWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title {
     
     self = [super init];
     if (self) {
         self.message = message;
         self.title = title;
+        self.messageAndTitleColour = color;
     }
     
     return self;
@@ -79,7 +81,7 @@ static const CGFloat animationDuration = 0.35f;
         _errorLabel = [[UILabel alloc]init];
         _errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _errorLabel.text = self.title;
-        _errorLabel.textColor = [UIColor statusLaneRed];
+        _errorLabel.textColor = self.messageAndTitleColour;
         _errorLabel.font = [UIFont statusLaneAsapRegular:18];
         [_errorLabel sizeToFit];
     }
@@ -97,7 +99,7 @@ static const CGFloat animationDuration = 0.35f;
         _messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _messageLabel.numberOfLines = 0;
         _messageLabel.textAlignment = NSTextAlignmentCenter;
-        _messageLabel.textColor = [UIColor statusLaneRed];
+        _messageLabel.textColor = self.messageAndTitleColour;
         _messageLabel.font = [UIFont statusLaneAsapRegular:18];
     }
     

@@ -489,7 +489,8 @@
 
 -(void)showErrorView:(NSString *)errorMessage{
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc]initWithMessage:errorMessage andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:errorMessage color:[UIColor redColor] andTitle:@"OOOOPs!"];
+
     [errorView showWithCompletionBlock:nil];
 }
 
