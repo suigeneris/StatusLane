@@ -8,12 +8,14 @@
 
 #import "UserProfileInteractor.h"
 #import "PushNotificationManager.h"
+#import "NetworkManager.h"
 #import "NSString+StatusLane.h"
 #import "UIColor+StatusLane.h"
 
 @interface UserProfileInteractor ()
 
 @property (nonatomic, strong) id<PushNotificationProvider> pushNotificationProvider;
+@property (nonatomic, strong) id<NetworkProvider> networkProvider;
 @end
 
 @implementation UserProfileInteractor
@@ -26,6 +28,15 @@
         _pushNotificationProvider = [PushNotificationManager new];
     }
     return _pushNotificationProvider;
+}
+
+-(id<NetworkProvider>)networkProvider{
+    
+    if (!_networkProvider) {
+        _networkProvider = [NetworkManager new];
+    }
+    
+    return _networkProvider;
 }
 
 
@@ -94,6 +105,32 @@
     
     [self.presenter startAnimating];
 
+    
+}
+
+
+-(void)getHistoryForAnonymousUser:(PFObject *)anonymousUser{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query whereKey:@"historyId" equalTo:anonymousUser.objectId];
+    [query orderByDescending:@"statusDate"];
+    [query includeKey:@"StatusHistory.partnerId"];
+    query.limit = 20;
+    
+    [self.networkProvider queryDatabaseWithQuery:query
+                                         success:^(id responseObject) {
+                                             
+                                             [self.presenter stopAnimating];
+                                             [self.presenter showUserHistoryWithHistory:responseObject];
+                                             
+                                         } failure:^(NSError *error) {
+                                             
+                                             [self.presenter stopAnimating];
+                                             NSLog(@"This is the error %@", error.localizedDescription);
+                                             
+                                         }];
+    
+    [self.presenter startAnimating];
     
 }
 

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *unseenRequestImageView;
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *badgeLabel;
 
 @property (strong, nonatomic) SWRevealViewController *revealController;
 
@@ -41,6 +42,16 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    NSString *badgeNumber = [self.interactor getBadgeNumber];
+    if ([badgeNumber isEqualToString:@"0"]) {
+        
+        self.badgeLabel.text = @"";
+    }
+    else{
+        
+        self.badgeLabel.text = badgeNumber;
+
+    }
     [self setUpProfileImage];
 }
 -(id<BurgerMenuInteractor>)interactor{

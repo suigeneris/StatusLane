@@ -16,6 +16,7 @@
 @protocol BurgerMenuInteractor <NSObject>
 
 -(UIImage *)retrieveProfileImageFromFile;
+-(NSString *)getBadgeNumber;
 
 
 @end

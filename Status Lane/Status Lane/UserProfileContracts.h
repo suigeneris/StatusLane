@@ -13,6 +13,8 @@
 
 -(void)sendStatusRequestToUser:(PFUser *)user;
 -(void)sendStatusHistoryRequestToUser:(PFUser *)user;
+-(void)getHistoryForAnonymousUser:(PFObject *)anonymousUser;
+
 
 @end
 

@@ -182,16 +182,11 @@
     NSString *senderObjectId = [dict objectForKey:@"senderObjectId"];
     PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
     [query whereKey:@"historyId" equalTo:senderObjectId];
+    [query orderByDescending:@"statusDate"];
+    [query includeKey:@"StatusHistory.partnerId"];
+    query.limit = 20;
     
-    PFQuery *query2 = [PFQuery queryWithClassName:@"StatusHistory"];
-    [query whereKey:@"partnerId" equalTo:senderObjectId];
-    
-    PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
-    [compoundQuery orderByDescending:@"statusDate"];
-    [compoundQuery includeKey:@"StatusHistory.partnerId"];
-    compoundQuery.limit = 20;
-    
-    [self.networkProvider queryDatabaseWithQuery:compoundQuery
+    [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
                                              
                                              [self.presenter stopAnimatingActivitiyView];
