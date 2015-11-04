@@ -24,5 +24,6 @@
 -(void)startAnimating;
 -(void)stopAnimating;
 -(void)showResponseViewWithMessage:(NSString *)message color:(UIColor *)color andTitle:(NSString *)title;
+-(void)showUserHistoryWithHistory:(NSArray *)arrayHistory;
 
 @end
