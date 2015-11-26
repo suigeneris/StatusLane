@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) id <NetworkProvider> networkProvider;
 @property (nonatomic, strong) id <PushNotificationProvider> pushNotificationProvider;
+@property (nonatomic , strong) NSString *anonymousUserObjectId;
 
 @end
 
@@ -59,7 +60,6 @@
                                                  success:^(id responseObject) {
                                                      
                                                      [self.presenter hideActivityView];
-                                                     NSLog(@"%@", responseObject);
                                                      
                                                  } failure:^(NSError *error) {
                                                      
@@ -160,6 +160,7 @@
                                                     [Defaults setStatus:user[@"status"]];
                                                     
                                                     [self subscriibeToPushNotificationChannel];
+                                                    
                                                     [self.presenter createAccountSuccessfull];
                                                     
                                                     

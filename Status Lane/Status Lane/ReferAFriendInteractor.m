@@ -46,17 +46,12 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
-
             break;
         case MFMailComposeResultSaved:
-            NSLog(@"Mail saved");
             break;
         case MFMailComposeResultSent:
-            NSLog(@"Mail sent");
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
             break;
         default:
             break;
@@ -95,21 +90,17 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results{
     
-    NSLog(@"Did complete with results %@", results);
 }
 
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error{
     
     
-    NSLog(@"Did fail with results %@", error);
     
 }
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer{
     
-    
-    NSLog(@"Did cancel");
     
 }
 

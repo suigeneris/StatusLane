@@ -139,7 +139,7 @@
 -(NSArray *)retrieveContactsFromAddressBook{
     
         CFErrorRef error = NULL;    
-        NSArray *array = [[NSMutableArray alloc]init];
+        NSArray *array;
         ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
         NSMutableArray *array2 = [[NSMutableArray alloc]init];
         if (addressBook != nil) {

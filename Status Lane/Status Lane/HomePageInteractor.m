@@ -165,7 +165,7 @@
             }
             
             [Defaults setBackgroundImage:[UIImage grayishImage:chosenImage]];
-            [self createBackgroundTaskForImageUpload:chosenImage withImageName:@"userBackgroundPicture"];
+            [self createBackgroundTaskForImageUpload:[Defaults backgroundImage] withImageName:@"userBackgroundPicture"];
             [self.presenter setBackGroundImage];
             
         }
@@ -283,7 +283,6 @@
         
     } andFailure:^(NSError *error) {
         
-        NSLog(@"This is the error %@", error.localizedDescription);
     }];
     
     
@@ -361,12 +360,9 @@
 
 -(void)updatePFUserStatusWithUser:(PFUser *)user{
     
-    NSLog(@"update pf user status with user called");
     [self.networkProvider saveWithPFObject:user
                                    success:^(id responseObject) {
                                        
-                                       NSLog(@"update pf user status with user success");
-
                                        [Defaults setStatus:self.selectedStatus];
                                        [self.presenter changeUserStatusWithStatus:self.selectedStatus];
                                        if ([self.selectedStatus isEqualToString:@"SINGLE"]) {
@@ -389,7 +385,7 @@
     
     PFUser *notifiedUser = partner;
     NSString *channel = [NSString verifyObjectId:[notifiedUser objectId]];
-    NSString *message = [NSString stringWithFormat:@"Your Partner Changed Thier Status To %@", self.selectedStatus];
+    NSString *message = [NSString stringWithFormat:@"Your Partner Changed Their Status To %@", self.selectedStatus];
     
     NSDictionary *dictionary = @{
                                  @"alert" : message,
@@ -409,7 +405,7 @@
                                                             [user removeObjectForKey:@"partner"];
                                                         }
                                                         
-                                                        NSDictionary *dict = @{@"updatingUserObjectId": channel,
+                                                        NSDictionary *dict = @{@"updatingUserObjectId": [notifiedUser objectId],
                                                                                @"updatingStatus": self.selectedStatus};
                                                         
                                                         [self.pushNotificationProvider callCloudFuntionWithName:@"updateUserWithMasterKey"
@@ -444,7 +440,7 @@
     [query whereKey:@"historyId" equalTo:user.objectId];
     
     PFQuery *query2 = [PFQuery queryWithClassName:@"StatusHistory"];
-    [query whereKey:@"partnerId" equalTo:user.objectId];
+    [query2 whereKey:@"partnerId" equalTo:user.objectId];
     
     PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
     [compoundQuery orderByDescending:@"statusDate"];
@@ -620,8 +616,7 @@
 
 -(void)createBackgroundTaskForImageUpload:(UIImage *)image withImageName:(NSString *)name{
     
-    UIBackgroundTaskIdentifier backgoundTask;
-    backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    UIBackgroundTaskIdentifier backgoundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         
         [[UIApplication sharedApplication] endBackgroundTask:backgoundTask];
     }];

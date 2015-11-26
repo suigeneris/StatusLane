@@ -247,25 +247,6 @@
 
 
 
-//+(void)updatePFUserColoum:(NSString *)column withInfo:(NSString *)info{
-//    
-//    NSLog(@"Attepmt update user");
-//    PFUser *currentUser = [PFUser currentUser];
-//    currentUser[column] = info;
-//    
-//    if ([info isEqualToString:@"SINGLE"]) {
-//        
-//        [self changeStatusWithUser:currentUser];
-//    }
-//    
-//    else{
-//        
-//        [currentUser saveInBackground];
-//    }
-//    
-//    
-//}
-
 +(void)updatePFUserProfileImage:(UIImage *)profileImage{
     
     if ([UIImage isImageToLarge:profileImage]) {

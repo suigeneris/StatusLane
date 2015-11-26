@@ -9,6 +9,7 @@
 #import "CreateAccountInteractor.h"
 #import "CountryCode.h"
 #import "NetworkManager.h"
+#import "NSString+StatusLane.h"
 
 @interface CreateAccountInteractor()
 
@@ -48,18 +49,18 @@
 
 -(void)sendSMSWithVerificationCode:(NSString *)number withCode:(NSString *)code{
     
-    [self.networkProvider sendSMSWithVerificationCode:number
+    NSString *E164 = [[NSString allFormatsForPhoneNumber:number] objectForKey:@"E164"];
+    [self.networkProvider sendSMSWithVerificationCode:E164
                                              withCode:code
                                               success:^(id responseObject) {
                                                   
+                                                  NSLog(@"This is the response %@", responseObject);
                                                   [self.presenter hideActivityView];
-                                                  NSLog(@"%@", responseObject);
                                                   [self.presenter showVerifyAccount];
                                                   
                                               } failure:^(NSError *error) {
                                                   
                                                   [self.presenter hideActivityView];
-                                                  NSLog(@"%@", error.localizedDescription);
                                                   [self.presenter showErrorView:error.localizedDescription];
                                                   
                                               }];
@@ -70,7 +71,8 @@
 
 -(void)queryParseForUsernmae:(NSString *)username andCode:(NSString *)code{
     
-    [self.networkProvider searchDatabaseForUsername:username
+    NSString *E164 = [[NSString allFormatsForPhoneNumber:username] objectForKey:@"E164"];
+    [self.networkProvider searchDatabaseForUsername:E164
                                             andCode:code
                                             success:^(id responseObject) {
                                                 
@@ -78,7 +80,7 @@
                                                 NSArray *array = responseObject;
                                                 if (array.count == 0) {
                                                     
-                                                    [self sendSMSWithVerificationCode:username withCode:code];
+                                                    [self sendSMSWithVerificationCode:E164 withCode:code];
                                                 }
                                                 
                                                 else{

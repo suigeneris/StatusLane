@@ -43,6 +43,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
     [self countryCodeButton];
     [self.phoneNumberTextfield addTarget:self action:@selector(validatePhoneNumber) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextfield addTarget:self action:@selector(validatePassword) forControlEvents:UIControlEventEditingChanged];

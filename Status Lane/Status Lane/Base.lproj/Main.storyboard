@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsL-8e-HdU">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -524,7 +524,7 @@
                                             <segue destination="ANi-G5-hoQ" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="QfD-PQ-cf9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NY-uJ-4h2">
+                                    <button hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NY-uJ-4h2">
                                         <rect key="frame" x="7" y="51" width="141" height="34"/>
                                         <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="17"/>
                                         <state key="normal" title="Purchase Requests">
@@ -532,6 +532,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="purchaseRequestPressed:" destination="wHx-g1-ffQ" eventType="touchUpInside" id="fut-1h-CkM"/>
                                             <segue destination="TX9-FR-bgt" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="D57-TX-Hwq"/>
                                         </connections>
                                     </button>
@@ -973,7 +974,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DC-To-WTz">
-                                <rect key="frame" x="86" y="210" width="149" height="30"/>
+                                <rect key="frame" x="86" y="30" width="149" height="30"/>
                                 <fontDescription key="fontDescription" name="Asap-Regular" family="Asap" pointSize="14"/>
                                 <state key="normal" title="TAP TO CHANGE IMAGE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1027,7 +1028,6 @@
                             <constraint firstAttribute="centerX" secondItem="2DC-To-WTz" secondAttribute="centerX" id="6WI-gK-kyI"/>
                             <constraint firstItem="IwG-uX-FnP" firstAttribute="top" secondItem="bgp-jD-rr7" secondAttribute="bottom" id="8qH-qn-Nte"/>
                             <constraint firstItem="lvE-WT-dgC" firstAttribute="centerX" secondItem="par-yy-A9o" secondAttribute="centerX" constant="0.5" id="Aun-Ho-SlP"/>
-                            <constraint firstAttribute="centerY" secondItem="2DC-To-WTz" secondAttribute="centerY" constant="59" id="B2X-Qn-BXf"/>
                             <constraint firstItem="4oc-RS-3vN" firstAttribute="centerX" secondItem="vlp-Ea-1cH" secondAttribute="centerX" id="Io7-fy-kqt"/>
                             <constraint firstItem="lvE-WT-dgC" firstAttribute="top" secondItem="vlp-Ea-1cH" secondAttribute="bottom" constant="26" id="PJB-bg-YqV"/>
                             <constraint firstItem="hKr-lX-slG" firstAttribute="leading" secondItem="zr4-Cx-o7w" secondAttribute="leading" id="S4s-e9-HFq"/>
@@ -1044,6 +1044,7 @@
                             <constraint firstItem="4oc-RS-3vN" firstAttribute="centerY" secondItem="vlp-Ea-1cH" secondAttribute="centerY" id="mbT-PJ-3mv"/>
                             <constraint firstItem="4oc-RS-3vN" firstAttribute="centerX" secondItem="llx-Ow-CTZ" secondAttribute="centerX" id="pbO-7b-cNA"/>
                             <constraint firstItem="vlp-Ea-1cH" firstAttribute="centerY" secondItem="STy-zc-Yj0" secondAttribute="centerY" constant="0.5" id="tK1-Td-h3L"/>
+                            <constraint firstItem="2DC-To-WTz" firstAttribute="top" secondItem="Ha6-nc-7nB" secondAttribute="bottom" constant="10" id="tze-vl-6a7"/>
                             <constraint firstAttribute="centerX" secondItem="par-yy-A9o" secondAttribute="centerX" id="vyY-Jy-UdB"/>
                         </constraints>
                     </view>
@@ -1054,6 +1055,7 @@
                         <outlet property="backgroundImageView" destination="bgp-jD-rr7" id="j01-0f-GeA"/>
                         <outlet property="bottomUIView" destination="hKr-lX-slG" id="SOT-27-cwr"/>
                         <outlet property="burgerMenu" destination="1OA-FG-nOB" id="U8w-Rm-Hvd"/>
+                        <outlet property="changeBackgroundImageButton" destination="2DC-To-WTz" id="RbZ-I0-1hj"/>
                         <outlet property="fullNameLabel" destination="lvE-WT-dgC" id="dBd-NA-I9Q"/>
                         <outlet property="partnerName" destination="llx-Ow-CTZ" id="i5t-TF-htQ"/>
                         <outlet property="partnerProfileImage" destination="4oc-RS-3vN" id="29B-o3-nDh"/>
@@ -1368,7 +1370,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Status Lane Users" id="heR-Zt-DEo">
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search  Users With Name or Number" id="heR-Zt-DEo">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -1397,7 +1399,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+447587479334" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44d-5V-kas">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+447587479334" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44d-5V-kas">
                                                     <rect key="frame" x="62" y="31" width="91" height="17"/>
                                                     <fontDescription key="fontDescription" name="Asap-Bold" family="Asap" pointSize="13"/>
                                                     <color key="textColor" red="0.23137254900000001" green="0.87450980389999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -2762,9 +2764,9 @@
         <image name="sample profile image" width="41" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fHY-dK-ILO"/>
         <segue reference="MJI-6u-jXI"/>
         <segue reference="A1T-yW-fbn"/>
-        <segue reference="fHY-dK-ILO"/>
         <segue reference="Qtg-Qj-Kr7"/>
     </inferredMetricsTieBreakers>
 </document>

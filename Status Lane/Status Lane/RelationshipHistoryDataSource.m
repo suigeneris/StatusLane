@@ -56,8 +56,16 @@
         
         NSMutableDictionary *dict = [self.arrayOfStatusHistoryObjects objectAtIndex:indexPath.row];
         
-        cell.fullNameLabel.text = [dict objectForKey:@"partnerName"];
         cell.userStatusLabel.text = [dict objectForKey:@"statusType"];
+        if ([[dict objectForKey:@"statusType"] isEqualToString:@"SINGLE"]) {
+            
+            cell.fullNameLabel.text = @"";
+        }
+        else{
+            
+            cell.fullNameLabel.text = [dict objectForKey:@"partnerName"];
+
+        }
         
         if ([[dict objectForKey:@"statusEndDate"] isKindOfClass:NSClassFromString(@"NSString" )]) {
             

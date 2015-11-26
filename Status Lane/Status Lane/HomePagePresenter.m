@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *partnerName;
 @property (weak, nonatomic) IBOutlet UIButton *burgerMenu;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UIButton *changeBackgroundImageButton;
 @property (weak, nonatomic) IBOutlet UILabel *quoteOfTheDay;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) UITableView *tableview;
@@ -489,7 +490,7 @@
 
 -(void)showErrorView:(NSString *)errorMessage{
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:errorMessage color:[UIColor redColor] andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:errorMessage color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
 
     [errorView showWithCompletionBlock:nil];
 }
@@ -568,7 +569,8 @@
     _isTableViewHidden = NO;
     self.burgerMenu.userInteractionEnabled = NO;
     self.searchButton.userInteractionEnabled = NO;
-    
+    self.changeBackgroundImageButton.userInteractionEnabled = NO;
+
     [self.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.view removeGestureRecognizer:self.revealViewController.tapGestureRecognizer];
     [self.view addGestureRecognizer:self.tapToHideTableView];
@@ -593,6 +595,7 @@
     _isTableViewHidden = YES;
     self.burgerMenu.userInteractionEnabled = YES;
     self.searchButton.userInteractionEnabled = YES;
+    self.changeBackgroundImageButton.userInteractionEnabled = YES;
     
     [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
     [self.view addGestureRecognizer: self.revealViewController.tapGestureRecognizer];

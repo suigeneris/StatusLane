@@ -89,7 +89,7 @@
     
     else{
         
-        NSLog(@"Cant send message at this");
+        NSLog(@"Cant send message at this time");
         [self presentErrorMessageWithString:@"Cannot Send SMS, please Check with your service provider" andTitle:@"OOOOPs!"];
     }
 
@@ -99,16 +99,21 @@
 - (IBAction)faceBookButtonPressed:(id)sender {
   
     
-    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:@"http://statuslane.co.uk"];
-    content.imageURL = [NSURL URLWithString:@"https://www.statuslane.co.uk"];
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        
+        
+        SLComposeViewController *socialController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        [socialController setInitialText:@"Status Lane\nThe new Pre-Dating App.\nCheck it out right before you go out on any date."];
+        //[socialController addImage:[UIImage imageNamed:@"AppIcon"]];
+        [socialController addURL:[NSURL URLWithString:@"http://postimg.org/image/jjs6ibond/"]];
+        [self presentViewController:socialController animated:YES completion:nil];
+    }
     
-    [FBSDKShareDialog showFromViewController:self
-                                 withContent:content
-                                    delegate:self.interactor];
-    
+    else{
+        
+    }
 
-    
      
 }
 
@@ -118,10 +123,10 @@
         
         
         SLComposeViewController *socialController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        
-        [socialController setInitialText:@"Refer Friend To Use Status Lane"];
+    
+        [socialController setInitialText:@"Status Lane\nThe new Pre-Dating App.\nCheck it out right before you go out on any date."];
         [socialController addImage:[UIImage imageNamed:@"AppIcon"]];
-        [socialController addURL:[NSURL URLWithString:@"https://www.statuslane.co.uk"]];
+        [socialController addURL:[NSURL URLWithString:@"http://postimg.org/image/jjs6ibond/"]];
         [self presentViewController:socialController animated:YES completion:nil];
     }
     

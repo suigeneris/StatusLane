@@ -30,7 +30,8 @@
     //    [self.window makeKeyAndVisible];
     
     [Parse enableLocalDatastore];
-    
+    [ParseCrashReporting enable];
+
     [Parse setApplicationId:@"nilSvL4G2SkPGxCgBuZkhjHLOraM4dtp8YFNQadT"
                   clientKey:@"4hSgGJ482V7Abf5sgzdEpDZZt9ZASG7lqCzVWMJt"];
     
@@ -84,11 +85,12 @@
     [currentInstallation saveInBackground];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
     UIApplicationState state  = [application applicationState];
     if (state == UIApplicationStateActive) {
-        
+        [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"setUserToSingle" object:nil userInfo:userInfo];
         NSDictionary *notificationPayload = userInfo;
         NotificationView *notificationView = [[NotificationView alloc] initWithDictionary:notificationPayload];
@@ -99,12 +101,8 @@
         [self openPendingRequests];
     }
 
+    completionHandler(UIBackgroundFetchResultNewData);
 
-}
-
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-    
-    
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

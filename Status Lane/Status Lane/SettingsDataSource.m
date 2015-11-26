@@ -117,25 +117,34 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    int numberOfSections;
-    if (section == 0 || section == 1) {
+    int numberOfRows;
+//    removing more information section for now
+//    if (section == 0 || section == 1) {
+//    
+//        numberOfRows = 3;
+//    }
+//    
+//    else if (section == 2){
+//        
+//        numberOfRows = 2;
+//    }
     
-        numberOfSections = 3;
-    }
-    
-    else if (section == 2){
+    if (section == 0) {
         
-        numberOfSections = 2;
+        numberOfRows = 3;
+    }
+    else{
+        numberOfRows = 2;
     }
     
-    
-    return numberOfSections;
+    return numberOfRows;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    
-    return 3;
+    //removing more information section for now
+    //return 3;
+    return 2;
 }
 
 
@@ -186,13 +195,13 @@
         
     }
     
-    else if (indexPath.section == 1){
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell 2"];
-        cell.textLabel.attributedText = [self.moreInformationArray objectAtIndex:indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        return cell;
-    }
+//    else if (indexPath.section == 1){
+//        
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell 2"];
+//        cell.textLabel.attributedText = [self.moreInformationArray objectAtIndex:indexPath.row];
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        return cell;
+//    }
     
     else  {
         

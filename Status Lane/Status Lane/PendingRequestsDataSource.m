@@ -112,7 +112,6 @@
         cell.disclosureArrow.hidden = NO;
         cell.disclosureArrow2.hidden = YES;
         cell.disclosureArrow2.userInteractionEnabled = NO;
-        NSLog(@"%@", cell.descriptionLabel.text);
 
 
     }

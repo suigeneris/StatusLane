@@ -55,6 +55,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
     [self countryCodeButton];
     [self.phoneNumberTextfield addTarget:self action:@selector(validatePhoneNumber) forControlEvents:UIControlEventEditingChanged];
     [self.partnerNameTextField addTarget:self action:@selector(checkPartnerName) forControlEvents:UIControlEventEditingChanged];
@@ -65,7 +66,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    //[self viewDidAppear:animated];
+    [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTableView" object:nil];
 
 }
@@ -302,7 +303,9 @@ static void *countryCodeContext = &countryCodeContext;
     
     [self saveStatusToDefaults];
     [self touchesBegan:[NSSet new] withEvent:nil];
-    [self.interactor updateUserPartnerWithFullName:self.partnerNameTextField.text andNumber:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text]];
+    NSString *E164FormatNumber = [[NSString allFormatsForPhoneNumber:[self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text]]
+                                                        objectForKey:@"E164"];
+    [self.interactor updateUserPartnerWithFullName:[NSString uppercaseAllFirstCharactersOfString:self.partnerNameTextField.text] andNumber:E164FormatNumber];
 }
 
 

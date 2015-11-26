@@ -8,6 +8,19 @@
 
 #import "NetworkManager.h"
 
+#define kBaseURL @"https://www.bulksms.co.uk/eapi/"
+#define kSendSMS @"submission/send_sms/2/2.0"
+#define kAuthentication @"?username=Jonathan_Aguele&password=4evayoung&"
+#define kMessage @"message=%@"
+
+@interface NetworkManager () <NSURLSessionDelegate>
+
+@property (nonatomic) NSURLSessionConfiguration *sessionConfiguration;
+@property (nonatomic) NSURLSession *urlSession;
+
+
+@end
+
 @implementation NetworkManager
 
 
@@ -63,23 +76,44 @@
                            success:(SuccessBlock)successBlock
                            failure:(FailureBlock)failureBlock{
     
-    [PFCloud callFunctionInBackground:@"verifyNumber"
-                       withParameters:@{ @"number" : number,
-                                         @"verificationCode" : code}
-     
-                                block:^(id object, NSError *error) {
-                                    
-                                    
-                                    if (!error) {
-                                        
-                                        successBlock(object);
-                                    }
-                                    
-                                    else{
-                                        
-                                        failureBlock(error);
-                                    }
-                                }];
+//    [PFCloud callFunctionInBackground:@"verifyNumber"
+//                       withParameters:@{ @"number" : number,
+//                                         @"verificationCode" : code}
+//     
+//                                block:^(id object, NSError *error) {
+//                                    
+//                                    
+//                                    if (!error) {
+//                                        
+//                                        successBlock(object);
+//                                    }
+//                                    
+//                                    else{
+//                                        
+//                                        failureBlock(error);
+//                                    }
+//                                }];
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://www.bulksms.co.uk/eapi/submission/send_sms/2/2.0?username=Jonathan_Aguele&password=4evayoung&message=%@&msisdn=%@", code, number];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:request
+                                                        completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                            
+                                                            if(error){
+                                                                
+                                                                failureBlock(error);
+                                                            }
+                                                            
+                                                            else{
+                                                                
+                                                                successBlock(data);
+                                                            }
+                                                            
+                                                        }];
+    [dataTask resume];
     
 }
 
@@ -307,6 +341,43 @@
     }];
 }
 
+
+#pragma mark - NSURLSession
+
+-(NSURLSessionConfiguration *)sessionConfiguration{
+    
+    if (!_sessionConfiguration) {
+        _sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        [_sessionConfiguration setHTTPAdditionalHeaders:@{@"Content-Type": @"application/x-www-form-urlencoded",
+                                                          @"Accept": @"text/plain"}];
+        [_sessionConfiguration setTimeoutIntervalForRequest:10];
+    }
+    
+    return _sessionConfiguration;
+}
+
+-(NSURLSession *)urlSession{
+    
+    if (!_urlSession) {
+        
+        _urlSession = [NSURLSession sessionWithConfiguration:[self sessionConfiguration]];
+        
+    }
+    
+    return _urlSession;
+}
+
+
+-(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler{
+    
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        if ([challenge.protectionSpace.host isEqualToString:@""]) {
+            
+            NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+            completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
+        }
+    }
+}
 @end
 
 

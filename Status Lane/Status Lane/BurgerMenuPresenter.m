@@ -69,7 +69,6 @@
 
 -(void)setUpUIElements{
     
-    //[self.buttonContainerView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     self.unseenRequestImageView.layer.cornerRadius = self.unseenRequestImageView.bounds.size.width/2;
     
     // show image
@@ -102,6 +101,9 @@
 }
 
 #pragma mark - Internal methods
+- (IBAction)purchaseRequestPressed:(id)sender {
+    
+}
 
 
 -(void)setText:(UIButton *)pressedButton{

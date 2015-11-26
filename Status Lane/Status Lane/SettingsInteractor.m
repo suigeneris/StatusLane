@@ -55,7 +55,22 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 2) {
+//    if (indexPath.section == 2) {
+//        
+//        if (indexPath.row == 0) {
+//            
+//            [PFUser logOut];
+//            [self.presenter logOut];
+//        }
+//        
+//        else{
+//            
+//            [self.presenter showAlertView];
+//            
+//        }
+//
+//    }
+    if (indexPath.section == 1) {
         
         if (indexPath.row == 0) {
             
@@ -68,7 +83,7 @@
             [self.presenter showAlertView];
             
         }
-
+        
     }
     
 }
@@ -97,12 +112,12 @@
         viewLabel.text = NSLocalizedString(@"MY ACCOUNT", @"MY ACCOUNT");
     }
     
-    else if (section == 1) {
-        
-        viewLabel.text = NSLocalizedString(@"MORE INFORMATION", @"MORE INFORMATION");
-    }
+//    else if (section == 1) {
+//        
+//        viewLabel.text = NSLocalizedString(@"MORE INFORMATION", @"MORE INFORMATION");
+//    }
     
-    else if (section == 2) {
+    else if (section == 1) {
         
         viewLabel.text = NSLocalizedString(@"ACCOUNT ACTIONS", @"ACCOUNT ACTIONS");
     }
@@ -136,4 +151,40 @@
 }
 
 
+
+
+
+
+
+
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -54,8 +54,8 @@
 
 -(void)attemptLoginWithUsername:(NSString *)username andPassword:(NSString *)password{
     
-    
-    [self.networkProvider loginWithUsername:username
+    NSString *E164 = [[NSString allFormatsForPhoneNumber:username] objectForKey:@"E164"];
+    [self.networkProvider loginWithUsername:E164
                                 andPassword:password
                                     success:^(id responseObject) {
                                         
@@ -235,7 +235,6 @@
 -(void)subscribeToPush{
     
     [self.pushNotificationProvider subcribeToReciveChannelWithSuccess:^(id responseObject) {
-        
         
     } andFailure:^(NSError *error) {
         

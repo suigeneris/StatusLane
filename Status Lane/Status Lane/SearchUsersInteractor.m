@@ -9,7 +9,7 @@
 #import "SearchUsersInteractor.h"
 #import "SearchUsersDataSource.h"
 #import "SearchedUser.h"
-
+#import "NSString+StatusLane.h"
 #import <Parse/Parse.h>
 
 @interface SearchUsersInteractor()
@@ -63,17 +63,38 @@
     
     [self.searchResults removeAllObjects];
     PFQuery *query = [PFUser query];
-    [query whereKey:@"username" matchesRegex:details];
-    [query includeKey:@"partner"];
-    query.limit = 20;
+
+    if ([details rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location != NSNotFound) {
+        
+        [query whereKey:@"username" matchesRegex:details];
+        [query includeKey:@"partner"];
+        query.limit = 20;
+
+    }
+    
+    else{
+        
+        [query whereKey:@"fullName" containsString:[NSString uppercaseAllFirstCharactersOfString:details]];
+        [query includeKey:@"partner"];
+        query.limit = 20;
+
+    }
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
         
         if (error) {
+            if (error.code == 154) {
+                
+                [self.presenter startAnimating];
+                [query cancel];
+            }
+            else{
+                
+                [self.presenter stopAnimating];
+                [self.presenter showResponseViewWithMessage:error.localizedDescription
+                                                   andTitle:@"OOOOPs!"];
+            }
             
-            [self.presenter stopAnimating];
-            [self.presenter showResponseViewWithMessage:error.localizedDescription
-                                               andTitle:@"OOOOPs!"];
         }
         
         else{
@@ -84,8 +105,19 @@
             }
             
             else{
-        
-                [self.searchResults addObjectsFromArray:array];
+                
+                if (array.count != 0) {
+                    
+                    for (id object in array) {
+                        
+                        if (![self.searchResults containsObject:object]) {
+                            
+                            [self.searchResults addObject:object];
+                            
+                        }
+                    }
+                    
+                }
                 [self searchForAnonymousUser:details];
 
             }
@@ -101,17 +133,37 @@
 -(void)searchForAnonymousUser:(NSString *)details{
     
     PFQuery *query = [PFQuery queryWithClassName:@"AnonymousUser"];
-    [query whereKey:@"username" matchesRegex:details];
-    [query includeKey:@"User.partner"];
-    query.limit = 20;
+    if ([details rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location != NSNotFound) {
+        
+        [query whereKey:@"username" matchesRegex:details];
+        [query includeKey:@"User.partner"];
+        query.limit = 20;
+        
+    }
+    
+    else{
+        
+        [query whereKey:@"fullName" containsString:[NSString uppercaseAllFirstCharactersOfString:details]];
+        [query includeKey:@"User.partner"];
+        query.limit = 20;
+        
+    }
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error){
         
         if (error) {
-            
-            [self.presenter stopAnimating];
-            [self.presenter showResponseViewWithMessage:error.localizedDescription
-                                               andTitle:@"OOOOPs!"];
+            if (error.code == 154) {
+                [self.presenter startAnimating];
+                [query cancel];
+           
+            }
+            else{
+                
+                [self.presenter stopAnimating];
+                [self.presenter showResponseViewWithMessage:error.localizedDescription
+                                                   andTitle:@"OOOOPs!"];
+
+            }
         }
         
         else{
@@ -126,7 +178,19 @@
             else{
                 
                 [self.presenter stopAnimating];
-                [self.searchResults addObjectsFromArray:array];
+                if (array.count != 0) {
+                    
+                    for (id object in array) {
+                        
+                        if (![self.searchResults containsObject:object]) {
+                            
+                            [self.searchResults addObject:object];
+                            
+                        }
+                    }
+                    
+                }
+                //[self.searchResults addObjectsFromArray:array];
                 [self.presenter reloadData];
                 
             }
@@ -175,7 +239,12 @@
     }
     else{
         
-        [self searchForUserWithUserDetails:searchText];
+        CGFloat mod = fmod(searchText.length, 2);
+        if (mod == 0 || searchText.length == 1) {
+            
+            [self searchForUserWithUserDetails:searchText];
+
+        }
 
     }
 

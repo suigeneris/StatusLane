@@ -125,6 +125,29 @@
         
     }
 }
+
++(NSString *)uppercaseAllFirstCharactersOfString:(NSString *)string{
+    
+    if (string.length <= 1) {
+        
+        return [string uppercaseString];
+        
+    }
+    NSArray *array = [string componentsSeparatedByString:@" "];
+    NSMutableArray  *arrayWithFinalStrings = [[NSMutableArray alloc]init];
+    
+    for (NSString *string in array) {
+        
+        NSString *mutableString = [string mutableCopy];
+        NSString *firstCharacter = [[mutableString substringToIndex:1] uppercaseString];
+        mutableString = [mutableString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:firstCharacter];
+        [arrayWithFinalStrings addObject:mutableString];
+        
+    }
+    
+    NSString *finalString = [arrayWithFinalStrings componentsJoinedByString:@" "];
+    return finalString;
+}
 @end
 
 

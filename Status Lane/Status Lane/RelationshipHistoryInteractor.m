@@ -65,6 +65,7 @@
     NSString *userObjectId = [[PFUser currentUser] objectId];
     PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
     [query whereKey:@"historyId" equalTo:userObjectId];
+    [query orderByDescending:@"statusDate"];
     [query includeKey:@"StatusHistory.partnerId"];
     
     [self.networkProvider queryDatabaseWithQuery:query

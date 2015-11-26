@@ -74,7 +74,7 @@
 -(void)retrieveArrayOfNotificationsForUser{
     
     PFQuery *query = [PFQuery queryWithClassName:@"NotificationObject"];
-    [query whereKey:@"receiverObjectId" equalTo:[PFUser currentUser].objectId];
+    [query whereKey:@"receiverObjectId" equalTo:[NSString verifyObjectId:[PFUser currentUser].objectId]];
     [query orderByDescending:@"createdAt"];
     [self.networkProvider queryDatabaseWithQuery:query
                                          success:^(id responseObject) {
@@ -203,7 +203,6 @@
     
     [self.presenter startAnimatingActivityView];
     
-    NSLog(@"Get history pressed");
 }
 
 #pragma mark - Table Delegate Methods
@@ -391,7 +390,6 @@
                                                     } andFailure:^(NSError *error) {
                                                         
                                                         [self.presenter stopAnimatingActivitiyView];
-                                                        //[self.presenter showErrorView:error.localizedDescription];
                                                         NSLog(@"This is the error %@", error.localizedDescription);
                                                         
                                                     }];

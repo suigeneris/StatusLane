@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIView *instructionView;
+@property (weak, nonatomic) IBOutlet UILabel *instructionText;
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) PFObject *anonymousUser;
 @property (strong, nonatomic) SWRevealViewController *revealController;

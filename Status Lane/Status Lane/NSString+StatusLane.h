@@ -16,5 +16,6 @@
 +(BOOL)isPhoneNumberValid:(NSString*)phoneNumber;
 -(BOOL)isValidEmail;
 +(NSString *)verifyObjectId:(NSString *)objectId;
++(NSString *)uppercaseAllFirstCharactersOfString:(NSString *)string;
 
 @end

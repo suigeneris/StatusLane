@@ -130,55 +130,6 @@
     
 }
 
-//-(void)removePreviousPartner:(PFObject *)partner{
-//    
-//    //We need to remove the currrent partner of the current user in order to update the anonymous user as the new partner.
-//    PFUser *currentUser = [PFUser currentUser];
-//    NSArray *arrayWithPreviousUser = currentUser[@"partner"];
-//    
-//    if (arrayWithPreviousUser) {
-//        
-//        //We need to determine if the current partner is a user or anonymous user.
-//        if (![[arrayWithPreviousUser objectAtIndex:0] isKindOfClass:NSClassFromString(@"PFUser")]) {
-//            
-//            //If the user is an anonymous user, we simply update the user accordningly and save
-//            PFObject *previousPartner = [arrayWithPreviousUser objectAtIndex:0];
-//            previousPartner[@"status"] = @"SINGLE";
-//            [previousPartner removeObjectForKey:@"partner"];
-//            
-//            [self.networkProvider saveWithPFObject:previousPartner
-//                                           success:^(id responseObject) {
-//                                               
-//                                               //Once saved successfully, we now set the new partner on the current user.
-//                                               [self setNewPartnerWithAnonymousUser:partner];
-//                                               
-//                                           } failure:^(NSError *error) {
-//                                               
-//                                               [self.presenter stopAnimatingActivitiyView];
-//                                               [self.presenter showErrorView:error.localizedDescription];
-//
-//                                           }];
-//
-//        }
-//        
-//        //This is called if the current partner is actually a user.
-//        else{
-//            
-//            NSLog(@"array contains pfuser");
-//            NSLog(@"Is a user");
-//            //TODO
-//        }
-//    }
-//    
-//    else{
-//        
-//        //This is called if the user has no partner at this time. Therefore just set the new partner on the current user.
-//        [self setNewPartnerWithAnonymousUser:partner];
-//        
-//    }
-//    
-//}
-
 -(void)setNewPartnerWithAnonymousUser:(PFObject *)anonymousUser{
     
     //This is where we set the anonymous user as the current partner of the current user. and we also have to set the current user as the partner of the anonymous user since this is a 2 way relationship
@@ -244,20 +195,34 @@
 }
 
 -(void)updateStatusHistoryForUser:(PFUser  *)user usingAnonymousUserAsPartner:(PFObject*)anonymousUserPartner{
+    NSLog(@"This is the anonymoua partner id %@", anonymousUserPartner.objectId);
+    NSLog(@"This is the main user  id %@", user.objectId);
+
     
     PFQuery *query = [PFQuery queryWithClassName:@"StatusHistory"];
     [query whereKey:@"historyId" equalTo:user.objectId];
-    [query orderByDescending:@"statusDate"];
     
-    [self.networkProvider queryDatabaseWithQuery:query
+    PFQuery *query2 = [PFQuery queryWithClassName:@"StatusHistory"];
+    [query2 whereKey:@"historyId" equalTo:anonymousUserPartner.objectId];
+    
+    PFQuery *compoundQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [compoundQuery orderByDescending:@"statusDate"];
+    [compoundQuery includeKey:@"StatusHistory.partnerId"];
+    compoundQuery.limit = 20;
+    
+    [self.networkProvider queryDatabaseWithQuery:compoundQuery
                                          success:^(id responseObject) {
                                            
                                              NSArray *array = responseObject;
                                              if (array.count > 0) {
+                                                 NSLog(@"THis is the response array %@", responseObject);
                                                  //User has a history, so send the end date of the last relationship
-                                                 PFObject *object = [array objectAtIndex:0];
-                                                 object[@"statusEndDate"] = [NSDate date];
-                                                 [object saveInBackground];
+                                                 for (PFObject *object in array) {
+                                                     
+                                                     object[@"statusEndDate"] = [NSDate date];
+                                                     [object saveInBackground];
+
+                                                 }
                                                  
                                                  //Then create the new history
                                                  PFObject *statusHistoryObject = [PFObject objectWithClassName:@"StatusHistory"];

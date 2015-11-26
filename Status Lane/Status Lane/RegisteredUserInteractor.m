@@ -50,7 +50,6 @@
     
     partnerStatus = status;
     partnerName = user[@"fullName"];
-    NSLog(@"This is the status %@", partnerStatus);
     
     if (user[@"partner"] && [user[@"partner"] count] > 0) {
         
@@ -67,7 +66,7 @@
 
 
 -(void)sendRelationshipRequestToUser:(PFUser *)user withRequestMessage:(NSString *)requestMessage{
-    
+
     NSString *channel = [NSString verifyObjectId:[user objectId]];
     NSDictionary *dictionary = @{
                                  @"alert" : requestMessage,

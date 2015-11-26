@@ -46,9 +46,10 @@ static void *countryCodeContext = &countryCodeContext;
     
     if ([segue.identifier isEqualToString:@"showVerify"]) {
         
-        VerifyAccountPresenter *vc = [[VerifyAccountPresenter alloc]init];
-        vc = segue.destinationViewController;
-        vc.phonenumber = [self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text];
+        VerifyAccountPresenter *vc = segue.destinationViewController;
+        NSString *phoneNumber = [self.countryCodeButton.titleLabel.text stringByAppendingString:self.phoneNumberTextfield.text];
+        NSString *E164 = [[NSString allFormatsForPhoneNumber:phoneNumber] objectForKey:@"E164"];
+        vc.phonenumber = E164;
         vc.password = self.passwordTextField.text;
         vc.verificationCode = self.verificationCode;
     
@@ -70,6 +71,7 @@ static void *countryCodeContext = &countryCodeContext;
 
 -(void)viewWillAppear:(BOOL)animated{
 
+    [super viewWillAppear:animated];
     [self countryCodeButton];
     [self.phoneNumberTextfield addTarget:self action:@selector(validatePhoneNumber) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(validatePassword) forControlEvents:UIControlEventEditingChanged];

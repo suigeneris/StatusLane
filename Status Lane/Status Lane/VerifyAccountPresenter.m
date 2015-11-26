@@ -51,15 +51,7 @@
     
     return _interactor;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - IB Outlets
 
@@ -145,7 +137,7 @@
 
 -(void)showErrorViewWithMessage:(NSString *)message {
     
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message color:[UIColor redColor] andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
     [errorView showWithCompletionBlock:nil];
 
 }

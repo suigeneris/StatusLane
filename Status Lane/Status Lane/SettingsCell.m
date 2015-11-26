@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "NetworkManager.h"
 #import "UIColor+StatusLane.h"
+#import "NSString+StatusLane.h"
 
 @interface SettingsCell() {
     
@@ -161,7 +162,7 @@
         
         if (cell1.textField.text && cell2.textField.text) {
             
-            [Defaults setFullName:cell1.textField.text];
+            [Defaults setFullName:[NSString uppercaseAllFirstCharactersOfString:cell1.textField.text]];
             [Defaults setSex:cell2.textField.text];
             [Defaults setEmailAddress:cell3.textField.text];
             
@@ -213,7 +214,7 @@
 -(void)showErrorViewWithMessage:(NSString *)message withResignTextField:(UITextField *)textField {
     
     AppDelegate *app = [UIApplication sharedApplication].delegate;
-    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message color:[UIColor redColor] andTitle:@"OOOOPs!"];
+    StatusLaneErrorView *errorView = [[StatusLaneErrorView alloc] initWithMessage:message color:[UIColor statusLaneRed] andTitle:@"OOOOPs!"];
     
     if (app.window.subviews.count < 2) {
         
